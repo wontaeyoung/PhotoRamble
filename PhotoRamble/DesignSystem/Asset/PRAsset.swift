@@ -32,12 +32,31 @@ public enum PRAsset {
       }
     }
     
-    public static let prPrimaryButtonTitle: UIFont = UIFont(name: FontName.bold.name, size: 19)
-    public static let prSecondaryButtonTitle: UIFont = UIFont(name: FontName.semiBold.name, size: 19)
-    public static let prMainTitleLabel: UIFont = UIFont(name: FontName.medium.name, size: 15)
-    public static let prMainInfoLabel: UIFont = UIFont(name: FontName.semiBold.name, size: 15)
-    public static let prSubInfoLabel: UIFont = UIFont(name: FontName.regular.name, size: 13)
-    public static let prContentText: UIFont = UIFont(name: FontName.regular.name, size: 15)
+    private static func font(_ fontName: FontName, size: CGFloat) -> UIFont {
+      let coalesceWeight: UIFont.Weight
+      
+      switch fontName {
+        case .extraBold:
+          coalesceWeight = .heavy
+        case .bold:
+          coalesceWeight = .bold
+        case .semiBold:
+          coalesceWeight = .semibold
+        case .medium:
+          coalesceWeight = .medium
+        case .regular:
+          coalesceWeight = .regular
+      }
+      
+      return .systemFont(ofSize: size, weight: coalesceWeight)
+    }
+    
+    public static let prPrimaryButtonTitle: UIFont = font(.bold, size: 19)
+    public static let prSecondaryButtonTitle: UIFont = font(.semiBold, size: 19)
+    public static let prMainTitleLabel: UIFont = font(.medium, size: 15)
+    public static let prMainInfoLabel: UIFont = font(.semiBold, size: 15)
+    public static let prSubInfoLabel: UIFont = font(.regular, size: 11)
+    public static let prContentText: UIFont = font(.regular, size: 15)
   }
   
   public enum Symbol {
@@ -64,30 +83,30 @@ public enum PRAsset {
       case envelopeBadgePersonCropFill = "envelope.badge.person.crop.fill"
       case trashFill = "trash.fill"
       
-      var image: UIImage {
+      var image: UIImage? {
         return UIImage(systemName: self.rawValue)
       }
     }
     
-    public static let walkTabIcon: UIImage = Image.figureWalk.image
-    public static let diaryTabIcon: UIImage = Image.bookPagesFill.image
-    public static let configTabIcon: UIImage = Image.gearshapeFill.image
+    public static let walkTabIcon: UIImage? = Image.figureWalk.image
+    public static let diaryTabIcon: UIImage? = Image.bookPagesFill.image
+    public static let configTabIcon: UIImage? = Image.gearshapeFill.image
     
-    public static let takePhotoButtonIcon: UIImage = Image.cameraViewfinder.image
+    public static let takePhotoButtonIcon: UIImage? = Image.cameraViewfinder.image
     
-    public static let dateInfoIcon: UIImage = Image.calendar.image
-    public static let temperatureInfoIcon: UIImage = Image.thermometerMedium.image
-    public static let walkDistanceInfoIcon: UIImage = Image.figureWalk.image
-    public static let walkTimeInfoIcon: UIImage = Image.clockFill.image
+    public static let dateInfoIcon: UIImage? = Image.calendar.image
+    public static let temperatureInfoIcon: UIImage? = Image.thermometerMedium.image
+    public static let walkDistanceInfoIcon: UIImage? = Image.figureWalk.image
+    public static let walkTimeInfoIcon: UIImage? = Image.clockFill.image
     
-    public static let continueWritingConfigIcon: UIImage = Image.pencilLine.image
-    public static let nearHomeConfigIcon: UIImage = Image.houseAndFlagFill.image
-    public static let locationConfigIcon: UIImage = Image.locationFill.image
-    public static let useCameraConfigIcon: UIImage = Image.cameraOnRectangleFill.image
-    public static let usePhotoConfigIcon: UIImage = Image.photoFillOnRectangleFill.image
-    public static let termsConfigIcon: UIImage = Image.docTextFill.image
-    public static let licenseConfigIcon: UIImage = Image.buildingColumnsFill.image
-    public static let sendToDeveloperConfigIcon: UIImage = Image.envelopeBadgePersonCropFill.image
-    public static let deleteAllDiaryConfigIcon: UIImage = Image.trashFill.image
+    public static let continueWritingConfigIcon: UIImage? = Image.pencilLine.image
+    public static let nearHomeConfigIcon: UIImage? = Image.houseAndFlagFill.image
+    public static let locationConfigIcon: UIImage? = Image.locationFill.image
+    public static let useCameraConfigIcon: UIImage? = Image.cameraOnRectangleFill.image
+    public static let usePhotoConfigIcon: UIImage? = Image.photoFillOnRectangleFill.image
+    public static let termsConfigIcon: UIImage? = Image.docTextFill.image
+    public static let licenseConfigIcon: UIImage? = Image.buildingColumnsFill.image
+    public static let sendToDeveloperConfigIcon: UIImage? = Image.envelopeBadgePersonCropFill.image
+    public static let deleteAllDiaryConfigIcon: UIImage? = Image.trashFill.image
   }
 }
