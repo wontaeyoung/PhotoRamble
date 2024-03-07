@@ -14,9 +14,19 @@
 		6E53C69D2B99833D0034649D /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 6E53C69C2B99833D0034649D /* Base */; };
 		6E53C6A52B9986FF0034649D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6E53C6A42B9986FF0034649D /* .gitignore */; };
 		6E53C6A72B9987070034649D /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 6E53C6A62B9987070034649D /* .gitattributes */; };
+		6E53C6B12B9996550034649D /* KazUtility in Frameworks */ = {isa = PBXBuildFile; productRef = 6E53C6B02B9996550034649D /* KazUtility */; };
+		6E53C6B42B9996610034649D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 6E53C6B32B9996610034649D /* SnapKit */; };
+		6E53C6B72B99970C0034649D /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */ = {isa = PBXBuildFile; productRef = 6E53C6B62B99970C0034649D /* FirebaseAnalyticsWithoutAdIdSupport */; };
+		6E53C6B92B99970C0034649D /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 6E53C6B82B99970C0034649D /* FirebaseCrashlytics */; };
+		6E53C6BF2B9997E70034649D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6E53C6BE2B9997E70034649D /* GoogleService-Info.plist */; };
+		6E53C6C32B9999330034649D /* KazRealm in Frameworks */ = {isa = PBXBuildFile; productRef = 6E53C6C22B9999330034649D /* KazRealm */; };
+		6E53C6C62B9999560034649D /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 6E53C6C52B9999560034649D /* Toast */; };
+		97F2F40ED23B5933B8EBF4DB /* Pods_PhotoRamble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF5D87C068FC9D7C5349CEBB /* Pods_PhotoRamble.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4411CD13F0B5C5ED7ACE7C89 /* Pods-PhotoRamble.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoRamble.release.xcconfig"; path = "Target Support Files/Pods-PhotoRamble/Pods-PhotoRamble.release.xcconfig"; sourceTree = "<group>"; };
+		48E6E08EF6B9F306622F3213 /* Pods-PhotoRamble.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhotoRamble.debug.xcconfig"; path = "Target Support Files/Pods-PhotoRamble/Pods-PhotoRamble.debug.xcconfig"; sourceTree = "<group>"; };
 		6E53C68D2B99833B0034649D /* PhotoRamble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoRamble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E53C6902B99833B0034649D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E53C6922B99833B0034649D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +36,8 @@
 		6E53C69E2B99833D0034649D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6E53C6A42B9986FF0034649D /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		6E53C6A62B9987070034649D /* .gitattributes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
+		6E53C6BE2B9997E70034649D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AF5D87C068FC9D7C5349CEBB /* Pods_PhotoRamble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoRamble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,12 +45,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E53C6C62B9999560034649D /* Toast in Frameworks */,
+				6E53C6B12B9996550034649D /* KazUtility in Frameworks */,
+				6E53C6C32B9999330034649D /* KazRealm in Frameworks */,
+				6E53C6B92B99970C0034649D /* FirebaseCrashlytics in Frameworks */,
+				6E53C6B72B99970C0034649D /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
+				6E53C6B42B9996610034649D /* SnapKit in Frameworks */,
+				97F2F40ED23B5933B8EBF4DB /* Pods_PhotoRamble.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C3C95D07002A2CB3D7A4DF3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AF5D87C068FC9D7C5349CEBB /* Pods_PhotoRamble.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5427ED74395E20AE6D6B210F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				48E6E08EF6B9F306622F3213 /* Pods-PhotoRamble.debug.xcconfig */,
+				4411CD13F0B5C5ED7ACE7C89 /* Pods-PhotoRamble.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		6E53C6842B99833B0034649D = {
 			isa = PBXGroup;
 			children = (
@@ -46,6 +82,8 @@
 				6E53C6A62B9987070034649D /* .gitattributes */,
 				6E53C68F2B99833B0034649D /* PhotoRamble */,
 				6E53C68E2B99833B0034649D /* Products */,
+				5427ED74395E20AE6D6B210F /* Pods */,
+				0C3C95D07002A2CB3D7A4DF3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,6 +98,7 @@
 		6E53C68F2B99833B0034649D /* PhotoRamble */ = {
 			isa = PBXGroup;
 			children = (
+				6E53C6BE2B9997E70034649D /* GoogleService-Info.plist */,
 				6E53C6A82B998A0F0034649D /* App */,
 				6E53C6A92B998A110034649D /* Config */,
 				6E53C6AA2B998A130034649D /* Data */,
@@ -133,15 +172,26 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6E53C6A12B99833D0034649D /* Build configuration list for PBXNativeTarget "PhotoRamble" */;
 			buildPhases = (
+				C148BCA95CD48B28A6CF4875 /* [CP] Check Pods Manifest.lock */,
 				6E53C6892B99833B0034649D /* Sources */,
 				6E53C68A2B99833B0034649D /* Frameworks */,
 				6E53C68B2B99833B0034649D /* Resources */,
+				6E53C6C02B99987C0034649D /* ShellScript */,
+				04E32AC58A7E110DA7D50891 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = PhotoRamble;
+			packageProductDependencies = (
+				6E53C6B02B9996550034649D /* KazUtility */,
+				6E53C6B32B9996610034649D /* SnapKit */,
+				6E53C6B62B99970C0034649D /* FirebaseAnalyticsWithoutAdIdSupport */,
+				6E53C6B82B99970C0034649D /* FirebaseCrashlytics */,
+				6E53C6C22B9999330034649D /* KazRealm */,
+				6E53C6C52B9999560034649D /* Toast */,
+			);
 			productName = PhotoRamble;
 			productReference = 6E53C68D2B99833B0034649D /* PhotoRamble.app */;
 			productType = "com.apple.product-type.application";
@@ -170,6 +220,13 @@
 				Base,
 			);
 			mainGroup = 6E53C6842B99833B0034649D;
+			packageReferences = (
+				6E53C6AF2B9996550034649D /* XCRemoteSwiftPackageReference "KazUtility" */,
+				6E53C6B22B9996610034649D /* XCRemoteSwiftPackageReference "SnapKit" */,
+				6E53C6B52B99970C0034649D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				6E53C6C12B9999330034649D /* XCRemoteSwiftPackageReference "KazRealm" */,
+				6E53C6C42B9999560034649D /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+			);
 			productRefGroup = 6E53C68E2B99833B0034649D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -188,10 +245,75 @@
 				6E53C6A52B9986FF0034649D /* .gitignore in Resources */,
 				6E53C69A2B99833D0034649D /* Assets.xcassets in Resources */,
 				6E53C69D2B99833D0034649D /* Base in Resources */,
+				6E53C6BF2B9997E70034649D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		04E32AC58A7E110DA7D50891 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PhotoRamble/Pods-PhotoRamble-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-PhotoRamble/Pods-PhotoRamble-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-PhotoRamble/Pods-PhotoRamble-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6E53C6C02B99987C0034649D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${PRODUCT_NAME}",
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Info.plist",
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/GoogleService-Info.plist",
+				"$(TARGET_BUILD_DIR)/$(EXECUTABLE_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\n";
+		};
+		C148BCA95CD48B28A6CF4875 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PhotoRamble-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		6E53C6892B99833B0034649D /* Sources */ = {
@@ -339,12 +461,16 @@
 		};
 		6E53C6A22B99833D0034649D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 48E6E08EF6B9F306622F3213 /* Pods-PhotoRamble.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 75QZ7682T2;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PhotoRamble/Config/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -356,6 +482,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Kaz.PhotoRamble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -369,12 +496,15 @@
 		};
 		6E53C6A32B99833D0034649D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4411CD13F0B5C5ED7ACE7C89 /* Pods-PhotoRamble.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 75QZ7682T2;
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PhotoRamble/Config/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -386,6 +516,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Kaz.PhotoRamble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -419,6 +550,82 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6E53C6AF2B9996550034649D /* XCRemoteSwiftPackageReference "KazUtility" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wontaeyoung/KazUtility";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.2;
+			};
+		};
+		6E53C6B22B9996610034649D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		6E53C6B52B99970C0034649D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.22.0;
+			};
+		};
+		6E53C6C12B9999330034649D /* XCRemoteSwiftPackageReference "KazRealm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wontaeyoung/KazRealm";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
+		6E53C6C42B9999560034649D /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6E53C6B02B9996550034649D /* KazUtility */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6E53C6AF2B9996550034649D /* XCRemoteSwiftPackageReference "KazUtility" */;
+			productName = KazUtility;
+		};
+		6E53C6B32B9996610034649D /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6E53C6B22B9996610034649D /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		6E53C6B62B99970C0034649D /* FirebaseAnalyticsWithoutAdIdSupport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6E53C6B52B99970C0034649D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalyticsWithoutAdIdSupport;
+		};
+		6E53C6B82B99970C0034649D /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6E53C6B52B99970C0034649D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		6E53C6C22B9999330034649D /* KazRealm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6E53C6C12B9999330034649D /* XCRemoteSwiftPackageReference "KazRealm" */;
+			productName = KazRealm;
+		};
+		6E53C6C52B9999560034649D /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6E53C6C42B9999560034649D /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 6E53C6852B99833B0034649D /* Project object */;
 }
