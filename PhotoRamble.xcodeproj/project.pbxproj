@@ -10,7 +10,6 @@
 		6E53C6912B99833B0034649D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E53C6902B99833B0034649D /* AppDelegate.swift */; };
 		6E53C6932B99833B0034649D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E53C6922B99833B0034649D /* SceneDelegate.swift */; };
 		6E53C6952B99833B0034649D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E53C6942B99833B0034649D /* ViewController.swift */; };
-		6E53C6982B99833B0034649D /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 6E53C6972B99833B0034649D /* Base */; };
 		6E53C69A2B99833D0034649D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E53C6992B99833D0034649D /* Assets.xcassets */; };
 		6E53C69D2B99833D0034649D /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 6E53C69C2B99833D0034649D /* Base */; };
 		6E53C6A52B9986FF0034649D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6E53C6A42B9986FF0034649D /* .gitignore */; };
@@ -22,7 +21,6 @@
 		6E53C6902B99833B0034649D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E53C6922B99833B0034649D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		6E53C6942B99833B0034649D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		6E53C6972B99833B0034649D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6E53C6992B99833D0034649D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E53C69C2B99833D0034649D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E53C69E2B99833D0034649D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,15 +60,70 @@
 		6E53C68F2B99833B0034649D /* PhotoRamble */ = {
 			isa = PBXGroup;
 			children = (
-				6E53C6902B99833B0034649D /* AppDelegate.swift */,
-				6E53C6922B99833B0034649D /* SceneDelegate.swift */,
-				6E53C6942B99833B0034649D /* ViewController.swift */,
-				6E53C6962B99833B0034649D /* Main.storyboard */,
-				6E53C6992B99833D0034649D /* Assets.xcassets */,
-				6E53C69B2B99833D0034649D /* LaunchScreen.storyboard */,
-				6E53C69E2B99833D0034649D /* Info.plist */,
+				6E53C6A82B998A0F0034649D /* App */,
+				6E53C6A92B998A110034649D /* Config */,
+				6E53C6AA2B998A130034649D /* Data */,
+				6E53C6AB2B998A150034649D /* Domain */,
+				6E53C6AC2B998A170034649D /* Presenter */,
+				6E53C6AE2B998F6E0034649D /* Resource */,
+				6E53C6AD2B998A4C0034649D /* Utility */,
 			);
 			path = PhotoRamble;
+			sourceTree = "<group>";
+		};
+		6E53C6A82B998A0F0034649D /* App */ = {
+			isa = PBXGroup;
+			children = (
+				6E53C6902B99833B0034649D /* AppDelegate.swift */,
+				6E53C6922B99833B0034649D /* SceneDelegate.swift */,
+				6E53C69B2B99833D0034649D /* LaunchScreen.storyboard */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		6E53C6A92B998A110034649D /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				6E53C69E2B99833D0034649D /* Info.plist */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		6E53C6AA2B998A130034649D /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		6E53C6AB2B998A150034649D /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		6E53C6AC2B998A170034649D /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				6E53C6942B99833B0034649D /* ViewController.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		6E53C6AD2B998A4C0034649D /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+		6E53C6AE2B998F6E0034649D /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				6E53C6992B99833D0034649D /* Assets.xcassets */,
+			);
+			path = Resource;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,7 +188,6 @@
 				6E53C6A52B9986FF0034649D /* .gitignore in Resources */,
 				6E53C69A2B99833D0034649D /* Assets.xcassets in Resources */,
 				6E53C69D2B99833D0034649D /* Base in Resources */,
-				6E53C6982B99833B0034649D /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,14 +207,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6E53C6962B99833B0034649D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6E53C6972B99833B0034649D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		6E53C69B2B99833D0034649D /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -226,7 +270,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -283,7 +327,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -302,12 +346,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 75QZ7682T2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PhotoRamble/Info.plist;
+				INFOPLIST_FILE = PhotoRamble/Config/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -315,6 +358,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Kaz.PhotoRamble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -330,12 +376,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 75QZ7682T2;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = PhotoRamble/Info.plist;
+				INFOPLIST_FILE = PhotoRamble/Config/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -343,6 +388,9 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Kaz.PhotoRamble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
