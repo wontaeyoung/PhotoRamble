@@ -13,6 +13,8 @@
 		6E53C6982B99833B0034649D /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 6E53C6972B99833B0034649D /* Base */; };
 		6E53C69A2B99833D0034649D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E53C6992B99833D0034649D /* Assets.xcassets */; };
 		6E53C69D2B99833D0034649D /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 6E53C69C2B99833D0034649D /* Base */; };
+		6E53C6A52B9986FF0034649D /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 6E53C6A42B9986FF0034649D /* .gitignore */; };
+		6E53C6A72B9987070034649D /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 6E53C6A62B9987070034649D /* .gitattributes */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		6E53C6992B99833D0034649D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E53C69C2B99833D0034649D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6E53C69E2B99833D0034649D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6E53C6A42B9986FF0034649D /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		6E53C6A62B9987070034649D /* .gitattributes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +44,8 @@
 		6E53C6842B99833B0034649D = {
 			isa = PBXGroup;
 			children = (
+				6E53C6A42B9986FF0034649D /* .gitignore */,
+				6E53C6A62B9987070034649D /* .gitattributes */,
 				6E53C68F2B99833B0034649D /* PhotoRamble */,
 				6E53C68E2B99833B0034649D /* Products */,
 			);
@@ -125,6 +131,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E53C6A72B9987070034649D /* .gitattributes in Resources */,
+				6E53C6A52B9986FF0034649D /* .gitignore in Resources */,
 				6E53C69A2B99833D0034649D /* Assets.xcassets in Resources */,
 				6E53C69D2B99833D0034649D /* Base in Resources */,
 				6E53C6982B99833B0034649D /* Base in Resources */,
