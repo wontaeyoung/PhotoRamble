@@ -8,6 +8,16 @@
 import UIKit
 
 public enum PRAsset {
+
+  case a
+  
+  public func printFonts() {
+    UIFont.familyNames.forEach {
+      for name in UIFont.fontNames(forFamilyName: $0) {
+        print("===", name)
+      }
+    }
+  }
   
   public enum Color {
     
