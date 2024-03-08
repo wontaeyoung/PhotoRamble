@@ -53,10 +53,10 @@ public enum PRAsset {
     }
     
     public static let prPrimaryButtonTitle: UIFont = font(.bold, size: 19)
-    public static let prSecondaryButtonTitle: UIFont = font(.semiBold, size: 19)
+    public static let prSecondaryButtonTitle: UIFont = font(.semiBold, size: 17)
     public static let prTertiaryButtonTitle: UIFont = font(.semiBold, size: 17)
     public static let prTagButtonTitle: UIFont = font(.medium, size: 13)
-    public static let prMainTitleLabel: UIFont = font(.medium, size: 15)
+    public static let prMainTitleLabel: UIFont = font(.semiBold, size: 13)
     public static let prMainInfoLabel: UIFont = font(.semiBold, size: 15)
     public static let prSubInfoLabel: UIFont = font(.regular, size: 11)
     public static let prContentText: UIFont = font(.regular, size: 15)
