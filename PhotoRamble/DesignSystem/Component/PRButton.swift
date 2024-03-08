@@ -39,7 +39,7 @@ public extension PRButton {
       $0.baseBackgroundColor = PRAsset.Color.prPrimary
       $0.buttonSize = .large
       $0.cornerStyle = .medium
-      $0.imagePadding = 10
+      $0.imagePadding = 6
       
       $0.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer {
         return $0.configured { $0.font = PRAsset.Font.prPrimaryButtonTitle }
@@ -52,7 +52,7 @@ public extension PRButton {
       $0.baseBackgroundColor = PRAsset.Color.prSecondary
       $0.buttonSize = .large
       $0.cornerStyle = .medium
-      $0.imagePadding = 10
+      $0.imagePadding = 6
       
       $0.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer {
         return $0.configured { $0.font = PRAsset.Font.prSecondaryButtonTitle }
@@ -73,8 +73,8 @@ public extension PRButton {
       
       $0.baseForegroundColor = PRAsset.Color.prPrimary
       $0.baseBackgroundColor = PRAsset.Color.prSecondary
-      $0.buttonSize = .large
-      $0.cornerStyle = .medium
+      $0.buttonSize = .mini
+      $0.cornerStyle = .large
       
       $0.titleTextAttributesTransformer = UIConfigurationTextAttributesTransformer {
         return $0.configured { $0.font = PRAsset.Font.prTagButtonTitle }
