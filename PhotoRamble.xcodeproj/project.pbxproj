@@ -30,6 +30,8 @@
 		6E86ABAA2B99C56500AADB50 /* PRAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5A92E52B99A3CD00A0CE6C /* PRAsset.swift */; };
 		6E86ABAB2B99C57400AADB50 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5A92DF2B99A16F00A0CE6C /* UIColor+.swift */; };
 		6E86ABAC2B99C57800AADB50 /* Configurator+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5A92E12B99A1D300A0CE6C /* Configurator+.swift */; };
+		6E86ABAE2B99CF7200AADB50 /* PRLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E86ABAD2B99CF7200AADB50 /* PRLabel.swift */; };
+		6E86ABB02B99D32C00AADB50 /* PRTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E86ABAF2B99D32C00AADB50 /* PRTextView.swift */; };
 		97F2F40ED23B5933B8EBF4DB /* Pods_PhotoRamble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF5D87C068FC9D7C5349CEBB /* Pods_PhotoRamble.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +57,8 @@
 		6E5A92FD2B99B0E000A0CE6C /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		6E5A92FE2B99B0E000A0CE6C /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		6E5A93152B99C3DA00A0CE6C /* PRButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRButton.swift; sourceTree = "<group>"; };
+		6E86ABAD2B99CF7200AADB50 /* PRLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRLabel.swift; sourceTree = "<group>"; };
+		6E86ABAF2B99D32C00AADB50 /* PRTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRTextView.swift; sourceTree = "<group>"; };
 		AF5D87C068FC9D7C5349CEBB /* Pods_PhotoRamble.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhotoRamble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -226,6 +230,8 @@
 			isa = PBXGroup;
 			children = (
 				6E5A93152B99C3DA00A0CE6C /* PRButton.swift */,
+				6E86ABAD2B99CF7200AADB50 /* PRLabel.swift */,
+				6E86ABAF2B99D32C00AADB50 /* PRTextView.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -401,7 +407,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				6E86ABAA2B99C56500AADB50 /* PRAsset.swift in Sources */,
+				6E86ABB02B99D32C00AADB50 /* PRTextView.swift in Sources */,
 				6E53C6952B99833B0034649D /* ViewController.swift in Sources */,
+				6E86ABAE2B99CF7200AADB50 /* PRLabel.swift in Sources */,
 				6E53C6912B99833B0034649D /* AppDelegate.swift in Sources */,
 				6E53C6932B99833B0034649D /* SceneDelegate.swift in Sources */,
 				6E5A93162B99C3DA00A0CE6C /* PRButton.swift in Sources */,
