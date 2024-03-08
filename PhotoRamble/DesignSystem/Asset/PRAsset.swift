@@ -63,7 +63,7 @@ public enum PRAsset {
   
   public enum Symbol {
     
-    private enum Image: String {
+    private enum SF: String {
       
       case figureWalk = "figure.walk"
       case bookPagesFill = "book.pages.fill"
@@ -84,31 +84,31 @@ public enum PRAsset {
       case buildingColumnsFill = "building.columns.fill"
       case envelopeBadgePersonCropFill = "envelope.badge.person.crop.fill"
       case trashFill = "trash.fill"
-      
-      var image: UIImage? {
-        return UIImage(systemName: self.rawValue)
-      }
     }
     
-    public static let walkTabIcon: UIImage? = Image.figureWalk.image
-    public static let diaryTabIcon: UIImage? = Image.bookPagesFill.image
-    public static let configTabIcon: UIImage? = Image.gearshapeFill.image
+    private static func image(_ sf: SF) -> UIImage? {
+      return UIImage(systemName: sf.rawValue)
+    }
     
-    public static let takePhotoButtonIcon: UIImage? = Image.cameraViewfinder.image
+    public static let walkTabIcon: UIImage? = image(.figureWalk)
+    public static let diaryTabIcon: UIImage? = image(.bookPagesFill)
+    public static let configTabIcon: UIImage? = image(.gearshapeFill)
     
-    public static let dateInfoIcon: UIImage? = Image.calendar.image
-    public static let temperatureInfoIcon: UIImage? = Image.thermometerMedium.image
-    public static let walkDistanceInfoIcon: UIImage? = Image.figureWalk.image
-    public static let walkTimeInfoIcon: UIImage? = Image.clockFill.image
+    public static let takePhotoButtonIcon: UIImage? = image(.cameraViewfinder)
     
-    public static let continueWritingConfigIcon: UIImage? = Image.pencilLine.image
-    public static let nearHomeConfigIcon: UIImage? = Image.houseAndFlagFill.image
-    public static let locationConfigIcon: UIImage? = Image.locationFill.image
-    public static let useCameraConfigIcon: UIImage? = Image.cameraOnRectangleFill.image
-    public static let usePhotoConfigIcon: UIImage? = Image.photoFillOnRectangleFill.image
-    public static let termsConfigIcon: UIImage? = Image.docTextFill.image
-    public static let licenseConfigIcon: UIImage? = Image.buildingColumnsFill.image
-    public static let sendToDeveloperConfigIcon: UIImage? = Image.envelopeBadgePersonCropFill.image
-    public static let deleteAllDiaryConfigIcon: UIImage? = Image.trashFill.image
+    public static let dateInfoIcon: UIImage? = image(.calendar)
+    public static let temperatureInfoIcon: UIImage? = image(.thermometerMedium)
+    public static let walkDistanceInfoIcon: UIImage? = image(.figureWalk)
+    public static let walkTimeInfoIcon: UIImage? = image(.clockFill)
+    
+    public static let continueWritingConfigIcon: UIImage? = image(.pencilLine)
+    public static let nearHomeConfigIcon: UIImage? = image(.houseAndFlagFill)
+    public static let locationConfigIcon: UIImage? = image(.locationFill)
+    public static let useCameraConfigIcon: UIImage? = image(.cameraOnRectangleFill)
+    public static let usePhotoConfigIcon: UIImage? = image(.photoFillOnRectangleFill)
+    public static let termsConfigIcon: UIImage? = image(.docTextFill)
+    public static let licenseConfigIcon: UIImage? = image(.buildingColumnsFill)
+    public static let sendToDeveloperConfigIcon: UIImage? = image(.envelopeBadgePersonCropFill)
+    public static let deleteAllDiaryConfigIcon: UIImage? = image(.trashFill)
   }
 }
