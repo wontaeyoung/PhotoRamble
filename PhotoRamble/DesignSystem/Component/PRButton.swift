@@ -8,9 +8,9 @@
 import UIKit
 import KazUtility
 
-open class PRButton: UIButton {
+public final class PRButton: UIButton {
   
-  init(style: PRButtonStyle, title: String? = nil, image: UIImage? = nil) {
+  public init(style: Style, title: String? = nil, image: UIImage? = nil) {
     super.init(frame: .zero)
     
     self.configuration = style.configuration.configured {
@@ -27,7 +27,7 @@ open class PRButton: UIButton {
 
 public extension PRButton {
   
-  enum PRButtonStyle {
+  enum Style {
     case primary
     case secondary
     case tertiary
@@ -84,16 +84,16 @@ public extension PRButton {
     var configuration: UIButton.Configuration {
       switch self {
         case .primary:
-          return PRButtonStyle.primaryConfig
+          return Style.primaryConfig
         
         case .secondary:
-          return PRButtonStyle.secondaryConfig
+          return Style.secondaryConfig
         
         case .tertiary:
-          return PRButtonStyle.tertiaryConfig
+          return Style.tertiaryConfig
         
         case .tag:
-          return PRButtonStyle.tagConfig
+          return Style.tagConfig
       }
     }
   }
