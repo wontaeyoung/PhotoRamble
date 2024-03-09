@@ -21,7 +21,8 @@ public enum PRAsset {
   
   public enum Font {
     
-    private enum FontName: String {
+    private enum Name: String {
+      
       case extraBold = "Pretendard-ExtraBold"
       case bold = "Pretendard-Bold"
       case semiBold = "Pretendard-SemiBold"
@@ -33,7 +34,7 @@ public enum PRAsset {
       }
     }
     
-    private static func font(_ fontName: FontName, size: CGFloat) -> UIFont {
+    private static func font(_ fontName: Name, size: CGFloat) -> UIFont {
       let coalesceWeight: UIFont.Weight
       
       switch fontName {
@@ -49,7 +50,7 @@ public enum PRAsset {
           coalesceWeight = .regular
       }
       
-      return .systemFont(ofSize: size, weight: coalesceWeight)
+      return UIFont(name: fontName.name, size: size) ?? .systemFont(ofSize: size, weight: coalesceWeight)
     }
     
     public static let prPrimaryButtonTitle: UIFont = font(.bold, size: 19)
