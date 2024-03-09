@@ -1,0 +1,17 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "home_welcome_navigation_title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@님, 어서오세요. 산책하러 갈까요?"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
