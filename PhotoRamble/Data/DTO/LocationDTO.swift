@@ -19,12 +19,12 @@ final class LocationDTO: Object, RealmModel, DTO {
     case timestamp
   }
   
-  @Persisted(primaryKey: true) var id: UUID
+  @Persisted(primaryKey: true) var id: ObjectId
   @Persisted var latitude: Double
   @Persisted var longitude: Double
   @Persisted var timestamp: Date
   
-  init(id: UUID, latitude: Double, longitude: Double, timestamp: Date) {
+  init(id: ObjectId, latitude: Double, longitude: Double, timestamp: Date) {
     super.init()
     
     self.id = id
