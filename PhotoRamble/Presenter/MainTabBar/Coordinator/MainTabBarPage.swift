@@ -27,6 +27,17 @@ enum MainTabBarPage: Int, CaseIterable {
     }
   }
   
+  var title: String {
+    switch self {
+      case .walk:
+        return Localization.walk.localized
+      case .post:
+        return Localization.diary.localized
+      case .config:
+        return Localization.config.localized
+    }
+  }
+  
   var icon: UIImage? {
     switch self {
       case .walk:
@@ -51,7 +62,7 @@ enum MainTabBarPage: Int, CaseIterable {
   
   var tabBarItem: UITabBarItem {
     return UITabBarItem(
-      title: nil,
+      title: title,
       image: icon,
       selectedImage: selectedIcon
     )
