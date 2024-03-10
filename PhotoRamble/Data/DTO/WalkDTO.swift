@@ -20,13 +20,13 @@ final class WalkDTO: Object, RealmModel, DTO {
     case postID
   }
   
-  @Persisted(primaryKey: true) var id: ObjectId
+  @Persisted(primaryKey: true) var id: UUID
   @Persisted var startAt: Double
   @Persisted var endAt: Double
   @Persisted var locations: List<LocationDTO>
-  @Persisted var postID: ObjectId?
+  @Persisted var postID: UUID?
   
-  init(id: ObjectId, startAt: Double, endAt: Double, locations: List<LocationDTO>, postID: ObjectId?) {
+  init(id: UUID, startAt: Double, endAt: Double, locations: List<LocationDTO>, postID: UUID?) {
     super.init()
     
     self.id = id

@@ -22,15 +22,15 @@ final class PostDTO: Object, RealmModel, DTO {
     case walkID
   }
   
-  @Persisted(primaryKey: true) var id: ObjectId
+  @Persisted(primaryKey: true) var id: UUID
   @Persisted var content: String
   @Persisted var createAt: Date
   @Persisted var updateAt: Date
   @Persisted var writingStatus: Int
   @Persisted var photoIndices: List<Int>
-  @Persisted var walkID: ObjectId
+  @Persisted var walkID: UUID
   
-  init(id: ObjectId, content: String, createAt: Date, updateAt: Date, writingStatus: Int, photoIndices: List<Int>, walkID: ObjectId) {
+  init(id: UUID, content: String, createAt: Date, updateAt: Date, writingStatus: Int, photoIndices: List<Int>, walkID: UUID) {
     super.init()
     
     self.id = id
