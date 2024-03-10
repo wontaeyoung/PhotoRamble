@@ -9,6 +9,6 @@ protocol Mapper {
   associatedtype DTOType: DTO
   associatedtype EntityType: Entity
   
-  static func toDTO(_ entity: EntityType) throws -> DTOType
-  static func toEntity(_ dto: DTOType) throws -> EntityType
+  static func toDTO(_ entity: EntityType) -> DTOType
+  static func toEntity(_ dto: DTOType) -> EntityType
 }
