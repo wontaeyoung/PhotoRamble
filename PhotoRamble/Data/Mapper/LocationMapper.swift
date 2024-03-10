@@ -9,7 +9,7 @@ import RealmSwift
 
 struct LocationMapper: Mapper {
   
-  static func toDTO(_ entity: Location) -> LocationDTO {
+  func toDTO(_ entity: Location) -> LocationDTO {
     return LocationDTO(
       id: entity.id,
       latitude: entity.latitude,
@@ -18,13 +18,13 @@ struct LocationMapper: Mapper {
     )
   }
   
-  static func toDTO(_ entities: [Location]) -> List<LocationDTO> {
+  func toDTO(_ entities: [Location]) -> List<LocationDTO> {
     return entities
       .map { toDTO($0) }
       .toList
   }
   
-  static func toEntity(_ dto: LocationDTO) -> Location {
+  func toEntity(_ dto: LocationDTO) -> Location {
     return Location(
       id: dto.id,
       latitude: dto.latitude,
@@ -33,7 +33,7 @@ struct LocationMapper: Mapper {
     )
   }
   
-  static func toEntity(_ dtos: List<LocationDTO>) -> [Location] {
+  func toEntity(_ dtos: List<LocationDTO>) -> [Location] {
     return dtos
       .toArray
       .map { toEntity($0) }

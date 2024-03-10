@@ -9,7 +9,7 @@ import RealmSwift
 
 struct PostMapper: Mapper {
   
-  static func toDTO(_ entity: Post) -> PostDTO{
+  func toDTO(_ entity: Post) -> PostDTO{
     return PostDTO(
       id: entity.id,
       content: entity.content,
@@ -21,7 +21,7 @@ struct PostMapper: Mapper {
     )
   }
   
-  static func toEntity(_ dto: PostDTO) -> Post {
+  func toEntity(_ dto: PostDTO) -> Post {
     return Post(
       id: dto.id,
       content: dto.content,
