@@ -69,8 +69,8 @@ public enum PRAsset {
       
       case figureWalk = "figure.walk"
       case figureWalkMotion = "figure.walk.motion"
-      case bookPages = "book.pages"
-      case bookPagesFill = "book.pages.fill"
+      case textBookClosed = "text.book.closed"
+      case textBookClosedFill = "text.book.closed.fill"
       case gearshape = "gearshape"
       case gearshapeFill = "gearshape.fill"
       
@@ -97,8 +97,8 @@ public enum PRAsset {
     
     public static let walkTabIcon: UIImage? = image(.figureWalk)
     public static let walkSelectedTabIcon: UIImage? = image(.figureWalkMotion)
-    public static let diaryTabIcon: UIImage? = image(.bookPages)
-    public static let diarySelectedTabIcon: UIImage? = image(.bookPagesFill)
+    public static let diaryTabIcon: UIImage? = image(.textBookClosed)
+    public static let diarySelectedTabIcon: UIImage? = image(.textBookClosedFill)
     public static let configTabIcon: UIImage? = image(.gearshape)
     public static let configSelectedTabIcon: UIImage? = image(.gearshapeFill)
     
