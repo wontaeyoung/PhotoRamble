@@ -11,6 +11,11 @@ enum Localization: String {
   
   case home_welcome_navigation_title
   
+  /// 탭바 아이템 타이틀
+  case walk
+  case diary
+  case config
+  
   var localized: String {
     return NSLocalizedString(self.rawValue, comment: "")
   }
