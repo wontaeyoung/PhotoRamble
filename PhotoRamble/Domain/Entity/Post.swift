@@ -13,6 +13,10 @@ struct Post: Entity {
     case choosePhoto
     case writing
     case done
+    
+    init(from rawValue: Int) {
+      self = WritingStatus(rawValue: rawValue) ?? .choosePhoto
+    }
   }
   
   let id: UUID
