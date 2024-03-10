@@ -68,7 +68,10 @@ public enum PRAsset {
     private enum SF: String {
       
       case figureWalk = "figure.walk"
+      case figureWalkMotion = "figure.walk.motion"
+      case bookPages = "book.pages"
       case bookPagesFill = "book.pages.fill"
+      case gearshape = "gearshape"
       case gearshapeFill = "gearshape.fill"
       
       case cameraViewfinder = "camera.viewfinder"
@@ -93,8 +96,11 @@ public enum PRAsset {
     }
     
     public static let walkTabIcon: UIImage? = image(.figureWalk)
-    public static let diaryTabIcon: UIImage? = image(.bookPagesFill)
-    public static let configTabIcon: UIImage? = image(.gearshapeFill)
+    public static let walkSelectedTabIcon: UIImage? = image(.figureWalkMotion)
+    public static let diaryTabIcon: UIImage? = image(.bookPages)
+    public static let diarySelectedTabIcon: UIImage? = image(.bookPagesFill)
+    public static let configTabIcon: UIImage? = image(.gearshape)
+    public static let configSelectedTabIcon: UIImage? = image(.gearshapeFill)
     
     public static let takePhotoButtonIcon: UIImage? = image(.cameraViewfinder)
     
