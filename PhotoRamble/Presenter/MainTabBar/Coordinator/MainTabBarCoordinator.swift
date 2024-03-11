@@ -58,6 +58,16 @@ final class MainTabBarCoordinator: Coordinator {
   }
   
   private func connectTabFlow(page: MainTabBarPage, tabPageController: UINavigationController) {
-    
+    switch page {
+      case .walk:
+        let coordinator = WalkCoordinator(tabPageController)
+        addChild(coordinator)
+        coordinator.start()
+        
+      case .post:
+        break
+      case .config:
+        break
+    }
   }
 }
