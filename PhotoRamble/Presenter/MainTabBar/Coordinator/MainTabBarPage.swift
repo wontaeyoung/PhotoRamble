@@ -21,20 +21,20 @@ enum MainTabBarPage: Int, CaseIterable {
       case .walk:
         return Localization.home_welcome_navigation_title.localizedWith("원태영")
       case .post:
-        return Localization.diary.localized
+        return Localization.tab_diary.localized
       case .config:
-        return Localization.config.localized
+        return Localization.tab_config.localized
     }
   }
   
   var title: String {
     switch self {
       case .walk:
-        return Localization.walk.localized
+        return Localization.tab_walk.localized
       case .post:
-        return Localization.diary.localized
+        return Localization.tab_diary.localized
       case .config:
-        return Localization.config.localized
+        return Localization.tab_config.localized
     }
   }
   

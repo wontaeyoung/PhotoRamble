@@ -9,12 +9,16 @@ import Foundation
 
 enum Localization: String {
   
+  /// 네비게이션 타이틀
   case home_welcome_navigation_title
   
   /// 탭바 아이템 타이틀
-  case walk
-  case diary
-  case config
+  case tab_walk
+  case tab_diary
+  case tab_config
+  
+  /// 버튼 타이틀
+  case walk_go_button
   
   var localized: String {
     return NSLocalizedString(self.rawValue, comment: "")
