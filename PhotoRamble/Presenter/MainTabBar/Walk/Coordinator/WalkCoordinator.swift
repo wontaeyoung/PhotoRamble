@@ -20,5 +20,23 @@ final class WalkCoordinator: Coordinator {
   }
   
   func start() {
+    showWalkView()
+  }
+}
+
+extension WalkCoordinator {
+  
+  func showWalkView() {
+    let viewModel = WalkViewModel()
+    let viewController = WalkViewController(viewModel: viewModel)
+      .navigationTitle(with: MainTabBarPage.walk.navigationTitle, displayMode: .always)
+      .hideBackTitle()
+    viewModel.coordinator = self
+    
+    push(viewController)
+  }
+  
+  func showWalkInProgressView() {
+    
   }
 }
