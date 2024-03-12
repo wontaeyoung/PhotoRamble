@@ -75,23 +75,23 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
     }
     
     timerLabel.snp.makeConstraints { make in
-      make.top.equalTo(takenPhotoPagerView.snp.bottom).offset(20)
-      make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
+      make.horizontalEdges.equalTo(view).inset(20)
+      make.bottom.equalTo(timerButton.snp.top).offset(-20)
     }
     
     timerButton.snp.makeConstraints { make in
-      make.top.equalTo(timerLabel.snp.bottom).offset(20)
-      make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
+      make.horizontalEdges.equalTo(view).inset(20)
+      make.bottom.equalTo(cameraButton.snp.top).offset(-20)
     }
     
     cameraButton.snp.makeConstraints { make in
-      make.top.equalTo(timerButton.snp.bottom).offset(20)
-      make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
+      make.horizontalEdges.equalTo(view).inset(20)
+      make.bottom.equalTo(walkCompleteButton.snp.top).offset(-20)
     }
     
     walkCompleteButton.snp.makeConstraints { make in
-      make.top.equalTo(cameraButton.snp.bottom).offset(20)
-      make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
+      make.horizontalEdges.equalTo(view).inset(20)
+      make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
     }
   }
   
@@ -109,7 +109,7 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
     /// UIImage -> Data 변환 후 전달
     imageRelay
       .compactMap {
-        $0.jpegData(compressionQuality: Constant.BusinessValue.fileImageCompressionPercent)
+        $0.jpegData(compressionQuality: 1.0)
       }
       .bind(to: input.takenNewPhotoDataEvent)
       .disposed(by: disposeBag)
@@ -185,6 +185,7 @@ extension WalkInProgressViewController: FSPagerViewDataSource, FSPagerViewDelega
     )
     
     cell.imageView?.image = photoPagerRelay.value[index]
+    cell.imageView?.layer.cornerRadius = 20
     
     return cell
   }
