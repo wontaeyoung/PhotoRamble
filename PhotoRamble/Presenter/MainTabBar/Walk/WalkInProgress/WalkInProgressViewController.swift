@@ -25,40 +25,25 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
     $0.itemSize = .init(width: 250, height: 250)
   }
   
-  private let timerLabel = UILabel().configured {
-    $0.font = .systemFont(ofSize: 17, weight: .bold)
+  private let timerLabel = PRLabel(style: .mainInfo, title: "00:00:00").configured {
     $0.textAlignment = .center
   }
   
-  private lazy var timerButton = UIButton().configured {
-    $0.configuration = .filled().configured {
-      $0.title = "산책 시작"
-      $0.cornerStyle = .large
-      $0.buttonSize = .large
-    }
-    
-    $0.addTarget(self, action: #selector(timerButtonTapped), for: .touchUpInside)
-  }
+  private let timerButton = PRButton(
+    style: .secondary,
+    title: Localization.walk_start_button.localized
+  )
   
-  private lazy var cameraButton = UIButton().configured {
-    $0.configuration = .filled().configured {
-      $0.title = "사진 촬영"
-      $0.cornerStyle = .large
-      $0.buttonSize = .large
-    }
-    
-    $0.addTarget(self, action: #selector(cameraButtonTapped), for: .touchUpInside)
-  }
+  private let cameraButton = PRButton(
+    style: .secondary,
+    title: Localization.photo_take_button.localized,
+    image: PRAsset.Symbol.takePhotoButtonIcon
+  )
   
-  private lazy var selectPhotoButton = UIButton().configured {
-    $0.configuration = .filled().configured {
-      $0.title = "사진 선택"
-      $0.cornerStyle = .large
-      $0.buttonSize = .large
-    }
-    
-    $0.addTarget(self, action: #selector(selectButtonTapped), for: .touchUpInside)
-  }
+  private let walkCompleteButton = PRButton(
+    style: .primary,
+    title: Localization.walk_complete_button.localized
+  )
   
   // MARK: - Property
   let viewModel: WalkInProgressViewModel
@@ -74,6 +59,16 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
   
   // MARK: - Life Cycle
   override func setHierarchy() {
+    view.addSubviews(
+      takenPhotoPagerView,
+      timerLabel,
+      timerButton,
+      cameraButton,
+      walkCompleteButton
+    )
+  }
+  
+  override func setConstraint() {
     takenPhotoPagerView.snp.makeConstraints { make in
       make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
       make.height.equalTo(takenPhotoPagerView.snp.width)
@@ -94,14 +89,10 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
     }
     
-    selectPhotoButton.snp.makeConstraints { make in
+    walkCompleteButton.snp.makeConstraints { make in
       make.top.equalTo(cameraButton.snp.bottom).offset(20)
       make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
     }
-  }
-  
-  override func setConstraint() {
-    
   }
   
   override func setAttribute() {
@@ -109,10 +100,13 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
   }
   
   override func bind() {
+    
     let input = WalkInProgressViewModel.Input(
-      takenNewPhotoDataEvent: PublishRelay<Data>()
+      takenNewPhotoDataEvent: PublishRelay<Data>(),
+      timerToggleEvent: PublishRelay<Void>()
     )
     
+    /// UIImage -> Data 변환 후 전달
     imageRelay
       .compactMap {
         $0.jpegData(compressionQuality: Constant.BusinessValue.fileImageCompressionPercent)
@@ -120,8 +114,14 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       .bind(to: input.takenNewPhotoDataEvent)
       .disposed(by: disposeBag)
     
+    /// 타이머 버튼 탭 이벤트 전달
+    timerButton.rx.tap
+      .bind(to: input.timerToggleEvent)
+      .disposed(by: disposeBag)
+    
     let output = viewModel.transform(input: input)
     
+    /// [Data] -> [UIImage] 변환 후 사진 리스트 업데이트
     output.imageDataUpdated
       .flatMap {
         Observable.from($0)
@@ -133,6 +133,18 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
         guard let self else { return }
         photoPagerRelay.accept(images)
       })
+      .disposed(by: disposeBag)
+    
+    output.timerButtonText
+      .drive(onNext: { [weak self] in
+        guard let self else { return }
+        
+        timerButton.title($0)
+      })
+      .disposed(by: disposeBag)
+    
+    output.timerLabelText
+      .drive(timerLabel.rx.text)
       .disposed(by: disposeBag)
   }
   
