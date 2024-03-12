@@ -19,6 +19,10 @@ enum Localization: String {
   
   /// 버튼 타이틀
   case walk_go_button
+  case walk_start_button
+  case walk_stop_button
+  case walk_complete_button
+  case photo_take_button
   
   var localized: String {
     return NSLocalizedString(self.rawValue, comment: "")

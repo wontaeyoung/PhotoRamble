@@ -12,6 +12,17 @@
         }
       }
     },
+    "photo_take_button" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사진 찍기"
+          }
+        }
+      }
+    },
     "tab_config" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -45,6 +56,17 @@
         }
       }
     },
+    "walk_complete_button" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "산책 완료"
+          }
+        }
+      }
+    },
     "walk_go_button" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -52,6 +74,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "산책하기"
+          }
+        }
+      }
+    },
+    "walk_start_button" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "산책 시작"
+          }
+        }
+      }
+    },
+    "walk_stop_button" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "산책 중지"
           }
         }
       }
