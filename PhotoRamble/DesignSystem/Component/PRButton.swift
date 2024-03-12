@@ -22,6 +22,14 @@ public final class PRButton: UIButton {
   public required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
+  func title(_ title: String) {
+    self.configuration?.title = title
+  }
+  
+  func image(_ image: UIImage) {
+    self.configuration?.image = image
+  }
 }
 
 public extension PRButton {
