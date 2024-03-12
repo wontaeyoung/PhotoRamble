@@ -13,7 +13,15 @@ import RxCocoa
 final class WalkViewController: RXBaseViewController, ViewModelController {
   
   // MARK: - UI
-  private let goWalkButton = PRButton(style: .primary, title: Localization.walk_go_button.localized)
+  private let welcomeLabel = PRLabel(
+    style: .navigationTitle,
+    title: Localization.home_welcome_navigation_title.localizedWith("태영")
+  )
+  
+  private let goWalkButton = PRButton(
+    style: .primary,
+    title: Localization.walk_go_button.localized
+  )
   
   // MARK: - Property
   let viewModel: WalkViewModel
@@ -27,10 +35,15 @@ final class WalkViewController: RXBaseViewController, ViewModelController {
   
   // MARK: - Life Cycle
   override func setHierarchy() {
-    view.addSubviews(goWalkButton)
+    view.addSubviews(welcomeLabel, goWalkButton)
   }
   
   override func setConstraint() {
+    welcomeLabel.snp.makeConstraints { make in
+      make.top.equalTo(view.safeAreaLayoutGuide).inset(20)
+      make.horizontalEdges.equalTo(view).inset(20)
+    }
+    
     goWalkButton.snp.makeConstraints { make in
       make.horizontalEdges.equalTo(view).inset(20)
       make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
