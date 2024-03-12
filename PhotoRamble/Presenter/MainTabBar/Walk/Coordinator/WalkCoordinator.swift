@@ -36,6 +36,14 @@ extension WalkCoordinator {
   }
   
   func showWalkInProgressView() {
+    let imageRepository = ImageRepositoryImpl()
+    let createImageFileUsecase = CreateImageFileUsecaseImpl(imageRepository: imageRepository)
+    let viewModel = WalkInProgressViewModel(createImageFileUsecase: createImageFileUsecase)
+    let viewController = WalkInProgressViewController(viewModel: viewModel)
+      .navigationTitle(with: "산책하기", displayMode: .never)
+      .hideBackTitle()
+    viewModel.coordinator = self
     
+    push(viewController)
   }
 }
