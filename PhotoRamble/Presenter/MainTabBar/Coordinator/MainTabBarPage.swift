@@ -19,7 +19,7 @@ enum MainTabBarPage: Int, CaseIterable {
   var navigationTitle: String {
     switch self {
       case .walk:
-        return Localization.home_welcome_navigation_title.localizedWith("원태영")
+        return Localization.tab_walk.localized
       case .post:
         return Localization.tab_diary.localized
       case .config:
