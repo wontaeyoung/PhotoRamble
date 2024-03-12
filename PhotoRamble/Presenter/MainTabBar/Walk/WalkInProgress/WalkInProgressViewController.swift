@@ -122,34 +122,24 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
     let output = viewModel.transform(input: input)
     
     /// [Data] -> [UIImage] 변환 후 사진 리스트 업데이트
-    output.imageDataUpdated
+    output.imageDataList
       .flatMap {
         Observable.from($0)
           .compactMap { UIImage(data: $0) }
           .toArray()
       }
       .asDriver(onErrorJustReturn: [])
-      .drive(onNext: { [weak self] images in
-        guard let self else { return }
-        photoPagerRelay.accept(images)
-      })
+      .drive(onNext: { self.photoPagerRelay.accept($0) })
       .disposed(by: disposeBag)
     
     output.timerButtonText
-      .drive(onNext: { [weak self] in
-        guard let self else { return }
-        
-        timerButton.title($0)
-      })
+      .drive(onNext: { self.timerButton.title($0) })
       .disposed(by: disposeBag)
     
     output.timerLabelText
       .drive(timerLabel.rx.text)
       .disposed(by: disposeBag)
   }
-  
-  // MARK: - Method
-  
 }
 
 extension WalkInProgressViewController: FSPagerViewDataSource, FSPagerViewDelegate {

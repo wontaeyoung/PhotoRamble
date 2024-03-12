@@ -18,7 +18,7 @@ final class WalkInProgressViewModel: ViewModel {
   }
   
   struct Output {
-    let imageDataUpdated: Observable<[Data]>
+    let imageDataList: Observable<[Data]>
     let timerButtonText: Driver<String>
     let timerLabelText: Driver<String>
   }
@@ -97,7 +97,7 @@ final class WalkInProgressViewModel: ViewModel {
       }
     
     return Output(
-      imageDataUpdated: imagesDataRelay.asObservable(),
+      imageDataList: imagesDataRelay.asObservable(),
       timerButtonText: timerButtonText.asDriver(onErrorJustReturn: ""),
       timerLabelText: timerText.asDriver(onErrorJustReturn: "타이머 표시 오류가 발생했습니다.")
     )
