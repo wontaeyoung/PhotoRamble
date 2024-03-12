@@ -5,8 +5,6 @@
 //  Created by 원태영 on 3/10/24.
 //
 
-import KazUtility
-
 enum MapperError: AppError {
   case toUUIDFailed(from: String)
   

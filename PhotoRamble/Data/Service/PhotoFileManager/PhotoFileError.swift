@@ -5,8 +5,6 @@
 //  Created by 원태영 on 3/11/24.
 //
 
-import KazUtility
-
 enum FileManageError: AppError {
   
   static let contactDeveloperMessage: String = "문제가 지속되면 개발자에게 문의해주세요."

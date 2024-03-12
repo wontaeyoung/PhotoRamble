@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import KazUtility
 
 protocol TabBarDelegate: AnyObject {
   func moveTab(to tab: MainTabBarPage)

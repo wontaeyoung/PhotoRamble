@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import KazUtility
 import SnapKit
 
 public final class PRTextView: UITextView {

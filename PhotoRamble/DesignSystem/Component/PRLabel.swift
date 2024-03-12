@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import KazUtility
 
 public final class PRLabel: UILabel {
   

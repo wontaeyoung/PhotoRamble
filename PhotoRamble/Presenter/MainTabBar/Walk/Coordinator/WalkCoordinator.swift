@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import KazUtility
 
 final class WalkCoordinator: Coordinator {
   
