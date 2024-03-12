@@ -18,14 +18,16 @@ final class WalkInProgressViewModel: ViewModel {
   }
   
   struct Output {
-    let imageDataUpdated: RxSwift.Observable<[Data]>
-    let timerText: RxSwift.Observable<String>
+    let imageDataUpdated: Observable<[Data]>
+    let timerButtonText: Driver<String>
+    let timerLabelText: Driver<String>
   }
   
   // MARK: - Observable
-  private var walkRelay = BehaviorRelay<Walk>(value: Walk())
+  private let walkRelay = BehaviorRelay<Walk>(value: Walk())
   private let imagesDataRelay = BehaviorRelay<[Data]>(value: [])
   private let timerStateRelay = BehaviorRelay<Bool>(value: false)
+  private let timeIntervalRelay = BehaviorRelay<TimeInterval>(value: 0)
   
   // MARK: - Property
   let disposeBag = DisposeBag()
@@ -77,9 +79,32 @@ final class WalkInProgressViewModel: ViewModel {
       })
       .disposed(by: disposeBag)
     
+    let timerButtonText: Observable<String> = timerStateRelay
+      .withUnretained(self)
+      .map { owner, on in
+        return owner.timerButtonTitle(isOn: on)
+      }
+    
+    let timerText: Observable<String> = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
+      .withLatestFrom(timerStateRelay)
+      .filter { $0 }
+      .withUnretained(self)
+      .flatMap { owner, _ in
+        owner.timerTick()
+        
+        let timerText = DateManager.shared.elapsedTime(owner.timeIntervalRelay.value, format: .HHmmss)
+        return Observable.just(timerText)
+      }
+    
     return Output(
-      imageDataUpdated: imagesDataRelay.asObservable()
+      imageDataUpdated: imagesDataRelay.asObservable(),
+      timerButtonText: timerButtonText.asDriver(onErrorJustReturn: ""),
+      timerLabelText: timerText.asDriver(onErrorJustReturn: "타이머 표시 오류가 발생했습니다.")
     )
+  }
+  
+  private func timerTick() {
+    timeIntervalRelay.accept(timeIntervalRelay.value + 1)
   }
   
   private func updateImageDataList(with newData: Data) {
@@ -87,5 +112,11 @@ final class WalkInProgressViewModel: ViewModel {
     currentList.append(newData)
     
     imagesDataRelay.accept(currentList)
+  }
+  
+  func timerButtonTitle(isOn: Bool) -> String {
+    return isOn 
+    ? Localization.walk_stop_button.localized
+    : Localization.walk_start_button.localized
   }
 }
