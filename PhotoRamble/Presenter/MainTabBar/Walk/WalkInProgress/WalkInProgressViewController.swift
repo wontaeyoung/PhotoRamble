@@ -119,6 +119,25 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       .bind(to: input.timerToggleEvent)
       .disposed(by: disposeBag)
     
+    cameraButton.rx.tap
+      .asDriver()
+      .drive(onNext: {
+        self.showingCamera()
+      })
+      .disposed(by: disposeBag)
+    
+    photoPagerRelay
+      .withUnretained(self)
+      .asDriver(onErrorJustReturn: (self, []))
+      .drive(onNext: { owner, _ in
+        owner.takenPhotoPagerView.reloadData()
+        
+        GCD.main(after: 0.1) {
+          owner.takenPhotoPagerView.scrollToItem(at: owner.viewModel.numberOfItems - 1, animated: true)
+        }
+      })
+      .disposed(by: disposeBag)
+    
     let output = viewModel.transform(input: input)
     
     /// [Data] -> [UIImage] 변환 후 사진 리스트 업데이트
@@ -140,6 +159,18 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       .drive(timerLabel.rx.text)
       .disposed(by: disposeBag)
   }
+  
+  private func showingCamera() {
+    if UIImagePickerController.isSourceTypeAvailable(.camera) {
+      let picker = UIImagePickerController().configured {
+        $0.sourceType = .camera
+        $0.cameraCaptureMode = .photo
+        $0.delegate = self
+      }
+      
+      present(picker, animated: true)
+    }
+  }
 }
 
 extension WalkInProgressViewController: FSPagerViewDataSource, FSPagerViewDelegate {
@@ -156,5 +187,15 @@ extension WalkInProgressViewController: FSPagerViewDataSource, FSPagerViewDelega
     cell.imageView?.image = photoPagerRelay.value[index]
     
     return cell
+  }
+}
+
+extension WalkInProgressViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    dismiss(animated: true)
+    
+    if let image = info[.originalImage] as? UIImage {
+      imageRelay.accept(image)
+    }
   }
 }
