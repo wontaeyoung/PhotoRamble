@@ -29,7 +29,7 @@ extension WalkCoordinator {
   func showWalkView() {
     let viewModel = WalkViewModel()
     let viewController = WalkViewController(viewModel: viewModel)
-      .navigationTitle(with: MainTabBarPage.walk.navigationTitle, displayMode: .always)
+      .navigationTitle(with: MainTabBarPage.walk.navigationTitle, displayMode: .never)
       .hideBackTitle()
     viewModel.coordinator = self
     
