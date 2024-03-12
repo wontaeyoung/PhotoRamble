@@ -38,6 +38,22 @@ public final class PRLabel: UILabel {
           $0.textAlignment = .natural
           $0.numberOfLines = 0
         }
+        
+      case .content:
+        self.configure {
+          $0.font = PRAsset.Font.prSubInfoLabel
+          $0.textColor = PRAsset.Color.prTitle
+          $0.textAlignment = .natural
+          $0.numberOfLines = 0
+        }
+        
+      case .navigationTitle:
+        self.configure {
+          $0.font = PRAsset.Font.prNavigationTitleLabel
+          $0.textColor = PRAsset.Color.prTitle
+          $0.textAlignment = .natural
+          $0.numberOfLines = 2
+        }
     }
   }
   
@@ -53,5 +69,7 @@ public extension PRLabel {
     case mainTitle
     case mainInfo
     case subInfo
+    case content
+    case navigationTitle
   }
 }

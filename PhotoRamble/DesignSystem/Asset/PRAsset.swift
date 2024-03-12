@@ -61,6 +61,7 @@ public enum PRAsset {
     public static let prMainInfoLabel: UIFont = font(.semiBold, size: 21)
     public static let prSubInfoLabel: UIFont = font(.regular, size: 11)
     public static let prContentText: UIFont = font(.regular, size: 15)
+    public static let prNavigationTitleLabel: UIFont = font(.extraBold, size: 29)
   }
   
   public enum Symbol {
