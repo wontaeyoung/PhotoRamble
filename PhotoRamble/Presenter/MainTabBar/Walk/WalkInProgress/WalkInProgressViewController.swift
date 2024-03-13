@@ -161,6 +161,15 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
   }
   
   private func showingCamera() {
+#if targetEnvironment(simulator)
+    viewModel.requestImageForSimulator()
+      .compactMap { UIImage(data: $0) }
+      .asDriver()
+      .drive(onNext: {
+        self.imageRelay.accept($0)
+      })
+      .disposed(by: disposeBag)
+#else
     if UIImagePickerController.isSourceTypeAvailable(.camera) {
       let picker = UIImagePickerController().configured {
         $0.sourceType = .camera
@@ -170,6 +179,7 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       
       present(picker, animated: true)
     }
+#endif
   }
 }
 
