@@ -146,17 +146,17 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
         Observable.from($0)
           .compactMap { UIImage(data: $0) }
           .toArray()
+          .asDriver(onErrorJustReturn: [])
       }
-      .asDriver(onErrorJustReturn: [])
-      .drive(onNext: { self.photoPagerRelay.accept($0) })
+      .drive(photoPagerRelay)
       .disposed(by: disposeBag)
     
     output.timerButtonText
-      .drive(onNext: { self.timerButton.title($0) })
+      .emit(onNext: { self.timerButton.title($0) })
       .disposed(by: disposeBag)
     
     output.timerLabelText
-      .drive(timerLabel.rx.text)
+      .emit(to: timerLabel.rx.text)
       .disposed(by: disposeBag)
   }
   
@@ -164,10 +164,7 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
 #if targetEnvironment(simulator)
     viewModel.requestImageForSimulator()
       .compactMap { UIImage(data: $0) }
-      .asDriver()
-      .drive(onNext: {
-        self.imageRelay.accept($0)
-      })
+      .bind(to: imageRelay)
       .disposed(by: disposeBag)
 #else
     if UIImagePickerController.isSourceTypeAvailable(.camera) {

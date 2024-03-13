@@ -18,9 +18,9 @@ final class WalkInProgressViewModel: ViewModel {
   }
   
   struct Output {
-    let imageDataList: Observable<[Data]>
-    let timerButtonText: Driver<String>
-    let timerLabelText: Driver<String>
+    let imageDataList: Driver<[Data]>
+    let timerButtonText: Signal<String>
+    let timerLabelText: Signal<String>
   }
   
   // MARK: - Observable
@@ -79,13 +79,14 @@ final class WalkInProgressViewModel: ViewModel {
       })
       .disposed(by: disposeBag)
     
-    let timerButtonText: Observable<String> = timerStateRelay
+    let timerButtonText: Signal<String> = timerStateRelay
       .withUnretained(self)
       .map { owner, on in
         return owner.timerButtonTitle(isOn: on)
       }
+      .asSignal(onErrorJustReturn: "")
     
-    let timerText: Observable<String> = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
+    let timerText: Signal<String> = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
       .withLatestFrom(timerStateRelay)
       .filter { $0 }
       .withUnretained(self)
@@ -95,11 +96,12 @@ final class WalkInProgressViewModel: ViewModel {
         let timerText = DateManager.shared.elapsedTime(owner.timeIntervalRelay.value, format: .HHmmss)
         return Observable.just(timerText)
       }
+      .asSignal(onErrorJustReturn: "타이머 표시 오류가 발생했습니다.")
     
     return Output(
-      imageDataList: imagesDataRelay.asObservable(),
-      timerButtonText: timerButtonText.asDriver(onErrorJustReturn: ""),
-      timerLabelText: timerText.asDriver(onErrorJustReturn: "타이머 표시 오류가 발생했습니다.")
+      imageDataList: imagesDataRelay.asDriver(),
+      timerButtonText: timerButtonText,
+      timerLabelText: timerText
     )
   }
   
