@@ -109,7 +109,7 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
     /// UIImage -> Data 변환 후 전달
     imageRelay
       .compactMap {
-        $0.jpegData(compressionQuality: 1.0)
+        $0.compressedJPEGData
       }
       .bind(to: input.takenNewPhotoDataEvent)
       .disposed(by: disposeBag)
