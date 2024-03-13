@@ -184,8 +184,11 @@ extension WalkInProgressViewController: FSPagerViewDataSource, FSPagerViewDelega
       at: index
     )
     
-    cell.imageView?.image = photoPagerRelay.value[index]
-    cell.imageView?.layer.cornerRadius = 20
+    cell.imageView?.configure {
+      $0.image = photoPagerRelay.value[index]
+      $0.clipsToBounds = true
+      $0.layer.cornerRadius = 20
+    }
     
     return cell
   }
