@@ -29,10 +29,12 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
     $0.textAlignment = .center
   }
   
+  /*
   private let timerButton = PRButton(
     style: .secondary,
     title: Localization.walk_start_button.localized
   )
+   */
   
   private let cameraButton = PRButton(
     style: .secondary,
@@ -58,11 +60,16 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
   }
   
   // MARK: - Life Cycle
+  override func viewDidDisappear(_ animated: Bool) {
+    super.viewDidDisappear(animated)
+    print(#function)
+  }
+  
   override func setHierarchy() {
     view.addSubviews(
       takenPhotoPagerView,
       timerLabel,
-      timerButton,
+//      timerButton,
       cameraButton,
       walkCompleteButton
     )
@@ -76,13 +83,15 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
     
     timerLabel.snp.makeConstraints { make in
       make.horizontalEdges.equalTo(view).inset(20)
-      make.bottom.equalTo(timerButton.snp.top).offset(-20)
+      make.bottom.equalTo(cameraButton.snp.top).offset(-20)
     }
     
+    /*
     timerButton.snp.makeConstraints { make in
       make.horizontalEdges.equalTo(view).inset(20)
       make.bottom.equalTo(cameraButton.snp.top).offset(-20)
     }
+     */
     
     cameraButton.snp.makeConstraints { make in
       make.horizontalEdges.equalTo(view).inset(20)
@@ -95,13 +104,10 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
     }
   }
   
-  override func setAttribute() {
-    
-  }
-  
   override func bind() {
     
     let input = WalkInProgressViewModel.Input(
+      viewDidLoadEvent: Observable.just(true).asSignal(onErrorJustReturn: true),
       takenNewPhotoDataEvent: PublishRelay<Data>(),
       timerToggleEvent: PublishRelay<Void>()
     )
@@ -115,14 +121,18 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       .disposed(by: disposeBag)
     
     /// 타이머 버튼 탭 이벤트 전달
+    /*
     timerButton.rx.tap
       .bind(to: input.timerToggleEvent)
       .disposed(by: disposeBag)
+     */
     
     cameraButton.rx.tap
       .asDriver()
-      .drive(onNext: {
-        self.showingCamera()
+      .drive(onNext: { [weak self] in
+        guard let self else { return }
+        
+        showingCamera()
       })
       .disposed(by: disposeBag)
     
@@ -151,9 +161,11 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       .drive(photoPagerRelay)
       .disposed(by: disposeBag)
     
+    /*
     output.timerButtonText
       .emit(onNext: { self.timerButton.title($0) })
       .disposed(by: disposeBag)
+     */
     
     output.timerLabelText
       .emit(to: timerLabel.rx.text)
