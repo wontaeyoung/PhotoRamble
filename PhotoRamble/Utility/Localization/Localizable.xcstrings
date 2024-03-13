@@ -12,6 +12,17 @@
         }
       }
     },
+    "no_photo_info_label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "아직 찍은 사진이 없어요. [사진 찍기] 버튼을 누르고 주변 풍경을 찍어보세요!"
+          }
+        }
+      }
+    },
     "photo_take_button" : {
       "extractionState" : "manual",
       "localizations" : {

@@ -17,6 +17,9 @@ enum Localization: String {
   case tab_diary
   case tab_config
   
+  /// 인포 라벨 타이틀
+  case no_photo_info_label
+  
   /// 버튼 타이틀
   case walk_go_button
   case walk_start_button
