@@ -19,6 +19,9 @@ extension UIImage {
     // 이미지를 JPEG 데이터로 변환
     guard var compressedData = self.jpegData(compressionQuality: compressionQuality) else { return nil }
     
+#if DEBUG
+    LogManager.shared.log(with: "압축 전 \(compressedData.count)", to: .local, level: .debug)
+#endif
     /// 용량이 최대 기준치 이하가 되었거나, 압축률이 100%가 아니면 반복 수행
     while Double(compressedData.count) > maxSizeInBytes && compressionQuality > minQuality {
       // 압축률 10% 증가 후 다시 시도
@@ -27,6 +30,10 @@ extension UIImage {
       guard let newData = self.jpegData(compressionQuality: compressionQuality) else { break }
       compressedData = newData
     }
+    
+#if DEBUG
+    LogManager.shared.log(with: "압축 후 \(compressedData.count)", to: .local, level: .debug)
+#endif
     
     return compressedData
   }

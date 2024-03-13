@@ -195,6 +195,10 @@ extension WalkInProgressViewController: FSPagerViewDataSource, FSPagerViewDelega
       $0.image = photoPagerRelay.value[index]
       $0.clipsToBounds = true
       $0.layer.cornerRadius = 20
+
+#if DEBUG
+      LogManager.shared.log(with: "페이저 이미지 용량 : " + $0.image!.jpegData(compressionQuality: 1.0)!.count.description, to: .local, level: .debug)
+#endif
     }
     
     return cell

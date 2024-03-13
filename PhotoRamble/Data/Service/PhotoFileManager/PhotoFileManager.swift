@@ -36,6 +36,10 @@ public final class PhotoFileManager {
       try FileManager.default.createDirectory(at: router.directoryURL, withIntermediateDirectories: true)
     }
     
+    #if DEBUG
+    LogManager.shared.log(with: "이미지 파일 저장 위치 : " + router.filePath, to: .local, level: .debug)
+    #endif
+    
     try imageData.write(to: router.fileURL, options: .withoutOverwriting)
   }
   

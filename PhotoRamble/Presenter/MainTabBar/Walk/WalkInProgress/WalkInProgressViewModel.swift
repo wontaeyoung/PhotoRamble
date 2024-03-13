@@ -127,6 +127,10 @@ final class WalkInProgressViewModel: ViewModel {
     let width = Int.random(in: 5...10) * 200
     let height = width + Int.random(in: -5...0) * 100
     let url = "https://picsum.photos/\(width)/\(height)"
+
+#if DEBUG
+    LogManager.shared.log(with: "요청 URL : " + url, to: .local, level: .debug)
+#endif
     
     return Observable.just(url)
       .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
