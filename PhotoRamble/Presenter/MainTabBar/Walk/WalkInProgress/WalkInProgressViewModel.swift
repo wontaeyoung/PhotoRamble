@@ -122,16 +122,15 @@ final class WalkInProgressViewModel: ViewModel {
     : Localization.walk_start_button.localized
   }
   
-  func requestImageForSimulator() -> Driver<Data> {
+  func requestImageForSimulator() -> Observable<Data> {
     
-    let width = Int.random(in: 10...20) * 200
-    let height = width + Int.random(in: -2...2) * 100
+    let width = Int.random(in: 5...10) * 200
+    let height = width + Int.random(in: -5...0) * 100
     let url = "https://picsum.photos/\(width)/\(height)"
     
     return Observable.just(url)
       .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
       .compactMap { URL(string: $0) }
       .compactMap { try Data(contentsOf: $0) }
-      .asDriver(onErrorJustReturn: Data())
   }
 }
