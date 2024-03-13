@@ -25,6 +25,10 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
     $0.itemSize = .init(width: 250, height: 250)
   }
   
+  private let noPhotoInfoLabel = PRLabel(style: .subInfo, title: Localization.no_photo_info_label.localized).configured {
+    $0.textAlignment = .center
+  }
+  
   private let timerLabel = PRLabel(style: .mainInfo, title: "00:00:00").configured {
     $0.textAlignment = .center
   }
@@ -66,14 +70,10 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
   }
   
   // MARK: - Life Cycle
-  override func viewDidDisappear(_ animated: Bool) {
-    super.viewDidDisappear(animated)
-    print(#function)
-  }
-  
   override func setHierarchy() {
     view.addSubviews(
       takenPhotoPagerView,
+      noPhotoInfoLabel,
       timerLabel,
 //      timerButton,
       cameraButton,
@@ -85,6 +85,11 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
     takenPhotoPagerView.snp.makeConstraints { make in
       make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
       make.height.equalTo(takenPhotoPagerView.snp.width)
+    }
+    
+    noPhotoInfoLabel.snp.makeConstraints { make in
+      make.edges.equalTo(takenPhotoPagerView)
+      make.center.equalTo(takenPhotoPagerView)
     }
     
     timerLabel.snp.makeConstraints { make in
@@ -124,6 +129,16 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
         $0.compressedJPEGData
       }
       .bind(to: input.takenNewPhotoDataEvent)
+      .disposed(by: disposeBag)
+    
+    imageRelay
+      .observe(on: MainScheduler.instance)
+      .asObservable()
+      .take(1)
+      .withUnretained(self)
+      .subscribe(onNext: { owner, _ in
+        owner.hideNoPhotoLabel()
+      })
       .disposed(by: disposeBag)
     
     /// 타이머 버튼 탭 이벤트 전달
@@ -195,6 +210,10 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       present(picker, animated: true)
     }
 #endif
+  }
+  
+  private func hideNoPhotoLabel() {
+    noPhotoInfoLabel.removeFromSuperview()
   }
 }
 
