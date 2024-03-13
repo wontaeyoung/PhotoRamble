@@ -59,6 +59,12 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
     super.init()
   }
   
+  deinit {
+#if DEBUG
+    LogManager.shared.log(with: "\(self.description) 해제", to: .local, level: .debug)
+#endif
+  }
+  
   // MARK: - Life Cycle
   override func viewDidDisappear(_ animated: Bool) {
     super.viewDidDisappear(animated)

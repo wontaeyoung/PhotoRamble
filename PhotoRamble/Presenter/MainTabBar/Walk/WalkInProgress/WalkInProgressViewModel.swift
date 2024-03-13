@@ -44,6 +44,12 @@ final class WalkInProgressViewModel: ViewModel {
     self.createImageFileUsecase = createImageFileUsecase
   }
   
+  deinit {
+#if DEBUG
+    LogManager.shared.log(with: "\(self) 해제", to: .local, level: .debug)
+#endif
+  }
+  
   // MARK: - Method
   func transform(input: Input) -> Output {
     
