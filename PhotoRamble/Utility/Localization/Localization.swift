@@ -19,6 +19,8 @@ enum Localization: String {
   
   /// 인포 라벨 타이틀
   case no_photo_info_label
+  case photo_selection_info_label
+  case photo_selected_count_info_label
   
   /// 버튼 타이틀
   case walk_go_button
@@ -26,6 +28,7 @@ enum Localization: String {
   case walk_stop_button
   case walk_complete_button
   case photo_take_button
+  case write_diary_button
   
   var localized: String {
     return NSLocalizedString(self.rawValue, comment: "")

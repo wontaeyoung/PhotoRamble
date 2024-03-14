@@ -23,6 +23,28 @@
         }
       }
     },
+    "photo_selected_count_info_label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택한 사진 %d / %d"
+          }
+        }
+      }
+    },
+    "photo_selection_info_label" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "산책하는 동안 찍은 사진들이에요"
+          }
+        }
+      }
+    },
     "photo_take_button" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -107,6 +129,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "산책 중지"
+          }
+        }
+      }
+    },
+    "write_diary_button" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일기 쓰러가기"
           }
         }
       }
