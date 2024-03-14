@@ -12,18 +12,27 @@ final class PhotoCollectionCell: RXBaseCollectionViewCell {
   
   // MARK: - UI
   private let photoImageView = UIImageView()
-  private let selectedNumberLabel = PaddingLabel(
-    style: .mainInfo,
-    title: nil,
-    alignment: .center,
-    horizontalInset: 4,
-    verticalInset: 4,
-    backgroundColor: PRAsset.Color.prSecondary
-  )
+  private let selectedView = UIView().configured {
+    $0.backgroundColor = PRAsset.Color.prBlack.withAlphaComponent(0.2)
+    $0.isHidden = true
+  }
+  private lazy var selectedNumberLabel = PRLabel(style: .mainTitle, alignment: .center).configured {
+    $0.backgroundColor = PRAsset.Color.prSecondary
+    $0.clipsToBounds = true
+    $0.layer.cornerRadius = selectedNumberLabelSize / 2
+    $0.isHidden = true
+  }
+  
+  private let selectedNumberLabelSize: CGFloat = 25
   
   // MARK: - Life Cycle
+  override func prepareForReuse() {
+    super.prepareForReuse()
+    
+    selectedNumberLabel.text = ""
+  }
   override func setHierarchy() {
-    contentView.addSubviews(photoImageView, selectedNumberLabel)
+    contentView.addSubviews(photoImageView, selectedView, selectedNumberLabel)
   }
   
   override func setConstraint() {
@@ -31,37 +40,47 @@ final class PhotoCollectionCell: RXBaseCollectionViewCell {
       make.edges.equalTo(contentView)
     }
     
+    selectedView.snp.makeConstraints { make in
+      make.edges.equalTo(photoImageView)
+    }
+    
     selectedNumberLabel.snp.makeConstraints { make in
-      make.trailing.bottom.equalTo(photoImageView).inset(20)
+      make.trailing.bottom.equalTo(photoImageView).inset(8)
+      make.size.equalTo(selectedNumberLabelSize)
     }
   }
   
   override func setAttribute() {
-    
+    contentView.layer.borderColor = PRAsset.Color.prPrimary.cgColor
   }
 }
 
 extension PhotoCollectionCell {
   
-  enum SelectionStyle {
-    case select(number: Int)
-    case deSelect
-  }
-  
-  func updateImage(with image: UIImage) {
+  func updateImage(with image: UIImage, selectedNumber: Int?) {
     photoImageView.image = image
+    
+    updateSelection(selectedNumber: selectedNumber)
+    selectedNumberLabelVisible()
+    selectedImageStyleVisible()
   }
   
-  func updateSelection(style: SelectionStyle) {
-    switch style {
-      case .select(let number):
-        selectedNumberLabel.configure {
-          $0.text = "\(number)"
-          $0.isHidden = false
-        }
-        
-      case .deSelect:
-        selectedNumberLabel.isHidden = true
+  private func updateSelection(selectedNumber: Int?) {
+    if let selectedNumber {
+      selectedNumberLabel.text = "\(selectedNumber)"
+    }
+  }
+  
+  private func selectedNumberLabelVisible() {
+    if let isEmpty = selectedNumberLabel.text?.isEmpty {
+      selectedNumberLabel.isHidden = isEmpty
+    }
+  }
+  
+  private func selectedImageStyleVisible() {
+    if let isEmpty = selectedNumberLabel.text?.isEmpty {
+      contentView.layer.borderWidth = isEmpty ? 0 : 4
+      selectedView.isHidden = isEmpty
     }
   }
 }
