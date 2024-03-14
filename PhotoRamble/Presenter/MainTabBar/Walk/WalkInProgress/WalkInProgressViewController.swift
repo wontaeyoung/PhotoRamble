@@ -159,16 +159,6 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       })
       .disposed(by: disposeBag)
     
-    photoPagerRelay
-      .withUnretained(self)
-      .asDriver(onErrorJustReturn: (self, []))
-      .drive(onNext: { owner, _ in
-        owner.takenPhotoPagerView.reloadData()
-        
-        GCD.main(after: 0.1) {
-          owner.takenPhotoPagerView.scrollToItem(at: owner.viewModel.numberOfItems - 1, animated: true)
-        }
-      })
       .disposed(by: disposeBag)
     
     let output = viewModel.transform(input: input)
@@ -193,6 +183,19 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
     output.timerLabelText
       .emit(to: timerLabel.rx.text)
       .disposed(by: disposeBag)
+    
+    photoPagerRelay
+      .withUnretained(self)
+      .asDriver(onErrorJustReturn: (self, []))
+      .drive(onNext: { owner, _ in
+        owner.updatePhotoCollection()
+        
+        GCD.main(after: 0.1) {
+          let scrollTargetItem = owner.viewModel.numberOfItems - 1
+          owner.takenPhotoPagerView.scrollToItem(at: scrollTargetItem, animated: true)
+        }
+      })
+      .disposed(by: disposeBag)
   }
   
   private func showingCamera() {
@@ -216,6 +219,10 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
   
   private func hideNoPhotoLabel() {
     noPhotoInfoLabel.removeFromSuperview()
+  }
+  
+  private func updatePhotoCollection() {
+    takenPhotoPagerView.reloadData()
   }
 }
 
