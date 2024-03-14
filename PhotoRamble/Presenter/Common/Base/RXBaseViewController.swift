@@ -46,4 +46,3 @@ open class RXBaseViewController: UIViewController {
     bind()
   }
 }
-
