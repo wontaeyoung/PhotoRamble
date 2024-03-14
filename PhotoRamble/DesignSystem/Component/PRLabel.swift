@@ -9,17 +9,17 @@ import UIKit
 
 public final class PRLabel: UILabel {
   
-  public init(style: Style, title: String? = nil) {
+  public init(style: Style, title: String? = nil, alignment: NSTextAlignment = .natural) {
     super.init(frame: .zero)
     
     self.text = title
+    self.textAlignment = textAlignment
     
     switch style {
       case .mainTitle:
         self.configure {
           $0.font = PRAsset.Font.prMainTitleLabel
           $0.textColor = PRAsset.Color.prMainInfo
-          $0.textAlignment = .natural
           $0.numberOfLines = 1
         }
         
@@ -27,7 +27,6 @@ public final class PRLabel: UILabel {
         self.configure {
           $0.font = PRAsset.Font.prMainInfoLabel
           $0.textColor = PRAsset.Color.prMainInfo
-          $0.textAlignment = .natural
           $0.numberOfLines = 1
         }
         
@@ -35,7 +34,6 @@ public final class PRLabel: UILabel {
         self.configure {
           $0.font = PRAsset.Font.prSubInfoLabel
           $0.textColor = PRAsset.Color.prSubInfo
-          $0.textAlignment = .natural
           $0.numberOfLines = 0
         }
         
@@ -43,7 +41,6 @@ public final class PRLabel: UILabel {
         self.configure {
           $0.font = PRAsset.Font.prSubInfoLabel
           $0.textColor = PRAsset.Color.prTitle
-          $0.textAlignment = .natural
           $0.numberOfLines = 0
         }
         
@@ -51,7 +48,6 @@ public final class PRLabel: UILabel {
         self.configure {
           $0.font = PRAsset.Font.prNavigationTitleLabel
           $0.textColor = PRAsset.Color.prTitle
-          $0.textAlignment = .natural
           $0.numberOfLines = 2
         }
     }
