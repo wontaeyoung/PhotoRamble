@@ -1,6 +1,17 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "cannot_over_max_selection_alert" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사진은 %d장까지만 선택 가능해요!"
+          }
+        }
+      }
+    },
     "home_welcome_navigation_title" : {
       "extractionState" : "manual",
       "localizations" : {

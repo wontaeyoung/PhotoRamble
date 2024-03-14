@@ -30,6 +30,9 @@ enum Localization: String {
   case photo_take_button
   case write_diary_button
   
+  /// 알럿 타이틀
+  case cannot_over_max_selection_alert
+  
   var localized: String {
     return NSLocalizedString(self.rawValue, comment: "")
   }
