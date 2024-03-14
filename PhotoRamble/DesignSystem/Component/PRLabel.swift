@@ -7,13 +7,13 @@
 
 import UIKit
 
-public final class PRLabel: UILabel {
+public class PRLabel: UILabel {
   
   public init(style: Style, title: String? = nil, alignment: NSTextAlignment = .natural) {
     super.init(frame: .zero)
     
     self.text = title
-    self.textAlignment = textAlignment
+    self.textAlignment = alignment
     
     switch style {
       case .mainTitle:
