@@ -16,6 +16,7 @@ final class WalkInProgressViewModel: ViewModel {
     let viewDidLoadEvent: Observable<Bool>
     let takenNewPhotoDataEvent: PublishRelay<Data>
     let timerToggleEvent: PublishRelay<Void>
+    let walkCompleteButtonTapEvent: PublishRelay<Void>
   }
   
   struct Output {
@@ -87,6 +88,14 @@ final class WalkInProgressViewModel: ViewModel {
       .withUnretained(self)
       .subscribe(onNext: { owner, isRunning in
         owner.timerStateRelay.accept(!isRunning)
+      })
+      .disposed(by: disposeBag)
+    
+    input.walkCompleteButtonTapEvent
+      .withLatestFrom(imagesDataRelay)
+      .withUnretained(self)
+      .subscribe(onNext: { owner, dataList in
+        owner.coordinator?.showWalkPhotoSelectionView(imageDataList: dataList)
       })
       .disposed(by: disposeBag)
     
