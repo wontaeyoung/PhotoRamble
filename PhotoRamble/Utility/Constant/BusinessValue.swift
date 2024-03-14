@@ -8,4 +8,5 @@
 enum BusinessValue {
   static let maxImageFileVolumeMB: Double = 2.0
   static let maxPhotoSelectionCount: Int = 10
+  static let gridCountInRow: Int = 3
 }
