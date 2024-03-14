@@ -146,7 +146,7 @@ public extension NSCollectionLayoutSection {
     rowGroup.interItemSpacing = .fixed(gridSpacing)
     
     let section = NSCollectionLayoutSection(group: rowGroup).configured {
-      $0.orthogonalScrollingBehavior = .none
+      $0.orthogonalScrollingBehavior = scrollStyle
       $0.contentInsets = sectionInset
       $0.interGroupSpacing = rowSpacing
     }
