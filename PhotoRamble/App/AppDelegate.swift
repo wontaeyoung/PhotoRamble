@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import Toast
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     connectFirebase()
     setGlobalNavigationBarAppearance()
+    setGlobalToastStyle()
     
     return true
   }
@@ -42,6 +44,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       $0.compactAppearance = appearance
       $0.scrollEdgeAppearance = appearance
       $0.compactScrollEdgeAppearance = appearance
+    }
+  }
+  
+  private func setGlobalToastStyle() {
+    ToastManager.shared.style = ToastStyle().applied {
+      $0.backgroundColor = PRAsset.Color.prToastBacgrkound
+      $0.messageColor = PRAsset.Color.prPrimary
+      $0.messageFont = PRAsset.Font.prToastMessage
+      $0.titleColor = PRAsset.Color.prTitle
+      $0.titleFont = PRAsset.Font.prToastTitle
+      $0.titleAlignment = .center
+      $0.activityBackgroundColor = .clear
+      $0.activityIndicatorColor = PRAsset.Color.prPrimary
     }
   }
 }
