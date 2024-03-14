@@ -106,4 +106,61 @@ public extension NSCollectionLayoutSection {
     
     return section
   }
+  
+  static func makeGridListSection(
+    gridCount: Int,
+    gridSpacing: Double = 0,
+    rowSpacing: Double = 0,
+    scrollStyle: UICollectionLayoutSectionOrthogonalScrollingBehavior,
+    sectionInset: NSDirectionalEdgeInsets = .init(top: 0, leading: 0, bottom: 0, trailing: 0),
+    header: Bool = false,
+    headerHeight: CGFloat = 30
+  ) -> NSCollectionLayoutSection {
+    
+    let gridWidthRatio = 1 / CGFloat(gridCount)
+    
+    let gridItem: NSCollectionLayoutItem = NSCollectionLayoutItem(
+      layoutSize: NSCollectionLayoutSize(
+        widthDimension: .fractionalWidth(1),
+        heightDimension: .fractionalHeight(1)
+      )
+    )
+    
+    let gridGroup: NSCollectionLayoutGroup = .horizontal(
+      layoutSize: NSCollectionLayoutSize(
+        widthDimension: .fractionalWidth(gridWidthRatio),
+        heightDimension: .fractionalWidth(gridWidthRatio)
+      ),
+      subitems: [gridItem]
+    )
+    
+    let rowGroup: NSCollectionLayoutGroup = .horizontal(
+      layoutSize: NSCollectionLayoutSize(
+        widthDimension: .fractionalWidth(1),
+        heightDimension: .fractionalWidth(gridWidthRatio)
+      ),
+      subitem: gridGroup,
+      count: gridCount
+    )
+    
+    rowGroup.interItemSpacing = .fixed(gridSpacing)
+    
+    let section = NSCollectionLayoutSection(group: rowGroup).configured {
+      $0.orthogonalScrollingBehavior = .none
+      $0.contentInsets = sectionInset
+      $0.interGroupSpacing = rowSpacing
+    }
+    
+    if header {
+      section.boundarySupplementaryItems = [
+        NSCollectionLayoutBoundarySupplementaryItem(
+          layoutSize: .init(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(headerHeight)),
+          elementKind: UICollectionView.elementKindSectionHeader,
+          alignment: .top
+        )
+      ]
+    }
+    
+    return section
+  }
 }
