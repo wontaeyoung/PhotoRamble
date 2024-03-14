@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Toast
 
 public protocol Configurator { }
 
@@ -52,3 +53,5 @@ extension UIBackgroundConfiguration: Configurator { }
 extension UIConfigurationTextAttributesTransformer: Configurator { }
 extension AttributeScopes: Configurator { }
 extension AttributeContainer: Configurator { }
+
+extension ToastStyle: Configurator { }
