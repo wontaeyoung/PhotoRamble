@@ -13,7 +13,7 @@ final class WalkInProgressViewModel: ViewModel {
   
   // MARK: - I / O
   struct Input {
-    let viewDidLoadEvent: Signal<Bool>
+    let viewDidLoadEvent: Observable<Bool>
     let takenNewPhotoDataEvent: PublishRelay<Data>
     let timerToggleEvent: PublishRelay<Void>
   }
@@ -54,7 +54,7 @@ final class WalkInProgressViewModel: ViewModel {
   func transform(input: Input) -> Output {
     
     input.viewDidLoadEvent
-      .emit(to: timerStateRelay)
+      .bind(to: timerStateRelay)
       .disposed(by: disposeBag)
     
     input.takenNewPhotoDataEvent

@@ -122,7 +122,7 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
   override func bind() {
     
     let input = WalkInProgressViewModel.Input(
-      viewDidLoadEvent: Observable.just(true).asSignal(onErrorJustReturn: true),
+      viewDidLoadEvent: Observable.just(true),
       takenNewPhotoDataEvent: PublishRelay<Data>(),
       timerToggleEvent: PublishRelay<Void>()
     )
