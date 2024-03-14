@@ -25,13 +25,17 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
     $0.itemSize = .init(width: 250, height: 250)
   }
   
-  private let noPhotoInfoLabel = PRLabel(style: .subInfo, title: Localization.no_photo_info_label.localized).configured {
-    $0.textAlignment = .center
-  }
+  private let noPhotoInfoLabel = PRLabel(
+    style: .subInfo,
+    title: Localization.no_photo_info_label.localized,
+    alignment: .center
+  )
   
-  private let timerLabel = PRLabel(style: .mainInfo, title: "00:00:00").configured {
-    $0.textAlignment = .center
-  }
+  private let timerLabel = PRLabel(
+    style: .mainInfo,
+    title: "00:00:00",
+    alignment: .center
+  )
   
   /*
   private let timerButton = PRButton(
