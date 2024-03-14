@@ -27,10 +27,10 @@ extension WalkCoordinator {
   
   func showWalkView() {
     let viewModel = WalkViewModel()
+      .coordinator(self)
     let viewController = WalkViewController(viewModel: viewModel)
       .navigationTitle(with: MainTabBarPage.walk.navigationTitle, displayMode: .never)
       .hideBackTitle()
-    viewModel.coordinator = self
     
     push(viewController)
   }
@@ -39,10 +39,10 @@ extension WalkCoordinator {
     let imageRepository = ImageRepositoryImpl()
     let createImageFileUsecase = CreateImageFileUsecaseImpl(imageRepository: imageRepository)
     let viewModel = WalkInProgressViewModel(createImageFileUsecase: createImageFileUsecase)
+      .coordinator(self)
     let viewController = WalkInProgressViewController(viewModel: viewModel)
       .navigationTitle(with: "산책하기", displayMode: .never)
       .hideBackTitle()
-    viewModel.coordinator = self
     
     push(viewController)
   }
