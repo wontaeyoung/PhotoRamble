@@ -135,8 +135,10 @@ final class WalkInProgressViewModel: ViewModel {
   
   func requestImageForSimulator() -> Observable<Data> {
     
-    let width = Int.random(in: 5...10) * 200
-    let height = width + Int.random(in: -5...0) * 100
+//    let width = Int.random(in: 5...10) * 200
+//    let height = width + Int.random(in: -5...0) * 100
+    let width = 500
+    let height = 500
     let url = "https://picsum.photos/\(width)/\(height)"
 
 #if DEBUG
