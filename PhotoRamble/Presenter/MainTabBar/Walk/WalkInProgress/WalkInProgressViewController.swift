@@ -124,7 +124,8 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
     let input = WalkInProgressViewModel.Input(
       viewDidLoadEvent: Observable.just(true),
       takenNewPhotoDataEvent: PublishRelay<Data>(),
-      timerToggleEvent: PublishRelay<Void>()
+      timerToggleEvent: PublishRelay<Void>(),
+      walkCompleteButtonTapEvent: PublishRelay<Void>()
     )
     
     /// UIImage -> Data 변환 후 전달
@@ -159,6 +160,8 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       })
       .disposed(by: disposeBag)
     
+    walkCompleteButton.rx.tap
+      .bind(to: input.walkCompleteButtonTapEvent)
       .disposed(by: disposeBag)
     
     let output = viewModel.transform(input: input)
@@ -205,6 +208,11 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       .bind(to: imageRelay)
       .disposed(by: disposeBag)
 #else
+    viewModel.requestImageForSimulator()
+      .compactMap { UIImage(data: $0) }
+      .bind(to: imageRelay)
+      .disposed(by: disposeBag)
+    /*
     if UIImagePickerController.isSourceTypeAvailable(.camera) {
       let picker = UIImagePickerController().configured {
         $0.sourceType = .camera
@@ -214,6 +222,7 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       
       present(picker, animated: true)
     }
+     */
 #endif
   }
   
