@@ -18,28 +18,28 @@ public class PRLabel: UILabel {
     switch style {
       case .mainTitle:
         self.configure {
-          $0.font = PRAsset.Font.prMainTitleLabel
+          $0.font = PRAsset.Font.prMainInfoLabel
           $0.textColor = PRAsset.Color.prMainInfo
           $0.numberOfLines = 1
         }
         
       case .mainInfo:
         self.configure {
-          $0.font = PRAsset.Font.prMainInfoLabel
+          $0.font = PRAsset.Font.prTimerLabel
           $0.textColor = PRAsset.Color.prMainInfo
           $0.numberOfLines = 1
         }
         
       case .subInfo:
         self.configure {
-          $0.font = PRAsset.Font.prSubInfoLabel
+          $0.font = PRAsset.Font.prCaptionLabel
           $0.textColor = PRAsset.Color.prSubInfo
           $0.numberOfLines = 0
         }
         
       case .content:
         self.configure {
-          $0.font = PRAsset.Font.prSubInfoLabel
+          $0.font = PRAsset.Font.prCaptionLabel
           $0.textColor = PRAsset.Color.prTitle
           $0.numberOfLines = 0
         }
