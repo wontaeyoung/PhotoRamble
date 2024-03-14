@@ -13,7 +13,7 @@ final class PhotoCollectionCell: RXBaseCollectionViewCell {
   // MARK: - UI
   private let photoImageView = UIImageView()
   private let selectedView = UIView().configured {
-    $0.backgroundColor = PRAsset.Color.prBlack.withAlphaComponent(0.2)
+    $0.backgroundColor = PRAsset.Color.prBlack.withAlphaComponent(0.5)
     $0.isHidden = true
   }
   private lazy var selectedNumberLabel = PRLabel(style: .mainTitle, alignment: .center).configured {
@@ -45,7 +45,7 @@ final class PhotoCollectionCell: RXBaseCollectionViewCell {
     }
     
     selectedNumberLabel.snp.makeConstraints { make in
-      make.trailing.bottom.equalTo(photoImageView).inset(8)
+      make.top.trailing.equalTo(photoImageView).inset(8)
       make.size.equalTo(selectedNumberLabelSize)
     }
   }
@@ -79,7 +79,6 @@ extension PhotoCollectionCell {
   
   private func selectedImageStyleVisible() {
     if let isEmpty = selectedNumberLabel.text?.isEmpty {
-      contentView.layer.borderWidth = isEmpty ? 0 : 4
       selectedView.isHidden = isEmpty
     }
   }
