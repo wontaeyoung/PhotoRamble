@@ -46,4 +46,14 @@ extension WalkCoordinator {
     
     push(viewController)
   }
+  
+  func showWalkPhotoSelectionView(imageDataList: [Data]) {
+    let viewModel = WalkPhotoSelectionViewModel()
+      .coordinator(self)
+    let viewcontroller = WalkPhotoSelectionViewController(viewModel: viewModel, imageDataList: imageDataList)
+      .navigationTitle(with: "사진 선택하기", displayMode: .never)
+      .hideBackTitle()
+    
+    push(viewcontroller)
+  }
 }
