@@ -33,7 +33,7 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
   
   private let timerLabel = PRLabel(
     style: .mainInfo,
-    title: "00:00:00",
+    title: Constant.timerStartText,
     alignment: .center
   )
   
