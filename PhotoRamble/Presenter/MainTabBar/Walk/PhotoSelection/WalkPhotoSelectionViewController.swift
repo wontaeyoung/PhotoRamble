@@ -21,7 +21,7 @@ final class WalkPhotoSelectionViewController: RXBaseViewController, ViewModelCon
   )
   
   private lazy var takenPhotoCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).configured {
-    $0.register(PhotoCollectionCell.self, forCellWithReuseIdentifier: PhotoCollectionCell.identifier)
+    $0.register(PhotoSelectionCollectionCell.self, forCellWithReuseIdentifier: PhotoSelectionCollectionCell.identifier)
   }
   
   private let layout = UICollectionViewCompositionalLayout(
@@ -99,8 +99,8 @@ final class WalkPhotoSelectionViewController: RXBaseViewController, ViewModelCon
     photosRelay
       .bind(
         to: takenPhotoCollectionView.rx.items(
-          cellIdentifier: PhotoCollectionCell.identifier,
-          cellType: PhotoCollectionCell.self)
+          cellIdentifier: PhotoSelectionCollectionCell.identifier,
+          cellType: PhotoSelectionCollectionCell.self)
       ) { [weak self] index, image, cell in
         guard let self else { return }
         cell.updateImage(with: image, selectedNumber: self.selectedNumber(at: index))

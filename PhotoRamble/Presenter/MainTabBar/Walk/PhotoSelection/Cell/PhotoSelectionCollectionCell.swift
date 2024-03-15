@@ -1,5 +1,5 @@
 //
-//  PhotoCollectionCell.swift
+//  PhotoSelectionCollectionCell.swift
 //  PhotoRamble
 //
 //  Created by 원태영 on 3/14/24.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class PhotoCollectionCell: RXBaseCollectionViewCell {
+final class PhotoSelectionCollectionCell: RXBaseCollectionViewCell {
   
   // MARK: - UI
   private let photoImageView = UIImageView()
@@ -55,7 +55,7 @@ final class PhotoCollectionCell: RXBaseCollectionViewCell {
   }
 }
 
-extension PhotoCollectionCell {
+extension PhotoSelectionCollectionCell {
   
   func updateImage(with image: UIImage, selectedNumber: Int?) {
     photoImageView.image = image
