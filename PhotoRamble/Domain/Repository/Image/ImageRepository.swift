@@ -11,5 +11,6 @@ import RxSwift
 protocol ImageRepository {
   
   func create(imageData: Data, directoryName: String, fileIndex: Int) -> Single<Data>
+  func create(imageDataList: [Data], directoryName: String) -> Single<[Data]>
+  func deleteAll(directoryName: String) -> Single<Void>
 }
-
