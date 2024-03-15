@@ -30,7 +30,7 @@ extension WalkCoordinator {
       .coordinator(self)
     let viewController = WalkViewController(viewModel: viewModel)
       .navigationTitle(with: MainTabBarPage.walk.navigationTitle, displayMode: .never)
-      .hideBackTitle()
+      .hideBackButton()
     
     push(viewController)
   }
@@ -42,7 +42,7 @@ extension WalkCoordinator {
       .coordinator(self)
     let viewController = WalkInProgressViewController(viewModel: viewModel)
       .navigationTitle(with: "산책하기", displayMode: .never)
-      .hideBackTitle()
+      .hideBackButton()
     
     push(viewController)
   }
