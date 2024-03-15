@@ -48,4 +48,12 @@ public final class PhotoFileManager {
 
     try FileManager.default.removeItem(at: router.fileURL)
   }
+  
+  public func removeAll(router: PhotoFileRouter) throws {
+    guard router.directoryExist else { return }
+    
+    try FileManager.default.contentsOfDirectory(at: router.directoryURL, includingPropertiesForKeys: nil).forEach {
+      try FileManager.default.removeItem(at: $0)
+    }
+  }
 }
