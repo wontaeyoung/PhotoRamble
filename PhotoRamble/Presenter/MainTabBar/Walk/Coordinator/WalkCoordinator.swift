@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxRelay
 
 final class WalkCoordinator: Coordinator {
   
@@ -47,12 +48,19 @@ extension WalkCoordinator {
     push(viewController)
   }
   
-  func showWalkPhotoSelectionView(imageDataList: [Data]) {
-    let viewModel = WalkPhotoSelectionViewModel()
+  func showWalkPhotoSelectionView(walkRealy: BehaviorRelay<Walk>, imageDataList: [Data]) {
+    let imageRepository = ImageRepositoryImpl()
+    let replaceImageFileUsecase = ReplaceImageFileUsecaseImpl(imageRepository: imageRepository)
+    
+    let viewModel = WalkPhotoSelectionViewModel(
+      walkRelay: walkRealy,
+      replaceImageFileUsecase: replaceImageFileUsecase
+    )
       .coordinator(self)
+    
     let viewcontroller = WalkPhotoSelectionViewController(viewModel: viewModel, imageDataList: imageDataList)
       .navigationTitle(with: "사진 선택하기", displayMode: .never)
-      .hideBackTitle()
+      .hideBackButton()
     
     push(viewcontroller)
   }

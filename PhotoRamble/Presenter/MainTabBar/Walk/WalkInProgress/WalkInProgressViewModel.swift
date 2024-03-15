@@ -95,7 +95,10 @@ final class WalkInProgressViewModel: ViewModel {
       .withLatestFrom(imagesDataRelay)
       .withUnretained(self)
       .subscribe(onNext: { owner, dataList in
-        owner.coordinator?.showWalkPhotoSelectionView(imageDataList: dataList)
+        owner.coordinator?.showWalkPhotoSelectionView(
+          walkRealy: owner.walkRelay,
+          imageDataList: dataList
+        )
       })
       .disposed(by: disposeBag)
     

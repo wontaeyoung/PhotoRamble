@@ -13,6 +13,12 @@
 		6E3843CF2BA27F8100410608 /* RXBaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3843CE2BA27F8100410608 /* RXBaseCollectionViewCell.swift */; };
 		6E3843D12BA287C800410608 /* PaddingLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3843D02BA287C800410608 /* PaddingLabel.swift */; };
 		6E3843D52BA3029500410608 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3843D42BA3029500410608 /* Constant.swift */; };
+		6E3843D92BA3CF4100410608 /* DeleteImageFileUsecaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3843D82BA3CF4100410608 /* DeleteImageFileUsecaseImpl.swift */; };
+		6E3843DB2BA3D1B700410608 /* DeleteImageFileUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3843DA2BA3D1B700410608 /* DeleteImageFileUsecase.swift */; };
+		6E3843DD2BA3D3CE00410608 /* ReplaceImageFileUsecaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3843DC2BA3D3CE00410608 /* ReplaceImageFileUsecaseImpl.swift */; };
+		6E3843DF2BA3E06000410608 /* ReplaceImageFileUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3843DE2BA3E06000410608 /* ReplaceImageFileUsecase.swift */; };
+		6E3843E12BA41E8E00410608 /* PRError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3843E02BA41E8E00410608 /* PRError.swift */; };
+		6E3843E42BA4254800410608 /* CreateDiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3843E32BA4254800410608 /* CreateDiaryViewController.swift */; };
 		6E53C6912B99833B0034649D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E53C6902B99833B0034649D /* AppDelegate.swift */; };
 		6E53C6932B99833B0034649D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E53C6922B99833B0034649D /* SceneDelegate.swift */; };
 		6E53C6952B99833B0034649D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E53C6942B99833B0034649D /* ViewController.swift */; };
@@ -117,6 +123,12 @@
 		6E3843CE2BA27F8100410608 /* RXBaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RXBaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		6E3843D02BA287C800410608 /* PaddingLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaddingLabel.swift; sourceTree = "<group>"; };
 		6E3843D42BA3029500410608 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		6E3843D82BA3CF4100410608 /* DeleteImageFileUsecaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteImageFileUsecaseImpl.swift; sourceTree = "<group>"; };
+		6E3843DA2BA3D1B700410608 /* DeleteImageFileUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteImageFileUsecase.swift; sourceTree = "<group>"; };
+		6E3843DC2BA3D3CE00410608 /* ReplaceImageFileUsecaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceImageFileUsecaseImpl.swift; sourceTree = "<group>"; };
+		6E3843DE2BA3E06000410608 /* ReplaceImageFileUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplaceImageFileUsecase.swift; sourceTree = "<group>"; };
+		6E3843E02BA41E8E00410608 /* PRError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRError.swift; sourceTree = "<group>"; };
+		6E3843E32BA4254800410608 /* CreateDiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDiaryViewController.swift; sourceTree = "<group>"; };
 		6E53C68D2B99833B0034649D /* PhotoRamble.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoRamble.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E53C6902B99833B0034649D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E53C6922B99833B0034649D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -248,6 +260,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		6E3843E22BA4252E00410608 /* CreateDiary */ = {
+			isa = PBXGroup;
+			children = (
+				6E3843E32BA4254800410608 /* CreateDiaryViewController.swift */,
+			);
+			path = CreateDiary;
+			sourceTree = "<group>";
+		};
 		6E53C6842B99833B0034649D = {
 			isa = PBXGroup;
 			children = (
@@ -292,6 +312,7 @@
 				6E53C69B2B99833D0034649D /* LaunchScreen.storyboard */,
 				6EFFED3C2B9E193500B9A238 /* AppCoordinator.swift */,
 				6ED8BEB92BA03F5F007F58F8 /* AppError.swift */,
+				6E3843E02BA41E8E00410608 /* PRError.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -608,6 +629,7 @@
 				6EFFED492B9E8EE900B9A238 /* WalkViewModel.swift */,
 				6EFFED502B9EEBF900B9A238 /* WalkInProgress */,
 				6E3843C62BA2670200410608 /* PhotoSelection */,
+				6E3843E22BA4252E00410608 /* CreateDiary */,
 			);
 			path = Walk;
 			sourceTree = "<group>";
@@ -663,6 +685,8 @@
 			children = (
 				6EFFED5B2B9EF95F00B9A238 /* Protocol */,
 				6EFFED5C2B9F051C00B9A238 /* CreateImageFileUsecaseImpl.swift */,
+				6E3843D82BA3CF4100410608 /* DeleteImageFileUsecaseImpl.swift */,
+				6E3843DC2BA3D3CE00410608 /* ReplaceImageFileUsecaseImpl.swift */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -671,6 +695,8 @@
 			isa = PBXGroup;
 			children = (
 				6EFFED582B9EF85F00B9A238 /* CreateImageFileUsecase.swift */,
+				6E3843DA2BA3D1B700410608 /* DeleteImageFileUsecase.swift */,
+				6E3843DE2BA3E06000410608 /* ReplaceImageFileUsecase.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -894,6 +920,7 @@
 				6EFFED402B9E1EE700B9A238 /* WalkViewController.swift in Sources */,
 				6E86ABE72B9DB0D000AADB50 /* List+.swift in Sources */,
 				6E86ABE92B9DBB1F00AADB50 /* PostMapper.swift in Sources */,
+				6E3843E42BA4254800410608 /* CreateDiaryViewController.swift in Sources */,
 				6E86ABD82B9CAEDA00AADB50 /* LocationMapper.swift in Sources */,
 				6E53C6912B99833B0034649D /* AppDelegate.swift in Sources */,
 				6E3843CA2BA2677600410608 /* WalkPhotoSelectionViewModel.swift in Sources */,
@@ -902,6 +929,7 @@
 				6EFFED5D2B9F051D00B9A238 /* CreateImageFileUsecaseImpl.swift in Sources */,
 				6ED8BEBB2BA0422A007F58F8 /* Configurator+.swift in Sources */,
 				6E86ABC62B9CA8E000AADB50 /* DTO.swift in Sources */,
+				6E3843DF2BA3E06000410608 /* ReplaceImageFileUsecase.swift in Sources */,
 				6ED8BEA52BA03D3B007F58F8 /* DateManager.swift in Sources */,
 				6E53C6932B99833B0034649D /* SceneDelegate.swift in Sources */,
 				6EFFED4D2B9E8F0600B9A238 /* WalkCoordinator.swift in Sources */,
@@ -913,18 +941,21 @@
 				6EFFED482B9E292500B9A238 /* ViewModelController.swift in Sources */,
 				6E86ABBA2B9AF93700AADB50 /* Localization.swift in Sources */,
 				6ED8BEAB2BA03E0C007F58F8 /* UIAlertController+.swift in Sources */,
+				6E3843DB2BA3D1B700410608 /* DeleteImageFileUsecase.swift in Sources */,
 				6E778A7B2BA0908200000D0E /* UIImage+.swift in Sources */,
 				6E86ABE32B9D637300AADB50 /* WalkMapper.swift in Sources */,
 				6EFFED652B9F07ED00B9A238 /* ImageRepositoryImpl.swift in Sources */,
 				6EFFED3D2B9E193500B9A238 /* AppCoordinator.swift in Sources */,
 				6E3843C82BA2672800410608 /* WalkPhotoSelectionViewController.swift in Sources */,
 				6EFFED312B9E0DFF00B9A238 /* CreateWalkUsecase.swift in Sources */,
+				6E3843DD2BA3D3CE00410608 /* ReplaceImageFileUsecaseImpl.swift in Sources */,
 				6E5A93162B99C3DA00A0CE6C /* PRButton.swift in Sources */,
 				6E778A792BA0901700000D0E /* BusinessValue.swift in Sources */,
 				6EFFED522B9EEC1000B9A238 /* WalkInProgressViewController.swift in Sources */,
 				6EFFED592B9EF85F00B9A238 /* CreateImageFileUsecase.swift in Sources */,
 				6ED8BEB82BA03F40007F58F8 /* GCDManager.swift in Sources */,
 				6EFFED4A2B9E8EE900B9A238 /* WalkViewModel.swift in Sources */,
+				6E3843E12BA41E8E00410608 /* PRError.swift in Sources */,
 				6EFFED6C2B9F08CF00B9A238 /* PhotoFileError.swift in Sources */,
 				6ED8BEAD2BA03E2B007F58F8 /* UINavigationController+.swift in Sources */,
 				6ED8BEA92BA03DE9007F58F8 /* NSCollectionLayoutSection+.swift in Sources */,
@@ -938,6 +969,7 @@
 				6E86ABD32B9CADB200AADB50 /* Post.swift in Sources */,
 				6EFFED3B2B9E14C600B9A238 /* MainTabBarPage.swift in Sources */,
 				6E86ABCD2B9CAA0500AADB50 /* WalkDTO.swift in Sources */,
+				6E3843D92BA3CF4100410608 /* DeleteImageFileUsecaseImpl.swift in Sources */,
 				6ED8BEB22BA03E72007F58F8 /* UIViewController+.swift in Sources */,
 				6E86ABAB2B99C57400AADB50 /* UIColor+.swift in Sources */,
 				6E86ABE52B9DAFA400AADB50 /* Array+.swift in Sources */,
