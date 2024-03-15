@@ -11,4 +11,5 @@ import RxSwift
 protocol CreateImageFileUsecase {
   
   func excute(imageData: Data, directoryName: String, fileIndex: Int) -> Single<Data>
+  func excute(imageDataList: [Data], directoryName: String) -> Single<[Data]>
 }
