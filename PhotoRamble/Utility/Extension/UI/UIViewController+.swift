@@ -18,5 +18,14 @@ public extension UIViewController {
     self.navigationItem.largeTitleDisplayMode = displayMode
     return self
   }
+  
+  func hideTabBar() -> Self {
+    self.hidesBottomBarWhenPushed = true
+    return self
+  }
+  
+  func hideBackButton() -> Self {
+    self.navigationItem.setHidesBackButton(true, animated: false)
+    return self
+  }
 }
-
