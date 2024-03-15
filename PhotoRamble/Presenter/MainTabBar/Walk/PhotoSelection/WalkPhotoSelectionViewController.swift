@@ -91,6 +91,11 @@ final class WalkPhotoSelectionViewController: RXBaseViewController, ViewModelCon
   }
   
   override func bind() {
+    let input = WalkPhotoSelectionViewModel.Input(
+      writeDiaryButtonTapEvent: PublishRelay<Void>(),
+      fixPhotoSelectionEvent: PublishRelay<[Data]>()
+    )
+    
     photosRelay
       .bind(
         to: takenPhotoCollectionView.rx.items(
@@ -117,6 +122,25 @@ final class WalkPhotoSelectionViewController: RXBaseViewController, ViewModelCon
         
         owner.updatePhotoIndices(with: row)
       }
+      .disposed(by: disposeBag)
+    
+    writeDiaryButton.rx.tap
+      .bind(to: input.writeDiaryButtonTapEvent)
+      .disposed(by: disposeBag)
+      
+    let output = viewModel.transform(input: input)
+    
+    output.agreeDeleteUnselectedPhotoRelay
+      .withLatestFrom(selectedIndicesRelay)
+      .withUnretained(self)
+      .flatMap { owner, indices in
+        
+        Observable.from(indices)
+          .map { owner.photosRelay.value[$0] }
+          .compactMap { $0.compressedJPEGData }
+          .toArray()
+      }
+      .bind(to: input.fixPhotoSelectionEvent)
       .disposed(by: disposeBag)
   }
   
