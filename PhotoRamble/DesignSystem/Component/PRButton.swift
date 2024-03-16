@@ -39,6 +39,7 @@ public extension PRButton {
     case secondary
     case tertiary
     case tag
+    case icon
     
     private static let primaryConfig: UIButton.Configuration = .filled().applied {
       
@@ -88,6 +89,14 @@ public extension PRButton {
       }
     }
     
+    private static let iconConfig: UIButton.Configuration = .filled().applied {
+      
+      $0.baseForegroundColor = PRAsset.Color.prPrimary
+      $0.baseBackgroundColor = PRAsset.Color.prSecondary
+      $0.buttonSize = .mini
+      $0.cornerStyle = .capsule
+    }
+    
     var configuration: UIButton.Configuration {
       switch self {
         case .primary:
@@ -101,6 +110,9 @@ public extension PRButton {
         
         case .tag:
           return Style.tagConfig
+          
+        case .icon:
+          return Style.iconConfig
       }
     }
   }
