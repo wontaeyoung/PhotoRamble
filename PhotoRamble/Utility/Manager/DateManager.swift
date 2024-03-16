@@ -46,6 +46,7 @@ public extension DateManager {
     case EEEE = "EEEE"
     case yyyyMMdd = "yyyyMMdd"
     case yyyyMMddKR = "yyyy년 MM월 dd일"
+    case yyyyMMddEEEEKR = "yyyy년 MM월 dd일 EEEE"
     
     var format: String {
       return self.rawValue
