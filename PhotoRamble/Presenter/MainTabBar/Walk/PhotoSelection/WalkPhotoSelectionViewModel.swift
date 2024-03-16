@@ -63,9 +63,10 @@ final class WalkPhotoSelectionViewModel: ViewModel {
       .flatMap { owner, imageDataList in
         owner.replaceImageFileUsecase
           .excute(imageDataList: imageDataList, directoryName: owner.walkRelay.value.id.uuidString)
+          .asObservable()
       }
       .subscribe {
-        print($0)
+        self.coordinator?.showWriteDiaryView(imageDataList: $0)
       } onError: { error in
         // FIXME: 여기서 Replace 과정에서 일어난 삭제 데이터 복구 과정 필요함
       }
