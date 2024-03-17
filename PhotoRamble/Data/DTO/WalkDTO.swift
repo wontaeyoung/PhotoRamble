@@ -24,14 +24,16 @@ final class WalkDTO: Object, RealmModel, DTO {
   @Persisted var startAt: Date
   @Persisted var endAt: Date?
   @Persisted var locations: List<LocationDTO>
+  @Persisted var walkDuration: Int
   @Persisted var diaryID: UUID?
   
-  init(id: UUID, startAt: Date, endAt: Date?, locations: List<LocationDTO>, diaryID: UUID?) {
+  init(id: UUID, startAt: Date, endAt: Date?, walkDuration: Int, locations: List<LocationDTO>, diaryID: UUID?) {
     super.init()
     
     self.id = id
     self.startAt = startAt
     self.endAt = endAt
+    self.walkDuration = walkDuration
     self.locations = locations
     self.diaryID = diaryID
   }
