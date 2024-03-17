@@ -57,5 +57,5 @@ extension AttributeContainer: Configurator { }
 extension ToastStyle: Configurator { }
 
 extension Walk: Configurator { }
-extension Post: Configurator { }
+extension Diary: Configurator { }
 extension Location: Configurator { }

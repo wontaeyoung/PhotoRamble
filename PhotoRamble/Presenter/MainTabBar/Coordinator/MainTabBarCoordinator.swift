@@ -63,7 +63,7 @@ final class MainTabBarCoordinator: Coordinator {
         addChild(coordinator)
         coordinator.start()
         
-      case .post:
+      case .diary:
         break
       case .config:
         break

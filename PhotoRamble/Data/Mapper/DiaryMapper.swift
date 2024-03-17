@@ -1,5 +1,5 @@
 //
-//  PostMapper.swift
+//  DiaryMapper.swift
 //  PhotoRamble
 //
 //  Created by 원태영 on 3/10/24.
@@ -7,10 +7,10 @@
 
 import RealmSwift
 
-struct PostMapper: Mapper {
+struct DiaryMapper: Mapper {
   
-  func toDTO(_ entity: Post) -> PostDTO{
-    return PostDTO(
+  func toDTO(_ entity: Diary) -> DiaryDTO{
+    return DiaryDTO(
       id: entity.id,
       content: entity.content,
       createAt: entity.createAt,
@@ -21,8 +21,8 @@ struct PostMapper: Mapper {
     )
   }
   
-  func toEntity(_ dto: PostDTO) -> Post {
-    return Post(
+  func toEntity(_ dto: DiaryDTO) -> Diary {
+    return Diary(
       id: dto.id,
       content: dto.content,
       createAt: dto.createAt,

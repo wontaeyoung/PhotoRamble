@@ -1,5 +1,5 @@
 //
-//  PostDTO.swift
+//  DiaryDTO.swift
 //  PhotoRamble
 //
 //  Created by 원태영 on 3/9/24.
@@ -9,7 +9,7 @@ import Foundation
 import KazRealm
 import RealmSwift
 
-final class PostDTO: Object, RealmModel, DTO {
+final class DiaryDTO: Object, RealmModel, DTO {
   
   enum Column: String {
     

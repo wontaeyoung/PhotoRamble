@@ -17,7 +17,7 @@ struct WalkMapper: Mapper {
       startAt: entity.startAt,
       endAt: entity.endAt,
       locations: locationMapper.toDTO(entity.locations),
-      postID: entity.postID
+      diaryID: entity.diaryID
     )
   }
   
@@ -27,7 +27,7 @@ struct WalkMapper: Mapper {
       startAt: dto.startAt,
       endAt: dto.endAt,
       locations: locationMapper.toEntity(dto.locations),
-      postID: dto.postID
+      diaryID: dto.diaryID
     )
   }
 }
