@@ -66,7 +66,7 @@ final class WalkPhotoSelectionViewModel: ViewModel {
           .asObservable()
       }
       .subscribe {
-        self.coordinator?.showWriteDiaryView(imageDataList: $0)
+        self.coordinator?.showWriteDiaryView(walk: self.walkRelay.value, imageDataList: $0)
       } onError: { error in
         // FIXME: 여기서 Replace 과정에서 일어난 삭제 데이터 복구 과정 필요함
       }

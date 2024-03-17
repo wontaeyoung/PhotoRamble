@@ -65,8 +65,9 @@ extension WalkCoordinator {
     push(viewcontroller)
   }
   
-  func showWriteDiaryView(imageDataList: [Data]) {
-    let viewController = WriteDiaryViewController(viewModel: WriteDiaryViewModel(), imageDataList: imageDataList)
+  func showWriteDiaryView(walk: Walk, imageDataList: [Data]) {
+    let viewModel = WriteDiaryViewModel(style: .initial(distance: 1.52, interval: 3661), walk: walk)
+    let viewController = WriteDiaryViewController(viewModel: viewModel, imageDataList: imageDataList)
       .hideBackButton()
     
     push(viewController)
