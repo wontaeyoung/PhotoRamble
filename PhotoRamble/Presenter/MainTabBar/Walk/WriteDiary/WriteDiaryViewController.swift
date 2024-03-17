@@ -52,10 +52,10 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
     $0.contentMode = .scaleAspectFit
   }
   
-  private let dateLabel = PRLabel(style: .mainInfo, title: "2024년 03월 16일 토요일")
-  private let weatherLabel = PRLabel(style: .mainInfo, title: "7°")
-  private let walkDistanceLabel = PRLabel(style: .mainInfo, title: "1.52 km")
-  private let walkTimeLabel = PRLabel(style: .mainInfo, title: "02시간 24분 52초")
+  private let dateLabel = PRLabel(style: .mainInfo)
+  private let weatherLabel = PRLabel(style: .mainInfo)
+  private let walkDistanceLabel = PRLabel(style: .mainInfo)
+  private let walkTimeLabel = PRLabel(style: .mainInfo)
   
   private let diaryTextView = PRTextView(placeholder: "일기 내용을 써주세요")
   
@@ -165,6 +165,11 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
   
   override func bind() {
     
+    let input = WriteDiaryViewModel.Input(
+      diaryText: PublishSubject<String>(),
+      writingCompletedButtonTapEvent: .init()
+    )
+    
     photosRelay
       .bind(
         to: photoCollectionView.rx.items(
@@ -175,8 +180,33 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
         cell.updateImage(with: image, tapEventRelay: deletePhotoButtonTapEvent)
       }
       .disposed(by: disposeBag)
+    
+    diaryTextView.rx.text.orEmpty
+      .bind(to: input.diaryText)
+      .disposed(by: disposeBag)
+    
+    let output = viewModel.transform(input: input)
+    
+    output.dateText
+      .emit(to: dateLabel.rx.text)
+      .disposed(by: disposeBag)
+    
+    output.temperatureText
+      .emit(to: weatherLabel.rx.text)
+      .disposed(by: disposeBag)
+    
+    output.walkDistanceText
+      .emit(to: walkDistanceLabel.rx.text)
+      .disposed(by: disposeBag)
+    
+    output.walkTimeInterval
+      .emit(to: walkTimeLabel.rx.text)
+      .disposed(by: disposeBag)
+    
+    output.isCompleteButtonEnabled
+      .emit(to: writingCompletedButton.rx.isEnabled)
+      .disposed(by: disposeBag)
   }
   
   // MARK: - Method
-  
 }
