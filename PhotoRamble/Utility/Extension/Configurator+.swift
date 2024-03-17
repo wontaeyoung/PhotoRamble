@@ -55,3 +55,7 @@ extension AttributeScopes: Configurator { }
 extension AttributeContainer: Configurator { }
 
 extension ToastStyle: Configurator { }
+
+extension Walk: Configurator { }
+extension Post: Configurator { }
+extension Location: Configurator { }
