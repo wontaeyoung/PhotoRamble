@@ -37,13 +37,6 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
     alignment: .center
   )
   
-  /*
-  private let timerButton = PRButton(
-    style: .secondary,
-    title: Localization.walk_start_button.localized
-  )
-   */
-  
   private let cameraButton = PRButton(
     style: .secondary,
     title: Localization.photo_take_button.localized,
@@ -79,7 +72,6 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       takenPhotoPagerView,
       noPhotoInfoLabel,
       timerLabel,
-//      timerButton,
       cameraButton,
       walkCompleteButton
     )
@@ -101,13 +93,6 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       make.bottom.equalTo(cameraButton.snp.top).offset(-20)
     }
     
-    /*
-    timerButton.snp.makeConstraints { make in
-      make.horizontalEdges.equalTo(view).inset(20)
-      make.bottom.equalTo(cameraButton.snp.top).offset(-20)
-    }
-     */
-    
     cameraButton.snp.makeConstraints { make in
       make.horizontalEdges.equalTo(view).inset(20)
       make.bottom.equalTo(walkCompleteButton.snp.top).offset(-20)
@@ -122,9 +107,7 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
   override func bind() {
     
     let input = WalkInProgressViewModel.Input(
-      viewDidLoadEvent: Observable.just(true),
       takenNewPhotoDataEvent: PublishRelay<Data>(),
-      timerToggleEvent: PublishRelay<Void>(),
       walkCompleteButtonTapEvent: PublishRelay<Void>()
     )
     
@@ -143,13 +126,6 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
         owner.hideNoPhotoLabel()
       })
       .disposed(by: disposeBag)
-    
-    /// 타이머 버튼 탭 이벤트 전달
-    /*
-    timerButton.rx.tap
-      .bind(to: input.timerToggleEvent)
-      .disposed(by: disposeBag)
-     */
     
     cameraButton.rx.tap
       .asDriver()
@@ -176,12 +152,6 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       }
       .drive(photoPagerRelay)
       .disposed(by: disposeBag)
-    
-    /*
-    output.timerButtonText
-      .emit(onNext: { self.timerButton.title($0) })
-      .disposed(by: disposeBag)
-     */
     
     output.timerLabelText
       .emit(to: timerLabel.rx.text)

@@ -13,22 +13,18 @@ final class WalkInProgressViewModel: ViewModel {
   
   // MARK: - I / O
   struct Input {
-    let viewDidLoadEvent: Observable<Bool>
     let takenNewPhotoDataEvent: PublishRelay<Data>
-    let timerToggleEvent: PublishRelay<Void>
     let walkCompleteButtonTapEvent: PublishRelay<Void>
   }
   
   struct Output {
     let imageDataList: Driver<[Data]>
-    let timerButtonText: Signal<String>
     let timerLabelText: Signal<String>
   }
   
   // MARK: - Observable
   private let walkRelay = BehaviorRelay<Walk>(value: Walk())
   private let imagesDataRelay = BehaviorRelay<[Data]>(value: [])
-  private let timerStateRelay = BehaviorRelay<Bool>(value: false)
   private let timeIntervalRelay = BehaviorRelay<TimeInterval>(value: 0)
   
   // MARK: - Property
@@ -53,10 +49,6 @@ final class WalkInProgressViewModel: ViewModel {
   
   // MARK: - Method
   func transform(input: Input) -> Output {
-    
-    input.viewDidLoadEvent
-      .bind(to: timerStateRelay)
-      .disposed(by: disposeBag)
     
     input.takenNewPhotoDataEvent
       .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
@@ -83,18 +75,12 @@ final class WalkInProgressViewModel: ViewModel {
       )
       .disposed(by: disposeBag)
     
-    input.timerToggleEvent
-      .withLatestFrom(timerStateRelay)
-      .withUnretained(self)
-      .subscribe(onNext: { owner, isRunning in
-        owner.timerStateRelay.accept(!isRunning)
-      })
-      .disposed(by: disposeBag)
-    
     input.walkCompleteButtonTapEvent
       .withLatestFrom(imagesDataRelay)
       .withUnretained(self)
       .subscribe(onNext: { owner, dataList in
+        owner.updateEndDate()
+        
         owner.coordinator?.showWalkPhotoSelectionView(
           walkRealy: owner.walkRelay,
           imageDataList: dataList
@@ -102,16 +88,7 @@ final class WalkInProgressViewModel: ViewModel {
       })
       .disposed(by: disposeBag)
     
-    let timerButtonText: Signal<String> = timerStateRelay
-      .withUnretained(self)
-      .map { owner, on in
-        return owner.timerButtonTitle(isOn: on)
-      }
-      .asSignal(onErrorJustReturn: "")
-    
     let timerText: Signal<String> = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
-      .withLatestFrom(timerStateRelay)
-      .filter { $0 }
       .withUnretained(self)
       .flatMap { owner, _ in
         owner.timerTick()
@@ -123,7 +100,6 @@ final class WalkInProgressViewModel: ViewModel {
     
     return Output(
       imageDataList: imagesDataRelay.asDriver(),
-      timerButtonText: timerButtonText,
       timerLabelText: timerText
     )
   }
