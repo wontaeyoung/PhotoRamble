@@ -22,8 +22,8 @@ struct Post: Entity {
   let id: UUID
   let content: String
   let createAt: Date
-  let updateAt: Date
-  let writingStatus: WritingStatus
+  var updateAt: Date
+  var writingStatus: WritingStatus
   let photoIndices: [Int]
   let walkID: UUID
 }
