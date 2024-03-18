@@ -121,18 +121,14 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       .observe(on: MainScheduler.instance)
       .asObservable()
       .take(1)
-      .withUnretained(self)
-      .subscribe(onNext: { owner, _ in
+      .subscribe(with: self, onNext: { owner, _ in
         owner.hideNoPhotoLabel()
       })
       .disposed(by: disposeBag)
     
     cameraButton.rx.tap
-      .asDriver()
-      .drive(onNext: { [weak self] in
-        guard let self else { return }
-        
-        showingCamera()
+      .bind(with: self, onNext: { owner, _ in
+        owner.showingCamera()
       })
       .disposed(by: disposeBag)
     
@@ -158,9 +154,8 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       .disposed(by: disposeBag)
     
     photoPagerRelay
-      .withUnretained(self)
-      .asDriver(onErrorJustReturn: (self, []))
-      .drive(onNext: { owner, _ in
+      .asDriver()
+      .drive(with: self, onNext: { owner, _ in
         owner.updatePhotoCollection()
         
         GCD.main(after: 0.1) {
