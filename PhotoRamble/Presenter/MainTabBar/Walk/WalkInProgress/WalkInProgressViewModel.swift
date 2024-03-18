@@ -79,7 +79,7 @@ final class WalkInProgressViewModel: ViewModel {
       .withLatestFrom(imagesDataRelay)
       .withUnretained(self)
       .subscribe(onNext: { owner, dataList in
-        owner.updateEndDate()
+        owner.prepareWalkForNextFlow()
         
         owner.coordinator?.showWalkPhotoSelectionView(
           walkRealy: owner.walkRelay,
@@ -114,9 +114,10 @@ final class WalkInProgressViewModel: ViewModel {
     imagesDataRelay.accept(currentList)
   }
   
-  private func updateEndDate() {
+  private func prepareWalkForNextFlow() {
     let updatedWalk = walkRelay.value.applied {
       $0.endAt = .now
+      $0.walkDuration = timeIntervalRelay.value.toSeconds
     }
     
     walkRelay.accept(updatedWalk)
