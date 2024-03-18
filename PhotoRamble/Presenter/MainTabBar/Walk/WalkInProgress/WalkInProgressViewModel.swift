@@ -93,8 +93,7 @@ final class WalkInProgressViewModel: ViewModel {
       .flatMap { owner, _ in
         owner.timerTick()
         
-        let timerText = DateManager.shared.elapsedTime(owner.timeIntervalRelay.value, format: .HHmmss)
-        return Observable.just(timerText)
+        return Observable.just(owner.getTimerText())
       }
       .asSignal(onErrorJustReturn: "타이머 표시 오류가 발생했습니다.")
     
@@ -113,6 +112,18 @@ final class WalkInProgressViewModel: ViewModel {
     currentList.append(newData)
     
     imagesDataRelay.accept(currentList)
+  }
+  
+  private func updateEndDate() {
+    let updatedWalk = walkRelay.value.applied {
+      $0.endAt = .now
+    }
+    
+    walkRelay.accept(updatedWalk)
+  }
+  
+  private func getTimerText() -> String {
+    return DateManager.shared.elapsedTime(timeIntervalRelay.value, format: .HHmmss)
   }
   
   func timerButtonTitle(isOn: Bool) -> String {
