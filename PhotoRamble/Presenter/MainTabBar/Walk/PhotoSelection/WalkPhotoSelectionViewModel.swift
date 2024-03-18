@@ -44,8 +44,7 @@ final class WalkPhotoSelectionViewModel: ViewModel {
     let agreeDeleteUnselectedPhotoRelay = PublishRelay<Void>()
     
     input.writeDiaryButtonTapEvent
-      .withUnretained(self)
-      .bind { owner, _ in
+      .bind(with: self, onNext: { owner, _ in
         
         owner.coordinator?.showAlert(
           title: "사진 선택 안내",
@@ -55,21 +54,21 @@ final class WalkPhotoSelectionViewModel: ViewModel {
         ) {
           agreeDeleteUnselectedPhotoRelay.accept(())
         }
-      }
+      })
       .disposed(by: disposeBag)
     
     input.fixPhotoSelectionEvent
-      .withUnretained(self)
+      .withUnretained(self) 
       .flatMap { owner, imageDataList in
         owner.replaceImageFileUsecase
           .excute(imageDataList: imageDataList, directoryName: owner.walkRelay.value.id.uuidString)
           .asObservable()
       }
-      .subscribe {
-        self.coordinator?.showWriteDiaryView(walk: self.walkRelay.value, imageDataList: $0)
-      } onError: { error in
+      .subscribe(with: self, onNext: { owner, dataList in
+        owner.coordinator?.showWriteDiaryView(walk: owner.walkRelay.value, imageDataList: dataList)
+      }, onError: { owner, error in
         // FIXME: 여기서 Replace 과정에서 일어난 삭제 데이터 복구 과정 필요함
-      }
+      })
       .disposed(by: disposeBag)
 
     return Output(agreeDeleteUnselectedPhotoRelay: agreeDeleteUnselectedPhotoRelay)
