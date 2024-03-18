@@ -12,4 +12,8 @@ extension TimeInterval {
   var toTimeFormatString: String {
     return DateManager.shared.elapsedTime(self, format: .HHmmssKR)
   }
+  
+  var toSeconds: Int {
+    return Int(self)
+  }
 }
