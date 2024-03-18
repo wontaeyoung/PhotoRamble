@@ -71,8 +71,7 @@ final class WalkInProgressViewModel: ViewModel {
     
     input.walkCompleteButtonTapEvent
       .withLatestFrom(imagesDataRelay)
-      .withUnretained(self)
-      .subscribe(onNext: { owner, dataList in
+      .subscribe(with: self, onNext: { owner, dataList in
         owner.prepareWalkForNextFlow()
         owner.coordinator?.showWalkPhotoSelectionView(
           walkRealy: owner.walkRelay,
@@ -82,13 +81,11 @@ final class WalkInProgressViewModel: ViewModel {
       .disposed(by: disposeBag)
     
     let timerText: Signal<String> = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
-      .withUnretained(self)
-      .flatMap { owner, _ in
+      .withUnretained(self) { owner, _ in
         owner.timerTick()
-        
-        return Observable.just(owner.getTimerText())
+        return owner.getTimerText()
       }
-      .asSignal(onErrorJustReturn: "타이머 표시 오류가 발생했습니다.")
+      .asSignal(onErrorJustReturn: "타이머 표시 오류가 발생했어요.")
     
     return Output(
       imageDataList: imagesDataRelay.asDriver(),
