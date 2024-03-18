@@ -61,18 +61,12 @@ final class WalkInProgressViewModel: ViewModel {
         )
       }
       .observe(on: MainScheduler.instance)
-      .withUnretained(self)
-      .subscribe(
-        onNext: { owner, data in
-          owner.updateImageDataList(with: data)
-        },
-        onError: { [weak self] error in
-          guard let self else { return }
-          
-          LogManager.shared.log(with: error, to: .local)
-          coordinator?.showErrorAlert(error: error)
-        }
-      )
+      .subscribe(with: self, onNext: { owner, data in
+        owner.updateImageDataList(with: data)
+      }, onError: { owner, error in
+        LogManager.shared.log(with: error, to: .local)
+        owner.coordinator?.showErrorAlert(error: error)
+      })
       .disposed(by: disposeBag)
     
     input.walkCompleteButtonTapEvent
@@ -80,7 +74,6 @@ final class WalkInProgressViewModel: ViewModel {
       .withUnretained(self)
       .subscribe(onNext: { owner, dataList in
         owner.prepareWalkForNextFlow()
-        
         owner.coordinator?.showWalkPhotoSelectionView(
           walkRealy: owner.walkRelay,
           imageDataList: dataList
@@ -128,19 +121,19 @@ final class WalkInProgressViewModel: ViewModel {
   }
   
   func timerButtonTitle(isOn: Bool) -> String {
-    return isOn 
+    return isOn
     ? Localization.walk_stop_button.localized
     : Localization.walk_start_button.localized
   }
   
   func requestImageForSimulator() -> Observable<Data> {
     
-//    let width = Int.random(in: 5...10) * 200
-//    let height = width + Int.random(in: -5...0) * 100
+    //    let width = Int.random(in: 5...10) * 200
+    //    let height = width + Int.random(in: -5...0) * 100
     let width = 500
     let height = 500
     let url = "https://picsum.photos/\(width)/\(height)"
-
+    
 #if DEBUG
     LogManager.shared.log(with: "요청 URL : " + url, to: .local, level: .debug)
 #endif
