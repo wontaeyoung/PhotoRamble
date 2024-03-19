@@ -20,7 +20,8 @@ final class WriteDiaryViewModel: ViewModel {
   struct Input {
     let diaryText: PublishRelay<String>
     let photoDeletedEvent: PublishRelay<Int>
-    let writingCompletedButtonTapEvent: PublishRelay<(diaryText: String, photoIndices: [Int])>
+    let writingCompletedButtonTapEvent: PublishRelay<Void>
+    let cratedDiaryToastCompletedEvent: PublishRelay<Void>
   }
   
   struct Output {
@@ -28,6 +29,7 @@ final class WriteDiaryViewModel: ViewModel {
     let walkTimeInterval: Signal<String>
     let deleteCompleted: Signal<Int>
     let isCompleteButtonEnabled: Signal<Bool>
+    let showCretedDiaryToast: Signal<Void>
   }
   
   // MARK: - Observable
@@ -61,6 +63,8 @@ final class WriteDiaryViewModel: ViewModel {
       .map { !$0.isEmpty }
       .asSignal(onErrorJustReturn: false)
     
+    let showCreatedDiaryToast = PublishRelay<Void>()
+    
     input.diaryText
       .bind(to: contentRelay)
       .disposed(by: disposeBag)
@@ -72,11 +76,24 @@ final class WriteDiaryViewModel: ViewModel {
       }
       .disposed(by: disposeBag)
     
+    input.writingCompletedButtonTapEvent
+      .bind(with: self) { owner, _ in
+        showCreatedDiaryToast.accept(())
+      }
+      .disposed(by: disposeBag)
+    
+    input.cratedDiaryToastCompletedEvent
+      .bind(with: self) { owner, _ in
+        owner.coordinator?.popToRoot()
+      }
+      .disposed(by: disposeBag)
+    
     return Output(
       dateText: dateText,
       walkTimeInterval: walkTimeInterval,
       deleteCompleted: deleteCompleted.asSignal(),
-      isCompleteButtonEnabled: isCompleteButtonEnabled
+      isCompleteButtonEnabled: isCompleteButtonEnabled,
+      showCretedDiaryToast: showCreatedDiaryToast.asSignal()
     )
   }
   
@@ -89,7 +106,7 @@ final class WriteDiaryViewModel: ViewModel {
   }
   
   private func deletePhotoIndex(at index: Int) {
-    var updatedDiary = diaryRelay.value.applied {
+    let updatedDiary = diaryRelay.value.applied {
       $0.photoIndices = $0.photoIndices.removed(at: index)
     }
     

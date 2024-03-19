@@ -179,7 +179,8 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
     let input = WriteDiaryViewModel.Input(
       diaryText: .init(), 
       photoDeletedEvent: .init(),
-      writingCompletedButtonTapEvent: .init()
+      writingCompletedButtonTapEvent: .init(),
+      cratedDiaryToastCompletedEvent: .init()
     )
     
     photosRelay
@@ -197,6 +198,11 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
       .bind(with: self, onNext: { owner, index in
         input.photoDeletedEvent.accept(index)
       })
+      .disposed(by: disposeBag)
+    
+    writingCompletedButton.rx.tap
+      .throttle(.microseconds(500), scheduler: MainScheduler.instance)
+      .bind(to: input.writingCompletedButtonTapEvent)
       .disposed(by: disposeBag)
     
     let output = viewModel.transform(input: input)
@@ -217,6 +223,14 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
     
     output.isCompleteButtonEnabled
       .emit(to: writingCompletedButton.rx.isEnabled)
+      .disposed(by: disposeBag)
+    
+    output.showCretedDiaryToast
+      .emit(with: self) { owner, _ in
+        owner.view.makeToast("일기가 작성되었어요.", duration: 1, position: .center) { _ in
+          input.cratedDiaryToastCompletedEvent.accept(())
+        }
+      }
       .disposed(by: disposeBag)
     
     diaryTextView.rx.text.orEmpty
