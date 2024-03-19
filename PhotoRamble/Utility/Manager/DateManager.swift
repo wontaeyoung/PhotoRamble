@@ -89,6 +89,18 @@ public extension DateManager {
     return dateFormatter.string(from: Date(timeIntervalSince1970: interval))
   }
   
+  func toString(with duration: Int, format: Format) -> String {
+    dateFormatter.dateFormat = format.format
+    
+    return dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(duration)))
+  }
+  
+  func toString(with duration: Int, formatString: String) -> String {
+    dateFormatter.dateFormat = formatString
+    
+    return dateFormatter.string(from: Date(timeIntervalSince1970: TimeInterval(duration)))
+  }
+  
   func elapsedTime(_ date: Date, format: Format) -> String {
     let elapsedTime = Date().timeIntervalSince(date)
     let intervalToDate = Date(timeIntervalSince1970: elapsedTime)
