@@ -20,7 +20,7 @@ struct Diary: Entity {
   }
   
   let id: UUID
-  let content: String
+  var content: String
   let createAt: Date
   var updateAt: Date
   var writingStatus: WritingStatus
