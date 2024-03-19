@@ -108,16 +108,14 @@ final class WalkPhotoSelectionViewController: RXBaseViewController, ViewModelCon
       .disposed(by: disposeBag)
     
     selectedIndicesRelay
-      .withUnretained(self)
-      .bind { owner, _ in
+      .bind(with: self) { owner, _ in
         owner.updatePhotoCollection()
         owner.updateSelectedPhotoCount()
       }
       .disposed(by: disposeBag)
     
     takenPhotoCollectionView.rx.itemSelected
-      .withUnretained(self)
-      .bind { owner, indexPath in
+      .bind(with: self) { owner, indexPath in
         let row = indexPath.row
         
         owner.updatePhotoIndices(with: row)
