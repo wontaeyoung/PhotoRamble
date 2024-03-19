@@ -91,8 +91,8 @@ public extension PRButton {
     
     private static let iconConfig: UIButton.Configuration = .filled().applied {
       
-      $0.baseForegroundColor = PRAsset.Color.prPrimary
-      $0.baseBackgroundColor = PRAsset.Color.prSecondary
+      $0.baseForegroundColor = PRAsset.Color.prWhite
+      $0.baseBackgroundColor = PRAsset.Color.prPrimary
       $0.buttonSize = .mini
       $0.cornerStyle = .capsule
     }
