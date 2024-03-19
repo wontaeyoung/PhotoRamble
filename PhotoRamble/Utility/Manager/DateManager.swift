@@ -124,6 +124,27 @@ public extension DateManager {
     return timerFormatter.string(from: intervalToDate)
   }
   
+  func elapsedTime(_ interval: TimeInterval, formatString: String) -> String {
+    let intervalToDate = Date(timeIntervalSince1970: interval)
+    
+    timerFormatter.dateFormat = formatString
+    return timerFormatter.string(from: intervalToDate)
+  }
+  
+  func elapsedTime(_ duration: Int, format: Format) -> String {
+    let intervalToDate = Date(timeIntervalSince1970: TimeInterval(duration))
+    
+    timerFormatter.dateFormat = format.format
+    return timerFormatter.string(from: intervalToDate)
+  }
+  
+  func elapsedTime(_ duration: Int, formatString: String) -> String {
+    let intervalToDate = Date(timeIntervalSince1970: TimeInterval(duration))
+    
+    timerFormatter.dateFormat = formatString
+    return timerFormatter.string(from: intervalToDate)
+  }
+  
   func unixTimestampToString(with interval: TimeInterval, format: Format) -> String {
     dateFormatter.dateFormat = format.format
     
