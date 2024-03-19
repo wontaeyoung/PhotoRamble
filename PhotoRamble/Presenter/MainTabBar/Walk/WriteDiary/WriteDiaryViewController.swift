@@ -20,8 +20,8 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
   }
   
   private var layout: UICollectionViewFlowLayout {
-    let cellCount: CGFloat = 4
-    let cellSpacing: CGFloat = 16
+    let cellCount: CGFloat = 3
+    let cellSpacing: CGFloat = 20
     let cellWidth: CGFloat = (UIScreen.main.bounds.width - (cellSpacing * (2 + cellCount - 1))) / cellCount
     
     return UICollectionViewFlowLayout().configured {
