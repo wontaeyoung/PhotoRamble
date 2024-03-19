@@ -11,6 +11,7 @@ import RxRelay
 final class WalkCoordinator: Coordinator {
   
   weak var delegate: CoordinatorDelegate?
+  weak var tabBarDelegate: TabBarDelegate?
   var navigationController: UINavigationController
   var childCoordinators: [Coordinator]
   
@@ -29,6 +30,7 @@ extension WalkCoordinator {
   func showWalkView() {
     let viewModel = WalkViewModel()
       .coordinator(self)
+    
     let viewController = WalkViewController(viewModel: viewModel)
       .navigationTitle(with: MainTabBarPage.walk.navigationTitle, displayMode: .never)
       .hideBackButton()
@@ -39,11 +41,14 @@ extension WalkCoordinator {
   func showWalkInProgressView() {
     let imageRepository = ImageRepositoryImpl()
     let createImageFileUsecase = CreateImageFileUsecaseImpl(imageRepository: imageRepository)
+    
     let viewModel = WalkInProgressViewModel(createImageFileUsecase: createImageFileUsecase)
       .coordinator(self)
+    
     let viewController = WalkInProgressViewController(viewModel: viewModel)
       .navigationTitle(with: "산책하기", displayMode: .never)
       .hideBackButton()
+      .hideTabBar()
     
     push(viewController)
   }
@@ -67,6 +72,8 @@ extension WalkCoordinator {
   
   func showWriteDiaryView(walk: Walk, diary: Diary, imageDataList: [Data]) {
     let viewModel = WriteDiaryViewModel(style: .initial, walk: walk, diary: diary)
+      .coordinator(self)
+    
     let viewController = WriteDiaryViewController(viewModel: viewModel, imageDataList: imageDataList)
       .hideBackButton()
     

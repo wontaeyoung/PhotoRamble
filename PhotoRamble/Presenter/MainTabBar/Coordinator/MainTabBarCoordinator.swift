@@ -62,6 +62,7 @@ final class MainTabBarCoordinator: Coordinator {
         let coordinator = WalkCoordinator(tabPageController)
         addChild(coordinator)
         coordinator.start()
+        coordinator.tabBarDelegate = self
         
       case .diary:
         break
