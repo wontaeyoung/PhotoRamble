@@ -15,7 +15,7 @@ final class DiaryPhotoCollectionCell: RXBaseCollectionViewCell {
   private let photoImageView = UIImageView().configured {
     $0.contentMode = .scaleAspectFill
     $0.clipsToBounds = true
-    $0.layer.cornerRadius = 20
+    $0.layer.cornerRadius = 10
   }
   
   private let deletePhotoButton = PRButton(style: .icon, image: UIImage(systemName: "xmark"))
@@ -31,7 +31,7 @@ final class DiaryPhotoCollectionCell: RXBaseCollectionViewCell {
     }
     
     deletePhotoButton.snp.makeConstraints { make in
-      make.top.trailing.equalTo(photoImageView)
+      make.top.trailing.equalTo(photoImageView).inset(-10)
     }
   }
 }
