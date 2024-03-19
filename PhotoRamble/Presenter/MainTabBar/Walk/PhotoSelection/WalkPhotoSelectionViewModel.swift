@@ -28,6 +28,7 @@ final class WalkPhotoSelectionViewModel: ViewModel {
   let disposeBag = DisposeBag()
   weak var coordinator: WalkCoordinator?
   private let replaceImageFileUsecase: any ReplaceImageFileUsecase
+  private let createWalkUsecase: any CreateWalkUsecase
   
   // MARK: - Initializer
   init(
@@ -58,27 +59,51 @@ final class WalkPhotoSelectionViewModel: ViewModel {
       .disposed(by: disposeBag)
     
     input.fixPhotoSelectionEvent
-      .withUnretained(self) 
+      .withUnretained(self)
       .flatMap { owner, imageDataList in
         owner.replaceImageFileUsecase
-          .excute(imageDataList: imageDataList, directoryName: owner.walkRelay.value.id.uuidString)
+          .execute(imageDataList: imageDataList, directoryName: owner.walkRelay.value.id.uuidString)
+          .asObservable()
       }
-      .subscribe(with: self, onNext: { owner, dataList in
+      .withUnretained(self)
+      .flatMap { owner, imageDataList in
+        let initialDiary = owner.makeInitialDiary(photoIndices: imageDataList.indices)
+        owner.prepareWalkForNextFlow(diaryID: initialDiary.id)
+        
+        return Observable.just((initialDiary, imageDataList))
+      }
+      .withUnretained(self)
+      .flatMap { owner, result in
+        let createWalk = owner.createWalkUsecase.execute(with: owner.walkRelay.value)
+        let (diary, imageDataList) = result
+        
+        return createWalk.map { walk in (walk, diary, imageDataList) }
+      }
+      .subscribe(with: self, onNext: { owner, result in
+        let (walk, diary, dataList) = result
         
         owner.coordinator?.showWriteDiaryView(
-          walk: owner.walkRelay.value,
-          diary: owner.makeInitialDiary(photoIndicies: dataList.indices),
+          walk: walk,
+          diary: diary,
           imageDataList: dataList
         )
       }, onError: { owner, error in
         // FIXME: 여기서 Replace 과정에서 일어난 삭제 데이터 복구 과정 필요함
       })
       .disposed(by: disposeBag)
-
+    
     return Output(agreeDeleteUnselectedPhotoRelay: agreeDeleteUnselectedPhotoRelay)
   }
   
-  private func makeInitialDiary(photoIndicies: Range<Int>) -> Diary {
-    return .initialDiary(photoIndicies: photoIndicies.map { $0 }, walkID: walkRelay.value.id)
+  private func makeInitialDiary(photoIndices: Range<Int>) -> Diary {
+    return .initialDiary(
+      photoIndicies: photoIndices.map { $0 },
+      walkID: walkRelay.value.id
+    )
+  }
+  
+  private func prepareWalkForNextFlow(diaryID: UUID) {
+    var updatedWalk = walkRelay.value.applied { $0.diaryID = diaryID }
+    walkRelay.accept(updatedWalk)
   }
 }
