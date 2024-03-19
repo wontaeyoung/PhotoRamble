@@ -66,7 +66,7 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
   
   // MARK: - Observable
   private let photosRelay: BehaviorRelay<[UIImage]>
-  private let deletePhotoButtonTapEvent = PublishRelay<Void>()
+  private let deletePhotoButtonTapEvent = PublishRelay<Int>()
   
   // MARK: - Property
   let viewModel: WriteDiaryViewModel
@@ -188,13 +188,13 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
           cellType: DiaryPhotoCollectionCell.self)
       ) { [weak self] index, image, cell in
         guard let self else { return }
-        cell.updateImage(with: image, tapEventRelay: deletePhotoButtonTapEvent)
+        cell.updateImage(with: image, at: index, tapEventRelay: deletePhotoButtonTapEvent)
       }
       .disposed(by: disposeBag)
     
     deletePhotoButtonTapEvent
       .bind {
-        print(#function)
+        print(#function, $0)
       }
       .disposed(by: disposeBag)
     

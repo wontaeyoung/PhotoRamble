@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import RxSwift
 import RxCocoa
 
 final class DiaryPhotoCollectionCell: RXBaseCollectionViewCell {
@@ -20,7 +21,14 @@ final class DiaryPhotoCollectionCell: RXBaseCollectionViewCell {
   
   private let deletePhotoButton = PRButton(style: .icon, image: UIImage(systemName: "xmark"))
   
+  // MARK: - Observable
+  private let indexRelay = BehaviorRelay<Int>(value: 0)
+  
   // MARK: - Life Cycle
+  override func prepareForReuse() {
+    disposeBag = DisposeBag()
+  }
+  
   override func setHierarchy() {
     contentView.addSubviews(photoImageView, deletePhotoButton)
   }
@@ -38,15 +46,20 @@ final class DiaryPhotoCollectionCell: RXBaseCollectionViewCell {
 
 extension DiaryPhotoCollectionCell {
   
-  func updateImage(with image: UIImage, tapEventRelay: PublishRelay<Void>) {
+  func updateImage(with image: UIImage, at index: Int, tapEventRelay: PublishRelay<Int>) {
     photoImageView.image = image
+    indexRelay.accept(index)
     
     bindDeleteButtonTapEvent(tapEventRelay: tapEventRelay)
   }
   
-  private func bindDeleteButtonTapEvent(tapEventRelay: PublishRelay<Void>) {
+  private func bindDeleteButtonTapEvent(tapEventRelay: PublishRelay<Int>) {
     deletePhotoButton.rx.tap
-      .bind(to: tapEventRelay)
+      .throttle(.seconds(1), scheduler: MainScheduler.instance)
+      .withLatestFrom(indexRelay)
+      .bind {
+        tapEventRelay.accept($0)
+      }
       .disposed(by: disposeBag)
   }
 }
