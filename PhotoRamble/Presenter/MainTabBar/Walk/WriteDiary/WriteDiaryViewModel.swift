@@ -32,6 +32,7 @@ final class WriteDiaryViewModel: ViewModel {
   
   // MARK: - Observable
   private let walkRelay: BehaviorRelay<Walk>
+  private let diaryRelay: BehaviorRelay<Diary>
   
   // MARK: - Property
   let disposeBag = DisposeBag()
@@ -43,7 +44,7 @@ final class WriteDiaryViewModel: ViewModel {
   private let walkTimeInterval: TimeInterval
   
   // MARK: - Initializer
-  init(style: WritingStyle, walk: Walk) {
+  init(style: WritingStyle, walk: Walk, diary: Diary) {
     switch style {
       case let .initial(distance, interval):
         self.date = .now
