@@ -7,6 +7,18 @@
 
 import RealmSwift
 
+extension Array {
+  
+  func removed(at index: Int) -> Self {
+    guard self.indices ~= index else { return self }
+    
+    var mutableList = self
+    mutableList.remove(at: index)
+    
+    return mutableList
+  }
+}
+
 extension Array where Element: RealmCollectionValue {
   
   var toList: List<Element> {
