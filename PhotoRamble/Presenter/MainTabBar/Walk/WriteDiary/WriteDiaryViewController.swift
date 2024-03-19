@@ -37,6 +37,7 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
     $0.contentMode = .scaleAspectFit
   }
   
+  /* ver. 1.0 이후 업데이트 사항으로 아카이브 처리
   private let weatherImageView = UIImageView().configured {
     $0.image = PRAsset.Symbol.temperatureInfoIcon
     $0.contentMode = .scaleAspectFit
@@ -46,6 +47,7 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
     $0.image = PRAsset.Symbol.walkDistanceInfoIcon
     $0.contentMode = .scaleAspectFit
   }
+   */
   
   private let walkTimeImageView = UIImageView().configured {
     $0.image = PRAsset.Symbol.walkTimeInfoIcon
@@ -53,12 +55,13 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
   }
   
   private let dateLabel = PRLabel(style: .mainInfo)
+  
+  /* ver. 1.0 이후 업데이트 사항으로 아카이브 처리
   private let weatherLabel = PRLabel(style: .mainInfo)
   private let walkDistanceLabel = PRLabel(style: .mainInfo)
+   */
   private let walkTimeLabel = PRLabel(style: .mainInfo)
-  
-  private let diaryTextView = PRTextView(placeholder: "일기 내용을 써주세요")
-  
+  private let diaryTextView = PRTextView(placeholder: "일기 내용을 써주세요", isResponder: true)
   private let writingCompletedButton = PRButton(style: .primary, title: "다 썼어요")
   
   // MARK: - Observable
@@ -83,12 +86,16 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
     view.addSubviews(
       photoCollectionView,
       dateImageView,
+      /* ver. 1.0 이후 업데이트 사항으로 아카이브 처리
       weatherImageView,
       walkDistanceImageView,
+       */
       walkTimeImageView,
       dateLabel,
+      /* ver. 1.0 이후 업데이트 사항으로 아카이브 처리
       weatherLabel,
       walkDistanceLabel,
+       */
       walkTimeLabel,
       diaryTextView,
       writingCompletedButton
@@ -108,6 +115,7 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
       make.size.equalTo(dateLabel.snp.height)
     }
     
+    /* ver. 1.0 이후 업데이트 사항으로 아카이브 처리
     weatherImageView.snp.makeConstraints { make in
       make.top.equalTo(dateImageView.snp.bottom).offset(12)
       make.leading.equalTo(dateImageView)
@@ -119,9 +127,10 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
       make.leading.equalTo(dateImageView)
       make.size.equalTo(dateImageView)
     }
+     */
     
     walkTimeImageView.snp.makeConstraints { make in
-      make.top.equalTo(walkDistanceImageView.snp.bottom).offset(12)
+      make.top.equalTo(dateImageView.snp.bottom).offset(12)
       make.leading.equalTo(dateImageView)
       make.size.equalTo(dateImageView)
     }
@@ -132,6 +141,7 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
       make.trailing.equalTo(view).inset(20)
     }
     
+    /* ver. 1.0 이후 업데이트 사항으로 아카이브 처리
     weatherLabel.snp.makeConstraints { make in
       make.centerY.equalTo(weatherImageView)
       make.horizontalEdges.equalTo(dateLabel)
@@ -141,6 +151,7 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
       make.centerY.equalTo(walkDistanceImageView)
       make.horizontalEdges.equalTo(dateLabel)
     }
+     */
     
     walkTimeLabel.snp.makeConstraints { make in
       make.centerY.equalTo(walkTimeImageView)
@@ -189,14 +200,6 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
     
     output.dateText
       .emit(to: dateLabel.rx.text)
-      .disposed(by: disposeBag)
-    
-    output.temperatureText
-      .emit(to: weatherLabel.rx.text)
-      .disposed(by: disposeBag)
-    
-    output.walkDistanceText
-      .emit(to: walkDistanceLabel.rx.text)
       .disposed(by: disposeBag)
     
     output.walkTimeInterval
