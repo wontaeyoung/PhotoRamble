@@ -18,13 +18,15 @@ final class WriteDiaryViewModel: ViewModel {
   
   // MARK: - I / O
   struct Input {
-    let diaryText: PublishSubject<String>
+    let diaryText: PublishRelay<String>
+    let photoDeletedEvent: PublishRelay<Int>
     let writingCompletedButtonTapEvent: PublishRelay<(diaryText: String, photoIndices: [Int])>
   }
   
   struct Output {
     let dateText: Signal<String>
     let walkTimeInterval: Signal<String>
+    let deleteCompleted: Signal<Int>
     let isCompleteButtonEnabled: Signal<Bool>
   }
   
@@ -47,23 +49,33 @@ final class WriteDiaryViewModel: ViewModel {
   // MARK: - Method
   func transform(input: Input) -> Output {
     
-    input.diaryText
-      .bind(to: contentRelay)
-      .disposed(by: disposeBag)
-    
     let dateText: Signal<String> = Observable.just(diaryDateString(date: diaryRelay.value.createAt))
       .asSignal(onErrorJustReturn: "-")
     
     let walkTimeInterval: Signal<String> = Observable.just(walkTimeString(duration: walkRelay.value.walkDuration))
       .asSignal(onErrorJustReturn: DateManager.shared.toString(with: 0, format: .HHmmssKR))
     
+    let deleteCompleted = PublishRelay<Int>()
+    
     let isCompleteButtonEnabled: Signal<Bool> = contentRelay
       .map { !$0.isEmpty }
       .asSignal(onErrorJustReturn: false)
     
+    input.diaryText
+      .bind(to: contentRelay)
+      .disposed(by: disposeBag)
+    
+    input.photoDeletedEvent
+      .bind(with: self) { owner, index in
+        owner.deletePhotoIndex(at: index)
+        deleteCompleted.accept(index)
+      }
+      .disposed(by: disposeBag)
+    
     return Output(
       dateText: dateText,
       walkTimeInterval: walkTimeInterval,
+      deleteCompleted: deleteCompleted.asSignal(),
       isCompleteButtonEnabled: isCompleteButtonEnabled
     )
   }
@@ -74,5 +86,13 @@ final class WriteDiaryViewModel: ViewModel {
   
   private func walkTimeString(duration: Int) -> String {
     return DateManager.shared.elapsedTime(duration, format: .HHmmssKR)
+  }
+  
+  private func deletePhotoIndex(at index: Int) {
+    var updatedDiary = diaryRelay.value.applied {
+      $0.photoIndices = $0.photoIndices.removed(at: index)
+    }
+    
+    diaryRelay.accept(updatedDiary)
   }
 }
