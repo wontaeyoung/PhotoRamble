@@ -62,15 +62,23 @@ final class WalkPhotoSelectionViewModel: ViewModel {
       .flatMap { owner, imageDataList in
         owner.replaceImageFileUsecase
           .excute(imageDataList: imageDataList, directoryName: owner.walkRelay.value.id.uuidString)
-          .asObservable()
       }
       .subscribe(with: self, onNext: { owner, dataList in
-        owner.coordinator?.showWriteDiaryView(walk: owner.walkRelay.value, imageDataList: dataList)
+        
+        owner.coordinator?.showWriteDiaryView(
+          walk: owner.walkRelay.value,
+          diary: owner.makeInitialDiary(photoIndicies: dataList.indices),
+          imageDataList: dataList
+        )
       }, onError: { owner, error in
         // FIXME: 여기서 Replace 과정에서 일어난 삭제 데이터 복구 과정 필요함
       })
       .disposed(by: disposeBag)
 
     return Output(agreeDeleteUnselectedPhotoRelay: agreeDeleteUnselectedPhotoRelay)
+  }
+  
+  private func makeInitialDiary(photoIndicies: Range<Int>) -> Diary {
+    return .initialDiary(photoIndicies: photoIndicies.map { $0 }, walkID: walkRelay.value.id)
   }
 }
