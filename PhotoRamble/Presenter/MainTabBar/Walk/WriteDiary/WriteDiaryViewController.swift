@@ -177,7 +177,8 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
   override func bind() {
     
     let input = WriteDiaryViewModel.Input(
-      diaryText: .init(),
+      diaryText: .init(), 
+      photoDeletedEvent: .init(),
       writingCompletedButtonTapEvent: .init()
     )
     
@@ -193,9 +194,9 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
       .disposed(by: disposeBag)
     
     deletePhotoButtonTapEvent
-      .bind {
-        print(#function, $0)
-      }
+      .bind(with: self, onNext: { owner, index in
+        input.photoDeletedEvent.accept(index)
+      })
       .disposed(by: disposeBag)
     
     let output = viewModel.transform(input: input)
@@ -208,6 +209,12 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
       .emit(to: walkTimeLabel.rx.text)
       .disposed(by: disposeBag)
     
+    output.deleteCompleted
+      .emit(with: self) { owner, index in
+        owner.deletePhoto(at: index)
+      }
+      .disposed(by: disposeBag)
+    
     output.isCompleteButtonEnabled
       .emit(to: writingCompletedButton.rx.isEnabled)
       .disposed(by: disposeBag)
@@ -218,4 +225,8 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
   }
   
   // MARK: - Method
+  private func deletePhoto(at index: Int) {
+    let updatedPhotos = photosRelay.value.removed(at: index)
+    photosRelay.accept(updatedPhotos)
+  }
 }
