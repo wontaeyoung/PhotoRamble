@@ -177,7 +177,7 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
   override func bind() {
     
     let input = WriteDiaryViewModel.Input(
-      diaryText: PublishSubject<String>(),
+      diaryText: .init(),
       writingCompletedButtonTapEvent: .init()
     )
     
@@ -192,8 +192,10 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
       }
       .disposed(by: disposeBag)
     
-    diaryTextView.rx.text.orEmpty
-      .bind(to: input.diaryText)
+    deletePhotoButtonTapEvent
+      .bind {
+        print(#function)
+      }
       .disposed(by: disposeBag)
     
     let output = viewModel.transform(input: input)
@@ -208,6 +210,10 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
     
     output.isCompleteButtonEnabled
       .emit(to: writingCompletedButton.rx.isEnabled)
+      .disposed(by: disposeBag)
+    
+    diaryTextView.rx.text.orEmpty
+      .bind(to: input.diaryText)
       .disposed(by: disposeBag)
   }
   
