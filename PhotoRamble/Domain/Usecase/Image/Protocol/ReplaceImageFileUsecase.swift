@@ -10,5 +10,5 @@ import RxSwift
 
 protocol ReplaceImageFileUsecase {
   
-  func excute(imageDataList: [Data], directoryName: String) -> Single<[Data]>
+  func execute(imageDataList: [Data], directoryName: String) -> Single<[Data]>
 }

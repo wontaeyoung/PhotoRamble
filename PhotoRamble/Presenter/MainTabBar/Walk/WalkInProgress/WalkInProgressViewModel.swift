@@ -54,7 +54,7 @@ final class WalkInProgressViewModel: ViewModel {
       .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
       .withUnretained(self)
       .flatMap { owner, data in
-        return owner.createImageFileUsecase.excute(
+        return owner.createImageFileUsecase.execute(
           imageData: data,
           directoryName: owner.walkRelay.value.id.uuidString,
           fileIndex: owner.imagesDataRelay.value.count

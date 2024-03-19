@@ -19,11 +19,11 @@ final class CreateImageFileUsecaseImpl: CreateImageFileUsecase {
   }
   
   // MARK: - Method
-  func excute(imageData: Data, directoryName: String, fileIndex: Int) -> Single<Data> {
+  func execute(imageData: Data, directoryName: String, fileIndex: Int) -> Single<Data> {
     return imageRepository.create(imageData: imageData, directoryName: directoryName, fileIndex: fileIndex)
   }
   
-  func excute(imageDataList: [Data], directoryName: String) -> Single<[Data]> {
+  func execute(imageDataList: [Data], directoryName: String) -> Single<[Data]> {
     return imageRepository.create(imageDataList: imageDataList, directoryName: directoryName)
   }
 }

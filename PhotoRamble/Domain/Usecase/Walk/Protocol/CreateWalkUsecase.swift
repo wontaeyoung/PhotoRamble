@@ -9,5 +9,5 @@ import RxSwift
 
 protocol CreateWalkUsecase {
   
-  func excute(with walk: Walk)
+  func execute(with walk: Walk) -> Single<Walk>
 }
