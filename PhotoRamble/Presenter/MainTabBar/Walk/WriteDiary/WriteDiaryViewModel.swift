@@ -44,11 +44,11 @@ final class WriteDiaryViewModel: ViewModel {
   
   // MARK: - Method
   func transform(input: Input) -> Output {
-      
-    let dateText: Signal<String> = Observable.just(DateManager.shared.toString(with: diaryRelay.value.createAt, format: .yyyyMMddEEEEKR))
+    
+    let dateText: Signal<String> = Observable.just(diaryDateString(date: diaryRelay.value.createAt))
       .asSignal(onErrorJustReturn: "-")
     
-    let walkTimeInterval: Signal<String> = Observable.just(DateManager.shared.toString(with: walkRelay.value.walkDuration, format: .HHmmssKR))
+    let walkTimeInterval: Signal<String> = Observable.just(walkTimeString(duration: walkRelay.value.walkDuration))
       .asSignal(onErrorJustReturn: DateManager.shared.toString(with: 0, format: .HHmmssKR))
     
     let isCompleteButtonEnabled: Signal<Bool> = input.diaryText
@@ -60,5 +60,13 @@ final class WriteDiaryViewModel: ViewModel {
       walkTimeInterval: walkTimeInterval,
       isCompleteButtonEnabled: isCompleteButtonEnabled
     )
+  }
+  
+  private func diaryDateString(date: Date) -> String {
+    return DateManager.shared.toString(with: date, format: .yyyyMMddEEEEKR)
+  }
+  
+  private func walkTimeString(duration: Int) -> String {
+    return DateManager.shared.elapsedTime(duration, format: .HHmmssKR)
   }
 }
