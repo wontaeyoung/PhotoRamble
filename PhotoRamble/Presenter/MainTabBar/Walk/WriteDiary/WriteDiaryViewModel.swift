@@ -12,8 +12,8 @@ import RxCocoa
 final class WriteDiaryViewModel: ViewModel {
   
   enum WritingStyle {
-    case initial(distance: Double, interval: TimeInterval)
-    case modify(date: Date, temperature: Int, distance: Double, interval: TimeInterval)
+    case initial
+    case modify(diary: Diary)
   }
   
   // MARK: - I / O
