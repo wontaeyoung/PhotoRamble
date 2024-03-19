@@ -31,6 +31,7 @@ final class WriteDiaryViewModel: ViewModel {
   // MARK: - Observable
   private let walkRelay: BehaviorRelay<Walk>
   private let diaryRelay: BehaviorRelay<Diary>
+  private let contentRelay: BehaviorRelay<String>
   
   // MARK: - Property
   let disposeBag = DisposeBag()
@@ -40,10 +41,15 @@ final class WriteDiaryViewModel: ViewModel {
   init(style: WritingStyle, walk: Walk, diary: Diary) {
     self.walkRelay = .init(value: walk)
     self.diaryRelay = .init(value: diary)
+    self.contentRelay = .init(value: "")
   }
   
   // MARK: - Method
   func transform(input: Input) -> Output {
+    
+    input.diaryText
+      .bind(to: contentRelay)
+      .disposed(by: disposeBag)
     
     let dateText: Signal<String> = Observable.just(diaryDateString(date: diaryRelay.value.createAt))
       .asSignal(onErrorJustReturn: "-")
@@ -51,7 +57,7 @@ final class WriteDiaryViewModel: ViewModel {
     let walkTimeInterval: Signal<String> = Observable.just(walkTimeString(duration: walkRelay.value.walkDuration))
       .asSignal(onErrorJustReturn: DateManager.shared.toString(with: 0, format: .HHmmssKR))
     
-    let isCompleteButtonEnabled: Signal<Bool> = input.diaryText
+    let isCompleteButtonEnabled: Signal<Bool> = contentRelay
       .map { !$0.isEmpty }
       .asSignal(onErrorJustReturn: false)
     
