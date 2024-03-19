@@ -84,7 +84,7 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
     }
     
     noPhotoInfoLabel.snp.makeConstraints { make in
-      make.edges.equalTo(takenPhotoPagerView)
+      make.edges.equalTo(takenPhotoPagerView).inset(20)
       make.center.equalTo(takenPhotoPagerView)
     }
     
