@@ -24,7 +24,7 @@ struct Diary: Entity {
   let createAt: Date
   var updateAt: Date
   var writingStatus: WritingStatus
-  let photoIndices: [Int]
+  var photoIndices: [Int]
   let walkID: UUID
   
   static func initialDiary(photoIndicies: [Int], walkID: UUID) -> Diary {
