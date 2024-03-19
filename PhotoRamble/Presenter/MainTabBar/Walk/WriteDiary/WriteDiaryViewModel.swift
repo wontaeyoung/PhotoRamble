@@ -24,8 +24,6 @@ final class WriteDiaryViewModel: ViewModel {
   
   struct Output {
     let dateText: Signal<String>
-    let temperatureText: Signal<String>
-    let walkDistanceText: Signal<String>
     let walkTimeInterval: Signal<String>
     let isCompleteButtonEnabled: Signal<Bool>
   }
@@ -38,43 +36,19 @@ final class WriteDiaryViewModel: ViewModel {
   let disposeBag = DisposeBag()
   weak var coordinator: WalkCoordinator?
   
-  private let date: Date
-  private let temperature: Int
-  private let walkDistance: Double
-  private let walkTimeInterval: TimeInterval
-  
   // MARK: - Initializer
   init(style: WritingStyle, walk: Walk, diary: Diary) {
-    switch style {
-      case let .initial(distance, interval):
-        self.date = .now
-        self.temperature = 0
-        self.walkDistance = distance
-        self.walkTimeInterval = interval
-        
-      case let .modify(date, temperature, distance, interval):
-        self.date = date
-        self.temperature = temperature
-        self.walkDistance = distance
-        self.walkTimeInterval = interval
-    }
-    
     self.walkRelay = .init(value: walk)
+    self.diaryRelay = .init(value: diary)
   }
   
   // MARK: - Method
   func transform(input: Input) -> Output {
       
-    let dateText: Signal<String> = Observable.just(DateManager.shared.toString(with: date, format: .yyyyMMddEEEEKR))
+    let dateText: Signal<String> = Observable.just(DateManager.shared.toString(with: diaryRelay.value.createAt, format: .yyyyMMddEEEEKR))
       .asSignal(onErrorJustReturn: "-")
     
-    let temeratureText: Signal<String> = Observable.just("\(temperature) °")
-      .asSignal(onErrorJustReturn: "0 °")
-    
-    let walkDistanceText: Signal<String> = Observable.just(NumberFormatManager.shared.toRoundedWith(from: walkDistance, fractionDigits: 2, unit: .km))
-      .asSignal(onErrorJustReturn: "0.0 km")
-    
-    let walkTimeInterval: Signal<String> = Observable.just(DateManager.shared.toString(with: walkTimeInterval, format: .HHmmssKR))
+    let walkTimeInterval: Signal<String> = Observable.just(DateManager.shared.toString(with: walkRelay.value.walkDuration, format: .HHmmssKR))
       .asSignal(onErrorJustReturn: DateManager.shared.toString(with: 0, format: .HHmmssKR))
     
     let isCompleteButtonEnabled: Signal<Bool> = input.diaryText
@@ -83,8 +57,6 @@ final class WriteDiaryViewModel: ViewModel {
     
     return Output(
       dateText: dateText,
-      temperatureText: temeratureText,
-      walkDistanceText: walkDistanceText,
       walkTimeInterval: walkTimeInterval,
       isCompleteButtonEnabled: isCompleteButtonEnabled
     )
