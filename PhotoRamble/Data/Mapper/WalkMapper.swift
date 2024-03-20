@@ -11,6 +11,10 @@ struct WalkMapper: Mapper {
   
   private let locationMapper: LocationMapper
   
+  init(locationMapper: LocationMapper) {
+    self.locationMapper = locationMapper
+  }
+  
   func toDTO(_ entity: Walk) -> WalkDTO {
     return WalkDTO(
       id: entity.id,
