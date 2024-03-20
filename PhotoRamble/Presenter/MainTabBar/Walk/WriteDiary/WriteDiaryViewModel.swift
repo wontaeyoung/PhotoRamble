@@ -92,6 +92,7 @@ final class WriteDiaryViewModel: ViewModel {
       .subscribe(with: self, onNext: { owner, diary in
         showCreatedDiaryToast.accept(())
       }, onError: { owner, error in
+        // FIXME: 실패 알럿 띄우기 전에 인디케이터 종료를 위한 output 이벤트 방출해야함
         LogManager.shared.log(with: error, to: .local)
         owner.coordinator?.showErrorAlert(error: error)
       })
