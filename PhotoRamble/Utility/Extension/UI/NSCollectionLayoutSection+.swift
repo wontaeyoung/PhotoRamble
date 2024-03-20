@@ -205,4 +205,137 @@ public extension NSCollectionLayoutSection {
     
     return section
   }
+  
+  static func makeDynamicGridSection(
+    itemCount: Int
+  ) -> NSCollectionLayoutSection {
+    let subItemCount: Int = min(
+      itemCount,
+      BusinessValue.maxShowableCountInDiaryListCellSubGroup
+    )
+    
+    guard itemCount > 1 else {
+      let mainItem = NSCollectionLayoutItem(
+        layoutSize: .init(
+          widthDimension: .fractionalWidth(1),
+          heightDimension: .fractionalHeight(1)
+        )
+      )
+
+      let mainGroup = NSCollectionLayoutGroup.vertical(
+        layoutSize: .init(
+          widthDimension: .fractionalWidth(1),
+          heightDimension: .fractionalHeight(1)
+        ),
+        subitems: [mainItem]
+      )
+      
+      return NSCollectionLayoutSection(group: mainGroup)
+    }
+    
+    let mainItem = NSCollectionLayoutItem(
+      layoutSize: .init(
+        widthDimension: .fractionalWidth(1),
+        heightDimension: .fractionalHeight(1)
+      )
+    )
+
+    var mainGroup = NSCollectionLayoutGroup.vertical(
+      layoutSize: .init(
+        widthDimension: .fractionalWidth(0.5),
+        heightDimension: .fractionalHeight(1)
+      ),
+      subitems: [mainItem]
+    )
+    
+    let subGroup: NSCollectionLayoutGroup
+    switch subItemCount {        
+      case 2:
+        let subItem = NSCollectionLayoutItem(
+          layoutSize: .init(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .fractionalHeight(1)
+          )
+        )
+        
+        subGroup = NSCollectionLayoutGroup.horizontal(
+          layoutSize: .init(
+            widthDimension: .fractionalWidth(0.5),
+            heightDimension: .fractionalHeight(1)
+          ),
+          subitem: subItem,
+          count: 2
+        )
+        
+      case 3:
+        let subItem = NSCollectionLayoutItem(
+          layoutSize: .init(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .fractionalHeight(1)
+          )
+        )
+        
+        let verticalGroup = NSCollectionLayoutGroup.vertical(
+          layoutSize: .init(
+            widthDimension: .fractionalWidth(0.5),
+            heightDimension: .fractionalHeight(1)
+          ),
+          subitem: subItem,
+          count: 1
+        )
+        
+        let verticalGroup2 = NSCollectionLayoutGroup.vertical(
+          layoutSize: .init(
+            widthDimension: .fractionalWidth(0.5),
+            heightDimension: .fractionalHeight(1)
+          ),
+          subitem: subItem,
+          count: 2
+        )
+        
+        subGroup = NSCollectionLayoutGroup.horizontal(
+          layoutSize: .init(
+            widthDimension: .fractionalWidth(0.5),
+            heightDimension: .fractionalHeight(1.0)
+          ),
+          subitems: [verticalGroup, verticalGroup2]
+        )
+        
+      default:
+        let subItem = NSCollectionLayoutItem(
+          layoutSize: .init(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .fractionalHeight(1)
+          )
+        )
+        
+        let horizontalGroup = NSCollectionLayoutGroup.horizontal(
+          layoutSize: .init(
+            widthDimension: .fractionalWidth(1.0),
+            heightDimension: .fractionalHeight(0.5)
+          ),
+          subitem: subItem,
+          count: 2
+        )
+        
+        subGroup = NSCollectionLayoutGroup.vertical(
+          layoutSize: .init(
+            widthDimension: .fractionalWidth(0.5),
+            heightDimension: .fractionalHeight(1.0)
+          ),
+          subitem: horizontalGroup,
+          count: 2
+        )
+    }
+    
+    let containerGroup = NSCollectionLayoutGroup.horizontal(
+      layoutSize: .init(
+        widthDimension: .fractionalWidth(1.0),
+        heightDimension: .fractionalHeight(1.0)
+      ),
+      subitems: [mainGroup, subGroup]
+    )
+    
+    return NSCollectionLayoutSection(group: containerGroup)
+  }
 }
