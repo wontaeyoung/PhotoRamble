@@ -26,7 +26,7 @@ final class WalkPhotoSelectionViewController: RXBaseViewController, ViewModelCon
   
   private let layout = UICollectionViewCompositionalLayout(
     section: .makeGridListSection(
-      gridCount: BusinessValue.gridCountInRow,
+      gridCount: BusinessValue.gridCountInPhotoSelectionRow,
       scrollStyle: .none
     )
   )
