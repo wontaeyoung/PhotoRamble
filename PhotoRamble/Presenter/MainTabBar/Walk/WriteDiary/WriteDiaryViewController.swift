@@ -202,6 +202,9 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
     
     writingCompletedButton.rx.tap
       .throttle(.seconds(5), scheduler: MainScheduler.instance)
+      .withUnretained(self) { owner, _ in
+        if #available(iOS 16, *) { owner.showWritingIndicator() }
+      }
       .bind(to: input.writingCompletedButtonTapEvent)
       .disposed(by: disposeBag)
     
@@ -242,5 +245,19 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
   private func deletePhoto(at index: Int) {
     let updatedPhotos = photosRelay.value.removed(at: index)
     photosRelay.accept(updatedPhotos)
+  }
+  
+  @available(iOS 16, *)
+  private func showWritingIndicator() {
+    writingCompletedButton.configuration?.apply {
+      $0.showsActivityIndicator = true
+    }
+  }
+  
+  @available(iOS 16, *)
+  private func hideWritingIndicator() {
+    writingCompletedButton.configuration?.apply {
+      $0.showsActivityIndicator = false
+    }
   }
 }
