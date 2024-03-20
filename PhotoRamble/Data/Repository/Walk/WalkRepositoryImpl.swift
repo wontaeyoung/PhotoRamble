@@ -28,7 +28,7 @@ final class WalkRepositoryImpl: WalkRepository {
       try service.create(with: walkDTO)
       return .just(walk)
     } catch {
-      return .error(PRError.WalkRepository.createFailed(error: error))
+      return .error(PRError.RealmRepository.createFailed(error: error, modelName: "산책"))
     }
   }
 }
