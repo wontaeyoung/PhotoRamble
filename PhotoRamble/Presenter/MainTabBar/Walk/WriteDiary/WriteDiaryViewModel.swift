@@ -40,12 +40,19 @@ final class WriteDiaryViewModel: ViewModel {
   // MARK: - Property
   let disposeBag = DisposeBag()
   weak var coordinator: WalkCoordinator?
+  private let createDiaryUsecase: any CreateDiaryUsecase
   
   // MARK: - Initializer
-  init(style: WritingStyle, walk: Walk, diary: Diary) {
+  init(
+    style: WritingStyle,
+    walk: Walk,
+    diary: Diary,
+    createDiaryUsecase: some CreateDiaryUsecase
+  ) {
     self.walkRelay = .init(value: walk)
     self.diaryRelay = .init(value: diary)
-    self.contentRelay = .init(value: "")
+    self.contentRelay = .init(value: diary.content)
+    self.createDiaryUsecase = createDiaryUsecase
   }
   
   // MARK: - Method
@@ -77,9 +84,17 @@ final class WriteDiaryViewModel: ViewModel {
       .disposed(by: disposeBag)
     
     input.writingCompletedButtonTapEvent
-      .bind(with: self) { owner, _ in
-        showCreatedDiaryToast.accept(())
+      .withUnretained(self)
+      .flatMap { owner, _ in
+        owner.prepareEntitiesForNextFlow()
+        return owner.createDiaryUsecase.execute(with: owner.diaryRelay.value)
       }
+      .subscribe(with: self, onNext: { owner, diary in
+        showCreatedDiaryToast.accept(())
+      }, onError: { owner, error in
+        LogManager.shared.log(with: error, to: .local)
+        owner.coordinator?.showErrorAlert(error: error)
+      })
       .disposed(by: disposeBag)
     
     input.cratedDiaryToastCompletedEvent
@@ -108,6 +123,15 @@ final class WriteDiaryViewModel: ViewModel {
   private func deletePhotoIndex(at index: Int) {
     let updatedDiary = diaryRelay.value.applied {
       $0.photoIndices = $0.photoIndices.removed(at: index)
+    }
+    
+    diaryRelay.accept(updatedDiary)
+  }
+  
+  private func prepareEntitiesForNextFlow() {
+    let updatedDiary = diaryRelay.value.applied {
+      $0.writingStatus = .done
+      $0.content = contentRelay.value
     }
     
     diaryRelay.accept(updatedDiary)
