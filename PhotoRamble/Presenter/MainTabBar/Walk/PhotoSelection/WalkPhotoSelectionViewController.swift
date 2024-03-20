@@ -178,7 +178,7 @@ final class WalkPhotoSelectionViewController: RXBaseViewController, ViewModelCon
     guard isSelected(with: photoIndex) else { return nil }
     guard let index = selectedIndicesRelay.value.firstIndex(of: photoIndex) else { return nil }
     
-    return indexToBusinessNumber(with: index)
+    return photoSelectionUINumber(with: index)
   }
   
   private func updatePhotoCollection() {
@@ -194,7 +194,7 @@ final class WalkPhotoSelectionViewController: RXBaseViewController, ViewModelCon
     )
   }
   
-  private func indexToBusinessNumber(with number: Int) -> Int {
+  private func photoSelectionUINumber(with number: Int) -> Int {
     return number + 1
   }
 }
