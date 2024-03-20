@@ -105,7 +105,7 @@ final class WalkPhotoSelectionViewModel: ViewModel {
   }
   
   private func prepareWalkForNextFlow(diaryID: UUID) {
-    var updatedWalk = walkRelay.value.applied { $0.diaryID = diaryID }
+    let updatedWalk = walkRelay.value.applied { $0.diaryID = diaryID }
     walkRelay.accept(updatedWalk)
   }
 }
