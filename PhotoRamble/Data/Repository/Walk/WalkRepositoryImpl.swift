@@ -31,16 +31,4 @@ final class WalkRepositoryImpl: WalkRepository {
       return .error(PRError.WalkRepository.createFailed(error: error))
     }
   }
-  
-  func update(with walk: Walk) -> Single<Walk> {
-    return .just(walk)
-  }
-  
-  func fetch() -> Single<[Walk]> {
-    .just([])
-  }
-  
-  func delete(at walkID: UUID) -> Single<Void> {
-    .just(())
-  }
 }
