@@ -30,5 +30,16 @@ final class DiaryRepositoryImpl: DiaryRepository {
       return .error(PRError.RealmRepository.createFailed(error: error, modelName: "일기"))
     }
   }
+  
+  func fetch() -> Single<[Diary]> {
+     
+    let diaryDTOs: [DiaryDTO] = service.fetch()
+      .sorted(byKeyPath: DiaryDTO.Column.createAt.rawValue, ascending: false)
+      .toList()
+      .toArray
+    
+    let diaries: [Diary] = mapper.toEntity(diaryDTOs)
+    
+    return .just(diaries)
+  }
 }
-
