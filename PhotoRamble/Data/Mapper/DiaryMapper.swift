@@ -32,4 +32,9 @@ struct DiaryMapper: Mapper {
       walkID: dto.walkID
     )
   }
+  
+  func toEntity(_ dtos: [DiaryDTO]) -> [Diary] {
+    return dtos
+      .map { toEntity($0) }
+  }
 }
