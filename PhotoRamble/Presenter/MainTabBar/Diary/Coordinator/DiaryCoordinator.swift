@@ -22,10 +22,25 @@ final class DiaryCoordinator: Coordinator {
   }
   
   func start() {
-    
+    showDiaryListView()
   }
 }
 
 extension DiaryCoordinator {
-  
+  func showDiaryListView() {
+    
+    let service = LiveRealmService()
+    let mapper = DiaryMapper()
+    let diaryRepository = DiaryRepositoryImpl(service: service, mapper: mapper)
+    let fetchDiaryUsecase = FetchDiaryUsecaseImpl(diaryRepository: diaryRepository)
+    
+    let viewModel = DiaryListViewModel(fetchDiaryUsecase: fetchDiaryUsecase)
+      .coordinator(self)
+    
+    let viewController = DiaryListViewController(viewModel: viewModel)
+      .navigationTitle(with: MainTabBarPage.diary.navigationTitle, displayMode: .never)
+      .hideBackTitle()
+    
+    push(viewController)
+  }
 }
