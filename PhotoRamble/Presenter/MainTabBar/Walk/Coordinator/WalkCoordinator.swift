@@ -79,7 +79,17 @@ extension WalkCoordinator {
   }
   
   func showWriteDiaryView(walk: Walk, diary: Diary, imageDataList: [Data]) {
-    let viewModel = WriteDiaryViewModel(style: .initial, walk: walk, diary: diary)
+    let service = LiveRealmService()
+    let mapper = DiaryMapper()
+    let diaryRepository = DiaryRepositoryImpl(service: service, mapper: mapper)
+    let createDiaryUsecase = CreateDiaryUsecaseImpl(diaryRepository: diaryRepository)
+    
+    let viewModel = WriteDiaryViewModel(
+      style: .initial,
+      walk: walk,
+      diary: diary,
+      createDiaryUsecase: createDiaryUsecase
+    )
       .coordinator(self)
     
     let viewController = WriteDiaryViewController(viewModel: viewModel, imageDataList: imageDataList)
