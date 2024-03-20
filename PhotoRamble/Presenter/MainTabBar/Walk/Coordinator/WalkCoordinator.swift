@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import KazRealm
 import RxRelay
 
 final class WalkCoordinator: Coordinator {
@@ -54,12 +55,19 @@ extension WalkCoordinator {
   }
   
   func showWalkPhotoSelectionView(walkRealy: BehaviorRelay<Walk>, imageDataList: [Data]) {
+    
+    let service = LiveRealmService()
+    let locationMapper = LocationMapper()
+    let walkMapper = WalkMapper(locationMapper: locationMapper)
     let imageRepository = ImageRepositoryImpl()
+    let walkRepository = WalkRepositoryImpl(service: service, mapper: walkMapper)
     let replaceImageFileUsecase = ReplaceImageFileUsecaseImpl(imageRepository: imageRepository)
+    let createWalkUsecase = CreateWalkUsecaseImpl(walkRepository: walkRepository)
     
     let viewModel = WalkPhotoSelectionViewModel(
       walkRelay: walkRealy,
-      replaceImageFileUsecase: replaceImageFileUsecase
+      replaceImageFileUsecase: replaceImageFileUsecase,
+      createWalkUsecase: createWalkUsecase
     )
       .coordinator(self)
     
