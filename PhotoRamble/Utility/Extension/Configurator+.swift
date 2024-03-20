@@ -59,3 +59,5 @@ extension ToastStyle: Configurator { }
 extension Walk: Configurator { }
 extension Diary: Configurator { }
 extension Location: Configurator { }
+
+extension NSDiffableDataSourceSnapshot: Configurator { }
