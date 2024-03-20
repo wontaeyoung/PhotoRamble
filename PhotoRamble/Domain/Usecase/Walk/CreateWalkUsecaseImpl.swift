@@ -23,4 +23,3 @@ final class CreateWalkUsecaseImpl: CreateWalkUsecase {
     return walkRepository.create(with: walk)
   }
 }
-
