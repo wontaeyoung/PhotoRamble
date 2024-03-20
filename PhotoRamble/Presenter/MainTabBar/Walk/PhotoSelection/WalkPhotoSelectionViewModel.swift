@@ -33,10 +33,12 @@ final class WalkPhotoSelectionViewModel: ViewModel {
   // MARK: - Initializer
   init(
     walkRelay: BehaviorRelay<Walk>,
-    replaceImageFileUsecase: some ReplaceImageFileUsecase
+    replaceImageFileUsecase: some ReplaceImageFileUsecase,
+    createWalkUsecase: some CreateWalkUsecase
   ) {
     self.walkRelay = walkRelay
     self.replaceImageFileUsecase = replaceImageFileUsecase
+    self.createWalkUsecase = createWalkUsecase
   }
   
   // MARK: - Method
