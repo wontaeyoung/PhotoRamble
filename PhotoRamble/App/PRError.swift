@@ -35,21 +35,21 @@ enum PRError {
     }
   }
   
-  enum WalkRepository: AppError {
+  enum RealmRepository: AppError {
     
-    case createFailed(error: Error)
+    case createFailed(error: Error, modelName: String)
     
     var logDescription: String {
       switch self {
-        case .createFailed(let error):
-          return "산책 인스턴스 저장 실패. \(error.localizedDescription)"
+        case .createFailed(let error, let name):
+          return "\(name) Realm 인스턴스 저장 실패. \(error.localizedDescription)"
       }
     }
     
     var alertDescription: String {
       switch self {
-        case .createFailed:
-          return "산책 내용을 저장하는데 실패했어요. 문제가 지속되면 개발자에게 알려주세요."
+        case .createFailed(_, let name):
+          return "\(name) 내용을 저장하는데 실패했어요. 문제가 지속되면 개발자에게 알려주세요."
       }
     }
   }
