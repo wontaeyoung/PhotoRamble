@@ -22,4 +22,3 @@ final class FetchDiaryUsecaseImpl: FetchDiaryUsecase {
     return diaryRepository.fetch()
   }
 }
-
