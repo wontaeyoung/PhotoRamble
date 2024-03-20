@@ -29,7 +29,7 @@ final class WriteDiaryViewModel: ViewModel {
     let walkTimeInterval: Signal<String>
     let deleteCompleted: Signal<Int>
     let isCompleteButtonEnabled: Signal<Bool>
-    let showCretedDiaryToast: Signal<Void>
+    let showCreatedDiaryToast: Signal<Void>
   }
   
   // MARK: - Observable
@@ -108,7 +108,7 @@ final class WriteDiaryViewModel: ViewModel {
       walkTimeInterval: walkTimeInterval,
       deleteCompleted: deleteCompleted.asSignal(),
       isCompleteButtonEnabled: isCompleteButtonEnabled,
-      showCretedDiaryToast: showCreatedDiaryToast.asSignal()
+      showCreatedDiaryToast: showCreatedDiaryToast.asSignal()
     )
   }
   

@@ -225,7 +225,7 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
       .emit(to: writingCompletedButton.rx.isEnabled)
       .disposed(by: disposeBag)
     
-    output.showCretedDiaryToast
+    output.showCreatedDiaryToast
       .emit(with: self) { owner, _ in
         owner.view.makeToast("일기가 작성되었어요.", duration: 1, position: .center) { _ in
           input.cratedDiaryToastCompletedEvent.accept(())
