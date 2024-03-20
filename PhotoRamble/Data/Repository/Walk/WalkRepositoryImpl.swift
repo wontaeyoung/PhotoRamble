@@ -7,7 +7,6 @@
 
 import Foundation
 import KazRealm
-import RealmSwift
 import RxSwift
 
 final class WalkRepositoryImpl: WalkRepository {
