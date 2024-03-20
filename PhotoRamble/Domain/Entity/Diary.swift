@@ -10,12 +10,11 @@ import Foundation
 struct Diary: Entity {
   
   enum WritingStatus: Int {
-    case choosePhoto
     case writing
     case done
     
     init(from rawValue: Int) {
-      self = WritingStatus(rawValue: rawValue) ?? .choosePhoto
+      self = WritingStatus(rawValue: rawValue) ?? .writing
     }
   }
   
