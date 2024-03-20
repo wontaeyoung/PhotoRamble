@@ -52,6 +52,7 @@
 		6E82E70C2BAA66B900892EC3 /* DiaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E82E70B2BAA66B900892EC3 /* DiaryRepository.swift */; };
 		6E82E70E2BAA66F200892EC3 /* CreateDiaryUsecaseImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E82E70D2BAA66F200892EC3 /* CreateDiaryUsecaseImpl.swift */; };
 		6E82E7102BAA674F00892EC3 /* CreateDiaryUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E82E70F2BAA674F00892EC3 /* CreateDiaryUsecase.swift */; };
+		6E82E7152BAA90B200892EC3 /* DiaryCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E82E7142BAA90B200892EC3 /* DiaryCoordinator.swift */; };
 		6E86ABAA2B99C56500AADB50 /* PRAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5A92E52B99A3CD00A0CE6C /* PRAsset.swift */; };
 		6E86ABAB2B99C57400AADB50 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5A92DF2B99A16F00A0CE6C /* UIColor+.swift */; };
 		6E86ABAE2B99CF7200AADB50 /* PRLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E86ABAD2B99CF7200AADB50 /* PRLabel.swift */; };
@@ -170,6 +171,7 @@
 		6E82E70B2BAA66B900892EC3 /* DiaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryRepository.swift; sourceTree = "<group>"; };
 		6E82E70D2BAA66F200892EC3 /* CreateDiaryUsecaseImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDiaryUsecaseImpl.swift; sourceTree = "<group>"; };
 		6E82E70F2BAA674F00892EC3 /* CreateDiaryUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateDiaryUsecase.swift; sourceTree = "<group>"; };
+		6E82E7142BAA90B200892EC3 /* DiaryCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCoordinator.swift; sourceTree = "<group>"; };
 		6E86ABAD2B99CF7200AADB50 /* PRLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRLabel.swift; sourceTree = "<group>"; };
 		6E86ABAF2B99D32C00AADB50 /* PRTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRTextView.swift; sourceTree = "<group>"; };
 		6E86ABB72B9AF74300AADB50 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
@@ -509,6 +511,22 @@
 			path = Diary;
 			sourceTree = "<group>";
 		};
+		6E82E7122BAA905100892EC3 /* Diary */ = {
+			isa = PBXGroup;
+			children = (
+				6E82E7132BAA905B00892EC3 /* Coordinator */,
+			);
+			path = Diary;
+			sourceTree = "<group>";
+		};
+		6E82E7132BAA905B00892EC3 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				6E82E7142BAA90B200892EC3 /* DiaryCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
 		6E86ABB62B9AF6DA00AADB50 /* Localization */ = {
 			isa = PBXGroup;
 			children = (
@@ -677,6 +695,7 @@
 			children = (
 				6EFFED372B9E147800B9A238 /* Coordinator */,
 				6EFFED3E2B9E1D2400B9A238 /* Walk */,
+				6E82E7122BAA905100892EC3 /* Diary */,
 			);
 			path = MainTabBar;
 			sourceTree = "<group>";
@@ -1018,6 +1037,7 @@
 				6E1E17212BA45C1500607A48 /* WriteDiaryViewModel.swift in Sources */,
 				6EFFED4D2B9E8F0600B9A238 /* WalkCoordinator.swift in Sources */,
 				6E3843CD2BA27F5E00410608 /* PhotoSelectionCollectionCell.swift in Sources */,
+				6E82E7152BAA90B200892EC3 /* DiaryCoordinator.swift in Sources */,
 				6EFFED392B9E148900B9A238 /* MainTabBarCoordinator.swift in Sources */,
 				6ED8BEB42BA03EF6007F58F8 /* LogManager.swift in Sources */,
 				6E86ABD12B9CAD5500AADB50 /* Walk.swift in Sources */,
