@@ -24,8 +24,8 @@ final class LocationDTO: Object, RealmModel, DTO {
   @Persisted var longitude: Double
   @Persisted var timestamp: Date
   
-  init(id: UUID, latitude: Double, longitude: Double, timestamp: Date) {
-    super.init()
+  convenience init(id: UUID, latitude: Double, longitude: Double, timestamp: Date) {
+    self.init()
     
     self.id = id
     self.latitude = latitude

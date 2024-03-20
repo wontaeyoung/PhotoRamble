@@ -30,8 +30,8 @@ final class DiaryDTO: Object, RealmModel, DTO {
   @Persisted var photoIndices: List<Int>
   @Persisted var walkID: UUID
   
-  init(id: UUID, content: String, createAt: Date, updateAt: Date, writingStatus: Int, photoIndices: List<Int>, walkID: UUID) {
-    super.init()
+  convenience init(id: UUID, content: String, createAt: Date, updateAt: Date, writingStatus: Int, photoIndices: List<Int>, walkID: UUID) {
+    self.init()
     
     self.id = id
     self.content = content
