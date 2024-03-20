@@ -201,7 +201,7 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
       .disposed(by: disposeBag)
     
     writingCompletedButton.rx.tap
-      .throttle(.microseconds(500), scheduler: MainScheduler.instance)
+      .throttle(.seconds(5), scheduler: MainScheduler.instance)
       .bind(to: input.writingCompletedButtonTapEvent)
       .disposed(by: disposeBag)
     
