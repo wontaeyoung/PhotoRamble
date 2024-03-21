@@ -10,4 +10,5 @@ import RxSwift
 protocol DeleteImageFileUsecase {
   
   func execute(directoryName: String) -> Single<Void>
+  @discardableResult func execute(directoryName: String, fileIndex: Int) -> Single<Int>
 }
