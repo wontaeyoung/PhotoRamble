@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import RxCocoa
 
 final class DiaryPhotoGridCollectionCell: RXBaseCollectionViewCell {
   
