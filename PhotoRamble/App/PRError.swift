@@ -12,6 +12,7 @@ enum PRError {
     case createFailed(error: Error)
     case createListFailed(error: Error)
     case clearFailed(error: Error)
+    case removeFailed(error: Error)
     case loadFailed(error: Error)
     
     var logDescription: String {
@@ -22,6 +23,8 @@ enum PRError {
           return "이미지 파일 리스트 저장 실패. \(error.localizedDescription)"
         case .clearFailed(let error):
           return "이미지 파일 전체 삭제 실패. \(error.localizedDescription)"
+        case .removeFailed(let error):
+          return "이미지 삭제 실패. \(error.localizedDescription)"
         case .loadFailed(let error):
           return "이미지 로드 실패. \(error.localizedDescription)"
       }
@@ -32,7 +35,7 @@ enum PRError {
         case .createFailed, .createListFailed:
           return "이미지를 저장하는데 실패했어요. 문제가 지속되면 개발자에게 알려주세요."
           
-        case .clearFailed:
+        case .clearFailed, .removeFailed:
           return "이미지를 정리하는데 실패했어요. 문제가 지속되면 개발자에게 알려주세요."
           
         case .loadFailed:
