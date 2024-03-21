@@ -22,4 +22,8 @@ final class DeleteImageFileUsecaseImpl: DeleteImageFileUsecase {
   func execute(directoryName: String) -> Single<Void> {
     return imageRepository.deleteAll(directoryName: directoryName)
   }
+  
+  func execute(directoryName: String, fileIndex: Int) -> Single<Int> {
+    return imageRepository.delete(directoryName: directoryName, fileIndex: fileIndex)
+  }
 }
