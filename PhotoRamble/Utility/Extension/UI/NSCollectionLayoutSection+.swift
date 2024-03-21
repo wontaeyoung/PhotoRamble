@@ -240,7 +240,7 @@ public extension NSCollectionLayoutSection {
       )
     )
 
-    var mainGroup = NSCollectionLayoutGroup.vertical(
+    let mainGroup = NSCollectionLayoutGroup.vertical(
       layoutSize: .init(
         widthDimension: .fractionalWidth(0.5),
         heightDimension: .fractionalHeight(1)
