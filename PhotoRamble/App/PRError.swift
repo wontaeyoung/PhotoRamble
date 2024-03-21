@@ -14,6 +14,7 @@ enum PRError {
     case clearFailed(error: Error)
     case removeFailed(error: Error)
     case loadFailed(error: Error)
+    case createDirectoryFailed(error: Error)
     
     var logDescription: String {
       switch self {
@@ -27,6 +28,8 @@ enum PRError {
           return "이미지 삭제 실패. \(error.localizedDescription)"
         case .loadFailed(let error):
           return "이미지 로드 실패. \(error.localizedDescription)"
+        case .createDirectoryFailed(let error):
+          return "디렉토리 생성 실패. \(error.localizedDescription)"
       }
     }
     
@@ -40,6 +43,9 @@ enum PRError {
           
         case .loadFailed:
           return "이미지를 불러오는데 실패했어요. 문제가 지속되면 개발자에게 알려주세요."
+          
+        case .createDirectoryFailed:
+          return "알 수 없는 문제가 발생했어요. 문제가 지속되면 개발자에게 알려주세요."
       }
     }
   }
