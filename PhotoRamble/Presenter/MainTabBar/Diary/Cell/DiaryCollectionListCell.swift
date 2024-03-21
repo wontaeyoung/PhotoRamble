@@ -22,9 +22,7 @@ final class DiaryCollectionListCell: RXBaseCollectionViewListCell {
   }
   
   private let dateLabel = PRLabel(style: .mainInfo, alignment: .center)
-  private let contentLabel = PRLabel(style: .content).configured {
-    $0.numberOfLines = 3
-  }
+  private let contentLabel = PRLabel(style: .content).configured { $0.numberOfLines = 3 }
   
   // MARK: - Observable
   private let photosRelay = BehaviorRelay<[UIImage]>(value: [])
@@ -50,12 +48,11 @@ final class DiaryCollectionListCell: RXBaseCollectionViewListCell {
   override func setConstraint() {
     contentView.snp.makeConstraints { make in
       make.width.equalTo(UIScreen.main.bounds.width)
-      make.height.equalTo(300)
     }
     
     photoCollectionView.snp.makeConstraints { make in
       make.top.horizontalEdges.equalTo(contentView)
-      make.height.equalTo(contentView).multipliedBy(0.5)
+      make.height.equalTo(UIScreen.main.bounds.width / 2)
     }
     
     dateLabel.snp.makeConstraints { make in
@@ -66,7 +63,7 @@ final class DiaryCollectionListCell: RXBaseCollectionViewListCell {
     contentLabel.snp.makeConstraints { make in
       make.top.equalTo(dateLabel.snp.bottom).offset(20)
       make.horizontalEdges.equalTo(contentView).inset(20)
-      make.bottom.greaterThanOrEqualTo(contentView).inset(20)
+      make.bottom.lessThanOrEqualTo(contentView).offset(-20)
     }
   }
   
@@ -100,8 +97,9 @@ final class DiaryCollectionListCell: RXBaseCollectionViewListCell {
       .disposed(by: disposeBag)
     
     photosRelay
-      .do(onNext: { [weak self] _ in
+      .do(onNext: { [weak self] photos in
         guard let self else { return }
+        print(photos.count)
         photoCollectionView.setCollectionViewLayout(layout, animated: true)
       })
       .bind(to: photoCollectionView.rx.items(
@@ -109,7 +107,6 @@ final class DiaryCollectionListCell: RXBaseCollectionViewListCell {
         cellType: DiaryPhotoGridCollectionCell.self)
       ) { row, item, cell in
         cell.updateUI(with: item)
-        self.photoCollectionView.reloadData()
       }
       .disposed(by: disposeBag)
     
