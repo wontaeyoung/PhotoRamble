@@ -42,8 +42,12 @@ extension WalkCoordinator {
   func showWalkInProgressView() {
     let imageRepository = ImageRepositoryImpl()
     let createImageFileUsecase = CreateImageFileUsecaseImpl(imageRepository: imageRepository)
+    let createDirectoryUsecase = CreateDirectoryUsecaseImpl(imageRepository: imageRepository)
     
-    let viewModel = WalkInProgressViewModel(createImageFileUsecase: createImageFileUsecase)
+    let viewModel = WalkInProgressViewModel(
+      createImageFileUsecase: createImageFileUsecase,
+      createDirectoryUsecase: createDirectoryUsecase
+    )
       .coordinator(self)
     
     let viewController = WalkInProgressViewController(viewModel: viewModel)
