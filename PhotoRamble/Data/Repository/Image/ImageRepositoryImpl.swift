@@ -65,4 +65,22 @@ final class ImageRepositoryImpl: ImageRepository {
     
     return .just(())
   }
+  
+  func fetch(directoryName: String) -> Single<[Data]> {
+    
+    let router = PhotoFileRouter(
+      directory: directoryName,
+      fileIndex: 0,
+      fileExtension: .jpg,
+      fileMethod: .read
+    )
+    
+    do {
+      let dataList = try PhotoFileManager.shared.loadAllImages(router: router)
+      
+      return .just(dataList)
+    } catch {
+      return .error(PRError.ImageFile.loadFailed(error: error))
+    }
+  }
 }
