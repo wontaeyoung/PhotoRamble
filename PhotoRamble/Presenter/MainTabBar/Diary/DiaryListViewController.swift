@@ -16,7 +16,7 @@ final class DiaryListViewController: RXBaseViewController, ViewModelController {
   private lazy var diaryListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
   
   private let layout: UICollectionViewCompositionalLayout = .list(
-    using: UICollectionLayoutListConfiguration(appearance: .insetGrouped)
+    using: UICollectionLayoutListConfiguration(appearance: .plain)
   )
   
   // MARK: - Property
@@ -70,12 +70,9 @@ extension DiaryListViewController {
   }
   
   private func setDataSource() {
-    let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Diary> { cell, indexPath, item in
+    let cellRegistration = UICollectionView.CellRegistration<DiaryCollectionListCell, Diary> { cell, indexPath, item in
       
-      cell.contentConfiguration = UIListContentConfiguration.cell().applied {
-        $0.text = item.content
-        $0.secondaryText = DateManager.shared.toString(with: item.createAt, format: .yyyyMMdd)
-      }
+      cell.bind(diary: item)
     }
     
     dataSource = UICollectionViewDiffableDataSource(collectionView: diaryListCollectionView) { collectionView, indexPath, item in
