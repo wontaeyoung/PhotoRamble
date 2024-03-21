@@ -30,15 +30,20 @@ final class WalkInProgressViewModel: ViewModel {
   // MARK: - Property
   let disposeBag = DisposeBag()
   weak var coordinator: WalkCoordinator?
-  private let createImageFileUsecase: CreateImageFileUsecase
+  private let createImageFileUsecase: any CreateImageFileUsecase
+  private let createDirectoryUsecase: any CreateDirectoryUsecase
   
   var numberOfItems: Int {
     return imagesDataRelay.value.count
   }
   
   // MARK: - Initializer
-  init(createImageFileUsecase: some CreateImageFileUsecase) {
+  init(
+    createImageFileUsecase: some CreateImageFileUsecase,
+    createDirectoryUsecase: some CreateDirectoryUsecase
+  ) {
     self.createImageFileUsecase = createImageFileUsecase
+    self.createDirectoryUsecase = createDirectoryUsecase
   }
   
   deinit {
@@ -72,11 +77,7 @@ final class WalkInProgressViewModel: ViewModel {
     input.walkCompleteButtonTapEvent
       .withLatestFrom(imagesDataRelay)
       .subscribe(with: self, onNext: { owner, dataList in
-        owner.prepareWalkForNextFlow()
-        owner.coordinator?.showWalkPhotoSelectionView(
-          walkRealy: owner.walkRelay,
-          imageDataList: dataList
-        )
+        owner.processCompleteEvent(imageDataList: dataList)
       })
       .disposed(by: disposeBag)
     
@@ -102,6 +103,40 @@ final class WalkInProgressViewModel: ViewModel {
     currentList.append(newData)
     
     imagesDataRelay.accept(currentList)
+  }
+  
+  private func processCompleteEvent(imageDataList: [Data]) {
+    if imageDataList.isEmpty {
+      showAgreementAlert()
+    } else {
+      prepareWalkForNextFlow()
+      
+      coordinator?.showWalkPhotoSelectionView(
+        walkRealy: walkRelay,
+        imageDataList: imageDataList
+      )
+    }
+  }
+  
+  private func showAgreementAlert() {
+    coordinator?.showAlert(
+      title: "산책 종료 안내",
+      message: "아직 촬영한 사진이 없어요. 정말 산책을 종료할까요?",
+      isCancelable: true
+    ) { [weak self] in
+      guard let self else { return }
+      prepareWalkForNextFlow()
+      
+      let walk = walkRelay.value
+      let initialDiary: Diary = .initialDiary(photoIndicies: [], walkID: walk.id)
+      coordinator?.showWriteDiaryView(walk: walk, diary: initialDiary, imageDataList: [])
+      
+      createDirectoryUsecase.execute(directoryName: walk.id.uuidString)
+        .subscribe(with: self, onFailure: { owner, error in
+          LogManager.shared.log(with: error, to: .local)
+        })
+        .disposed(by: disposeBag)
+    }
   }
   
   private func prepareWalkForNextFlow() {
