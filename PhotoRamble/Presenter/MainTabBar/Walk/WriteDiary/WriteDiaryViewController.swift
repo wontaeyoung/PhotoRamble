@@ -60,8 +60,24 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
   private let weatherLabel = PRLabel(style: .mainInfo)
   private let walkDistanceLabel = PRLabel(style: .mainInfo)
    */
+  
   private let walkTimeLabel = PRLabel(style: .mainInfo)
-  private let diaryTextView = PRTextView(placeholder: "일기 내용을 써주세요", isResponder: true)
+  
+  private lazy var diaryTextView = PRTextView(placeholder: "일기 내용을 써주세요", isResponder: true).configured { textView in
+    textView.inputAccessoryView = UIToolbar().configured {
+      let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+      let doneButton = UIBarButtonItem(image: UIImage(systemName: "keyboard.chevron.compact.down.fill"), style: .done, target: self, action: nil)
+      $0.setItems([flexibleSpace, doneButton], animated: false)
+      $0.sizeToFit()
+      
+      doneButton.rx.tap
+        .bind(with: self) { owner, _ in
+          textView.resignFirstResponder()
+        }
+        .disposed(by: self.disposeBag)
+    }
+  }
+  
   private let writingCompletedButton = PRButton(style: .primary, title: "다 썼어요")
   
   // MARK: - Observable
@@ -238,6 +254,15 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
     
     diaryTextView.rx.text.orEmpty
       .bind(to: input.diaryText)
+      .disposed(by: disposeBag)
+    
+    let tap = UITapGestureRecognizer()
+    view.addGestureRecognizer(tap)
+    
+    tap.rx.event
+      .bind(with: self) { owner, _ in
+        owner.view.endEditing(true)
+      }
       .disposed(by: disposeBag)
   }
   
