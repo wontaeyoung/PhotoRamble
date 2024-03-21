@@ -50,20 +50,38 @@ final class ImageRepositoryImpl: ImageRepository {
   
   func deleteAll(directoryName: String) -> Single<Void> {
     
+    let router = PhotoFileRouter(
+      directory: directoryName,
+      fileIndex: 0,
+      fileExtension: .jpg,
+      fileMethod: .delete
+    )
+    
     do {
-      let router = PhotoFileRouter(
-        directory: directoryName,
-        fileIndex: 0, 
-        fileExtension: .jpg,
-        fileMethod: .delete
-      )
-      
       try PhotoFileManager.shared.removeAll(router: router)
+      
+      return .just(())
     } catch {
       return .error(PRError.ImageFile.clearFailed(error: error))
     }
+  }
+  
+  func delete(directoryName: String, fileIndex: Int) -> Single<Int> {
     
-    return .just(())
+    let router = PhotoFileRouter(
+      directory: directoryName,
+      fileIndex: fileIndex,
+      fileExtension: .jpg,
+      fileMethod: .delete
+    )
+    
+    do {
+      try PhotoFileManager.shared.remove(router: router)
+      
+      return .just(fileIndex)
+    } catch {
+      return .error(PRError.ImageFile.removeFailed(error: error))
+    }
   }
   
   func fetch(directoryName: String) -> Single<[Data]> {
