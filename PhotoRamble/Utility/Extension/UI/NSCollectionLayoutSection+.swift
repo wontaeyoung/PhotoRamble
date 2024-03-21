@@ -331,7 +331,7 @@ public extension NSCollectionLayoutSection {
     let containerGroup = NSCollectionLayoutGroup.horizontal(
       layoutSize: .init(
         widthDimension: .fractionalWidth(1.0),
-        heightDimension: .fractionalHeight(1.0)
+        heightDimension: .fractionalWidth(0.5)
       ),
       subitems: [mainGroup, subGroup]
     )
