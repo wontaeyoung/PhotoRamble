@@ -99,7 +99,6 @@ final class DiaryCollectionListCell: RXBaseCollectionViewListCell {
     photosRelay
       .do(onNext: { [weak self] photos in
         guard let self else { return }
-        print(photos.count)
         photoCollectionView.setCollectionViewLayout(layout, animated: true)
       })
       .bind(to: photoCollectionView.rx.items(
