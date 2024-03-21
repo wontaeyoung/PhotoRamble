@@ -56,4 +56,10 @@ public final class PhotoFileManager {
       try FileManager.default.removeItem(at: $0)
     }
   }
+  
+  public func createDirectory(router: PhotoFileRouter) throws {
+    guard !router.directoryExist else { return }
+    
+    try FileManager.default.createDirectory(at: router.directoryURL, withIntermediateDirectories: true)
+  }
 }
