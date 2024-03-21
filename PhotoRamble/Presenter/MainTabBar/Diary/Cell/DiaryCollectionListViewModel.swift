@@ -36,7 +36,6 @@ final class DiaryCollectionListViewModel: ViewModel {
   func transform(input: Input) -> Output {
     
     let photos = BehaviorRelay<[Data]>(value: [])
-    
     let dateText = PublishRelay<String>()
     let contentText = PublishRelay<String>()
     
