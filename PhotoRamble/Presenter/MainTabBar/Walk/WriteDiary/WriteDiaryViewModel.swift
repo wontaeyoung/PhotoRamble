@@ -41,18 +41,21 @@ final class WriteDiaryViewModel: ViewModel {
   let disposeBag = DisposeBag()
   weak var coordinator: WalkCoordinator?
   private let createDiaryUsecase: any CreateDiaryUsecase
+  private let deleteImageFileUsecase: any DeleteImageFileUsecase
   
   // MARK: - Initializer
   init(
     style: WritingStyle,
     walk: Walk,
     diary: Diary,
-    createDiaryUsecase: some CreateDiaryUsecase
+    createDiaryUsecase: some CreateDiaryUsecase,
+    deleteImageFileUsecase: some DeleteImageFileUsecase
   ) {
     self.walkRelay = .init(value: walk)
     self.diaryRelay = .init(value: diary)
     self.contentRelay = .init(value: diary.content)
     self.createDiaryUsecase = createDiaryUsecase
+    self.deleteImageFileUsecase = deleteImageFileUsecase
   }
   
   // MARK: - Method
@@ -77,6 +80,13 @@ final class WriteDiaryViewModel: ViewModel {
       .disposed(by: disposeBag)
     
     input.photoDeletedEvent
+      .withUnretained(self)
+      .flatMap { owner, index in
+        let fileIndex = owner.removedFileIndex(at: index)
+        owner.deleteImageFileUsecase.execute(directoryName: owner.walkRelay.value.id.uuidString, fileIndex: fileIndex)
+        
+        return Observable.just(index)
+      }
       .bind(with: self) { owner, index in
         owner.deletePhotoIndex(at: index)
         deleteCompleted.accept(index)
@@ -119,6 +129,10 @@ final class WriteDiaryViewModel: ViewModel {
   
   private func walkTimeString(duration: Int) -> String {
     return DateManager.shared.elapsedTime(duration, format: .HHmmssKR)
+  }
+  
+  private func removedFileIndex(at index: Int) -> Int {
+    return diaryRelay.value.photoIndices[index]
   }
   
   private func deletePhotoIndex(at index: Int) {
