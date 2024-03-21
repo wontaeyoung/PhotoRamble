@@ -19,6 +19,8 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
     $0.keyboardDismissMode = .onDrag
   }
   
+  private let noPhotoInfoLabel = PRLabel(style: .subInfo, title: "선택된 사진이 없어요.", alignment: .center)
+  
   private var layout: UICollectionViewFlowLayout {
     let cellCount: CGFloat = 3
     let cellSpacing: CGFloat = 20
@@ -101,6 +103,7 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
   override func setHierarchy() {
     view.addSubviews(
       photoCollectionView,
+      noPhotoInfoLabel,
       dateImageView,
       /* ver. 1.0 이후 업데이트 사항으로 아카이브 처리
       weatherImageView,
@@ -123,6 +126,10 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
       make.top.equalTo(view.safeAreaLayoutGuide)
       make.horizontalEdges.equalTo(view)
       make.height.equalTo(150)
+    }
+    
+    noPhotoInfoLabel.snp.makeConstraints { make in
+      make.edges.equalTo(photoCollectionView).inset(20)
     }
     
     dateImageView.snp.makeConstraints { make in
@@ -200,6 +207,9 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
     )
     
     photosRelay
+      .do(onNext: { _ in
+        self.toggleNoPhotoInfoLabelVisible()
+      })
       .bind(
         to: photoCollectionView.rx.items(
           cellIdentifier: DiaryPhotoCollectionCell.identifier,
@@ -270,6 +280,10 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
   private func deletePhoto(at index: Int) {
     let updatedPhotos = photosRelay.value.removed(at: index)
     photosRelay.accept(updatedPhotos)
+  }
+  
+  private func toggleNoPhotoInfoLabelVisible() {
+    noPhotoInfoLabel.isHidden = !photosRelay.value.isEmpty
   }
   
   @available(iOS 16, *)
