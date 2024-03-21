@@ -540,10 +540,10 @@
 		6E82E7122BAA905100892EC3 /* Diary */ = {
 			isa = PBXGroup;
 			children = (
-				6E82E7202BAABFEB00892EC3 /* Cell */,
 				6E82E7132BAA905B00892EC3 /* Coordinator */,
 				6E82E7162BAA911A00892EC3 /* DiaryListViewController.swift */,
 				6E82E7182BAA912C00892EC3 /* DiaryListViewModel.swift */,
+				6E82E7202BAABFEB00892EC3 /* Cell */,
 			);
 			path = Diary;
 			sourceTree = "<group>";
