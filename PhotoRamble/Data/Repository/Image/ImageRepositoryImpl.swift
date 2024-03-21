@@ -101,4 +101,21 @@ final class ImageRepositoryImpl: ImageRepository {
       return .error(PRError.ImageFile.loadFailed(error: error))
     }
   }
+  
+  func createDirectory(directoryName: String) -> Single<Void> {
+    let router = PhotoFileRouter(
+      directory: directoryName,
+      fileIndex: 0,
+      fileExtension: .jpg,
+      fileMethod: .write
+    )
+    
+    do {
+      try PhotoFileManager.shared.createDirectory(router: router)
+      
+      return .just(())
+    } catch {
+      return .error(PRError.ImageFile.createDirectoryFailed(error: error))
+    }
+  }
 }

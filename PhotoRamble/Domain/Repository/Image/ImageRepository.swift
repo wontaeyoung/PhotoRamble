@@ -15,4 +15,5 @@ protocol ImageRepository {
   func deleteAll(directoryName: String) -> Single<Void>
   func delete(directoryName: String, fileIndex: Int) -> Single<Int>
   func fetch(directoryName: String) -> Single<[Data]>
+  func createDirectory(directoryName: String) -> Single<Void>
 }
