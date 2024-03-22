@@ -13,11 +13,17 @@ import RxCocoa
 final class DiaryListViewController: RXBaseViewController, ViewModelController {
   
   // MARK: - UI
-  private lazy var diaryListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+  private lazy var diaryListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).configured {
+    $0.backgroundColor = PRAsset.Color.prBackground
+  }
   
-  private let layout: UICollectionViewCompositionalLayout = .list(
-    using: UICollectionLayoutListConfiguration(appearance: .plain)
-  )
+  private let layout = UICollectionViewFlowLayout().configured {
+    let cellSpacing: CGFloat = 20
+    $0.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width - 40, height: 100)
+    $0.sectionInset = UIEdgeInsets(top: cellSpacing, left: cellSpacing, bottom: cellSpacing, right: cellSpacing)
+    $0.minimumLineSpacing = 50
+    $0.minimumInteritemSpacing = 50
+  }
   
   // MARK: - Property
   let viewModel: DiaryListViewModel
