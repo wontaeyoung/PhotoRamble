@@ -21,7 +21,8 @@ final class DiaryCollectionListCell: RXBaseCollectionViewListCell {
     return .init(section: .makeDynamicGridSection(itemCount: photosRelay.value.count))
   }
   
-  private let dateLabel = PRLabel(style: .mainInfo, alignment: .center)
+  private let divider = Divider(color: PRAsset.Color.prLightGray)
+  private let dateLabel = PRLabel(style: .mainInfo, alignment: .right)
   private let contentLabel = PRLabel(style: .content).configured { $0.numberOfLines = 3 }
   
   // MARK: - Observable
@@ -40,6 +41,7 @@ final class DiaryCollectionListCell: RXBaseCollectionViewListCell {
   override func setHierarchy() {
     contentView.addSubviews(
       photoCollectionView,
+      divider,
       dateLabel,
       contentLabel
     )
@@ -47,23 +49,40 @@ final class DiaryCollectionListCell: RXBaseCollectionViewListCell {
   
   override func setConstraint() {
     contentView.snp.makeConstraints { make in
-      make.width.equalTo(UIScreen.main.bounds.width)
+      make.width.equalTo(UIScreen.main.bounds.width - 40)
     }
     
     photoCollectionView.snp.makeConstraints { make in
       make.top.horizontalEdges.equalTo(contentView)
-      make.height.equalTo(UIScreen.main.bounds.width / 2)
+      make.height.equalTo((UIScreen.main.bounds.width - 40) / 2)
+    }
+    
+    divider.snp.makeConstraints { make in
+      make.top.equalTo(photoCollectionView.snp.bottom)
+      make.horizontalEdges.equalTo(contentView)
     }
     
     dateLabel.snp.makeConstraints { make in
-      make.top.equalTo(photoCollectionView.snp.bottom).offset(20)
+      make.top.equalTo(divider.snp.bottom).offset(10)
       make.horizontalEdges.equalTo(contentView).inset(20)
     }
     
     contentLabel.snp.makeConstraints { make in
-      make.top.equalTo(dateLabel.snp.bottom).offset(20)
+      make.top.equalTo(dateLabel.snp.bottom).offset(10)
       make.horizontalEdges.equalTo(contentView).inset(20)
       make.bottom.lessThanOrEqualTo(contentView).offset(-20)
+    }
+  }
+  
+  override func setAttribute() {
+    self.configure {
+      $0.clipsToBounds = true
+      
+      $0.layer.configure {
+        $0.cornerRadius = 20
+        $0.borderColor = PRAsset.Color.prPrimary.withAlphaComponent(0.1).cgColor
+        $0.borderWidth = 1
+      }
     }
   }
   
