@@ -42,6 +42,7 @@
 		6E5A93022B99B1D400A0CE6C /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E5A92FD2B99B0E000A0CE6C /* Pretendard-ExtraBold.otf */; };
 		6E5A93032B99B1D400A0CE6C /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 6E5A92FA2B99B0E000A0CE6C /* Pretendard-Medium.otf */; };
 		6E5A93162B99C3DA00A0CE6C /* PRButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5A93152B99C3DA00A0CE6C /* PRButton.swift */; };
+		6E5C185A2BADD16E009488F2 /* Divider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5C18592BADD16E009488F2 /* Divider.swift */; };
 		6E778A712BA05BBC00000D0E /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 6E86ABB72B9AF74300AADB50 /* Localizable.xcstrings */; };
 		6E778A732BA05C5700000D0E /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 6E778A722BA05C5700000D0E /* InfoPlist.xcstrings */; };
 		6E778A792BA0901700000D0E /* BusinessValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E778A782BA0901700000D0E /* BusinessValue.swift */; };
@@ -174,6 +175,7 @@
 		6E5A92FD2B99B0E000A0CE6C /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		6E5A92FE2B99B0E000A0CE6C /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		6E5A93152B99C3DA00A0CE6C /* PRButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PRButton.swift; sourceTree = "<group>"; };
+		6E5C18592BADD16E009488F2 /* Divider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Divider.swift; sourceTree = "<group>"; };
 		6E778A722BA05C5700000D0E /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		6E778A782BA0901700000D0E /* BusinessValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessValue.swift; sourceTree = "<group>"; };
 		6E778A7A2BA0908200000D0E /* UIImage+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+.swift"; sourceTree = "<group>"; };
@@ -480,6 +482,7 @@
 				6E86ABAD2B99CF7200AADB50 /* PRLabel.swift */,
 				6E86ABAF2B99D32C00AADB50 /* PRTextView.swift */,
 				6E3843D02BA287C800410608 /* PaddingLabel.swift */,
+				6E5C18592BADD16E009488F2 /* Divider.swift */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -1110,6 +1113,7 @@
 				6E3843DD2BA3D3CE00410608 /* ReplaceImageFileUsecaseImpl.swift in Sources */,
 				6E5A93162B99C3DA00A0CE6C /* PRButton.swift in Sources */,
 				6E778A792BA0901700000D0E /* BusinessValue.swift in Sources */,
+				6E5C185A2BADD16E009488F2 /* Divider.swift in Sources */,
 				6EFFED522B9EEC1000B9A238 /* WalkInProgressViewController.swift in Sources */,
 				6EFFED592B9EF85F00B9A238 /* CreateImageFileUsecase.swift in Sources */,
 				6ED8BEB82BA03F40007F58F8 /* GCDManager.swift in Sources */,
@@ -1282,7 +1286,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 75QZ7682T2;
 				ENABLE_APP_SANDBOX = NO;
@@ -1318,7 +1322,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 75QZ7682T2;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
