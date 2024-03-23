@@ -33,6 +33,7 @@ public enum PRAsset {
       case semiBold = "Pretendard-SemiBold"
       case medium = "Pretendard-Medium"
       case regular = "Pretendard-Regular"
+      case diaryContent = "omyu_pretty"
       
       var name: String {
         return self.rawValue
@@ -53,6 +54,9 @@ public enum PRAsset {
           coalesceWeight = .medium
         case .regular:
           coalesceWeight = .regular
+          
+        default:
+          coalesceWeight = .regular
       }
       
       return UIFont(name: fontName.name, size: size) ?? .systemFont(ofSize: size, weight: coalesceWeight)
@@ -72,6 +76,9 @@ public enum PRAsset {
     
     public static let prContentText: UIFont = font(.regular, size: 15)
     public static let prNavigationTitleLabel: UIFont = font(.extraBold, size: 29)
+    
+    public static let prDiaryText: UIFont = font(.diaryContent, size: 25)
+    public static let prDiaryLabel: UIFont = font(.diaryContent, size: 21)
   }
   
   public enum Symbol {
