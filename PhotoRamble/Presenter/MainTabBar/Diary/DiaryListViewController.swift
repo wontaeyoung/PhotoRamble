@@ -58,6 +58,7 @@ final class DiaryListViewController: RXBaseViewController, ViewModelController {
     output.diaries
       .drive(with: self) { owner, diaries in
         owner.updateSnapshot(diaries: diaries)
+        owner.resetCollectionScrollOffset()
       }
       .disposed(by: disposeBag)
     
@@ -97,5 +98,9 @@ extension DiaryListViewController {
     }
     
     dataSource.apply(snapshot)
+  }
+  
+  private func resetCollectionScrollOffset() {
+    diaryListCollectionView.setContentOffset(.zero, animated: true)
   }
 }
