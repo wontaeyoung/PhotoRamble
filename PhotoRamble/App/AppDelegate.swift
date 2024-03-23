@@ -8,6 +8,7 @@
 import UIKit
 import Firebase
 import Toast
+import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +18,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     connectFirebase()
     setGlobalNavigationBarAppearance()
     setGlobalToastStyle()
+    
+#if targetEnvironment(simulator)
+    print(try! Realm().configuration.fileURL!)
+#endif
     
     return true
   }
