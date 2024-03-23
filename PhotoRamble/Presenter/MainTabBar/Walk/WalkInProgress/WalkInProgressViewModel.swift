@@ -120,8 +120,8 @@ final class WalkInProgressViewModel: ViewModel {
   
   private func showAgreementAlert() {
     coordinator?.showAlert(
-      title: "산책 종료 안내",
-      message: "아직 촬영한 사진이 없어요. 정말 산책을 종료할까요?",
+      title: "산책 완료 안내",
+      message: "아직 촬영한 사진이 없어요. 산책을 끝내고 일기를 쓰러 가볼까요?",
       isCancelable: true
     ) { [weak self] in
       guard let self else { return }
@@ -160,8 +160,6 @@ final class WalkInProgressViewModel: ViewModel {
   
   func requestImageForSimulator() -> Observable<Data> {
     
-    //    let width = Int.random(in: 5...10) * 200
-    //    let height = width + Int.random(in: -5...0) * 100
     let width = 500
     let height = 500
     let url = "https://picsum.photos/\(width)/\(height)"
