@@ -173,11 +173,6 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       .bind(to: imageRelay)
       .disposed(by: disposeBag)
 #else
-    viewModel.requestImageForSimulator()
-      .compactMap { UIImage(data: $0) }
-      .bind(to: imageRelay)
-      .disposed(by: disposeBag)
-    /*
     if UIImagePickerController.isSourceTypeAvailable(.camera) {
       let picker = UIImagePickerController().configured {
         $0.sourceType = .camera
@@ -187,7 +182,6 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       
       present(picker, animated: true)
     }
-     */
 #endif
   }
   
