@@ -9,7 +9,19 @@ import UIKit
 
 public class PRLabel: UILabel {
   
+  private let style: Style
+  
+  override public var text: String? {
+    didSet {
+      if style == .diaryContent {
+        applyLineSpacing()
+      }
+    }
+  }
+  
   public init(style: Style, title: String? = nil, alignment: NSTextAlignment = .natural) {
+    self.style = style
+    
     super.init(frame: .zero)
     
     self.text = title
@@ -57,6 +69,13 @@ public class PRLabel: UILabel {
           $0.textColor = PRAsset.Color.prTitle
           $0.numberOfLines = 2
         }
+        
+      case .diaryContent:
+        self.configure {
+          $0.font = PRAsset.Font.prDiaryLabel
+          $0.textColor = PRAsset.Color.prTitle
+          $0.numberOfLines = 0
+        }
     }
   }
   
@@ -75,5 +94,21 @@ public extension PRLabel {
     case subInfo
     case content
     case navigationTitle
+    case diaryContent
+  }
+  
+  func applyLineSpacing() {
+    guard let text = self.text else { return }
+    
+    let style = NSMutableParagraphStyle().configured {
+      $0.lineSpacing = 10
+    }
+    
+    self.attributedText = NSMutableAttributedString(string: text).configured {
+      let range = NSRange(location: 0, length: $0.length)
+      
+      $0.addAttribute(NSAttributedString.Key.paragraphStyle, value: style, range: range)
+      $0.addAttribute(NSAttributedString.Key.font, value: PRAsset.Font.prDiaryLabel, range: range)
+    }
   }
 }

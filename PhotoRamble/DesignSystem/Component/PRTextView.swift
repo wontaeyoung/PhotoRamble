@@ -14,7 +14,7 @@ public final class PRTextView: UITextView {
     super.init(frame: .zero, textContainer: nil)
     
     self.configure {
-      $0.font = PRAsset.Font.prContentText
+      $0.font = PRAsset.Font.prDiaryText
       $0.textColor = PRAsset.Color.prTitle
       $0.tintColor = PRAsset.Color.prPrimary
       $0.textAlignment = .natural
@@ -25,6 +25,7 @@ public final class PRTextView: UITextView {
       $0.showsVerticalScrollIndicator = false
       $0.addSubview(placeholderLabel)
       $0.delegate = $0
+      $0.applyLineSpacing()
       
       if isResponder { $0.becomeFirstResponder() }
     }
@@ -55,6 +56,30 @@ public final class PRTextView: UITextView {
 
 extension PRTextView: UITextViewDelegate {
   public func textViewDidChange(_ textView: UITextView) {
-    placeholderLabel.isHidden = !textView.text.isEmpty
+    togglePlaceholderVisibility()
+    applyLineSpacing()
+  }
+}
+
+extension PRTextView {
+  private func togglePlaceholderVisibility() {
+    guard let text = self.text else { return }
+    
+    placeholderLabel.isHidden = !text.isEmpty
+  }
+  
+  private func applyLineSpacing() {
+    guard let text = self.text else { return }
+    
+    let style = NSMutableParagraphStyle().configured {
+      $0.lineSpacing = 10
+    }
+    
+    self.attributedText = NSMutableAttributedString(string: text).configured {
+      let range = NSRange(location: 0, length: $0.length)
+      
+      $0.addAttribute(NSAttributedString.Key.paragraphStyle, value: style, range: range)
+      $0.addAttribute(NSAttributedString.Key.font, value: PRAsset.Font.prDiaryText, range: range)
+    }
   }
 }
