@@ -22,8 +22,10 @@ final class DiaryCollectionListCell: RXBaseCollectionViewListCell {
   }
   
   private let divider = Divider(color: PRAsset.Color.prLightGray.withAlphaComponent(0.2))
-  private let dateLabel = PRLabel(style: .mainInfo, alignment: .right)
-  private let contentLabel = PRLabel(style: .content).configured { $0.numberOfLines = 5 }
+  private let dateLabel = PRLabel(style: .subInfo, alignment: .right)
+  private let contentLabel = PRLabel(style: .diaryContent).configured {
+    $0.numberOfLines = 5
+  }
   
   // MARK: - Observable
   private let photosRelay = BehaviorRelay<[UIImage]>(value: [])
@@ -58,12 +60,12 @@ final class DiaryCollectionListCell: RXBaseCollectionViewListCell {
     }
     
     divider.snp.makeConstraints { make in
-      make.top.equalTo(photoCollectionView.snp.bottom).offset(5)
+      make.top.equalTo(photoCollectionView.snp.bottom).offset(10)
       make.horizontalEdges.equalTo(contentView)
     }
     
     dateLabel.snp.makeConstraints { make in
-      make.top.equalTo(divider.snp.bottom).offset(5)
+      make.top.equalTo(divider.snp.bottom).offset(10)
       make.horizontalEdges.equalTo(contentView).inset(20)
     }
     
