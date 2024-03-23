@@ -46,6 +46,10 @@ final class DiaryListViewModel: ViewModel {
       }
       .disposed(by: disposeBag)
     
+    BindingContainer.shared.diaryTableUpdatedEvent
+      .bind(to: input.viewDidLoadEvent)
+      .disposed(by: disposeBag)
+    
     return Output(
       diaries: diariesRelay.asDriver()
     )
