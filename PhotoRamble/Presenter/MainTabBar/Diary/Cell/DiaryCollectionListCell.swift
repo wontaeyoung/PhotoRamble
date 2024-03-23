@@ -86,12 +86,6 @@ final class DiaryCollectionListCell: RXBaseCollectionViewListCell {
     }
   }
   
-  private func injectViewModel() -> DiaryCollectionListViewModel {
-    let repository = ImageRepositoryImpl()
-    let fetchImageFileUsecase = FetchImageFileUsecaseImpl(imageRepository: repository)
-    return DiaryCollectionListViewModel(fetchImageFileUsecase: fetchImageFileUsecase)
-  }
-  
   func bind(diary: Diary) {
     let input = DiaryCollectionListViewModel.Input(requestPhotoImagesEvent: .init())
     let output = viewModel.transform(input: input)
@@ -118,7 +112,9 @@ final class DiaryCollectionListCell: RXBaseCollectionViewListCell {
     photosRelay
       .do(onNext: { [weak self] photos in
         guard let self else { return }
-        photoCollectionView.setCollectionViewLayout(layout, animated: true)
+        
+        toggleCollectionVisibility(photosEmpty: photos.isEmpty)
+        updateCollectionLayout()
       })
       .bind(to: photoCollectionView.rx.items(
         cellIdentifier: DiaryPhotoGridCollectionCell.identifier,
@@ -129,6 +125,24 @@ final class DiaryCollectionListCell: RXBaseCollectionViewListCell {
       .disposed(by: disposeBag)
     
     input.requestPhotoImagesEvent.accept(diary)
+  }
+  
+  private func injectViewModel() -> DiaryCollectionListViewModel {
+    let repository = ImageRepositoryImpl()
+    let fetchImageFileUsecase = FetchImageFileUsecaseImpl(imageRepository: repository)
+    return DiaryCollectionListViewModel(fetchImageFileUsecase: fetchImageFileUsecase)
+  }
+  
+  private func updateCollectionLayout() {
+    photoCollectionView.setCollectionViewLayout(layout, animated: true)
+  }
+  
+  private func toggleCollectionVisibility(photosEmpty: Bool) {
+    photoCollectionView.snp.updateConstraints { make in
+      make.height.equalTo(photosEmpty ? 0 : (UIScreen.main.bounds.width - 40) / 2)
+    }
+    
+    divider.isHidden = photosEmpty
   }
 }
 
