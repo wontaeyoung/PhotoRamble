@@ -12,20 +12,7 @@ import KazRealm
 final class BindingContainer {
   
   static let shared: BindingContainer = BindingContainer()
+  private init() { }
   
-  private init() {
-    
-    let repository = DiaryRepositoryImpl(service: LiveRealmService(), mapper: DiaryMapper())
-    let fetchDiaryUsecase = FetchDiaryUsecaseImpl(diaryRepository: repository)
-    
-    fetchDiaryUsecase.execute()
-      .subscribe(with: self, onSuccess: { owner, diaries in
-        owner.diaries.accept(diaries)
-      })
-      .disposed(by: disposeBag)
-  }
-  
-  private var disposeBag: DisposeBag = DisposeBag()
-  
-  let diaries = BehaviorRelay<[Diary]>(value: [])
+  let diaryTableUpdatedEvent = PublishRelay<Void>()
 }
