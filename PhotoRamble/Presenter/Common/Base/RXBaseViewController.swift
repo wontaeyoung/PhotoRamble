@@ -38,7 +38,7 @@ open class RXBaseViewController: UIViewController {
     
     super.viewDidLoad()
     
-    view.backgroundColor = .systemBackground
+    view.backgroundColor = PRAsset.Color.prBackground
     
     setHierarchy()
     setConstraint()
