@@ -5,6 +5,8 @@
 //  Created by 원태영 on 3/15/24.
 //
 
+import Foundation
+
 enum PRError {
   
   enum ImageFile: AppError {
@@ -53,11 +55,15 @@ enum PRError {
   enum RealmRepository: AppError {
     
     case createFailed(error: Error, modelName: String)
+    case fetchFailed(error: Error, modelName: String)
     
     var logDescription: String {
       switch self {
         case .createFailed(let error, let name):
           return "\(name) Realm 인스턴스 저장 실패. \(error.localizedDescription)"
+        
+        case .fetchFailed(let error, let name):
+          return "\(name) Realm 인스턴스 조회 실패. \(error.localizedDescription)"
       }
     }
     
@@ -65,6 +71,8 @@ enum PRError {
       switch self {
         case .createFailed(_, let name):
           return "\(name) 내용을 저장하는데 실패했어요. 문제가 지속되면 개발자에게 알려주세요."
+        case .fetchFailed(_, let name):
+          return "\(name) 내용을 불러오는데 실패했어요. 문제가 지속되면 개발자에게 알려주세요."
       }
     }
   }
