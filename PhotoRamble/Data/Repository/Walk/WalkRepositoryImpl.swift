@@ -29,4 +29,16 @@ final class WalkRepositoryImpl: WalkRepository {
       return .error(PRError.RealmRepository.createFailed(error: error, modelName: "산책"))
     }
   }
+  
+  func fetch(walkID: UUID) -> Single<Walk> {
+    
+    do {
+      let walkDTO: WalkDTO = try service.fetch(at: walkID)
+      let walk = mapper.toEntity(walkDTO)
+      
+      return .just(walk)
+    } catch {
+      return .error(PRError.RealmRepository.fetchFailed(error: error, modelName: "산책"))
+    }
+  }
 }
