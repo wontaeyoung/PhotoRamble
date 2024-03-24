@@ -70,7 +70,7 @@ final class MainTabBarCoordinator: Coordinator {
         coordinator.start()
         coordinator.tabBarDelegate = self
         
-      case .config:
+      case .setting:
         break
     }
   }

@@ -67,17 +67,6 @@
         }
       }
     },
-    "tab_config" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "설정"
-          }
-        }
-      }
-    },
     "tab_diary" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -85,6 +74,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "일기장"
+          }
+        }
+      }
+    },
+    "tab_setting" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정"
           }
         }
       }

@@ -10,7 +10,7 @@ import UIKit
 enum MainTabBarPage: Int, CaseIterable {
   case walk
   case diary
-  case config
+  case setting
   
   var index: Int {
     self.rawValue
@@ -22,8 +22,8 @@ enum MainTabBarPage: Int, CaseIterable {
         return Localization.tab_walk.localized
       case .diary:
         return Localization.tab_diary.localized
-      case .config:
-        return Localization.tab_config.localized
+      case .setting:
+        return Localization.tab_setting.localized
     }
   }
   
@@ -33,8 +33,8 @@ enum MainTabBarPage: Int, CaseIterable {
         return Localization.tab_walk.localized
       case .diary:
         return Localization.tab_diary.localized
-      case .config:
-        return Localization.tab_config.localized
+      case .setting:
+        return Localization.tab_setting.localized
     }
   }
   
@@ -44,7 +44,7 @@ enum MainTabBarPage: Int, CaseIterable {
         return PRAsset.Symbol.walkTabIcon
       case .diary:
         return PRAsset.Symbol.diaryTabIcon
-      case .config:
+      case .setting:
         return PRAsset.Symbol.configTabIcon
     }
   }
@@ -55,7 +55,7 @@ enum MainTabBarPage: Int, CaseIterable {
         return PRAsset.Symbol.walkSelectedTabIcon
       case .diary:
         return PRAsset.Symbol.diarySelectedTabIcon
-      case .config:
+      case .setting:
         return PRAsset.Symbol.configSelectedTabIcon
     }
   }
