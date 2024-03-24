@@ -160,8 +160,8 @@ final class WalkInProgressViewModel: ViewModel {
   
   func requestImageForSimulator() -> Observable<Data> {
     
-    let width = 500
-    let height = 500
+    let width = 2000
+    let height = 2000
     let url = "https://picsum.photos/\(width)/\(height)"
     
 #if DEBUG
