@@ -1,5 +1,5 @@
 {
-  "originHash" : "80d6eada9d55dcf7da2886b435f835487c84fffe0bb14eedfeff9cc650930cec",
+  "originHash" : "1207a8b5979d7387ebe6eba436b284cce3475820346079cb4b87fab6e314218d",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -83,15 +83,6 @@
       }
     },
     {
-      "identity" : "kazrealm",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/wontaeyoung/KazRealm",
-      "state" : {
-        "revision" : "14c951a6b1cbee8fb8957742e817f061ff57913c",
-        "version" : "1.0.2"
-      }
-    },
-    {
       "identity" : "leveldb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/leveldb.git",
@@ -116,24 +107,6 @@
       "state" : {
         "revision" : "540318ecedd63d883069ae7f1ed811a2df00b6ac",
         "version" : "2.4.0"
-      }
-    },
-    {
-      "identity" : "realm-core",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/realm-core.git",
-      "state" : {
-        "revision" : "a5e87a39cffdcc591f3203c11cfca68100d0b9a6",
-        "version" : "13.26.0"
-      }
-    },
-    {
-      "identity" : "realm-swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/realm-swift",
-      "state" : {
-        "revision" : "7a2f7d41ffa409978a6b5e475c2ee57f08222705",
-        "version" : "10.48.0"
       }
     },
     {

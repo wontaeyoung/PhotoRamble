@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import KazRealm
 import RealmSwift
 
 final class WalkDTO: Object, RealmModel, DTO {

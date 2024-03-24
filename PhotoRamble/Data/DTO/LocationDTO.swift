@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import KazRealm
 import RealmSwift
 
 final class LocationDTO: Object, RealmModel, DTO {

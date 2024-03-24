@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import KazRealm
 import RxSwift
 
 final class DiaryRepositoryImpl: DiaryRepository {

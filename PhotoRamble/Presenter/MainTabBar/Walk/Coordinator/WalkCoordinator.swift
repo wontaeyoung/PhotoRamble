@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import KazRealm
 import RxRelay
 
 final class WalkCoordinator: Coordinator {

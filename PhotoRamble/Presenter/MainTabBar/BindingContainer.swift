@@ -7,7 +7,6 @@
 
 import RxSwift
 import RxRelay
-import KazRealm
 
 final class BindingContainer {
   
