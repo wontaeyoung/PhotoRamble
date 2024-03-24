@@ -60,6 +60,7 @@ extension DiaryCoordinator {
     
     let viewController = DiaryDetailViewController(viewModel: viewModel)
       .hideBackTitle()
+      .navigationTitle(with: "내가 쓴 일기", displayMode: .never)
     
     push(viewController)
   }
