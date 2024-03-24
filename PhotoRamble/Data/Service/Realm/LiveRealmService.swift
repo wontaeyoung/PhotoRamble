@@ -1,3 +1,4 @@
+import Foundation
 import RealmSwift
 
 public final class LiveRealmService: RealmService {
@@ -42,7 +43,17 @@ public final class LiveRealmService: RealmService {
     at id: ObjectId
   ) throws -> T {
     guard let object = realm.object(ofType: T.self, forPrimaryKey: id) else {
-      throw RealmError.objectNotFoundWithID(id: id)
+      throw RealmError.objectNotFoundWithObjectID(id: id)
+    }
+    
+    return object
+  }
+  
+  public func fetch<T: RealmModel>(
+    at id: UUID
+  ) throws -> T {
+    guard let object = realm.object(ofType: T.self, forPrimaryKey: id) else {
+      throw RealmError.objectNotFoundWithUUID(id: id)
     }
     
     return object
