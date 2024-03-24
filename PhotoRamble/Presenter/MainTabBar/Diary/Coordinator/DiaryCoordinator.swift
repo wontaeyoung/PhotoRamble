@@ -26,18 +26,39 @@ final class DiaryCoordinator: Coordinator {
 }
 
 extension DiaryCoordinator {
+  
   func showDiaryListView() {
     
     let service = LiveRealmService()
-    let mapper = DiaryMapper()
-    let diaryRepository = DiaryRepositoryImpl(service: service, mapper: mapper)
+    let diaryMapper = DiaryMapper()
+    let locationMapper = LocationMapper()
+    let walkMapper = WalkMapper(locationMapper: locationMapper)
+    let diaryRepository = DiaryRepositoryImpl(service: service, mapper: diaryMapper)
+    let walkRepository = WalkRepositoryImpl(service: service, mapper: walkMapper)
     let fetchDiaryUsecase = FetchDiaryUsecaseImpl(diaryRepository: diaryRepository)
+    let fetchWalkUsecase = FetchWalkUsecaseImpl(walkRepository: walkRepository)
     
-    let viewModel = DiaryListViewModel(fetchDiaryUsecase: fetchDiaryUsecase)
+    let viewModel = DiaryListViewModel(
+      fetchDiaryUsecase: fetchDiaryUsecase,
+      fetchWalkUsecase: fetchWalkUsecase
+    )
       .coordinator(self)
     
     let viewController = DiaryListViewController(viewModel: viewModel)
       .navigationTitle(with: MainTabBarPage.diary.navigationTitle, displayMode: .never)
+      .hideBackTitle()
+    
+    push(viewController)
+  }
+  
+  func showDiaryDetailView(diary: Diary, walk: Walk) {
+    
+    let imageRepository = ImageRepositoryImpl()
+    let fetchImageUsecase = FetchImageFileUsecaseImpl(imageRepository: imageRepository)
+    let viewModel = DiaryDetailViewModel(diary: diary, walk: walk, fetchImageUsecase: fetchImageUsecase)
+      .coordinator(self)
+    
+    let viewController = DiaryDetailViewController(viewModel: viewModel)
       .hideBackTitle()
     
     push(viewController)
