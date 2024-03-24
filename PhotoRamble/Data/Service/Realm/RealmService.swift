@@ -22,6 +22,7 @@
 /// - Add처럼 인스턴스를 가지고 생성하는 것도 지원함
 /// - 기존 객체가 없을 때, 딕셔너리에 필수 값이 포함되어있지 않으면 에러가 발생할 수 있음
 
+import Foundation
 import RealmSwift
 
 public protocol RealmService {
@@ -50,6 +51,7 @@ public protocol RealmService {
   func create<T: RealmModel>(from objects: List<T>) throws
   
   func fetch<T: RealmModel>(at id: ObjectId) throws -> T
+  func fetch<T: RealmModel>(at id: UUID) throws -> T
   func fetch<T: RealmModel>() -> Results<T>
   func fetch<T: RealmModel>(by column: T.Column, ascending: Bool) -> Results<T>
   
