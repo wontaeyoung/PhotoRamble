@@ -61,7 +61,7 @@ final class WriteDiaryViewModel: ViewModel {
   // MARK: - Method
   func transform(input: Input) -> Output {
     
-    let dateText: Signal<String> = Observable.just(diaryDateString(date: diaryRelay.value.createAt))
+    let dateText: Signal<String> = Observable.just(walkDateString(date: walkRelay.value.startAt))
       .asSignal(onErrorJustReturn: "-")
     
     let walkTimeInterval: Signal<String> = Observable.just(walkTimeString(duration: walkRelay.value.walkDuration))
@@ -124,7 +124,7 @@ final class WriteDiaryViewModel: ViewModel {
     )
   }
   
-  private func diaryDateString(date: Date) -> String {
+  private func walkDateString(date: Date) -> String {
     return DateManager.shared.toString(with: date, format: .yyyyMMddEEEEKR)
   }
   
