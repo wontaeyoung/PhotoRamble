@@ -14,11 +14,14 @@ import FSPagerView
 final class DiaryDetailViewController: RXBaseViewController, ViewModelController {
   
   // MARK: - UI
-  private let scrollView = UIScrollView()
+  private let scrollView = UIScrollView().configured {
+    $0.bounces = false
+  }
   
   private let contentView = UIView()
   
   private lazy var photoPagerView = FSPagerView().configured {
+    $0.bounces = false
     $0.delegate = self
     $0.dataSource = self
     $0.register(
@@ -99,7 +102,7 @@ final class DiaryDetailViewController: RXBaseViewController, ViewModelController
     }
     
     dateImageView.snp.makeConstraints { make in
-      make.top.equalTo(photoPagerView.snp.bottom).offset(10)
+      make.top.equalTo(photoPagerView.snp.bottom).offset(20)
       make.leading.equalTo(contentView).inset(20)
       make.size.equalTo(dateLabel.snp.height)
     }
@@ -194,6 +197,5 @@ extension DiaryDetailViewController: FSPagerViewDelegate, FSPagerViewDataSource 
   
   private func updatePagerConfiguration(numberOfItems: Int) {
     pageControl.numberOfPages = numberOfItems
-    photoPagerView.isInfinite = numberOfItems > 1
   }
 }
