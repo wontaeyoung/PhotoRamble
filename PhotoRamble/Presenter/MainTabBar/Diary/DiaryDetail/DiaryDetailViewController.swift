@@ -145,6 +145,9 @@ final class DiaryDetailViewController: RXBaseViewController, ViewModelController
       .disposed(by: disposeBag)
     
     output.imageDataList
+      .do(onNext: { list in
+        if list.isEmpty { self.hidePhotoPager() }
+      })
       .flatMap {
         Observable.from($0)
           .compactMap { UIImage(data: $0) }
@@ -153,6 +156,16 @@ final class DiaryDetailViewController: RXBaseViewController, ViewModelController
       }
       .drive(photoPagerRelay)
       .disposed(by: disposeBag)
+  }
+  
+  private func hidePhotoPager() {
+    photoPagerView.isHidden = true
+    pageControl.isHidden = true
+    photoPagerView.snp.removeConstraints()
+    photoPagerView.snp.makeConstraints { make in
+      make.top.equalTo(contentView.safeAreaLayoutGuide)
+      make.height.equalTo(0)
+    }
   }
 }
 
