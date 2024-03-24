@@ -32,6 +32,7 @@ final class WalkInProgressViewModel: ViewModel {
   weak var coordinator: WalkCoordinator?
   private let createImageFileUsecase: any CreateImageFileUsecase
   private let createDirectoryUsecase: any CreateDirectoryUsecase
+  private let createWalkUsecase: any CreateWalkUsecase
   
   var numberOfItems: Int {
     return imagesDataRelay.value.count
@@ -40,10 +41,12 @@ final class WalkInProgressViewModel: ViewModel {
   // MARK: - Initializer
   init(
     createImageFileUsecase: some CreateImageFileUsecase,
-    createDirectoryUsecase: some CreateDirectoryUsecase
+    createDirectoryUsecase: some CreateDirectoryUsecase,
+    createWalkUsecase: some CreateWalkUsecase
   ) {
     self.createImageFileUsecase = createImageFileUsecase
     self.createDirectoryUsecase = createDirectoryUsecase
+    self.createWalkUsecase = createWalkUsecase
   }
   
   deinit {
@@ -135,6 +138,10 @@ final class WalkInProgressViewModel: ViewModel {
         .subscribe(with: self, onFailure: { owner, error in
           LogManager.shared.log(with: error, to: .local)
         })
+        .disposed(by: disposeBag)
+      
+      createWalkUsecase.execute(with: walk)
+        .subscribe()
         .disposed(by: disposeBag)
     }
   }
