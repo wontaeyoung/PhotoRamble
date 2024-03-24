@@ -9,6 +9,7 @@ import UIKit
 import Firebase
 import Toast
 import RealmSwift
+import IQKeyboardManagerSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     connectFirebase()
     setGlobalNavigationBarAppearance()
     setGlobalToastStyle()
+    applyIQKeyboardConfiguration()
     
 #if targetEnvironment(simulator)
     print(try! Realm().configuration.fileURL!)
@@ -62,6 +64,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       $0.titleAlignment = .center
       $0.activityBackgroundColor = .clear
       $0.activityIndicatorColor = PRAsset.Color.prPrimary
+    }
+  }
+  
+  private func applyIQKeyboardConfiguration() {
+    IQKeyboardManager.shared.configure {
+      $0.enable = true
+      $0.enableAutoToolbar = false
     }
   }
 }
