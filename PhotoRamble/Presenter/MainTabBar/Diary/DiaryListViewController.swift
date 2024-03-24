@@ -15,6 +15,7 @@ final class DiaryListViewController: RXBaseViewController, ViewModelController {
   // MARK: - UI
   private lazy var diaryListCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).configured {
     $0.backgroundColor = PRAsset.Color.prBackground
+    $0.delegate = self
   }
   
   private let layout = UICollectionViewFlowLayout().configured {
@@ -24,6 +25,8 @@ final class DiaryListViewController: RXBaseViewController, ViewModelController {
     $0.minimumLineSpacing = 50
     $0.minimumInteritemSpacing = 50
   }
+  
+  private let noDiaryInfoLabel = PRLabel(style: .subInfo, title: "작성된 일기가 아직 없어요.\n동네를 산책하고 첫 일기를 작성해보는 것은 어떨까요?", alignment: .center)
   
   // MARK: - Property
   let viewModel: DiaryListViewModel
@@ -38,11 +41,18 @@ final class DiaryListViewController: RXBaseViewController, ViewModelController {
   
   // MARK: - Life Cycle
   override func setHierarchy() {
-    view.addSubviews(diaryListCollectionView)
+    view.addSubviews(
+      diaryListCollectionView,
+      noDiaryInfoLabel
+    )
   }
   
   override func setConstraint() {
     diaryListCollectionView.snp.makeConstraints { make in
+      make.edges.equalTo(view.safeAreaLayoutGuide)
+    }
+    
+    noDiaryInfoLabel.snp.makeConstraints { make in
       make.edges.equalTo(view.safeAreaLayoutGuide)
     }
   }
@@ -52,25 +62,34 @@ final class DiaryListViewController: RXBaseViewController, ViewModelController {
   }
   
   override func bind() {
-    let input = DiaryListViewModel.Input(viewDidLoadEvent: PublishRelay())
+    let input = DiaryListViewModel.Input(
+      viewDidLoadEvent: PublishRelay(),
+      diaryCellTapEvent: PublishRelay()
+    )
+    
     let output = viewModel.transform(input: input)
+    
+    diaryListCollectionView.rx.itemSelected
+      .do(onNext: {
+        self.diaryListCollectionView.deselectItem(at: $0, animated: true)
+      })
+      .bind(to: input.diaryCellTapEvent)
+      .disposed(by: disposeBag)
     
     output.diaries
       .drive(with: self) { owner, diaries in
         owner.updateSnapshot(diaries: diaries)
         owner.resetCollectionScrollOffset()
+        owner.toggleNoDiaryInfoLabelVisibility(isEmpty: diaries.isEmpty)
       }
       .disposed(by: disposeBag)
     
     input.viewDidLoadEvent.accept(())
   }
-  
-  // MARK: - Method
-  
 }
 
 // MARK: - Collection Configuration
-extension DiaryListViewController {
+extension DiaryListViewController: UICollectionViewDelegate {
   
   enum Section: CaseIterable {
     case main
@@ -102,5 +121,9 @@ extension DiaryListViewController {
   
   private func resetCollectionScrollOffset() {
     diaryListCollectionView.setContentOffset(.zero, animated: true)
+  }
+  
+  private func toggleNoDiaryInfoLabelVisibility(isEmpty: Bool) {
+    noDiaryInfoLabel.isHidden = !isEmpty
   }
 }
