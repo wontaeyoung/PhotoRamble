@@ -1,3 +1,4 @@
+import Foundation
 import RealmSwift
 
 public enum RealmError: Error {
@@ -8,7 +9,9 @@ public enum RealmError: Error {
   case updateFailed(error: Error?)
   case removeFailed(error: Error?)
   case fetchFailed(error: Error?)
-  case objectNotFoundWithID(id: ObjectId)
+  case objectNotFoundWithObjectID(id: ObjectId)
+  case objectNotFoundWithUUID(id: UUID)
+  
   
   var logDescription: String {
     switch self {
@@ -30,8 +33,11 @@ public enum RealmError: Error {
       case .fetchFailed(let error):
         return "데이터 로드에 실패했습니다. \(error?.localizedDescription ?? "")"
       
-      case .objectNotFoundWithID(let id):
+      case .objectNotFoundWithObjectID(let id):
         return "ID에 해당하는 객체를 찾을 수 없습니다. ID: \(id.stringValue)"
+        
+      case .objectNotFoundWithUUID(let id):
+        return "ID에 해당하는 객체를 찾을 수 없습니다. ID: \(id.uuidString)"
     }
   }
 }
