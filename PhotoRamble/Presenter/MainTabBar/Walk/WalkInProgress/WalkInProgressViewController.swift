@@ -22,7 +22,9 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       FSPagerViewCell.self,
       forCellWithReuseIdentifier: FSPagerViewCell.identifier
     )
-    $0.itemSize = .init(width: 250, height: 250)
+    
+    let size = UIScreen.main.bounds.width * 0.6
+    $0.itemSize = .init(width: size, height: size)
   }
   
   private let noPhotoInfoLabel = PRLabel(
