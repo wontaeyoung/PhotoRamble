@@ -17,6 +17,7 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
     $0.register(DiaryPhotoCollectionCell.self, forCellWithReuseIdentifier: DiaryPhotoCollectionCell.identifier)
     $0.showsHorizontalScrollIndicator = false
     $0.keyboardDismissMode = .onDrag
+    $0.backgroundColor = PRAsset.Color.prBackground
   }
   
   private let noPhotoInfoLabel = PRLabel(style: .subInfo, title: "선택된 사진이 없어요.", alignment: .center)
@@ -65,7 +66,8 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
   
   private let walkTimeLabel = PRLabel(style: .mainInfo)
   
-  private lazy var diaryTextView = PRTextView(placeholder: "일기 내용을 써주세요", isResponder: true).configured { textView in
+  private lazy var diaryTextView = PRTextView(placeholder: "일기 내용을 써주세요").configured { textView in
+    textView.backgroundColor = PRAsset.Color.prBackground
     textView.inputAccessoryView = UIToolbar().configured {
       let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
       let doneButton = UIBarButtonItem(image: UIImage(systemName: "keyboard.chevron.compact.down.fill"), style: .done, target: self, action: nil)

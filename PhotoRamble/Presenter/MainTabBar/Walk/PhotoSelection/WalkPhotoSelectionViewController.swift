@@ -22,6 +22,7 @@ final class WalkPhotoSelectionViewController: RXBaseViewController, ViewModelCon
   
   private lazy var takenPhotoCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).configured {
     $0.register(PhotoSelectionCollectionCell.self, forCellWithReuseIdentifier: PhotoSelectionCollectionCell.identifier)
+    $0.backgroundColor = PRAsset.Color.prBackground
   }
   
   private let layout = UICollectionViewCompositionalLayout(
