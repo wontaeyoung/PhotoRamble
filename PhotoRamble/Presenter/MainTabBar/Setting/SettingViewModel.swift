@@ -7,6 +7,7 @@
 
 import RxSwift
 import RxCocoa
+import AVFoundation
 
 final class SettingViewModel: ViewModel {
   
@@ -16,21 +17,36 @@ final class SettingViewModel: ViewModel {
   }
   
   struct Output {
-    
+    let appVersion: Driver<String>
   }
   
   // MARK: - Property
   let disposeBag = DisposeBag()
   weak var coordinator: SettingCoordinator?
+  private let fetchAppVersionUsecase: any FetchAppVersionUsecase
   
   // MARK: - Initializer
-  init() {
-    
+  init(fetchAppVersionUsecase: some FetchAppVersionUsecase) {
+    self.fetchAppVersionUsecase = fetchAppVersionUsecase
   }
   
   // MARK: - Method
   func transform(input: Input) -> Output {
-    return Output()
+    
+    let appVersion = BehaviorRelay<String>(value: "-")
+    
+    fetchAppVersionUsecase.execute()
+      .map { "v " + $0 }
+      .subscribe(with: self) { owner, version in
+        appVersion.accept(version)
+      } onFailure: { owner, error in
+        LogManager.shared.log(with: error, to: .local)
+        owner.coordinator?.showErrorAlert(error: error)
+      }
+      .disposed(by: disposeBag)
+    
+    return Output(
+      appVersion: appVersion.asDriver()
+    )
   }
 }
-
