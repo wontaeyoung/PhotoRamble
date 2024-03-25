@@ -51,14 +51,14 @@ public class PRLabel: UILabel {
         
       case .subInfo:
         self.configure {
-          $0.font = PRAsset.Font.prCaptionLabel
+          $0.font = PRAsset.Font.prSubInfoLabel
           $0.textColor = PRAsset.Color.prSubInfo
           $0.numberOfLines = 0
         }
         
       case .content:
         self.configure {
-          $0.font = PRAsset.Font.prCaptionLabel
+          $0.font = PRAsset.Font.prSubInfoLabel
           $0.textColor = PRAsset.Color.prTitle
           $0.numberOfLines = 0
         }
