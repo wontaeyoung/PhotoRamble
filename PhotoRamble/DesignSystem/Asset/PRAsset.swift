@@ -22,6 +22,7 @@ public enum PRAsset {
     public static let prBlack: UIColor = UIColor(hex: "#000000")
     public static let prToastBacgrkound: UIColor = UIColor(hex: "#F3F4F6")
     public static let prLightGray: UIColor = UIColor(hex: "#B4B4B4")
+    public static let prRed: UIColor = UIColor(hex: "#FF3B30")
   }
   
   public enum Font {
