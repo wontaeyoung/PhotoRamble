@@ -9,6 +9,29 @@ import Foundation
 
 enum PRError {
   
+  enum AppInfo: AppError {
+    
+    case invalidInfoKey(key: String)
+    case invalidPattern
+    
+    var logDescription: String {
+      switch self {
+        case .invalidInfoKey(let key):
+          return "InfoKey 유효성 없음 : \(key)"
+          
+        case .invalidPattern:
+          return "정규식 패턴 미일치."
+      }
+    }
+    
+    var alertDescription: String {
+      switch self {
+        case .invalidInfoKey, .invalidPattern:
+          return "앱 버전을 가져오는데 실패했어요!"
+      }
+    }
+  }
+  
   enum ImageFile: AppError {
     
     case createFailed(error: Error)
