@@ -95,7 +95,7 @@ final class SettingViewController: RXBaseViewController, ViewModelController {
       }
       
       switch section {
-        case .access:
+        case .permission:
           cell.contentConfiguration = UIListContentConfiguration.subtitleCell().applied {
             $0.text = row.title
             $0.secondaryText = row.subTitle

@@ -9,12 +9,12 @@ import UIKit
 
 enum SettingSection: Int, CaseIterable {
   
-  case access
+  case permission
   case about
   
   var title: String {
     switch self {
-      case .access:
+      case .permission:
         return "앱 권한 설정"
         
       case .about:
@@ -24,7 +24,7 @@ enum SettingSection: Int, CaseIterable {
   
   var rows: [Row] {
     switch self {
-      case .access:
+      case .permission:
         return [.camera]
         
       case .about:
