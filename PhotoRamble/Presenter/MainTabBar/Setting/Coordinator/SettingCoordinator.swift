@@ -28,7 +28,11 @@ final class SettingCoordinator: Coordinator {
 extension SettingCoordinator {
   
   func showSettingView() {
-    let viewModel = SettingViewModel()
+    
+    let appInfoRepository = AppInfoRepositoryImpl()
+    let fetchAppVersionUsecase = FetchAppVersionUsecaseImpl(appInfoRepository: appInfoRepository)
+    
+    let viewModel = SettingViewModel(fetchAppVersionUsecase: fetchAppVersionUsecase)
       .coordinator(self)
     
     let viewController = SettingViewController(viewModel: viewModel)
