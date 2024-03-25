@@ -19,6 +19,7 @@ final class SettingViewController: RXBaseViewController, ViewModelController {
     using: UICollectionLayoutListConfiguration(appearance: .grouped).applied {
       $0.showsSeparators = true
       $0.backgroundColor = PRAsset.Color.prBackground
+      $0.headerMode = .supplementary
     }
   )
   
@@ -55,10 +56,43 @@ final class SettingViewController: RXBaseViewController, ViewModelController {
   
   // MARK: - Method
   private func setDataSource() {
-    let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, SettingSection.Row> { cell, indexPath, item in
+    let cellRegistration = makeCellRegistration()
+    
+    dataSource = UICollectionViewDiffableDataSource(collectionView: settingListCollectionView) { collectionView, indexPath, item in
+      return collectionView.dequeueConfiguredReusableCell(
+        using: cellRegistration,
+        for: indexPath,
+        item: item
+      )
+    }
+    
+    let headerRegistration = makeHeaderRegistration()
+    
+    dataSource.supplementaryViewProvider = { collectionView, kind, indexPath in
+      return collectionView.dequeueConfiguredReusableSupplementary(
+        using: headerRegistration,
+        for: indexPath
+      )
+    }
+  }
+  
+  private func makeHeaderRegistration() -> UICollectionView.SupplementaryRegistration<UICollectionViewListCell> {
+    .init(elementKind: UICollectionView.elementKindSectionHeader) { supplementaryView, elementKind, indexPath in
+      supplementaryView.contentConfiguration = supplementaryView.defaultContentConfiguration().applied {
+        $0.text = SettingSection(rawValue: indexPath.section)?.title
+      }
+    }
+  }
+  
+  private func makeCellRegistration() -> UICollectionView.CellRegistration<UICollectionViewListCell, SettingSection.Row> {
+    return .init { cell, indexPath, item in
       
       guard let section = SettingSection(rawValue: indexPath.section) else { return }
       let row = section.row(at: indexPath)
+      
+      cell.backgroundConfiguration = .listGroupedCell().applied {
+        $0.backgroundColor = PRAsset.Color.prBackground
+      }
       
       switch section {
         case .access:
@@ -112,14 +146,6 @@ final class SettingViewController: RXBaseViewController, ViewModelController {
             }
           }
       }
-    }
-    
-    dataSource = UICollectionViewDiffableDataSource(collectionView: settingListCollectionView) { collectionView, indexPath, item in
-      return collectionView.dequeueConfiguredReusableCell(
-        using: cellRegistration,
-        for: indexPath,
-        item: item
-      )
     }
   }
   
