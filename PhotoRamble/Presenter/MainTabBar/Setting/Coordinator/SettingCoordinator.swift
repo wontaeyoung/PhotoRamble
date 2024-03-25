@@ -21,10 +21,20 @@ final class SettingCoordinator: Coordinator {
   }
   
   func start() {
-    
+    showSettingView()
   }
 }
 
 extension SettingCoordinator {
   
+  func showSettingView() {
+    let viewModel = SettingViewModel()
+      .coordinator(self)
+    
+    let viewController = SettingViewController(viewModel: viewModel)
+      .hideBackTitle()
+      .navigationTitle(with: Localization.tab_setting.localized, displayMode: .never)
+    
+    push(viewController)
+  }
 }
