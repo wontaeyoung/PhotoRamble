@@ -18,22 +18,29 @@ final class SettingViewModel: ViewModel {
   
   struct Output {
     let appVersion: Driver<String>
+    let isCameraAuthorized: Driver<Bool>
   }
   
   // MARK: - Property
   let disposeBag = DisposeBag()
   weak var coordinator: SettingCoordinator?
   private let fetchAppVersionUsecase: any FetchAppVersionUsecase
+  private let canAccessCameraUsecase: any CanAccessCameraUsecase
   
   // MARK: - Initializer
-  init(fetchAppVersionUsecase: some FetchAppVersionUsecase) {
+  init(
+    fetchAppVersionUsecase: some FetchAppVersionUsecase,
+    canAccessCameraUsecase: some CanAccessCameraUsecase
+  ) {
     self.fetchAppVersionUsecase = fetchAppVersionUsecase
+    self.canAccessCameraUsecase = canAccessCameraUsecase
   }
   
   // MARK: - Method
   func transform(input: Input) -> Output {
     
     let appVersion = BehaviorRelay<String>(value: "-")
+    let isCameraAuthorized = BehaviorRelay<Bool>(value: false)
     
     fetchAppVersionUsecase.execute()
       .map { "v " + $0 }
@@ -45,8 +52,15 @@ final class SettingViewModel: ViewModel {
       }
       .disposed(by: disposeBag)
     
+    canAccessCameraUsecase.execute()
+      .subscribe(with: self) { owner, canAccess in
+        isCameraAuthorized.accept(canAccess)
+      }
+      .disposed(by: disposeBag)
+    
     return Output(
-      appVersion: appVersion.asDriver()
+      appVersion: appVersion.asDriver(),
+      isCameraAuthorized: isCameraAuthorized.asDriver()
     )
   }
 }
