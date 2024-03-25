@@ -24,7 +24,8 @@ final class SettingViewController: RXBaseViewController, ViewModelController {
   )
   
   // MARK: - Observable
-  private let appVersion = BehaviorRelay<String>(value: "zxc")
+  private let appVersion = BehaviorRelay<String>(value: "-")
+  private let isCameraAuthorized = BehaviorRelay<Bool>(value: false)
   
   // MARK: - Property
   let viewModel: SettingViewModel
@@ -61,7 +62,11 @@ final class SettingViewController: RXBaseViewController, ViewModelController {
       .drive(appVersion)
       .disposed(by: disposeBag)
     
-    appVersion
+    output.isCameraAuthorized
+      .drive(isCameraAuthorized)
+      .disposed(by: disposeBag)
+    
+    Observable.combineLatest(appVersion, isCameraAuthorized)
       .bind(with: self) { owner, str in
         owner.updateSnapshot()
       }
@@ -127,7 +132,9 @@ final class SettingViewController: RXBaseViewController, ViewModelController {
             }
           }
           
-          cell.accessories = [.checkmark()]
+          cell.accessories = [
+            .checkmark(options: .init(isHidden: !isCameraAuthorized.value))
+          ]
           
         case .about:
           cell.contentConfiguration = UIListContentConfiguration.cell().applied {
