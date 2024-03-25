@@ -12,4 +12,3 @@ protocol DiaryRepository {
   func create(with diary: Diary) -> Single<Diary>
   func fetch() -> Single<[Diary]>
 }
-
