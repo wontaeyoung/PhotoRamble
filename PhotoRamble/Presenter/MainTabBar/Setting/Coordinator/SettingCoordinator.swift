@@ -30,9 +30,15 @@ extension SettingCoordinator {
   func showSettingView() {
     
     let appInfoRepository = AppInfoRepositoryImpl()
-    let fetchAppVersionUsecase = FetchAppVersionUsecaseImpl(appInfoRepository: appInfoRepository)
+    let appPermissionRepository = AppPermissionRepositoryImpl()
     
-    let viewModel = SettingViewModel(fetchAppVersionUsecase: fetchAppVersionUsecase)
+    let fetchAppVersionUsecase = FetchAppVersionUsecaseImpl(appInfoRepository: appInfoRepository)
+    let canAccessCameraUsecase = CanAccessCameraUsecaseImpl(appPermissionRepository: appPermissionRepository)
+    
+    let viewModel = SettingViewModel(
+      fetchAppVersionUsecase: fetchAppVersionUsecase,
+      canAccessCameraUsecase: canAccessCameraUsecase
+    )
       .coordinator(self)
     
     let viewController = SettingViewController(viewModel: viewModel)
