@@ -23,6 +23,9 @@ final class SettingViewController: RXBaseViewController, ViewModelController {
     }
   )
   
+  // MARK: - Observable
+  private let appVersion = BehaviorRelay<String>(value: "zxc")
+  
   // MARK: - Property
   let viewModel: SettingViewModel
   private var dataSource: UICollectionViewDiffableDataSource<SettingSection, SettingSection.Row>!
@@ -51,7 +54,18 @@ final class SettingViewController: RXBaseViewController, ViewModelController {
   }
   
   override func bind() {
+    let input = SettingViewModel.Input()
+    let output = viewModel.transform(input: input)
     
+    output.appVersion
+      .drive(appVersion)
+      .disposed(by: disposeBag)
+    
+    appVersion
+      .bind(with: self) { owner, str in
+        owner.updateSnapshot()
+      }
+      .disposed(by: disposeBag)
   }
   
   // MARK: - Method
@@ -85,8 +99,9 @@ final class SettingViewController: RXBaseViewController, ViewModelController {
   }
   
   private func makeCellRegistration() -> UICollectionView.CellRegistration<UICollectionViewListCell, SettingSection.Row> {
-    return .init { cell, indexPath, item in
+    return .init { [weak self] cell, indexPath, item in
       
+      guard let self else { return }
       guard let section = SettingSection(rawValue: indexPath.section) else { return }
       let row = section.row(at: indexPath)
       
@@ -135,6 +150,8 @@ final class SettingViewController: RXBaseViewController, ViewModelController {
                   $0.color = PRAsset.Color.prPrimary
                   $0.font = PRAsset.Font.prMainInfoLabel
                 }
+                
+                cell.accessories = [.label(text: self.appVersion.value)]
                 
               default:
                 $0.textProperties.apply {
