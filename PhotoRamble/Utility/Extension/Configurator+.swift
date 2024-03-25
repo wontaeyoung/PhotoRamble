@@ -61,3 +61,6 @@ extension Diary: Configurator { }
 extension Location: Configurator { }
 
 extension NSDiffableDataSourceSnapshot: Configurator { }
+
+extension UIListContentConfiguration.TextProperties: Configurator { }
+extension UIListContentConfiguration.ImageProperties: Configurator { }
