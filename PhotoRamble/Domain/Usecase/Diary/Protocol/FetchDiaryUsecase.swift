@@ -11,4 +11,3 @@ protocol FetchDiaryUsecase {
   
   func execute() -> Single<[Diary]>
 }
-
