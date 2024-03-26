@@ -55,7 +55,11 @@ final class SettingViewController: RXBaseViewController, ViewModelController {
   }
   
   override func bind() {
-    let input = SettingViewModel.Input()
+    let input = SettingViewModel.Input(
+      requestCheckingCameraAccessEvent: PublishRelay(),
+      settingRowTapEvent: PublishRelay()
+    )
+    
     let output = viewModel.transform(input: input)
     
     output.appVersion
@@ -71,6 +75,12 @@ final class SettingViewController: RXBaseViewController, ViewModelController {
         owner.updateSnapshot()
       }
       .disposed(by: disposeBag)
+    
+    settingListCollectionView.rx.itemSelected
+      .bind(to: input.settingRowTapEvent)
+      .disposed(by: disposeBag)
+    
+    input.requestCheckingCameraAccessEvent.accept(())
   }
   
   // MARK: - Method
