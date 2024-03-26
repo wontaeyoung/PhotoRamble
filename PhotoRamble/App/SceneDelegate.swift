@@ -27,4 +27,8 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     coordinator?.start()
   }
+  
+  func sceneDidEnterBackground(_ scene: UIScene) {
+    BindingContainer.shared.didEnterForegroundEvent.accept(())
+  }
 }

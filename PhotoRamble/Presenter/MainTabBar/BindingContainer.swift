@@ -14,4 +14,5 @@ final class BindingContainer {
   private init() { }
   
   let diaryTableUpdatedEvent = PublishRelay<Void>()
+  let didEnterForegroundEvent = PublishRelay<Void>()
 }
