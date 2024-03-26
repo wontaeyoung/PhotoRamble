@@ -7,6 +7,7 @@
 
 import Foundation
 import RxSwift
+import RealmSwift
 
 final class DiaryRepositoryImpl: DiaryRepository {
   
@@ -40,5 +41,22 @@ final class DiaryRepositoryImpl: DiaryRepository {
     let diaries: [Diary] = mapper.toEntity(diaryDTOs)
     
     return .just(diaries)
+  }
+  
+  func deleteAll() -> Single<[Diary]> {
+    
+    do {
+      let diariesDTO: [DiaryDTO] = service.fetch()
+        .toList()
+        .toArray
+      
+      let diaries = mapper.toEntity(diariesDTO)
+      
+      try service.deleteTable(tableType: DiaryDTO.self)
+      
+      return .just(diaries)
+    } catch {
+      return .error(PRError.RealmRepository.fetchFailed(error: error, modelName: "일기"))
+    }
   }
 }
