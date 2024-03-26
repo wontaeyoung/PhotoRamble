@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import Toast
 
 final class SettingViewController: RXBaseViewController, ViewModelController {
   
@@ -68,6 +69,12 @@ final class SettingViewController: RXBaseViewController, ViewModelController {
     
     output.isCameraAuthorized
       .drive(isCameraAuthorized)
+      .disposed(by: disposeBag)
+    
+    output.showClearedDiaryToast
+      .drive(with: self) { owner, message in
+        owner.view.makeToast(message, duration: 1, position: .center)
+      }
       .disposed(by: disposeBag)
     
     Observable.combineLatest(appVersion, isCameraAuthorized)
