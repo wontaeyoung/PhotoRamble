@@ -26,15 +26,15 @@ struct Diary: Entity {
   var photoIndices: [Int]
   let walkID: UUID
   
-  static func initialDiary(photoIndicies: [Int], walkID: UUID) -> Diary {
+  static func initialDiary(photoIndicies: [Int], walk: Walk) -> Diary {
     return Diary(
       id: UUID(),
       content: "",
-      createAt: .now,
-      updateAt: .now, 
+      createAt: walk.startAt,
+      updateAt: walk.startAt,
       writingStatus: .writing,
       photoIndices: photoIndicies,
-      walkID: walkID
+      walkID: walk.id
     )
   }
 }

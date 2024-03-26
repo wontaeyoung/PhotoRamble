@@ -100,7 +100,7 @@ final class WalkPhotoSelectionViewModel: ViewModel {
   private func makeInitialDiary(photoIndices: Range<Int>) -> Diary {
     return .initialDiary(
       photoIndicies: photoIndices.map { $0 },
-      walkID: walkRelay.value.id
+      walk: walkRelay.value
     )
   }
   
