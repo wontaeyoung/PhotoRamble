@@ -61,4 +61,5 @@ public protocol RealmService {
   
   func delete<T: RealmModel>(with object: T) throws
   func delete<T: RealmModel>(from objects: Results<T>) throws
+  func deleteTable<T: RealmModel>(tableType: T.Type) throws
 }

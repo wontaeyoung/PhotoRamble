@@ -135,4 +135,14 @@ public final class LiveRealmService: RealmService {
       realm.delete(objects)
     }
   }
+  
+  public func deleteTable<T: RealmModel>(
+    tableType: T.Type
+  ) throws {
+    let table: Results<T> = fetch()
+    
+    try realm.write {
+      realm.delete(table)
+    }
+  }
 }
