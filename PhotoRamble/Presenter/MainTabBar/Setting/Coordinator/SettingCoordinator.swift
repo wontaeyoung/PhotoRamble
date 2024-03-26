@@ -62,4 +62,20 @@ extension SettingCoordinator {
     
     push(viewController)
   }
+  
+  func moveToSetting() {
+    
+    showAlert(
+      title: "권한 설정 안내",
+      message: "카메라 권한은 [설정 > 산책일기]에서 변경 가능합니다. 설정으로 이동할까요?",
+      okTitle: "설정으로 이동하기",
+      isCancelable: true
+    ) {
+      guard let settingURL = URL(string: UIApplication.openSettingsURLString) else { return }
+      
+      if UIApplication.shared.canOpenURL(settingURL) {
+        UIApplication.shared.open(settingURL, completionHandler: nil)
+      }
+    }
+  }
 }

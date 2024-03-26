@@ -119,7 +119,7 @@ final class SettingViewModel: ViewModel {
   }
   
   private func requestOpenSettingAlert() {
-    
+    coordinator?.moveToSetting()
   }
   
   private func showClearDiaryAlert() {
