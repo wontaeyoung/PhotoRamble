@@ -79,6 +79,7 @@ enum PRError {
     
     case createFailed(error: Error, modelName: String)
     case fetchFailed(error: Error, modelName: String)
+    case deleteAllFailed(error: Error, modelName: String)
     
     var logDescription: String {
       switch self {
@@ -87,6 +88,9 @@ enum PRError {
         
         case .fetchFailed(let error, let name):
           return "\(name) Realm 인스턴스 조회 실패. \(error.localizedDescription)"
+          
+        case .deleteAllFailed(let error, let name):
+          return "\(name) Realm 테이블 삭제 실패. \(error.localizedDescription)"
       }
     }
     
@@ -94,8 +98,12 @@ enum PRError {
       switch self {
         case .createFailed(_, let name):
           return "\(name) 내용을 저장하는데 실패했어요. 문제가 지속되면 개발자에게 알려주세요."
+        
         case .fetchFailed(_, let name):
           return "\(name) 내용을 불러오는데 실패했어요. 문제가 지속되면 개발자에게 알려주세요."
+        
+        case .deleteAllFailed(_, let name):
+          return "\(name) 내용들을 삭제하는데 실패했어요. 문제가 지속되면 개발자에게 알려주세요."
       }
     }
   }
