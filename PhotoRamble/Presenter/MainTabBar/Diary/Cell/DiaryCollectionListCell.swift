@@ -15,6 +15,7 @@ final class DiaryCollectionListCell: RXBaseCollectionViewListCell {
   // MARK: - UI
   private lazy var photoCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout).configured {
     $0.register(DiaryPhotoGridCollectionCell.self, forCellWithReuseIdentifier: DiaryPhotoGridCollectionCell.identifier)
+    $0.isScrollEnabled = false
   }
   
   private var layout: UICollectionViewCompositionalLayout {
@@ -93,7 +94,7 @@ final class DiaryCollectionListCell: RXBaseCollectionViewListCell {
     let output = viewModel.transform(input: input)
     
     output.photos
-      .map { $0.prefix(5) }
+      .map { $0.prefix(1) }
       .flatMap {
         Observable.from($0)
           .compactMap { UIImage(data: $0) }
