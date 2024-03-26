@@ -28,7 +28,7 @@ enum SettingSection: Int, CaseIterable {
         return [.camera]
         
       case .about:
-        return [.terms, .openSource, .clearDiary, .version]
+        return [.privacy, .openSource, .clearDiary, .version]
     }
   }
   
@@ -36,7 +36,7 @@ enum SettingSection: Int, CaseIterable {
     
     case camera
     
-    case terms
+    case privacy
     case openSource
     case clearDiary
     case version
@@ -46,8 +46,8 @@ enum SettingSection: Int, CaseIterable {
         case .camera:
           return "카메라 사용"
           
-        case .terms:
-          return "약관 및 개인정보 처리 방침"
+        case .privacy:
+          return "개인정보 처리 방침"
           
         case .openSource:
           return "오픈소스 라이선스"
@@ -75,7 +75,7 @@ enum SettingSection: Int, CaseIterable {
         case .camera:
           return PRAsset.Symbol.useCameraConfigIcon
           
-        case .terms:
+        case .privacy:
           return PRAsset.Symbol.termsConfigIcon
           
         case .openSource:
@@ -91,6 +91,10 @@ enum SettingSection: Int, CaseIterable {
   }
   
   func row(at indexPath: IndexPath) -> Row {
+    return SettingSection.allCases[indexPath.section].rows[indexPath.row]
+  }
+  
+  static func row(at indexPath: IndexPath) -> Row {
     return SettingSection.allCases[indexPath.section].rows[indexPath.row]
   }
 }
