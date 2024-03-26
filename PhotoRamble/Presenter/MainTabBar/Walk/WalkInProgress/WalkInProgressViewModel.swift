@@ -131,7 +131,7 @@ final class WalkInProgressViewModel: ViewModel {
       prepareWalkForNextFlow()
       
       let walk = walkRelay.value
-      let initialDiary: Diary = .initialDiary(photoIndicies: [], walkID: walk.id)
+      let initialDiary: Diary = .initialDiary(photoIndicies: [], walk: walk)
       coordinator?.showWriteDiaryView(walk: walk, diary: initialDiary, imageDataList: [])
       
       createDirectoryUsecase.execute(directoryName: walk.id.uuidString)
