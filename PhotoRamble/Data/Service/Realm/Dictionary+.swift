@@ -1,4 +1,4 @@
-public extension Dictionary {
+internal extension Dictionary {
   func mapKeys<K: Hashable>(_ transform: (Key) -> K) -> [K: Value] {
     var newDict: [K: Value] = [:]
     

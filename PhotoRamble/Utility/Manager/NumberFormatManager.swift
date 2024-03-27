@@ -13,7 +13,7 @@ final class NumberFormatManager {
     case km
   }
   
-  public static let shared = NumberFormatManager()
+  internal static let shared = NumberFormatManager()
   private init() { configFormatter() }
   
   // MARK: - Property
@@ -25,16 +25,16 @@ final class NumberFormatManager {
     formatter.roundingMode = .halfUp
   }
   
-  public func toCurrency(from number: Int) -> String {
+  internal func toCurrency(from number: Int) -> String {
     return formatter.string(from: number as NSNumber) ?? String(number)
   }
   
-  public func toRounded(from number: Double, fractionDigits: Int) -> String {
+  internal func toRounded(from number: Double, fractionDigits: Int) -> String {
     formatter.maximumFractionDigits = fractionDigits
     return formatter.string(from: number as NSNumber) ?? String(number)
   }
   
-  public func toRoundedWith(from number: Double, fractionDigits: Int, unit: Unit) -> String {
+  internal func toRoundedWith(from number: Double, fractionDigits: Int, unit: Unit) -> String {
     formatter.maximumFractionDigits = fractionDigits
     let string = formatter.string(from: number as NSNumber) ?? String(number)
     

@@ -7,7 +7,7 @@
 
 import UIKit
 
-public extension UIAlertController {
+internal extension UIAlertController {
   func addActions(_ actions: UIAlertAction...) {
     actions.forEach { self.addAction($0) }
   }

@@ -1,13 +1,13 @@
 import Foundation
 import RealmSwift
 
-public final class LiveRealmService: RealmService {
+internal final class LiveRealmService: RealmService {
   
   private let realm: Realm = try! Realm()
-  public init() { }
+  internal init() { }
   
   // MARK: - Create
-  public func create<T: RealmModel>(
+  internal func create<T: RealmModel>(
     with object: T
   ) throws {
     try realm.write {
@@ -15,7 +15,7 @@ public final class LiveRealmService: RealmService {
     }
   }
   
-  public func create<T: RealmModel>(
+  internal func create<T: RealmModel>(
     from objects: Results<T>
   ) throws {
     try realm.write {
@@ -23,7 +23,7 @@ public final class LiveRealmService: RealmService {
     }
   }
   
-  public func create<T: RealmModel>(
+  internal func create<T: RealmModel>(
     from objects: List<T>
   ) throws {
     try realm.write {
@@ -31,7 +31,7 @@ public final class LiveRealmService: RealmService {
     }
   }
   
-  public func create<T>(type: T.Type, with values: [T.Column : Any]) throws where T : RealmModel, T.Column : Hashable {
+  internal func create<T>(type: T.Type, with values: [T.Column : Any]) throws where T : RealmModel, T.Column : Hashable {
     try realm.write {
       realm.create(type, value: values)
     }
@@ -39,7 +39,7 @@ public final class LiveRealmService: RealmService {
   
   
   // MARK: - Read
-  public func fetch<T: RealmModel>(
+  internal func fetch<T: RealmModel>(
     at id: ObjectId
   ) throws -> T {
     guard let object = realm.object(ofType: T.self, forPrimaryKey: id) else {
@@ -49,7 +49,7 @@ public final class LiveRealmService: RealmService {
     return object
   }
   
-  public func fetch<T: RealmModel>(
+  internal func fetch<T: RealmModel>(
     at id: UUID
   ) throws -> T {
     guard let object = realm.object(ofType: T.self, forPrimaryKey: id) else {
@@ -59,11 +59,11 @@ public final class LiveRealmService: RealmService {
     return object
   }
   
-  public func fetch<T: RealmModel>() -> Results<T> {
+  internal func fetch<T: RealmModel>() -> Results<T> {
     return realm.objects(T.self)
   }
   
-  public func fetch<T: RealmModel>(
+  internal func fetch<T: RealmModel>(
     by column: T.Column,
     ascending: Bool
   ) -> Results<T> {
@@ -73,7 +73,7 @@ public final class LiveRealmService: RealmService {
   
   
   // MARK: - Update
-  public func update<T: RealmModel>(
+  internal func update<T: RealmModel>(
     with object: T
   ) throws {
     try realm.write {
@@ -81,7 +81,7 @@ public final class LiveRealmService: RealmService {
     }
   }
   
-  public func update<T: RealmModel>(
+  internal func update<T: RealmModel>(
     from objects: Results<T>
   ) throws {
     try realm.write {
@@ -89,7 +89,7 @@ public final class LiveRealmService: RealmService {
     }
   }
   
-  public func update<T: RealmModel>(
+  internal func update<T: RealmModel>(
     from objects: List<T>
   ) throws {
     try realm.write {
@@ -97,7 +97,7 @@ public final class LiveRealmService: RealmService {
     }
   }
   
-  public func update<T: RealmModel>(
+  internal func update<T: RealmModel>(
     type: T.Type,
     at id: ObjectId,
     with values: [T.Column : Any]
@@ -112,7 +112,7 @@ public final class LiveRealmService: RealmService {
   
   
   // MARK: - Delete
-  public func delete<T: RealmModel>(
+  internal func delete<T: RealmModel>(
     with object: T
   ) throws {
     try realm.write {
@@ -120,7 +120,7 @@ public final class LiveRealmService: RealmService {
     }
   }
   
-  public func delete<T: RealmModel>(
+  internal func delete<T: RealmModel>(
     from objects: Results<T>
   ) throws {
     try realm.write {
@@ -128,7 +128,7 @@ public final class LiveRealmService: RealmService {
     }
   }
   
-  public func delete<T: RealmModel>(
+  internal func delete<T: RealmModel>(
     from objects: List<T>
   ) throws {
     try realm.write {
@@ -136,7 +136,7 @@ public final class LiveRealmService: RealmService {
     }
   }
   
-  public func deleteTable<T: RealmModel>(
+  internal func deleteTable<T: RealmModel>(
     tableType: T.Type
   ) throws {
     let table: Results<T> = fetch()

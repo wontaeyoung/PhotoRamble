@@ -7,26 +7,26 @@
 
 import Foundation
 
-public final class GCD {
-  public static func main(work: @escaping () -> Void) {
+internal final class GCD {
+  internal static func main(work: @escaping () -> Void) {
     DispatchQueue.main.async {
       work()
     }
   }
   
-  public static func global(work: @escaping () -> Void) {
+  internal static func global(work: @escaping () -> Void) {
     DispatchQueue.global().async {
       work()
     }
   }
   
-  public static func main(after time: Double, work: @escaping () -> Void) {
+  internal static func main(after time: Double, work: @escaping () -> Void) {
     DispatchQueue.main.asyncAfter(deadline: .now() + time) {
       work()
     }
   }
   
-  public static func global(after time: Double, work: @escaping () -> Void) {
+  internal static func global(after time: Double, work: @escaping () -> Void) {
     DispatchQueue.global().asyncAfter(deadline: .now() + time) {
       work()
     }

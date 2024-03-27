@@ -8,9 +8,9 @@
 import UIKit
 import Toast
 
-public protocol Configurator { }
+internal protocol Configurator { }
 
-public extension Configurator where Self: Any {
+internal extension Configurator where Self: Any {
   
   mutating func apply(_ apply: (inout Self) -> Void) {
     apply(&self)
@@ -24,7 +24,7 @@ public extension Configurator where Self: Any {
   }
 }
 
-public extension Configurator where Self: AnyObject {
+internal extension Configurator where Self: AnyObject {
   
   func configure(_ apply: (Self) -> Void) {
     apply(self)

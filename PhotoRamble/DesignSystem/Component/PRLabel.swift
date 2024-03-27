@@ -7,11 +7,11 @@
 
 import UIKit
 
-public class PRLabel: UILabel {
+internal class PRLabel: UILabel {
   
   private let style: Style
   
-  override public var text: String? {
+  override internal var text: String? {
     didSet {
       if style == .diaryContent {
         applyLineSpacing()
@@ -19,7 +19,7 @@ public class PRLabel: UILabel {
     }
   }
   
-  public init(style: Style, title: String? = nil, alignment: NSTextAlignment = .natural) {
+  internal init(style: Style, title: String? = nil, alignment: NSTextAlignment = .natural) {
     self.style = style
     
     super.init(frame: .zero)
@@ -80,12 +80,12 @@ public class PRLabel: UILabel {
   }
   
   @available(*, unavailable)
-  public required init?(coder: NSCoder) {
+  internal required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 }
 
-public extension PRLabel {
+internal extension PRLabel {
   
   enum Style {
     case mainTitle

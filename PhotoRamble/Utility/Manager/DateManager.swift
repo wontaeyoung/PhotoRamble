@@ -7,9 +7,9 @@
 
 import Foundation
 
-public final class DateManager {
+internal final class DateManager {
   
-  public static let shared = DateManager()
+  internal static let shared = DateManager()
   private init() { }
   
   private let locale = Locale(identifier: "ko_KR")
@@ -36,7 +36,7 @@ public final class DateManager {
   }
 }
 
-public extension DateManager {
+internal extension DateManager {
   
   enum Format: String {
     case HHmm = "HH:mm"
@@ -55,7 +55,7 @@ public extension DateManager {
 }
 
 // MARK: - String Format
-public extension DateManager {
+internal extension DateManager {
   
   func isoStringtoDate(with string: String) -> Date {
     guard let date = isoDateFormaater.date(from: string) else {
@@ -153,7 +153,7 @@ public extension DateManager {
 }
 
 // MARK: - Compare Date
-public extension DateManager {
+internal extension DateManager {
   
   func getDateBetween(when date: Date, by day: Int = 1) -> (start: Date, end: Date) {
     let start = calendar.startOfDay(for: date)
@@ -164,7 +164,7 @@ public extension DateManager {
 }
 
 // MARK: - Compare Date
-public extension DateManager {
+internal extension DateManager {
   
   func isDate(with interval: TimeInterval, by component: Calendar.Component, equalTo: Int) -> Bool {
     return calendar.component(component, from: Date(timeIntervalSince1970: interval)) == equalTo

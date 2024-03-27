@@ -7,12 +7,12 @@
 
 import UIKit
 
-public protocol CoordinatorDelegate: AnyObject {
+internal protocol CoordinatorDelegate: AnyObject {
   
   func coordinatorDidEnd(_ childCoordinator: Coordinator)
 }
 
-public protocol Coordinator: AnyObject {
+internal protocol Coordinator: AnyObject {
   
   // MARK: - Property
   var navigationController: UINavigationController { get set }
@@ -44,7 +44,7 @@ public protocol Coordinator: AnyObject {
 }
 
 // MARK: - View Navigation
-public extension Coordinator {
+internal extension Coordinator {
   
   func end() {
     self.emptyOut()

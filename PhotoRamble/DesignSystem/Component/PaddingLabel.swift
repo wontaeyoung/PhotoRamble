@@ -7,14 +7,14 @@
 
 import UIKit
 
-public final class PaddingLabel: PRLabel {
+internal final class PaddingLabel: PRLabel {
   
   // MARK: - Property
-  public var horizontalInset: CGFloat
-  public var verticalInset: CGFloat
+  internal var horizontalInset: CGFloat
+  internal var verticalInset: CGFloat
   
   // MARK: - Initializer
-  public init(
+  internal init(
     style: Style,
     title: String?,
     alignment: NSTextAlignment,
@@ -35,12 +35,12 @@ public final class PaddingLabel: PRLabel {
   }
   
   // MARK: - Life Cycle
-  public override func drawText(in rect: CGRect) {
+  internal override func drawText(in rect: CGRect) {
     let insets = UIEdgeInsets(top: verticalInset, left: horizontalInset, bottom: verticalInset, right: horizontalInset)
     super.drawText(in: rect.inset(by: insets))
   }
   
-  public override var intrinsicContentSize: CGSize {
+  internal override var intrinsicContentSize: CGSize {
     let size = super.intrinsicContentSize
     return CGSize(
       width: size.width + horizontalInset * 2,
@@ -48,7 +48,7 @@ public final class PaddingLabel: PRLabel {
     )
   }
   
-  public override var bounds: CGRect {
+  internal override var bounds: CGRect {
     didSet {
       preferredMaxLayoutWidth = bounds.width - horizontalInset * 2
     }

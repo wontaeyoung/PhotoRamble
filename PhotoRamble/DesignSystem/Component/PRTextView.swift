@@ -8,9 +8,9 @@
 import UIKit
 import SnapKit
 
-public final class PRTextView: UITextView {
+internal final class PRTextView: UITextView {
   
-  public init(placeholder: String? = nil, isResponder: Bool = false) {
+  internal init(placeholder: String? = nil, isResponder: Bool = false) {
     super.init(frame: .zero, textContainer: nil)
     
     self.configure {
@@ -42,7 +42,7 @@ public final class PRTextView: UITextView {
   }
   
   @available(*, unavailable)
-  public required init?(coder: NSCoder) {
+  internal required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
@@ -55,7 +55,7 @@ public final class PRTextView: UITextView {
 }
 
 extension PRTextView: UITextViewDelegate {
-  public func textViewDidChange(_ textView: UITextView) {
+  internal func textViewDidChange(_ textView: UITextView) {
     togglePlaceholderVisibility()
     applyLineSpacing()
   }

@@ -7,25 +7,25 @@
 
 import UIKit
 
-public enum PRAsset {
+enum PRAsset {
   
-  public enum Color {
+  enum Color {
     
-    public static let prPrimary: UIColor = UIColor(hex: "#1A3568")
-    public static let prSecondary: UIColor = UIColor(hex: "#E2EDF6")
-    public static let prBackground: UIColor = UIColor(hex: "#F4FBFD")
-    public static let prTitle: UIColor = UIColor(hex: "#222A3A")
-    public static let prMainInfo: UIColor = UIColor(hex: "#214C9E")
-    public static let prSubInfo: UIColor = UIColor(hex: "#606673")
-    public static let prPlaceholder: UIColor = UIColor(hex: "#A9A9A9")
-    public static let prWhite: UIColor = UIColor(hex: "#FFFFFF")
-    public static let prBlack: UIColor = UIColor(hex: "#000000")
-    public static let prToastBacgrkound: UIColor = UIColor(hex: "#F3F4F6")
-    public static let prLightGray: UIColor = UIColor(hex: "#B4B4B4")
-    public static let prRed: UIColor = UIColor(hex: "#FF3B30")
+    static let prPrimary: UIColor = UIColor(hex: "#1A3568")
+    static let prSecondary: UIColor = UIColor(hex: "#E2EDF6")
+    static let prBackground: UIColor = UIColor(hex: "#F4FBFD")
+    static let prTitle: UIColor = UIColor(hex: "#222A3A")
+    static let prMainInfo: UIColor = UIColor(hex: "#214C9E")
+    static let prSubInfo: UIColor = UIColor(hex: "#606673")
+    static let prPlaceholder: UIColor = UIColor(hex: "#A9A9A9")
+    static let prWhite: UIColor = UIColor(hex: "#FFFFFF")
+    static let prBlack: UIColor = UIColor(hex: "#000000")
+    static let prToastBacgrkound: UIColor = UIColor(hex: "#F3F4F6")
+    static let prLightGray: UIColor = UIColor(hex: "#B4B4B4")
+    static let prRed: UIColor = UIColor(hex: "#FF3B30")
   }
   
-  public enum Font {
+  enum Font {
     
     private enum Name: String {
       
@@ -63,27 +63,27 @@ public enum PRAsset {
       return UIFont(name: fontName.name, size: size) ?? .systemFont(ofSize: size, weight: coalesceWeight)
     }
     
-    public static let prPrimaryButtonTitle: UIFont = font(.bold, size: 19)
-    public static let prSecondaryButtonTitle: UIFont = font(.semiBold, size: 17)
-    public static let prTertiaryButtonTitle: UIFont = font(.semiBold, size: 17)
-    public static let prTagButtonTitle: UIFont = font(.medium, size: 13)
+    static let prPrimaryButtonTitle: UIFont = font(.bold, size: 19)
+    static let prSecondaryButtonTitle: UIFont = font(.semiBold, size: 17)
+    static let prTertiaryButtonTitle: UIFont = font(.semiBold, size: 17)
+    static let prTagButtonTitle: UIFont = font(.medium, size: 13)
     
-    public static let prToastTitle: UIFont = font(.bold, size: 17)
-    public static let prToastMessage: UIFont = font(.semiBold, size: 15)
+    static let prToastTitle: UIFont = font(.bold, size: 17)
+    static let prToastMessage: UIFont = font(.semiBold, size: 15)
     
-    public static let prTimerLabel: UIFont = font(.semiBold, size: 19)
-    public static let prMainInfoLabel: UIFont = font(.semiBold, size: 15)
-    public static let prSubInfoLabel: UIFont = font(.regular, size: 13)
-    public static let prCaptionLabel: UIFont = font(.regular, size: 11)
+    static let prTimerLabel: UIFont = font(.semiBold, size: 19)
+    static let prMainInfoLabel: UIFont = font(.semiBold, size: 15)
+    static let prSubInfoLabel: UIFont = font(.regular, size: 13)
+    static let prCaptionLabel: UIFont = font(.regular, size: 11)
     
-    public static let prContentText: UIFont = font(.regular, size: 15)
-    public static let prNavigationTitleLabel: UIFont = font(.extraBold, size: 29)
+    static let prContentText: UIFont = font(.regular, size: 15)
+    static let prNavigationTitleLabel: UIFont = font(.extraBold, size: 29)
     
-    public static let prDiaryText: UIFont = font(.diaryContent, size: 25)
-    public static let prDiaryLabel: UIFont = font(.diaryContent, size: 21)
+    static let prDiaryText: UIFont = font(.diaryContent, size: 25)
+    static let prDiaryLabel: UIFont = font(.diaryContent, size: 21)
   }
   
-  public enum Symbol {
+  enum Symbol {
     
     private enum SF: String {
       
@@ -115,28 +115,28 @@ public enum PRAsset {
       return UIImage(systemName: sf.rawValue)
     }
     
-    public static let walkTabIcon: UIImage? = image(.figureWalk)
-    public static let walkSelectedTabIcon: UIImage? = image(.figureWalkMotion)
-    public static let diaryTabIcon: UIImage? = image(.textBookClosed)
-    public static let diarySelectedTabIcon: UIImage? = image(.textBookClosedFill)
-    public static let configTabIcon: UIImage? = image(.gearshape)
-    public static let configSelectedTabIcon: UIImage? = image(.gearshapeFill)
+    static let walkTabIcon: UIImage? = image(.figureWalk)
+    static let walkSelectedTabIcon: UIImage? = image(.figureWalkMotion)
+    static let diaryTabIcon: UIImage? = image(.textBookClosed)
+    static let diarySelectedTabIcon: UIImage? = image(.textBookClosedFill)
+    static let configTabIcon: UIImage? = image(.gearshape)
+    static let configSelectedTabIcon: UIImage? = image(.gearshapeFill)
     
-    public static let takePhotoButtonIcon: UIImage? = image(.cameraViewfinder)
+    static let takePhotoButtonIcon: UIImage? = image(.cameraViewfinder)
     
-    public static let dateInfoIcon: UIImage? = image(.calendar)
-    public static let temperatureInfoIcon: UIImage? = image(.thermometerMedium)
-    public static let walkDistanceInfoIcon: UIImage? = image(.figureWalk)
-    public static let walkTimeInfoIcon: UIImage? = image(.clockFill)
+    static let dateInfoIcon: UIImage? = image(.calendar)
+    static let temperatureInfoIcon: UIImage? = image(.thermometerMedium)
+    static let walkDistanceInfoIcon: UIImage? = image(.figureWalk)
+    static let walkTimeInfoIcon: UIImage? = image(.clockFill)
     
-    public static let continueWritingConfigIcon: UIImage? = image(.pencilLine)
-    public static let nearHomeConfigIcon: UIImage? = image(.houseAndFlagFill)
-    public static let locationConfigIcon: UIImage? = image(.locationFill)
-    public static let useCameraConfigIcon: UIImage? = image(.cameraOnRectangleFill)
-    public static let usePhotoConfigIcon: UIImage? = image(.photoFillOnRectangleFill)
-    public static let termsConfigIcon: UIImage? = image(.docTextFill)
-    public static let licenseConfigIcon: UIImage? = image(.buildingColumnsFill)
-    public static let sendToDeveloperConfigIcon: UIImage? = image(.envelopeBadgePersonCropFill)
-    public static let deleteAllDiaryConfigIcon: UIImage? = image(.trashFill)
+    static let continueWritingConfigIcon: UIImage? = image(.pencilLine)
+    static let nearHomeConfigIcon: UIImage? = image(.houseAndFlagFill)
+    static let locationConfigIcon: UIImage? = image(.locationFill)
+    static let useCameraConfigIcon: UIImage? = image(.cameraOnRectangleFill)
+    static let usePhotoConfigIcon: UIImage? = image(.photoFillOnRectangleFill)
+    static let termsConfigIcon: UIImage? = image(.docTextFill)
+    static let licenseConfigIcon: UIImage? = image(.buildingColumnsFill)
+    static let sendToDeveloperConfigIcon: UIImage? = image(.envelopeBadgePersonCropFill)
+    static let deleteAllDiaryConfigIcon: UIImage? = image(.trashFill)
   }
 }

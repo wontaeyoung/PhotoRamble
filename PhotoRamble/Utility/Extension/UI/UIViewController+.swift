@@ -7,7 +7,7 @@
 
 import UIKit
 
-public extension UIViewController {
+internal extension UIViewController {
   func hideBackTitle() -> Self {
     self.navigationItem.backButtonTitle = ""
     return self

@@ -1,7 +1,7 @@
 import Foundation
 import RealmSwift
 
-public enum RealmError: Error {
+internal enum RealmError: Error {
   
   case getRealmFailed
   case observedChangeError(error: Error?)

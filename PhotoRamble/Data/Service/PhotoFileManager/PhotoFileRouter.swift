@@ -7,26 +7,26 @@
 
 import Foundation
 
-public struct PhotoFileRouter {
+internal struct PhotoFileRouter {
   
-  public enum FileExtension: String, CaseIterable {
+  internal enum FileExtension: String, CaseIterable {
     
     case jpg
     case png
     
-    public var name: String {
+    internal var name: String {
       return ".\(self.rawValue)"
     }
   }
   
-  public enum CompressionLevel {
+  internal enum CompressionLevel {
     
     case high
     case middle
     case low
     case raw
     
-    public var percent: CGFloat {
+    internal var percent: CGFloat {
       switch self {
         case .high:
           return 0.25
@@ -40,7 +40,7 @@ public struct PhotoFileRouter {
     }
   }
   
-  public enum FileMethod {
+  internal enum FileMethod {
     
     case write
     case read
@@ -49,12 +49,12 @@ public struct PhotoFileRouter {
   
   
   // MARK: - Property
-  public let directory: String
-  public let fileIndex: Int
-  public let fileExtension: FileExtension
-  public let fileMethod: FileMethod
+  internal let directory: String
+  internal let fileIndex: Int
+  internal let fileExtension: FileExtension
+  internal let fileMethod: FileMethod
   
-  public init(directory: String, fileIndex: Int, fileExtension: FileExtension, fileMethod: FileMethod) {
+  internal init(directory: String, fileIndex: Int, fileExtension: FileExtension, fileMethod: FileMethod) {
     
     self.directory = directory
     self.fileIndex = fileIndex
@@ -62,39 +62,39 @@ public struct PhotoFileRouter {
     self.fileMethod = fileMethod
   }
   
-  public var baseDirectory: URL {
+  internal var baseDirectory: URL {
     return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
   }
   
-  public var path: String {
+  internal var path: String {
     return "photo/\(directory)"
   }
   
-  public var directoryURL: URL {
+  internal var directoryURL: URL {
     return baseDirectory.appendingPathComponent(path)
   }
   
-  public var fileName: String {
+  internal var fileName: String {
     return directory + "_\(fileIndex)" + fileExtension.name
   }
   
-  public var fileURL: URL {
+  internal var fileURL: URL {
     return directoryURL.appendingPathComponent(fileName)
   }
   
-  public var directoryPath: String {
+  internal var directoryPath: String {
     return directoryURL.path
   }
   
-  public var filePath: String {
+  internal var filePath: String {
     return fileURL.path
   }
   
-  public var directoryExist: Bool {
+  internal var directoryExist: Bool {
     return FileManager.default.fileExists(atPath: directoryPath)
   }
   
-  public var fileExist: Bool {
+  internal var fileExist: Bool {
     return FileManager.default.fileExists(atPath: filePath)
   }
 }

@@ -25,7 +25,7 @@
 import Foundation
 import RealmSwift
 
-public protocol RealmService {
+internal protocol RealmService {
   
   // MARK: - Method
   // MARK: Create

@@ -7,9 +7,9 @@
 
 import UIKit
 
-public final class PRButton: UIButton {
+internal final class PRButton: UIButton {
   
-  public init(style: Style, title: String? = nil, image: UIImage? = nil) {
+  internal init(style: Style, title: String? = nil, image: UIImage? = nil) {
     super.init(frame: .zero)
     
     self.configuration = style.configuration.applied {
@@ -19,7 +19,7 @@ public final class PRButton: UIButton {
   }
   
   @available(*, unavailable)
-  public required init?(coder: NSCoder) {
+  internal required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
@@ -32,7 +32,7 @@ public final class PRButton: UIButton {
   }
 }
 
-public extension PRButton {
+internal extension PRButton {
   
   enum Style {
     case primary

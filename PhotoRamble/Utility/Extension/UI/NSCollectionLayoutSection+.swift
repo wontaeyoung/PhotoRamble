@@ -7,7 +7,7 @@
 
 import UIKit
 
-public extension NSCollectionLayoutSection {
+internal extension NSCollectionLayoutSection {
   
   static func makeCardSection(
     cardWidth: Double,

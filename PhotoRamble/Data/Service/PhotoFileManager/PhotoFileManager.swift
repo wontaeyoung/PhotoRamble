@@ -7,12 +7,12 @@
 
 import Foundation
 
-public final class PhotoFileManager {
+internal final class PhotoFileManager {
   
-  public static let shared = PhotoFileManager()
+  internal static let shared = PhotoFileManager()
   private init() { }
   
-  public func loadImage(router: PhotoFileRouter) throws -> Data {
+  internal func loadImage(router: PhotoFileRouter) throws -> Data {
     guard router.fileExist else {
       throw FileManageError.fileNotExist(path: router.filePath)
     }
@@ -20,18 +20,18 @@ public final class PhotoFileManager {
     return try Data(contentsOf: router.fileURL, options: .mappedIfSafe)
   }
   
-  public func loadImage(url: URL) -> Data? {
+  internal func loadImage(url: URL) -> Data? {
     return try? Data(contentsOf: url, options: .mappedIfSafe)
   }
   
-  public func loadAllImages(router: PhotoFileRouter) throws -> [Data] {
+  internal func loadAllImages(router: PhotoFileRouter) throws -> [Data] {
     let urls = try FileManager.default.contentsOfDirectory(at: router.directoryURL, includingPropertiesForKeys: nil)
       .filter { PhotoFileRouter.FileExtension(rawValue: $0.pathExtension) != nil }
     
     return urls.compactMap { loadImage(url: $0) }
   }
   
-  public func writeImage(imageData: Data, router: PhotoFileRouter) throws {
+  internal func writeImage(imageData: Data, router: PhotoFileRouter) throws {
     if !router.directoryExist {
       try FileManager.default.createDirectory(at: router.directoryURL, withIntermediateDirectories: true)
     }
@@ -43,13 +43,13 @@ public final class PhotoFileManager {
     try imageData.write(to: router.fileURL, options: .withoutOverwriting)
   }
   
-  public func remove(router: PhotoFileRouter) throws {
+  internal func remove(router: PhotoFileRouter) throws {
     guard router.fileExist else { return }
 
     try FileManager.default.removeItem(at: router.fileURL)
   }
   
-  public func removeAll(router: PhotoFileRouter) throws {
+  internal func removeAll(router: PhotoFileRouter) throws {
     guard router.directoryExist else { return }
     
     try FileManager.default.contentsOfDirectory(at: router.directoryURL, includingPropertiesForKeys: nil).forEach {
@@ -57,7 +57,7 @@ public final class PhotoFileManager {
     }
   }
   
-  public func createDirectory(router: PhotoFileRouter) throws {
+  internal func createDirectory(router: PhotoFileRouter) throws {
     guard !router.directoryExist else { return }
     
     try FileManager.default.createDirectory(at: router.directoryURL, withIntermediateDirectories: true)

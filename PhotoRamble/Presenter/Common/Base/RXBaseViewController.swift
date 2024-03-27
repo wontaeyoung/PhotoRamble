@@ -8,33 +8,33 @@
 import UIKit
 import RxSwift
 
-open class RXBaseViewController: UIViewController {
+internal class RXBaseViewController: UIViewController {
   
-  open class var identifier: String {
+  internal class var identifier: String {
     return self.description()
   }
   
   // MARK: - Property
-  public var disposeBag = DisposeBag()
+  internal var disposeBag = DisposeBag()
   
   // MARK: - Initializer
-  public init() {
+  internal init() {
     super.init(nibName: nil, bundle: nil)
   }
   
   @available(*, unavailable)
-  public required init?(coder: NSCoder) {
+  internal required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
   
   // MARK: - Life Cycle
-  open func setHierarchy() { }
-  open func setConstraint() { }
-  open func setAttribute() { }
-  open func bind() { }
+  internal func setHierarchy() { }
+  internal func setConstraint() { }
+  internal func setAttribute() { }
+  internal func bind() { }
   
-  open override func viewDidLoad() {
+  internal override func viewDidLoad() {
     
     super.viewDidLoad()
     

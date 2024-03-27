@@ -7,7 +7,7 @@
 
 import UIKit
 
-public extension UINavigationController {
+internal extension UINavigationController {
   
   func navigationLargeTitleEnabled() -> Self {
     self.navigationBar.prefersLargeTitles = true
