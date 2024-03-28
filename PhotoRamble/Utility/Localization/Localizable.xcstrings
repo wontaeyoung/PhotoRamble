@@ -4,6 +4,12 @@
     "cannot_over_max_selection_alert" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사진은 %d장까지만 선택 가능해요!"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -15,6 +21,12 @@
     "home_welcome_navigation_title" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "어서오세요. 산책하러 가볼까요?"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26,6 +38,12 @@
     "no_photo_info_label" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "아직 찍은 사진이 없어요. [사진 찍기] 버튼을 누르고 주변을 찍어보세요!"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -37,6 +55,12 @@
     "photo_selected_count_info_label" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "선택한 사진 %d / %d"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -48,6 +72,12 @@
     "photo_selection_info_label" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "산책하는 동안 찍은 사진들이에요"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -59,6 +89,12 @@
     "photo_take_button" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "사진 찍기"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -70,6 +106,12 @@
     "tab_diary" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일기장"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -81,6 +123,12 @@
     "tab_setting" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "설정"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -92,6 +140,12 @@
     "tab_walk" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "산책"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -103,6 +157,12 @@
     "walk_complete_button" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "산책 완료"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -114,6 +174,12 @@
     "walk_go_button" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "산책하기"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -125,6 +191,12 @@
     "walk_start_button" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "산책 시작"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -136,6 +208,12 @@
     "walk_stop_button" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "산책 중지"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
@@ -147,6 +225,12 @@
     "write_diary_button" : {
       "extractionState" : "manual",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일기 쓰러가기"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
