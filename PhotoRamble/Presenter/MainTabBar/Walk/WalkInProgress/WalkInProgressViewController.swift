@@ -213,7 +213,7 @@ extension WalkInProgressViewController: FSPagerViewDataSource, FSPagerViewDelega
       $0.layer.cornerRadius = 20
 
 #if DEBUG
-      LogManager.shared.log(with: "페이저 이미지 용량 : " + $0.image!.jpegData(compressionQuality: 1.0)!.count.description, to: .local, level: .debug)
+      LogManager.shared.log(with: "표시 이미지 용량 - " + UIImage.dataVolumnMB(data: $0.image!.jpegData(compressionQuality: 1.0)!) , to: .local, level: .debug)
 #endif
     }
     

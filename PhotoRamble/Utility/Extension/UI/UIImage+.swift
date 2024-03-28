@@ -13,14 +13,14 @@ extension UIImage {
     let minQuality: CGFloat = 0.0
     let maxSizeInBytes = BusinessValue.maxImageFileVolumeMB * 1024 * 1024
     
-    // 우선 최대 품질(무압축)에서 시작
+    // 최대 품질(무압축)에서 시작
     var compressionQuality: CGFloat = maxQuality
     
     // 이미지를 JPEG 데이터로 변환
     guard var compressedData = self.jpegData(compressionQuality: compressionQuality) else { return nil }
     
 #if DEBUG
-    LogManager.shared.log(with: "압축 전 \(compressedData.count)", to: .local, level: .debug)
+    LogManager.shared.log(with: "압축 전 - \(Self.dataVolumnMB(data: compressedData))", to: .local, level: .debug)
 #endif
     /// 용량이 최대 기준치 이하가 되었거나, 압축률이 100%가 아니면 반복 수행
     while Double(compressedData.count) > maxSizeInBytes && compressionQuality > minQuality {
@@ -32,9 +32,15 @@ extension UIImage {
     }
     
 #if DEBUG
-    LogManager.shared.log(with: "압축 후 \(compressedData.count)", to: .local, level: .debug)
+    LogManager.shared.log(with: "압축 후 - \(Self.dataVolumnMB(data: compressedData))", to: .local, level: .debug)
 #endif
     
     return compressedData
+  }
+  
+  static func dataVolumnMB(data: Data) -> String {
+    let value = Double(data.count) / (1024 * 1024)
+    
+    return NumberFormatManager.shared.toRoundedWith(from: value, fractionDigits: 2, unit: .MB)
   }
 }

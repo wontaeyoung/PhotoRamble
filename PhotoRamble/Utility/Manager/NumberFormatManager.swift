@@ -11,6 +11,7 @@ final class NumberFormatManager {
   
   enum Unit: String {
     case km
+    case MB
   }
   
   internal static let shared = NumberFormatManager()
