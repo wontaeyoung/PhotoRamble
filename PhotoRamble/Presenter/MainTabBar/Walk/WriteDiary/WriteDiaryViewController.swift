@@ -92,13 +92,14 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
   let viewModel: WriteDiaryViewModel
   
   // MARK: - Initializer
-  init(viewModel: WriteDiaryViewModel, imageDataList: [Data]) {
-    self.viewModel = viewModel
-    
+  init(viewModel: WriteDiaryViewModel, style: WriteDiaryViewModel.WritingStyle, imageDataList: [Data]) {
     let photos = imageDataList.compactMap { UIImage(data: $0) }
     self.photosRelay = .init(value: photos)
+    self.viewModel = viewModel
     
     super.init()
+    
+    self.setNavigationTitle(with: style.navigationTitle, displayMode: .never)
   }
   
   // MARK: - Life Cycle

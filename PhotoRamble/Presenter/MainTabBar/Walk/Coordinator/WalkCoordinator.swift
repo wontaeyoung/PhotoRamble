@@ -104,7 +104,11 @@ extension WalkCoordinator {
     )
       .coordinator(self)
     
-    let viewController = WriteDiaryViewController(viewModel: viewModel, imageDataList: imageDataList)
+    let viewController = WriteDiaryViewController(
+      viewModel: viewModel,
+      style: .initial,
+      imageDataList: imageDataList
+    )
       .hideBackButton()
     
     push(viewController)
