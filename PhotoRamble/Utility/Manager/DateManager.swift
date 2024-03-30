@@ -41,7 +41,8 @@ internal extension DateManager {
   enum Format: String {
     case HHmm = "HH:mm"
     case HHmmss = "HH:mm:ss"
-    case HHmmssKR = "HH시 mm분 ss초"
+    case HHmmssKR = "HH시간 mm분 ss초"
+    case HHmmssTimeOfDayKR = "HH시 mm분 ss초"
     case HHKr = "HH시"
     case EEEE = "EEEE"
     case yyyyMMdd = "yyyyMMdd"
