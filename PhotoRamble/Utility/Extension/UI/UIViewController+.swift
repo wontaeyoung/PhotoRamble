@@ -8,9 +8,15 @@
 import UIKit
 
 internal extension UIViewController {
+  
   func hideBackTitle() -> Self {
     self.navigationItem.backButtonTitle = ""
     return self
+  }
+  
+  func setNavigationTitle(with title: String, displayMode: UINavigationItem.LargeTitleDisplayMode) {
+    self.navigationItem.title = title
+    self.navigationItem.largeTitleDisplayMode = displayMode
   }
   
   func navigationTitle(with title: String, displayMode: UINavigationItem.LargeTitleDisplayMode) -> Self {
