@@ -14,6 +14,16 @@ final class WriteDiaryViewModel: ViewModel {
   enum WritingStyle {
     case initial
     case modify(diary: Diary)
+    
+    var navigationTitle: String {
+      switch self {
+        case .initial:
+          return "일기 쓰기"
+          
+        case .modify:
+          return "일기 다시쓰기"
+      }
+    }
   }
   
   // MARK: - I / O
