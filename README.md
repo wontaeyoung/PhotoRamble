@@ -131,10 +131,12 @@ Coordinator / Singleton / Repository / Router
 - 압축 로직은 용량이 2MB 이하가 될 때까지 압축률을 10%씩 증가시켜서 시도하는 방식으로 구현했습니다.
 
 **적용 전**
+
 ![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/eb4cebeb-9254-48fc-869e-92fd585bd5a4)
 
 
 **적용 후**
+
 ![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/d1bcef1b-58e3-40d7-b903-fa4383181635)
 
 
