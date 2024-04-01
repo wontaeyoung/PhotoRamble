@@ -10,7 +10,7 @@ import Foundation
 enum Localization: String {
   
   /// 네비게이션 타이틀
-  case home_welcome_navigation_title
+  case title_home_welcome_navigation
   
   /// 탭바 아이템 타이틀
   case tab_walk
@@ -18,20 +18,21 @@ enum Localization: String {
   case tab_setting
   
   /// 인포 라벨 타이틀
-  case no_photo_info_label
-  case photo_selection_info_label
-  case photo_selected_count_info_label
+  case label_no_photo_info
+  case label_photo_selection_info
+  case label_photo_selected_count_info
   
   /// 버튼 타이틀
-  case walk_go_button
-  case walk_start_button
-  case walk_stop_button
-  case walk_complete_button
-  case photo_take_button
-  case write_diary_button
+  case button_walk_go
+  case button_walk_start
+  case button_walk_stop
+  case button_walk_complete
+  case button_photo_take
+  case button_write_diary
   
   /// 알럿 타이틀
-  case cannot_over_max_selection_alert
+  case alert_cannot_over_max_selection
+  case alert_unknown_error
   
   var localized: String {
     return NSLocalizedString(self.rawValue, comment: "")

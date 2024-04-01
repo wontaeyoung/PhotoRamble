@@ -15,12 +15,12 @@ final class WalkViewController: RXBaseViewController, ViewModelController {
   // MARK: - UI
   private let welcomeLabel = PRLabel(
     style: .navigationTitle,
-    title: Localization.home_welcome_navigation_title.localizedWith("태영")
+    title: Localization.title_home_welcome_navigation.localizedWith("태영")
   )
   
   private let goWalkButton = PRButton(
     style: .primary,
-    title: Localization.walk_go_button.localized
+    title: Localization.button_walk_go.localized
   )
   
   // MARK: - Property

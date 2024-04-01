@@ -1,7 +1,7 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "cannot_over_max_selection_alert" : {
+    "alert_cannot_over_max_selection" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -18,24 +18,123 @@
         }
       }
     },
-    "home_welcome_navigation_title" : {
+    "alert_fail_get_app_version" : {
+      "extractionState" : "manual"
+    },
+    "alert_unknown_error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알 수 없는 문제가 발생했어요. 문제가 지속되면 개발자에게 알려주세요."
+          }
+        }
+      }
+    },
+    "button_photo_take" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Welcome. Shall we go for a walk?"
+            "value" : "Take Photo"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "어서오세요. 산책하러 가볼까요?"
+            "value" : "사진 찍기"
           }
         }
       }
     },
-    "no_photo_info_label" : {
+    "button_walk_complete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Complete Walk"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "산책 완료"
+          }
+        }
+      }
+    },
+    "button_walk_go" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go for a Walk"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "산책하기"
+          }
+        }
+      }
+    },
+    "button_walk_start" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start Walk"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "산책 시작"
+          }
+        }
+      }
+    },
+    "button_walk_stop" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stop Walk"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "산책 중지"
+          }
+        }
+      }
+    },
+    "button_write_diary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Go to Write Diary"
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일기 쓰러가기"
+          }
+        }
+      }
+    },
+    "label_no_photo_info" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -52,7 +151,7 @@
         }
       }
     },
-    "photo_selected_count_info_label" : {
+    "label_photo_selected_count_info" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -69,7 +168,7 @@
         }
       }
     },
-    "photo_selection_info_label" : {
+    "label_photo_selection_info" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
@@ -82,23 +181,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "산책하는 동안 찍은 사진들이에요"
-          }
-        }
-      }
-    },
-    "photo_take_button" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Take Photo"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "사진 찍기"
           }
         }
       }
@@ -154,87 +236,19 @@
         }
       }
     },
-    "walk_complete_button" : {
+    "title_home_welcome_navigation" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Complete Walk"
+            "value" : "Welcome. Shall we go for a walk?"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "산책 완료"
-          }
-        }
-      }
-    },
-    "walk_go_button" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Go for a Walk"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "산책하기"
-          }
-        }
-      }
-    },
-    "walk_start_button" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Start Walk"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "산책 시작"
-          }
-        }
-      }
-    },
-    "walk_stop_button" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stop Walk"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "산책 중지"
-          }
-        }
-      }
-    },
-    "write_diary_button" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Go to Write Diary"
-          }
-        },
-        "ko" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "일기 쓰러가기"
+            "value" : "어서오세요. 산책하러 가볼까요?"
           }
         }
       }

@@ -16,7 +16,7 @@ final class WalkPhotoSelectionViewController: RXBaseViewController, ViewModelCon
   // MARK: - UI
   private let photoInfoLabel = PRLabel(
     style: .subInfo,
-    title: Localization.photo_selection_info_label.localized,
+    title: Localization.label_photo_selection_info.localized,
     alignment: .center
   )
   
@@ -34,13 +34,13 @@ final class WalkPhotoSelectionViewController: RXBaseViewController, ViewModelCon
   
   private let photoSelectedCountInfoLabel = PRLabel(
     style: .mainTitle,
-    title: Localization.photo_selected_count_info_label.localizedWith(0, BusinessValue.maxPhotoSelectionCount),
+    title: Localization.label_photo_selected_count_info.localizedWith(0, BusinessValue.maxPhotoSelectionCount),
     alignment: .center
   )
   
   private let writeDiaryButton = PRButton(
     style: .primary,
-    title: Localization.write_diary_button.localized
+    title: Localization.button_write_diary.localized
   )
   
   // MARK: - Property
@@ -158,7 +158,7 @@ final class WalkPhotoSelectionViewController: RXBaseViewController, ViewModelCon
   
   private func append(at photoIndex: Int) {
     guard selectedIndicesRelay.value.count < BusinessValue.maxPhotoSelectionCount else {
-      let toastMessage = Localization.cannot_over_max_selection_alert.localizedWith(BusinessValue.maxPhotoSelectionCount)
+      let toastMessage = Localization.alert_cannot_over_max_selection.localizedWith(BusinessValue.maxPhotoSelectionCount)
       return view.makeToast(toastMessage, duration: 1, position: .center)
     }
     
@@ -189,7 +189,7 @@ final class WalkPhotoSelectionViewController: RXBaseViewController, ViewModelCon
   private func updateSelectedPhotoCount() {
     let currentPhotoCount = selectedIndicesRelay.value.count
     
-    photoSelectedCountInfoLabel.text = Localization.photo_selected_count_info_label.localizedWith(
+    photoSelectedCountInfoLabel.text = Localization.label_photo_selected_count_info.localizedWith(
       currentPhotoCount,
       BusinessValue.maxPhotoSelectionCount
     )

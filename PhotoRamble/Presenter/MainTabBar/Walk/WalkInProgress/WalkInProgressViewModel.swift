@@ -161,8 +161,8 @@ final class WalkInProgressViewModel: ViewModel {
   
   func timerButtonTitle(isOn: Bool) -> String {
     return isOn
-    ? Localization.walk_stop_button.localized
-    : Localization.walk_start_button.localized
+    ? Localization.button_walk_stop.localized
+    : Localization.button_walk_start.localized
   }
   
   func requestImageForSimulator() -> Observable<Data> {

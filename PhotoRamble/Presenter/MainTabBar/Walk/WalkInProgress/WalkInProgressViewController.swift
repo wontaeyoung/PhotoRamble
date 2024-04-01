@@ -29,7 +29,7 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
   
   private let noPhotoInfoLabel = PRLabel(
     style: .subInfo,
-    title: Localization.no_photo_info_label.localized,
+    title: Localization.label_no_photo_info.localized,
     alignment: .center
   )
   
@@ -41,13 +41,13 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
   
   private let cameraButton = PRButton(
     style: .secondary,
-    title: Localization.photo_take_button.localized,
+    title: Localization.button_photo_take.localized,
     image: PRAsset.Symbol.takePhotoButtonIcon
   )
   
   private let walkCompleteButton = PRButton(
     style: .primary,
-    title: Localization.walk_complete_button.localized
+    title: Localization.button_walk_complete.localized
   )
   
   // MARK: - Property
