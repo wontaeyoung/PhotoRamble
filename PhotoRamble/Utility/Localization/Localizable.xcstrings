@@ -7,7 +7,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "사진은 %d장까지만 선택 가능해요!"
+            "value" : "You can select up to %d photos!"
           }
         },
         "ko" : {
@@ -24,7 +24,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "어서오세요. 산책하러 가볼까요?"
+            "value" : "Welcome. Shall we go for a walk?"
           }
         },
         "ko" : {
@@ -41,7 +41,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "아직 찍은 사진이 없어요. [사진 찍기] 버튼을 누르고 주변을 찍어보세요!"
+            "value" : "No photos taken yet. Press the [Take Photo] button to capture your surroundings!"
           }
         },
         "ko" : {
@@ -58,7 +58,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "선택한 사진 %d / %d"
+            "value" : "Selected photos %d / %d"
           }
         },
         "ko" : {
@@ -75,7 +75,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "산책하는 동안 찍은 사진들이에요"
+            "value" : "Photos taken during the walk"
           }
         },
         "ko" : {
@@ -92,7 +92,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "사진 찍기"
+            "value" : "Take Photo"
           }
         },
         "ko" : {
@@ -109,7 +109,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "일기장"
+            "value" : "Diary"
           }
         },
         "ko" : {
@@ -126,7 +126,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "설정"
+            "value" : "Settings"
           }
         },
         "ko" : {
@@ -143,7 +143,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "산책"
+            "value" : "Walk"
           }
         },
         "ko" : {
@@ -160,7 +160,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "산책 완료"
+            "value" : "Complete Walk"
           }
         },
         "ko" : {
@@ -177,7 +177,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "산책하기"
+            "value" : "Go for a Walk"
           }
         },
         "ko" : {
@@ -194,7 +194,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "산책 시작"
+            "value" : "Start Walk"
           }
         },
         "ko" : {
@@ -211,7 +211,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "산책 중지"
+            "value" : "Stop Walk"
           }
         },
         "ko" : {
@@ -228,7 +228,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "일기 쓰러가기"
+            "value" : "Go to Write Diary"
           }
         },
         "ko" : {

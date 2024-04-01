@@ -8,7 +8,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "산책일기"
+            "value" : "PhotoRamble"
           }
         },
         "ko" : {
@@ -26,13 +26,13 @@
         "en" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "산책일기"
+            "value" : "PhotoRamble"
           }
         },
         "ko" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "산책일기"
+            "value" : "PhotoRamble"
           }
         }
       }

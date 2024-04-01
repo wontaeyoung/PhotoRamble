@@ -7,7 +7,7 @@
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 	<key>CFBundleName</key>
-	<string>산책일기</string>
+	<string>PhotoRamble</string>
 	<key>NSCameraUsageDescription</key>
 	<string>산책하는동안 사진을 찍기 위해서 카메라 권한이 필요해요!</string>
 	<key>UIAppFonts</key>
