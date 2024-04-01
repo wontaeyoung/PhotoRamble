@@ -143,7 +143,7 @@ Coordinator / Singleton / Repository / Router
 <br>
 
 <details>
-    <summary> 압축 로직 코드 접기 / 펼치기</summary>
+    <summary> 압축 로직 코드 </summary>
     
 ```swift
 import UIKit
@@ -215,6 +215,9 @@ extension UIImage {
 
 <br><br>
 
+<details>
+    <summary> 객체 분리 코드 예시 </summary>
+
 ```swift
 final class CreateDiaryUsecaseImpl: CreateDiaryUsecase {
   
@@ -254,6 +257,8 @@ final class CreateWalkUsecaseImpl: CreateWalkUsecase {
 ```
 
 - 인터페이스 프로토콜 추상화로 구현체 변경에 영향을 받지 않도록 구성했습니다.
+
+</details>
 
 <br><br>
 
