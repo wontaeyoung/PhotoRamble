@@ -27,27 +27,9 @@ import RealmSwift
 
 internal protocol RealmService {
   
-  // MARK: - Method
-  // MARK: Create
-  /// 전달받은 객체를 테이블에 추가합니다.
-  /// - Parameters:
-  ///   - with object: 테이블에 추가할 객체 인스턴스입니다.
   func create<T: RealmModel>(with object: T) throws
-  
-  /// 전달받은 객체들을 테이블에 추가합니다.
-  /// - Parameters:
-  ///   - from objects: 테이블에 추가할 객체 인스턴스들입니다.
   func create<T: RealmModel>(type: T.Type, with values: [T.Column: Any]) throws
-  
-  /// 전달받은 객체들을 테이블에 추가합니다.
-  /// - Parameters:
-  ///   - from objects: 테이블에 추가할 객체 인스턴스들입니다.
   func create<T: RealmModel>(from objects: Results<T>) throws
-  
-  /// 전달받은 딕셔너리로 새 객체를 생성하고 테이블에 추가합니다.
-  /// - Parameters:
-  ///   - type: 생성할 객체의 타입입니다.
-  ///   - with values: 생성할 객체의 레코드입니다.
   func create<T: RealmModel>(from objects: List<T>) throws
   
   func fetch<T: RealmModel>(at id: ObjectId) throws -> T
