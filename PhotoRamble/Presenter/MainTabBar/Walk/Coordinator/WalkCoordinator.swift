@@ -44,14 +44,10 @@ extension WalkCoordinator {
     let walkMapper = WalkMapper(locationMapper: locationMapper)
     let imageRepository = ImageRepositoryImpl()
     let walkRepository = WalkRepositoryImpl(service: service, mapper: walkMapper)
-    let createImageFileUsecase = CreateImageFileUsecaseImpl(imageRepository: imageRepository)
-    let createDirectoryUsecase = CreateDirectoryUsecaseImpl(imageRepository: imageRepository)
-    let createWalkUsecase = CreateWalkUsecaseImpl(walkRepository: walkRepository)
     
     let viewModel = WalkInProgressViewModel(
-      createImageFileUsecase: createImageFileUsecase,
-      createDirectoryUsecase: createDirectoryUsecase,
-      createWalkUsecase: createWalkUsecase
+      imageRepository: imageRepository, 
+      walkRepository: walkRepository
     )
       .coordinator(self)
     
