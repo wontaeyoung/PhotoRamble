@@ -28,7 +28,7 @@ internal enum CommonError: AppError {
   internal var alertDescription: String {
     switch self {
       case .unknownError, .unExceptedNil:
-        return "알 수 없는 문제가 발생했어요. 문제가 지속되면 개발자에게 알려주세요."
+        return Localization.alert_unknown_error.localized
     }
   }
 }

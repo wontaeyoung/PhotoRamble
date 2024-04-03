@@ -27,7 +27,7 @@ enum PRError {
     var alertDescription: String {
       switch self {
         case .invalidInfoKey, .invalidPattern:
-          return "앱 버전을 가져오는데 실패했어요!"
+          return Localization.alert_fail_get_app_version_error.localized
       }
     }
   }
@@ -61,16 +61,16 @@ enum PRError {
     var alertDescription: String {
       switch self {
         case .createFailed, .createListFailed:
-          return "이미지를 저장하는데 실패했어요. 문제가 지속되면 개발자에게 알려주세요."
+          return Localization.alert_fail_create_image_error.localized
           
         case .clearFailed, .removeFailed:
-          return "이미지를 정리하는데 실패했어요. 문제가 지속되면 개발자에게 알려주세요."
+          return Localization.alert_fail_delete_image_error.localized
           
         case .loadFailed:
-          return "이미지를 불러오는데 실패했어요. 문제가 지속되면 개발자에게 알려주세요."
+          return Localization.alert_fail_fetch_image_error.localized
           
         case .createDirectoryFailed:
-          return "알 수 없는 문제가 발생했어요. 문제가 지속되면 개발자에게 알려주세요."
+          return Localization.alert_unknown_error.localized
       }
     }
   }
@@ -97,13 +97,13 @@ enum PRError {
     var alertDescription: String {
       switch self {
         case .createFailed(_, let name):
-          return "\(name) 내용을 저장하는데 실패했어요. 문제가 지속되면 개발자에게 알려주세요."
+          return Localization.alert_fail_create_realm_error.localizedWith(name)
         
         case .fetchFailed(_, let name):
-          return "\(name) 내용을 불러오는데 실패했어요. 문제가 지속되면 개발자에게 알려주세요."
+          return Localization.alert_fail_fetch_realm_error.localizedWith(name)
         
         case .deleteAllFailed(_, let name):
-          return "\(name) 내용들을 삭제하는데 실패했어요. 문제가 지속되면 개발자에게 알려주세요."
+          return Localization.alert_fail_delete_realm_error.localizedWith(name)
       }
     }
   }

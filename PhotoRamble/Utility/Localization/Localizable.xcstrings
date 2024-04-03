@@ -18,8 +18,126 @@
         }
       }
     },
-    "alert_fail_get_app_version" : {
-      "extractionState" : "manual"
+    "alert_fail_convert_data_error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지 저장에 실패했어요. 문제가 지속되면 개발자에게 문의해주세요."
+          }
+        }
+      }
+    },
+    "alert_fail_create_directory_error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "폴더를 만들지 못했어요. 문제가 지속되면 개발자에게 문의해주세요."
+          }
+        }
+      }
+    },
+    "alert_fail_create_image_error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지를 저장하는데 실패했어요. 문제가 지속되면 개발자에게 알려주세요."
+          }
+        }
+      }
+    },
+    "alert_fail_create_realm_error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%s 내용을 저장하지 못했어요. 문제가 지속되면 개발자에게 알려주세요."
+          }
+        }
+      }
+    },
+    "alert_fail_delete_image_error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지를 정리하는데 실패했어요. 문제가 지속되면 개발자에게 알려주세요."
+          }
+        }
+      }
+    },
+    "alert_fail_delete_realm_error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%s 내용을 삭제하지 못했어요. 문제가 지속되면 개발자에게 알려주세요."
+          }
+        }
+      }
+    },
+    "alert_fail_fetch_image_error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미지를 불러오는데 실패했어요. 문제가 지속되면 개발자에게 알려주세요."
+          }
+        }
+      }
+    },
+    "alert_fail_fetch_realm_error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%s 내용들을 불러오지 못했어요. 문제가 지속되면 개발자에게 알려주세요."
+          }
+        }
+      }
+    },
+    "alert_fail_find_file_error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "파일을 찾지 못했어요. 문제가 지속되면 개발자에게 문의해주세요."
+          }
+        }
+      }
+    },
+    "alert_fail_get_app_version_error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "앱 버전 확인에 실패했어요. 앱 버전 확인이 필요하시면 앱스토어 > 산책일기 페이지를 확인해주세요."
+          }
+        }
+      }
+    },
+    "alert_fail_write_data_error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "데이터 저장에 실패했어요. 문제가 지속되면 개발자에게 문의해주세요."
+          }
+        }
+      }
     },
     "alert_unknown_error" : {
       "extractionState" : "manual",
@@ -249,6 +367,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "어서오세요. 산책하러 가볼까요?"
+          }
+        }
+      }
+    },
+    "word_diary" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "일기"
+          }
+        }
+      }
+    },
+    "word_walk" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "산책"
           }
         }
       }

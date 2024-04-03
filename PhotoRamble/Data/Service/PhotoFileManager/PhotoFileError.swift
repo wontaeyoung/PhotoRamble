@@ -33,16 +33,16 @@ enum FileManageError: AppError {
   var alertDescription: String {
     switch self {
       case .imageToDataFailed:
-        return "이미지 저장에 실패했어요. \(Self.contactDeveloperMessage)"
+        return Localization.alert_fail_convert_data_error.localized
         
       case .writeDataFailed:
-        return "데이터 저장에 실패했어요. \(Self.contactDeveloperMessage)"
+        return Localization.alert_fail_write_data_error.localized
         
       case .createDirectoryFailed:
-        return "폴더를 만들지 못했어요. \(Self.contactDeveloperMessage)"
+        return Localization.alert_fail_create_directory_error.localized
         
       case .fileNotExist:
-        return "파일을 찾지 못했어요."
+        return Localization.alert_fail_find_file_error.localized
     }
   }
 }

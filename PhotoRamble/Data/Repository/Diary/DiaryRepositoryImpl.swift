@@ -27,7 +27,7 @@ final class DiaryRepositoryImpl: DiaryRepository {
       try service.create(with: diaryDTO)
       return .just(diary)
     } catch {
-      return .error(PRError.RealmRepository.createFailed(error: error, modelName: "일기"))
+      return .error(PRError.RealmRepository.createFailed(error: error, modelName: Localization.word_diary.localized))
     }
   }
   
@@ -56,7 +56,7 @@ final class DiaryRepositoryImpl: DiaryRepository {
       
       return .just(diaries)
     } catch {
-      return .error(PRError.RealmRepository.fetchFailed(error: error, modelName: "일기"))
+      return .error(PRError.RealmRepository.fetchFailed(error: error, modelName: Localization.word_diary.localized))
     }
   }
 }

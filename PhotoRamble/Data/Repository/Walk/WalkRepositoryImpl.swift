@@ -26,7 +26,7 @@ final class WalkRepositoryImpl: WalkRepository {
       try service.create(with: walkDTO)
       return .just(walk)
     } catch {
-      return .error(PRError.RealmRepository.createFailed(error: error, modelName: "산책"))
+      return .error(PRError.RealmRepository.createFailed(error: error, modelName: Localization.word_walk.localized))
     }
   }
   
@@ -38,7 +38,7 @@ final class WalkRepositoryImpl: WalkRepository {
       
       return .just(walk)
     } catch {
-      return .error(PRError.RealmRepository.fetchFailed(error: error, modelName: "산책"))
+      return .error(PRError.RealmRepository.fetchFailed(error: error, modelName: Localization.word_walk.localized))
     }
   }
 }
