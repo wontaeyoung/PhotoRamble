@@ -13,6 +13,7 @@ final class WalkInProgressViewModel: ViewModel {
   
   // MARK: - I / O
   struct Input {
+    let viewDidLoadEvent: PublishRelay<Void>
     let takenNewPhotoDataEvent: PublishRelay<Data>
     let walkCompleteButtonTapEvent: PublishRelay<Void>
   }
@@ -32,6 +33,8 @@ final class WalkInProgressViewModel: ViewModel {
   weak var coordinator: WalkCoordinator?
   private let imageRepository: any ImageRepository
   private let walkRepository: any WalkRepository
+  private var timer: Timer?
+  private var backgroundTimeIntervalManager = BackgroundTimeIntervalManager()
   
   var numberOfItems: Int {
     return imagesDataRelay.value.count
@@ -55,6 +58,8 @@ final class WalkInProgressViewModel: ViewModel {
   }
   
   deinit {
+    clearTimer()
+
 #if DEBUG
     LogManager.shared.log(with: "\(self) 해제", to: .local, level: .debug)
 #endif
@@ -62,6 +67,18 @@ final class WalkInProgressViewModel: ViewModel {
   
   // MARK: - Method
   func transform(input: Input) -> Output {
+    
+    let timerText = timeIntervalRelay
+      .withUnretained(self)
+      .map { owner, interval in
+        return owner.getTimerText(interval: interval)
+      }
+    
+    input.viewDidLoadEvent
+      .bind(with: self) { owner, _ in
+        owner.startTimer()
+      }
+      .disposed(by: disposeBag)
     
     input.takenNewPhotoDataEvent
       .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
@@ -84,26 +101,27 @@ final class WalkInProgressViewModel: ViewModel {
     
     input.walkCompleteButtonTapEvent
       .withLatestFrom(imagesDataRelay)
-      .subscribe(with: self, onNext: { owner, dataList in
+      .bind(with: self) { owner, dataList in
         owner.processCompleteEvent(imageDataList: dataList)
-      })
+      }
       .disposed(by: disposeBag)
     
-    let timerText: Signal<String> = Observable<Int>.interval(.seconds(1), scheduler: MainScheduler.instance)
-      .withUnretained(self) { owner, _ in
-        owner.timerTick()
-        return owner.getTimerText()
+    BindingContainer.shared.didEnterBackgroundEvent
+      .bind(with: self) { owner, _ in
+        owner.logLeaveForegroundTime()
       }
-      .asSignal(onErrorJustReturn: "타이머 표시 오류가 발생했어요.")
+      .disposed(by: disposeBag)
+    
+    BindingContainer.shared.didEnterForegroundEvent
+      .bind(with: self) { owner, _ in
+        owner.addBackgroundTimeInterval()
+      }
+      .disposed(by: disposeBag)
     
     return Output(
       imageDataList: imagesDataRelay.asDriver(),
-      timerLabelText: timerText
+      timerLabelText: timerText.asSignal(onErrorJustReturn: "--:--:--")
     )
-  }
-  
-  private func timerTick() {
-    timeIntervalRelay.accept(timeIntervalRelay.value + 1)
   }
   
   private func updateImageDataList(with newData: Data) {
@@ -160,8 +178,8 @@ final class WalkInProgressViewModel: ViewModel {
     walkRelay.accept(updatedWalk)
   }
   
-  private func getTimerText() -> String {
-    return DateManager.shared.elapsedTime(timeIntervalRelay.value, format: .HHmmss)
+  private func getTimerText(interval: TimeInterval) -> String {
+    return DateManager.shared.elapsedTime(interval, format: .HHmmss)
   }
   
   func timerButtonTitle(isOn: Bool) -> String {
@@ -183,5 +201,54 @@ final class WalkInProgressViewModel: ViewModel {
       .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
       .compactMap { URL(string: $0) }
       .compactMap { try Data(contentsOf: $0) }
+  }
+}
+
+// MARK: - Timer
+extension WalkInProgressViewModel {
+  struct BackgroundTimeIntervalManager {
+    private var leaveTime: Date?
+    
+    mutating func logLeaveTime() {
+      self.leaveTime = .now
+    }
+    
+    mutating func backgroundTimeInterval() -> TimeInterval {
+      guard let leaveTime else {
+        return 0
+      }
+      
+      let interval = Date.now.timeIntervalSince(leaveTime)
+      self.leaveTime = nil
+      
+      return interval
+    }
+  }
+  
+  private func timerTick() {
+    timeIntervalRelay.accept(timeIntervalRelay.value + 1)
+  }
+  
+  private func logLeaveForegroundTime() {
+    backgroundTimeIntervalManager.logLeaveTime()
+  }
+  
+  private func addBackgroundTimeInterval() {
+    let interval = backgroundTimeIntervalManager.backgroundTimeInterval()
+    
+    timeIntervalRelay.accept(timeIntervalRelay.value + interval)
+  }
+  
+  private func clearTimer() {
+    timer?.invalidate()
+  }
+  
+  private func startTimer() {
+    clearTimer()
+    
+    timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+      guard let self else { return }
+      timerTick()
+    }
   }
 }
