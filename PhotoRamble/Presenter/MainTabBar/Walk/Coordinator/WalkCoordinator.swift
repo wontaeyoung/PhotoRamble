@@ -66,13 +66,11 @@ extension WalkCoordinator {
     let walkMapper = WalkMapper(locationMapper: locationMapper)
     let imageRepository = ImageRepositoryImpl()
     let walkRepository = WalkRepositoryImpl(service: service, mapper: walkMapper)
-    let replaceImageFileUsecase = ReplaceImageFileUsecaseImpl(imageRepository: imageRepository)
-    let createWalkUsecase = CreateWalkUsecaseImpl(walkRepository: walkRepository)
     
     let viewModel = WalkPhotoSelectionViewModel(
       walkRelay: walkRealy,
-      replaceImageFileUsecase: replaceImageFileUsecase,
-      createWalkUsecase: createWalkUsecase
+      imageRepository: imageRepository,
+      walkRepository: walkRepository
     )
       .coordinator(self)
     
