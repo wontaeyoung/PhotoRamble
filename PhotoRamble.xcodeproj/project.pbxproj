@@ -411,11 +411,11 @@
 				6E53C6A82B998A0F0034649D /* App */,
 				6E53C6A92B998A110034649D /* Config */,
 				6E53C6AA2B998A130034649D /* Data */,
-				6E53C6AB2B998A150034649D /* Domain */,
 				6E53C6AC2B998A170034649D /* Presenter */,
 				6E53C6AE2B998F6E0034649D /* Resource */,
 				6E53C6AD2B998A4C0034649D /* Utility */,
 				6E5A93142B99B37C00A0CE6C /* DesignSystem */,
+				6E623FF92BBE3278005660C8 /* Archive */,
 			);
 			path = PhotoRamble;
 			sourceTree = "<group>";
@@ -608,6 +608,14 @@
 				6E86ABC32B9CA88800AADB50 /* Mapper */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		6E623FF92BBE3278005660C8 /* Archive */ = {
+			isa = PBXGroup;
+			children = (
+				6E53C6AB2B998A150034649D /* Domain */,
+			);
+			path = Archive;
 			sourceTree = "<group>";
 		};
 		6E82E7002BA963ED00892EC3 /* Walk */ = {
