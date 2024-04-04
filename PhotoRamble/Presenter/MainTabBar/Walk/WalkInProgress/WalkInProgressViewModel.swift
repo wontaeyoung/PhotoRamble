@@ -30,23 +30,28 @@ final class WalkInProgressViewModel: ViewModel {
   // MARK: - Property
   let disposeBag = DisposeBag()
   weak var coordinator: WalkCoordinator?
-  private let createImageFileUsecase: any CreateImageFileUsecase
-  private let createDirectoryUsecase: any CreateDirectoryUsecase
-  private let createWalkUsecase: any CreateWalkUsecase
+  private let imageRepository: any ImageRepository
+  private let walkRepository: any WalkRepository
   
   var numberOfItems: Int {
     return imagesDataRelay.value.count
   }
   
+  private var photoDirectoryName: String {
+    return walkRelay.value.id.uuidString
+  }
+  
+  private var currentFileIndex: Int {
+    return imagesDataRelay.value.count
+  }
+  
   // MARK: - Initializer
   init(
-    createImageFileUsecase: some CreateImageFileUsecase,
-    createDirectoryUsecase: some CreateDirectoryUsecase,
-    createWalkUsecase: some CreateWalkUsecase
+    imageRepository: some ImageRepository,
+    walkRepository: some WalkRepository
   ) {
-    self.createImageFileUsecase = createImageFileUsecase
-    self.createDirectoryUsecase = createDirectoryUsecase
-    self.createWalkUsecase = createWalkUsecase
+    self.imageRepository = imageRepository
+    self.walkRepository = walkRepository
   }
   
   deinit {
@@ -62,10 +67,10 @@ final class WalkInProgressViewModel: ViewModel {
       .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
       .withUnretained(self)
       .flatMap { owner, data in
-        return owner.createImageFileUsecase.execute(
+        return owner.imageRepository.create(
           imageData: data,
-          directoryName: owner.walkRelay.value.id.uuidString,
-          fileIndex: owner.imagesDataRelay.value.count
+          directoryName: owner.photoDirectoryName,
+          fileIndex: owner.currentFileIndex
         )
       }
       .observe(on: MainScheduler.instance)
@@ -134,13 +139,13 @@ final class WalkInProgressViewModel: ViewModel {
       let initialDiary: Diary = .initialDiary(photoIndicies: [], walk: walk)
       coordinator?.showWriteDiaryView(walk: walk, diary: initialDiary, imageDataList: [])
       
-      createDirectoryUsecase.execute(directoryName: walk.id.uuidString)
+      imageRepository.createDirectory(directoryName: photoDirectoryName)
         .subscribe(with: self, onFailure: { owner, error in
           LogManager.shared.log(with: error, to: .local)
         })
         .disposed(by: disposeBag)
       
-      createWalkUsecase.execute(with: walk)
+      walkRepository.create(with: walk)
         .subscribe()
         .disposed(by: disposeBag)
     }
@@ -167,9 +172,8 @@ final class WalkInProgressViewModel: ViewModel {
   
   func requestImageForSimulator() -> Observable<Data> {
     
-    let width = 5000
-    let height = 6000
-    let url = "https://picsum.photos/\(width)"
+    let size = 5000
+    let url = "https://picsum.photos/\(size)"
     
 #if DEBUG
     LogManager.shared.log(with: "요청 URL : " + url, to: .local, level: .debug)

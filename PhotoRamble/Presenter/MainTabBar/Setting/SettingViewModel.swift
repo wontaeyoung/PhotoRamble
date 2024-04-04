@@ -29,19 +29,19 @@ final class SettingViewModel: ViewModel {
   // MARK: - Property
   let disposeBag = DisposeBag()
   weak var coordinator: SettingCoordinator?
-  private let fetchAppVersionUsecase: any FetchAppVersionUsecase
-  private let canAccessCameraUsecase: any CanAccessCameraUsecase
-  private let deleteAllDiaryUsecase: any DeleteAllDiaryUsecase
+  private let appPermissionRepository: any AppPermissionRepository
+  private let appInfoRepository: any AppInfoRepository
+  private let diaryRepository: any DiaryRepository
   
   // MARK: - Initializer
   init(
-    fetchAppVersionUsecase: some FetchAppVersionUsecase,
-    canAccessCameraUsecase: some CanAccessCameraUsecase,
-    deleteAllDiaryUsecase: some DeleteAllDiaryUsecase
+    appPermissionRepository: any AppPermissionRepository,
+    appInfoRepository: any AppInfoRepository,
+    diaryRepository: any DiaryRepository
   ) {
-    self.fetchAppVersionUsecase = fetchAppVersionUsecase
-    self.canAccessCameraUsecase = canAccessCameraUsecase
-    self.deleteAllDiaryUsecase = deleteAllDiaryUsecase
+    self.appPermissionRepository = appPermissionRepository
+    self.appInfoRepository = appInfoRepository
+    self.diaryRepository = diaryRepository
   }
   
   // MARK: - Method
@@ -55,7 +55,7 @@ final class SettingViewModel: ViewModel {
       .bind(to: input.requestCheckingCameraAccessEvent)
       .disposed(by: disposeBag)
     
-    fetchAppVersionUsecase.execute()
+    appInfoRepository.fetchVersion()
       .map { "v " + $0 }
       .subscribe(with: self) { owner, version in
         appVersion.accept(version)
@@ -76,7 +76,7 @@ final class SettingViewModel: ViewModel {
     input.requestCheckingCameraAccessEvent
       .withUnretained(self)
       .flatMap { owner, _ in
-        return owner.canAccessCameraUsecase.execute()
+        return owner.appPermissionRepository.isCameraAuthorized()
       }
       .subscribe(with: self) { owner, canAccess in
         isCameraAuthorized.accept(canAccess)
@@ -109,10 +109,10 @@ final class SettingViewModel: ViewModel {
         
       case .openSource:
         coordinator?.showSettingWebView(webCase: .openSource)
-      
+        
       case .clearDiary:
         showClearDiaryAlert()
-      
+        
       case .version:
         break
     }
@@ -131,7 +131,7 @@ final class SettingViewModel: ViewModel {
     ) { [weak self] in
       guard let self else { return }
       
-      deleteAllDiaryUsecase.execute()
+      diaryRepository.deleteAll()
         .subscribe(with: self) { owner, diaries in
           owner.clearDiaryCompleted.accept(diaries.count)
         } onFailure: { owner, error in

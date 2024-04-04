@@ -31,19 +31,14 @@ extension SettingCoordinator {
     
     let service = LiveRealmService()
     let mapper = DiaryMapper()
-    
-    let appInfoRepository = AppInfoRepositoryImpl()
     let appPermissionRepository = AppPermissionRepositoryImpl()
+    let appInfoRepository = AppInfoRepositoryImpl()
     let diaryRepository = DiaryRepositoryImpl(service: service, mapper: mapper)
     
-    let fetchAppVersionUsecase = FetchAppVersionUsecaseImpl(appInfoRepository: appInfoRepository)
-    let canAccessCameraUsecase = CanAccessCameraUsecaseImpl(appPermissionRepository: appPermissionRepository)
-    let deleteAllDiaryUsecase = DeleteAllDiaryUsecaseImpl(diaryRepository: diaryRepository)
-    
     let viewModel = SettingViewModel(
-      fetchAppVersionUsecase: fetchAppVersionUsecase,
-      canAccessCameraUsecase: canAccessCameraUsecase,
-      deleteAllDiaryUsecase: deleteAllDiaryUsecase
+      appPermissionRepository: appPermissionRepository,
+      appInfoRepository: appInfoRepository,
+      diaryRepository: diaryRepository
     )
       .coordinator(self)
     

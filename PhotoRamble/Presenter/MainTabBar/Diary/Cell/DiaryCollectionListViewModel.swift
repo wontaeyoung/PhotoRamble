@@ -25,11 +25,11 @@ final class DiaryCollectionListViewModel: ViewModel {
   // MARK: - Property
   let disposeBag = DisposeBag()
   weak var coordinator: DiaryCoordinator?
-  private let fetchImageFileUsecase: any FetchImageFileUsecase
+  private let imageRepository: any ImageRepository
   
   // MARK: - Initializer
-  init(fetchImageFileUsecase: some FetchImageFileUsecase) {
-    self.fetchImageFileUsecase = fetchImageFileUsecase
+  init(imageRepository: some ImageRepository) {
+    self.imageRepository = imageRepository
   }
   
   // MARK: - Method
@@ -46,8 +46,7 @@ final class DiaryCollectionListViewModel: ViewModel {
         contentText.accept(diary.content)
       })
       .flatMap { owner, diary in
-        return owner.fetchImageFileUsecase.execute(directoryName: diary.walkID.uuidString)
-          .asObservable()
+        return owner.imageRepository.fetch(directoryName: diary.walkID.uuidString)
       }
       .bind(to: photos)
       .disposed(by: disposeBag)

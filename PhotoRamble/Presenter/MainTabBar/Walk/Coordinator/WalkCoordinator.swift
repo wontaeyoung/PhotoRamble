@@ -44,14 +44,10 @@ extension WalkCoordinator {
     let walkMapper = WalkMapper(locationMapper: locationMapper)
     let imageRepository = ImageRepositoryImpl()
     let walkRepository = WalkRepositoryImpl(service: service, mapper: walkMapper)
-    let createImageFileUsecase = CreateImageFileUsecaseImpl(imageRepository: imageRepository)
-    let createDirectoryUsecase = CreateDirectoryUsecaseImpl(imageRepository: imageRepository)
-    let createWalkUsecase = CreateWalkUsecaseImpl(walkRepository: walkRepository)
     
     let viewModel = WalkInProgressViewModel(
-      createImageFileUsecase: createImageFileUsecase,
-      createDirectoryUsecase: createDirectoryUsecase,
-      createWalkUsecase: createWalkUsecase
+      imageRepository: imageRepository, 
+      walkRepository: walkRepository
     )
       .coordinator(self)
     
@@ -70,13 +66,11 @@ extension WalkCoordinator {
     let walkMapper = WalkMapper(locationMapper: locationMapper)
     let imageRepository = ImageRepositoryImpl()
     let walkRepository = WalkRepositoryImpl(service: service, mapper: walkMapper)
-    let replaceImageFileUsecase = ReplaceImageFileUsecaseImpl(imageRepository: imageRepository)
-    let createWalkUsecase = CreateWalkUsecaseImpl(walkRepository: walkRepository)
     
     let viewModel = WalkPhotoSelectionViewModel(
       walkRelay: walkRealy,
-      replaceImageFileUsecase: replaceImageFileUsecase,
-      createWalkUsecase: createWalkUsecase
+      imageRepository: imageRepository,
+      walkRepository: walkRepository
     )
       .coordinator(self)
     
@@ -90,17 +84,15 @@ extension WalkCoordinator {
   func showWriteDiaryView(walk: Walk, diary: Diary, imageDataList: [Data]) {
     let service = LiveRealmService()
     let mapper = DiaryMapper()
-    let diaryRepository = DiaryRepositoryImpl(service: service, mapper: mapper)
     let imageRepository = ImageRepositoryImpl()
-    let createDiaryUsecase = CreateDiaryUsecaseImpl(diaryRepository: diaryRepository)
-    let deleteImageFileUsecase = DeleteImageFileUsecaseImpl(imageRepository: imageRepository)
+    let diaryRepository = DiaryRepositoryImpl(service: service, mapper: mapper)
     
     let viewModel = WriteDiaryViewModel(
       style: .initial,
       walk: walk,
       diary: diary,
-      createDiaryUsecase: createDiaryUsecase,
-      deleteImageFileUsecase: deleteImageFileUsecase
+      imageRepository: imageRepository,
+      diaryRepository: diaryRepository
     )
       .coordinator(self)
     

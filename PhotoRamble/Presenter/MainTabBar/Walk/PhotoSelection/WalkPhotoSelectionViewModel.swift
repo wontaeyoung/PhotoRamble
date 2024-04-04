@@ -27,18 +27,26 @@ final class WalkPhotoSelectionViewModel: ViewModel {
   // MARK: - Property
   let disposeBag = DisposeBag()
   weak var coordinator: WalkCoordinator?
-  private let replaceImageFileUsecase: any ReplaceImageFileUsecase
-  private let createWalkUsecase: any CreateWalkUsecase
+  private let imageRepository: any ImageRepository
+  private let walkRepository: any WalkRepository
+
+  private var photoDirectoryName: String {
+    return walkRelay.value.id.uuidString
+  }
+  
+  private var currentWalk: Walk {
+    return walkRelay.value
+  }
   
   // MARK: - Initializer
   init(
     walkRelay: BehaviorRelay<Walk>,
-    replaceImageFileUsecase: some ReplaceImageFileUsecase,
-    createWalkUsecase: some CreateWalkUsecase
+    imageRepository: some ImageRepository,
+    walkRepository: some WalkRepository
   ) {
     self.walkRelay = walkRelay
-    self.replaceImageFileUsecase = replaceImageFileUsecase
-    self.createWalkUsecase = createWalkUsecase
+    self.imageRepository = imageRepository
+    self.walkRepository = walkRepository
   }
   
   // MARK: - Method
@@ -62,10 +70,13 @@ final class WalkPhotoSelectionViewModel: ViewModel {
     
     input.fixPhotoSelectionEvent
       .withUnretained(self)
+      .flatMap { owner, _ in
+        return owner.imageRepository.deleteAll(directoryName: owner.photoDirectoryName)
+      }
+      .withLatestFrom(input.fixPhotoSelectionEvent)
+      .withUnretained(self)
       .flatMap { owner, imageDataList in
-        owner.replaceImageFileUsecase
-          .execute(imageDataList: imageDataList, directoryName: owner.walkRelay.value.id.uuidString)
-          .asObservable()
+        return owner.imageRepository.create(imageDataList: imageDataList, directoryName: owner.photoDirectoryName)
       }
       .withUnretained(self)
       .flatMap { owner, imageDataList in
@@ -76,7 +87,7 @@ final class WalkPhotoSelectionViewModel: ViewModel {
       }
       .withUnretained(self)
       .flatMap { owner, result in
-        let createWalk = owner.createWalkUsecase.execute(with: owner.walkRelay.value)
+        let createWalk = owner.walkRepository.create(with: owner.currentWalk)
         let (diary, imageDataList) = result
         
         return createWalk.map { walk in (walk, diary, imageDataList) }
@@ -100,12 +111,12 @@ final class WalkPhotoSelectionViewModel: ViewModel {
   private func makeInitialDiary(photoIndices: Range<Int>) -> Diary {
     return .initialDiary(
       photoIndicies: photoIndices.map { $0 },
-      walk: walkRelay.value
+      walk: currentWalk
     )
   }
   
   private func prepareWalkForNextFlow(diaryID: UUID) {
-    let updatedWalk = walkRelay.value.applied { $0.diaryID = diaryID }
+    let updatedWalk = currentWalk.applied { $0.diaryID = diaryID }
     walkRelay.accept(updatedWalk)
   }
 }
