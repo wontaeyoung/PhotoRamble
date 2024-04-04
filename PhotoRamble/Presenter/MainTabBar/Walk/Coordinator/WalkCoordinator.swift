@@ -84,17 +84,15 @@ extension WalkCoordinator {
   func showWriteDiaryView(walk: Walk, diary: Diary, imageDataList: [Data]) {
     let service = LiveRealmService()
     let mapper = DiaryMapper()
-    let diaryRepository = DiaryRepositoryImpl(service: service, mapper: mapper)
     let imageRepository = ImageRepositoryImpl()
-    let createDiaryUsecase = CreateDiaryUsecaseImpl(diaryRepository: diaryRepository)
-    let deleteImageFileUsecase = DeleteImageFileUsecaseImpl(imageRepository: imageRepository)
+    let diaryRepository = DiaryRepositoryImpl(service: service, mapper: mapper)
     
     let viewModel = WriteDiaryViewModel(
       style: .initial,
       walk: walk,
       diary: diary,
-      createDiaryUsecase: createDiaryUsecase,
-      deleteImageFileUsecase: deleteImageFileUsecase
+      imageRepository: imageRepository,
+      diaryRepository: diaryRepository
     )
       .coordinator(self)
     
