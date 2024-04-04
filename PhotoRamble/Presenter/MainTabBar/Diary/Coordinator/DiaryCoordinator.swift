@@ -33,14 +33,12 @@ extension DiaryCoordinator {
     let diaryMapper = DiaryMapper()
     let locationMapper = LocationMapper()
     let walkMapper = WalkMapper(locationMapper: locationMapper)
-    let diaryRepository = DiaryRepositoryImpl(service: service, mapper: diaryMapper)
     let walkRepository = WalkRepositoryImpl(service: service, mapper: walkMapper)
-    let fetchDiaryUsecase = FetchDiaryUsecaseImpl(diaryRepository: diaryRepository)
-    let fetchWalkUsecase = FetchWalkUsecaseImpl(walkRepository: walkRepository)
+    let diaryRepository = DiaryRepositoryImpl(service: service, mapper: diaryMapper)
     
     let viewModel = DiaryListViewModel(
-      fetchDiaryUsecase: fetchDiaryUsecase,
-      fetchWalkUsecase: fetchWalkUsecase
+      walkRepository: walkRepository,
+      diaryRepository: diaryRepository
     )
       .coordinator(self)
     
@@ -54,8 +52,7 @@ extension DiaryCoordinator {
   func showDiaryDetailView(diary: Diary, walk: Walk) {
     
     let imageRepository = ImageRepositoryImpl()
-    let fetchImageUsecase = FetchImageFileUsecaseImpl(imageRepository: imageRepository)
-    let viewModel = DiaryDetailViewModel(diary: diary, walk: walk, fetchImageUsecase: fetchImageUsecase)
+    let viewModel = DiaryDetailViewModel(diary: diary, walk: walk, imageRepository: imageRepository)
       .coordinator(self)
     
     let viewController = DiaryDetailViewController(viewModel: viewModel)

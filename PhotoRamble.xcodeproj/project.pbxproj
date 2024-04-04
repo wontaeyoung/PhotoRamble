@@ -411,11 +411,11 @@
 				6E53C6A82B998A0F0034649D /* App */,
 				6E53C6A92B998A110034649D /* Config */,
 				6E53C6AA2B998A130034649D /* Data */,
-				6E53C6AB2B998A150034649D /* Domain */,
 				6E53C6AC2B998A170034649D /* Presenter */,
 				6E53C6AE2B998F6E0034649D /* Resource */,
 				6E53C6AD2B998A4C0034649D /* Utility */,
 				6E5A93142B99B37C00A0CE6C /* DesignSystem */,
+				6E623FF92BBE3278005660C8 /* Archive */,
 			);
 			path = PhotoRamble;
 			sourceTree = "<group>";
@@ -444,10 +444,9 @@
 		6E53C6AA2B998A130034649D /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				6E86ABC02B9CA55500AADB50 /* Service */,
 				6E86ABBF2B9CA15900AADB50 /* Repository */,
-				6E86ABBE2B9CA15300AADB50 /* DTO */,
-				6E86ABC32B9CA88800AADB50 /* Mapper */,
+				6E623FF82BBD9E54005660C8 /* Model */,
+				6E86ABC02B9CA55500AADB50 /* Service */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -455,8 +454,6 @@
 		6E53C6AB2B998A150034649D /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				6E86ABBD2B9CA14F00AADB50 /* Entity */,
-				6E5A92C92B999F0900A0CE6C /* Repository */,
 				6E5A92C82B999F0600A0CE6C /* Usecase */,
 			);
 			path = Domain;
@@ -465,6 +462,7 @@
 		6E53C6AC2B998A170034649D /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				6E5A92C92B999F0900A0CE6C /* Repository */,
 				6EFFED342B9E111400B9A238 /* Common */,
 				6EFFED332B9E110F00B9A238 /* MainTabBar */,
 				6EFFED322B9E110700B9A238 /* Onboarding */,
@@ -600,6 +598,24 @@
 				6E5C188C2BB0A9A4009488F2 /* SettingCoordinator.swift */,
 			);
 			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		6E623FF82BBD9E54005660C8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6E86ABBD2B9CA14F00AADB50 /* Entity */,
+				6E86ABBE2B9CA15300AADB50 /* DTO */,
+				6E86ABC32B9CA88800AADB50 /* Mapper */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6E623FF92BBE3278005660C8 /* Archive */ = {
+			isa = PBXGroup;
+			children = (
+				6E53C6AB2B998A150034649D /* Domain */,
+			);
+			path = Archive;
 			sourceTree = "<group>";
 		};
 		6E82E7002BA963ED00892EC3 /* Walk */ = {
@@ -1505,7 +1521,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 75QZ7682T2;
 				ENABLE_APP_SANDBOX = NO;
@@ -1522,7 +1538,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Kaz.PhotoRamble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1543,7 +1559,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 75QZ7682T2;
 				ENABLE_APP_SANDBOX = NO;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -1559,7 +1575,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Kaz.PhotoRamble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
