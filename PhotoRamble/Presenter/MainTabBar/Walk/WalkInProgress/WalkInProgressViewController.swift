@@ -109,9 +109,12 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
   override func bind() {
     
     let input = WalkInProgressViewModel.Input(
+      viewDidLoadEvent: .init(),
       takenNewPhotoDataEvent: PublishRelay<Data>(),
       walkCompleteButtonTapEvent: PublishRelay<Void>()
     )
+    
+    let output = viewModel.transform(input: input)
     
     /// UIImage -> Data 변환 후 전달
     imageRelay
@@ -137,8 +140,6 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
     walkCompleteButton.rx.tap
       .bind(to: input.walkCompleteButtonTapEvent)
       .disposed(by: disposeBag)
-    
-    let output = viewModel.transform(input: input)
     
     /// [Data] -> [UIImage] 변환 후 사진 리스트 업데이트
     output.imageDataList
@@ -166,6 +167,8 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
         }
       })
       .disposed(by: disposeBag)
+    
+    input.viewDidLoadEvent.accept(())
   }
   
   private func showingCamera() {
