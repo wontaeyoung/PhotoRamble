@@ -61,6 +61,10 @@ final class WriteDiaryViewModel: ViewModel {
     return diaryRelay.value
   }
   
+  private var currentContent: String {
+    return contentRelay.value
+  }
+  
   private var photoDirectoryName: String {
     return currentWalk.id.uuidString
   }
@@ -83,10 +87,10 @@ final class WriteDiaryViewModel: ViewModel {
   // MARK: - Method
   func transform(input: Input) -> Output {
     
-    let dateText: Signal<String> = Observable.just(walkDateString(date: walkRelay.value.startAt))
+    let dateText: Signal<String> = Observable.just(walkDateString(date: currentWalk.startAt))
       .asSignal(onErrorJustReturn: "-")
     
-    let walkTimeInterval: Signal<String> = Observable.just(walkTimeString(duration: walkRelay.value.walkDuration))
+    let walkTimeInterval: Signal<String> = Observable.just(walkTimeString(duration: currentWalk.walkDuration))
       .asSignal(onErrorJustReturn: DateManager.shared.toString(with: 0, format: .HHmmssKR))
     
     let deleteCompleted = PublishRelay<Int>()
@@ -156,11 +160,11 @@ final class WriteDiaryViewModel: ViewModel {
   }
   
   private func removedFileIndex(at index: Int) -> Int {
-    return diaryRelay.value.photoIndices[index]
+    return currentDiary.photoIndices[index]
   }
   
   private func deletePhotoIndex(at index: Int) {
-    let updatedDiary = diaryRelay.value.applied {
+    let updatedDiary = currentDiary.applied {
       $0.photoIndices = $0.photoIndices.removed(at: index)
     }
     
@@ -168,9 +172,9 @@ final class WriteDiaryViewModel: ViewModel {
   }
   
   private func prepareEntitiesForNextFlow() {
-    let updatedDiary = diaryRelay.value.applied {
+    let updatedDiary = currentDiary.applied {
       $0.writingStatus = .done
-      $0.content = contentRelay.value
+      $0.content = currentContent
     }
     
     diaryRelay.accept(updatedDiary)
