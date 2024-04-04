@@ -34,6 +34,7 @@ final class WalkInProgressViewModel: ViewModel {
   private let imageRepository: any ImageRepository
   private let walkRepository: any WalkRepository
   private var timer: Timer?
+  private var backgroundTimeIntervalManager = BackgroundTimeIntervalManager()
   
   var numberOfItems: Int {
     return imagesDataRelay.value.count
@@ -100,32 +101,27 @@ final class WalkInProgressViewModel: ViewModel {
     
     input.walkCompleteButtonTapEvent
       .withLatestFrom(imagesDataRelay)
-      .subscribe(with: self, onNext: { owner, dataList in
+      .bind(with: self) { owner, dataList in
         owner.processCompleteEvent(imageDataList: dataList)
-      })
+      }
+      .disposed(by: disposeBag)
+    
+    BindingContainer.shared.didEnterBackgroundEvent
+      .bind(with: self) { owner, _ in
+        owner.logLeaveForegroundTime()
+      }
+      .disposed(by: disposeBag)
+    
+    BindingContainer.shared.didEnterForegroundEvent
+      .bind(with: self) { owner, _ in
+        owner.addBackgroundTimeInterval()
+      }
       .disposed(by: disposeBag)
     
     return Output(
       imageDataList: imagesDataRelay.asDriver(),
       timerLabelText: timerText.asSignal(onErrorJustReturn: "--:--:--")
     )
-  }
-  
-  private func timerTick() {
-    timeIntervalRelay.accept(timeIntervalRelay.value + 1)
-  }
-  
-  private func clearTimer() {
-    timer?.invalidate()
-  }
-  
-  private func startTimer() {
-    clearTimer()
-    
-    timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
-      guard let self else { return }
-      timerTick()
-    }
   }
   
   private func updateImageDataList(with newData: Data) {
@@ -205,5 +201,54 @@ final class WalkInProgressViewModel: ViewModel {
       .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
       .compactMap { URL(string: $0) }
       .compactMap { try Data(contentsOf: $0) }
+  }
+}
+
+// MARK: - Timer
+extension WalkInProgressViewModel {
+  struct BackgroundTimeIntervalManager {
+    private var leaveTime: Date?
+    
+    mutating func logLeaveTime() {
+      self.leaveTime = .now
+    }
+    
+    mutating func backgroundTimeInterval() -> TimeInterval {
+      guard let leaveTime else {
+        return 0
+      }
+      
+      let interval = Date.now.timeIntervalSince(leaveTime)
+      self.leaveTime = nil
+      
+      return interval
+    }
+  }
+  
+  private func timerTick() {
+    timeIntervalRelay.accept(timeIntervalRelay.value + 1)
+  }
+  
+  private func logLeaveForegroundTime() {
+    backgroundTimeIntervalManager.logLeaveTime()
+  }
+  
+  private func addBackgroundTimeInterval() {
+    let interval = backgroundTimeIntervalManager.backgroundTimeInterval()
+    
+    timeIntervalRelay.accept(timeIntervalRelay.value + interval)
+  }
+  
+  private func clearTimer() {
+    timer?.invalidate()
+  }
+  
+  private func startTimer() {
+    clearTimer()
+    
+    timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+      guard let self else { return }
+      timerTick()
+    }
   }
 }
