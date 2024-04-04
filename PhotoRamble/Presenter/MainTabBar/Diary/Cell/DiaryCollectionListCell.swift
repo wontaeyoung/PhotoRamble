@@ -132,8 +132,7 @@ final class DiaryCollectionListCell: RXBaseCollectionViewListCell {
   
   private func injectViewModel() -> DiaryCollectionListViewModel {
     let repository = ImageRepositoryImpl()
-    let fetchImageFileUsecase = FetchImageFileUsecaseImpl(imageRepository: repository)
-    return DiaryCollectionListViewModel(fetchImageFileUsecase: fetchImageFileUsecase)
+    return DiaryCollectionListViewModel(imageRepository: repository)
   }
   
   private func updateCollectionLayout() {

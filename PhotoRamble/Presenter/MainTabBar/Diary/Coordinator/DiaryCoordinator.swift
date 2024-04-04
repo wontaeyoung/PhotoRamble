@@ -33,14 +33,12 @@ extension DiaryCoordinator {
     let diaryMapper = DiaryMapper()
     let locationMapper = LocationMapper()
     let walkMapper = WalkMapper(locationMapper: locationMapper)
-    let diaryRepository = DiaryRepositoryImpl(service: service, mapper: diaryMapper)
     let walkRepository = WalkRepositoryImpl(service: service, mapper: walkMapper)
-    let fetchDiaryUsecase = FetchDiaryUsecaseImpl(diaryRepository: diaryRepository)
-    let fetchWalkUsecase = FetchWalkUsecaseImpl(walkRepository: walkRepository)
+    let diaryRepository = DiaryRepositoryImpl(service: service, mapper: diaryMapper)
     
     let viewModel = DiaryListViewModel(
-      fetchDiaryUsecase: fetchDiaryUsecase,
-      fetchWalkUsecase: fetchWalkUsecase
+      walkRepository: walkRepository,
+      diaryRepository: diaryRepository
     )
       .coordinator(self)
     

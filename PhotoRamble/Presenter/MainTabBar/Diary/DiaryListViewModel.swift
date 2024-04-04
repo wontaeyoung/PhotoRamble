@@ -27,16 +27,16 @@ final class DiaryListViewModel: ViewModel {
   // MARK: - Property
   let disposeBag = DisposeBag()
   weak var coordinator: DiaryCoordinator?
-  private let fetchDiaryUsecase: any FetchDiaryUsecase
-  private let fetchWalkUsecase: any FetchWalkUsecase
+  private let walkRepository: any WalkRepository
+  private let diaryRepository: any DiaryRepository
   
   // MARK: - Initializer
   init(
-    fetchDiaryUsecase: some FetchDiaryUsecase,
-    fetchWalkUsecase: some FetchWalkUsecase
+    walkRepository: some WalkRepository,
+    diaryRepository: some DiaryRepository
   ) {
-    self.fetchDiaryUsecase = fetchDiaryUsecase
-    self.fetchWalkUsecase = fetchWalkUsecase
+    self.walkRepository = walkRepository
+    self.diaryRepository = diaryRepository
   }
   
   // MARK: - Method
@@ -45,8 +45,7 @@ final class DiaryListViewModel: ViewModel {
     input.viewDidLoadEvent
       .withUnretained(self)
       .flatMap { owner, _ in
-        return owner.fetchDiaryUsecase.execute()
-          .asObservable()
+        return owner.diaryRepository.fetch()
       }
       .subscribe(with: self) { owner, diaries in
         owner.diariesRelay.accept(diaries)
@@ -57,8 +56,7 @@ final class DiaryListViewModel: ViewModel {
       .map { self.diary(at: $0) }
       .withUnretained(self)
       .flatMap { owner, diary in
-        return owner.fetchWalkUsecase.execute(walkID: diary.walkID)
-          .asObservable()
+        return owner.walkRepository.fetch(walkID: diary.walkID)
           .map { ($0, diary) }
       }
       .subscribe(with: self) { owner, result in
