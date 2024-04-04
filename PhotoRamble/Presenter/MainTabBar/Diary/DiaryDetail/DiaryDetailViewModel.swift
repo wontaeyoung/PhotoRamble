@@ -31,32 +31,40 @@ final class DiaryDetailViewModel: ViewModel {
   // MARK: - Property
   let disposeBag = DisposeBag()
   weak var coordinator: DiaryCoordinator?
-  private let fetchImageUsecase: any FetchImageFileUsecase
+  private let imageRepository: any ImageRepository
   
   var numberOfItems: Int {
     return imageDataList.value.count
   }
   
+  private var currentWalk: Walk {
+    return walk.value
+  }
+  
+  private var photoDirectoryName: String {
+    return currentWalk.id.uuidString
+  }
+  
   // MARK: - Initializer
-  init(diary: Diary, walk: Walk, fetchImageUsecase: some FetchImageFileUsecase) {
-    self.imageDataList = BehaviorRelay(value: [])
-    self.diary = BehaviorRelay(value: diary)
-    self.walk = BehaviorRelay(value: walk)
-    self.fetchImageUsecase = fetchImageUsecase
+  init(diary: Diary, walk: Walk, imageRepository: some ImageRepository) {
+    self.imageDataList = .init(value: [])
+    self.diary = .init(value: diary)
+    self.walk = .init(value: walk)
+    self.imageRepository = imageRepository
   }
   
   // MARK: - Method
   func transform(input: Input) -> Output {
     
-    fetchImageUsecase.execute(directoryName: walk.value.id.uuidString)
+    imageRepository.fetch(directoryName: photoDirectoryName)
       .asDriver(onErrorJustReturn: [])
       .drive(imageDataList)
       .disposed(by: disposeBag)
     
-    let dateText = Observable.just(walkDateString(date: walk.value.startAt))
+    let dateText = Observable.just(walkDateString(date: currentWalk.startAt))
       .asDriver(onErrorJustReturn: "-")
     
-    let walkTimeText = Observable.just(walkTimeString(duration: walk.value.walkDuration))
+    let walkTimeText = Observable.just(walkTimeString(duration: currentWalk.walkDuration))
       .asDriver(onErrorJustReturn: DateManager.shared.elapsedTime(0, format: .HHmmssKR))
     
     let contentText = Observable.just(diary.value.content)

@@ -52,8 +52,7 @@ extension DiaryCoordinator {
   func showDiaryDetailView(diary: Diary, walk: Walk) {
     
     let imageRepository = ImageRepositoryImpl()
-    let fetchImageUsecase = FetchImageFileUsecaseImpl(imageRepository: imageRepository)
-    let viewModel = DiaryDetailViewModel(diary: diary, walk: walk, fetchImageUsecase: fetchImageUsecase)
+    let viewModel = DiaryDetailViewModel(diary: diary, walk: walk, imageRepository: imageRepository)
       .coordinator(self)
     
     let viewController = DiaryDetailViewController(viewModel: viewModel)
