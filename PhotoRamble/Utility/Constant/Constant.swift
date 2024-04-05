@@ -15,4 +15,8 @@ enum Constant {
   enum RegPattern {
     static let appVersion: String = #"^\d+\.\d+\.\d+$"#
   }
+  
+  enum FileName {
+    static let startWalkLottieJson: String = "StartWalkSplash"
+  }
 }
