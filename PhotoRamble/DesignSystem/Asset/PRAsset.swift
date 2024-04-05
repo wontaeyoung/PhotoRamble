@@ -72,8 +72,9 @@ enum PRAsset {
     static let prToastMessage: UIFont = font(.semiBold, size: 15)
     
     static let prTimerLabel: UIFont = font(.semiBold, size: 19)
+    static let prPrimaryInfoLabel: UIFont = font(.bold, size: 21)
     static let prMainInfoLabel: UIFont = font(.semiBold, size: 15)
-    static let prSubInfoLabel: UIFont = font(.regular, size: 13)
+    static let prSubInfoLabel: UIFont = font(.regular, size: 15)
     static let prCaptionLabel: UIFont = font(.regular, size: 11)
     
     static let prContentText: UIFont = font(.regular, size: 15)

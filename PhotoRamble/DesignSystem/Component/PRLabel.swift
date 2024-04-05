@@ -42,6 +42,13 @@ internal class PRLabel: UILabel {
           $0.numberOfLines = 1
         }
         
+      case .primaryInfo:
+        self.configure {
+          $0.font = PRAsset.Font.prPrimaryInfoLabel
+          $0.textColor = PRAsset.Color.prMainInfo
+          $0.numberOfLines = 0
+        }
+        
       case .mainInfo:
         self.configure {
           $0.font = PRAsset.Font.prMainInfoLabel
@@ -90,6 +97,7 @@ internal extension PRLabel {
   enum Style {
     case mainTitle
     case timer
+    case primaryInfo
     case mainInfo
     case subInfo
     case content
