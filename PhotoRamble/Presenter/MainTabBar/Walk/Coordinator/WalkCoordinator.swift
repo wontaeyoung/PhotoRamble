@@ -38,6 +38,17 @@ extension WalkCoordinator {
     push(viewController)
   }
   
+  func showStartWalkSplashView() {
+    let viewMoidel = StartWalkSplashViewModel()
+      .coordinator(self)
+    
+    let viewController = StartWalkSplashViewController(viewModel: viewMoidel)
+      .hideBackButton()
+      .hideTabBar()
+    
+    push(viewController, animation: false)
+  }
+  
   func showWalkInProgressView() {
     let service = LiveRealmService()
     let locationMapper = LocationMapper()
@@ -54,7 +65,6 @@ extension WalkCoordinator {
     let viewController = WalkInProgressViewController(viewModel: viewModel)
       .navigationTitle(with: "산책하기", displayMode: .never)
       .hideBackButton()
-      .hideTabBar()
     
     push(viewController)
   }

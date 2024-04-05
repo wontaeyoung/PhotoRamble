@@ -35,7 +35,7 @@ final class WalkViewModel: ViewModel {
     input.walkButtonTapEvent
       .withUnretained(self)
       .subscribe(onNext: { owner, _ in
-        owner.coordinator?.showWalkInProgressView()
+        owner.coordinator?.showStartWalkSplashView()
       })
       .disposed(by: disposeBag)
     
