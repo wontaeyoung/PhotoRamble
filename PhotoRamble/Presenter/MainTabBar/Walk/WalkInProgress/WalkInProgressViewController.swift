@@ -123,10 +123,9 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       .disposed(by: disposeBag)
     
     imageRelay
-      .observe(on: MainScheduler.instance)
-      .asObservable()
       .take(1)
-      .subscribe(with: self, onNext: { owner, _ in
+      .thread(.main)
+      .bind(with: self, onNext: { owner, _ in
         owner.hideNoPhotoLabel()
       })
       .disposed(by: disposeBag)
