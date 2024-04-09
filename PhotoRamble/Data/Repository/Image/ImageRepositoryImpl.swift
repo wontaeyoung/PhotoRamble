@@ -48,7 +48,7 @@ final class ImageRepositoryImpl: ImageRepository {
     return .just(imageDataList)
   }
   
-  func deleteAll(directoryName: String) -> Single<Void> {
+  func deleteImages(directoryName: String) -> Single<Void> {
     
     let router = PhotoFileRouter(
       directory: directoryName,

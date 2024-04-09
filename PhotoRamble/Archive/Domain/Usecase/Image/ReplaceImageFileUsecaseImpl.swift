@@ -20,7 +20,7 @@ final class ReplaceImageFileUsecaseImpl: ReplaceImageFileUsecase {
   
   // MARK: - Method
   func execute(imageDataList: [Data], directoryName: String) -> Single<[Data]> {
-    return imageRepository.deleteAll(directoryName: directoryName)
+    return imageRepository.deleteImages(directoryName: directoryName)
       .flatMap {
         self.imageRepository.create(imageDataList: imageDataList, directoryName: directoryName)
       }

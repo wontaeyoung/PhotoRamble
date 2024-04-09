@@ -71,7 +71,7 @@ final class WalkPhotoSelectionViewModel: ViewModel {
     input.fixPhotoSelectionEvent
       .withUnretained(self)
       .flatMap { owner, _ in
-        return owner.imageRepository.deleteAll(directoryName: owner.photoDirectoryName)
+        return owner.imageRepository.deleteImages(directoryName: owner.photoDirectoryName)
       }
       .withLatestFrom(input.fixPhotoSelectionEvent)
       .withUnretained(self)
