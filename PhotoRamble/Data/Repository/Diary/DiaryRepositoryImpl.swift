@@ -56,7 +56,7 @@ final class DiaryRepositoryImpl: DiaryRepository {
       
       return .just(diaries)
     } catch {
-      return .error(PRError.RealmRepository.fetchFailed(error: error, modelName: "일기"))
+      return .error(PRError.RealmRepository.deleteAllFailed(error: error, modelName: "일기"))
     }
   }
 }
