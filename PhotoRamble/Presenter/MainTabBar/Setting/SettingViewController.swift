@@ -57,8 +57,8 @@ final class SettingViewController: RXBaseViewController, ViewModelController {
   
   override func bind() {
     let input = SettingViewModel.Input(
-      requestCheckingCameraAccessEvent: PublishRelay(),
-      settingRowTapEvent: PublishRelay()
+      requestCheckingCameraAccessEvent: .init(),
+      settingRowTapEvent: .init()
     )
     
     let output = viewModel.transform(input: input)
