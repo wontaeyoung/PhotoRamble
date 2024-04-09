@@ -14,6 +14,7 @@ final class WalkInProgressViewModel: ViewModel {
   // MARK: - I / O
   struct Input {
     let viewDidLoadEvent: PublishRelay<Void>
+    let leaveWalkButtonTapEvent: PublishRelay<Void>
     let takenNewPhotoDataEvent: PublishRelay<Data>
     let walkCompleteButtonTapEvent: PublishRelay<Void>
   }
@@ -82,6 +83,12 @@ final class WalkInProgressViewModel: ViewModel {
       }
       .disposed(by: disposeBag)
     
+    input.leaveWalkButtonTapEvent
+      .bind(with: self) { owner, _ in
+        owner.showLeaveWalkAlert()
+      }
+      .disposed(by: disposeBag)
+    
     input.takenNewPhotoDataEvent
       .withUnretained(self)
       .flatMap { owner, imageData in
@@ -133,6 +140,19 @@ final class WalkInProgressViewModel: ViewModel {
         walkRealy: walkRelay,
         imageDataList: imageDataList
       )
+    }
+  }
+  
+  private func showLeaveWalkAlert() {
+    coordinator?.showAlert(
+      title: "산책을 종료하시겠어요?",
+      message: "지금까지 촬영한 사진이 사라져요",
+      okTitle: "종료하기",
+      okStyle: .destructive,
+      isCancelable: true
+    ) { [weak self] in
+      guard let self else { return }
+      coordinator?.popToRoot()
     }
   }
   

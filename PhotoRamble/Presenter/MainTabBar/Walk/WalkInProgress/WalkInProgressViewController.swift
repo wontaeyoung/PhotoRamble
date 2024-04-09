@@ -27,6 +27,8 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
     $0.itemSize = .init(width: size, height: size)
   }
   
+  private let leaveWalkBarButton = UIBarButtonItem(image: PRAsset.Symbol.xmarkIcon, style: .plain, target: nil, action: nil)
+  
   private let noPhotoInfoLabel = PRLabel(
     style: .subInfo,
     title: Localization.no_photo_info_label.localized,
@@ -106,15 +108,33 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
     }
   }
   
+  override func setAttribute() {
+    navigationItem.rightBarButtonItem = leaveWalkBarButton
+  }
+  
   override func bind() {
     
     let input = WalkInProgressViewModel.Input(
       viewDidLoadEvent: .init(),
-      takenNewPhotoDataEvent: PublishRelay<Data>(),
-      walkCompleteButtonTapEvent: PublishRelay<Void>()
+      leaveWalkButtonTapEvent: .init(),
+      takenNewPhotoDataEvent: .init(),
+      walkCompleteButtonTapEvent: .init()
     )
     
     let output = viewModel.transform(input: input)
+    
+    /// [Data] -> [UIImage] 변환 후 사진 리스트 업데이트
+    output.newImageData
+      .compactMap { $0 }
+      .compactMap { UIImage(data: $0) }
+      .drive(with: self) { owner, image in
+        owner.addNewPhoto(with: image)
+      }
+      .disposed(by: disposeBag)
+    
+    output.timerLabelText
+      .drive(timerLabel.rx.text)
+      .disposed(by: disposeBag)
     
     /// UIImage -> Data 변환 후 전달
     imageRelay
@@ -130,6 +150,10 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       })
       .disposed(by: disposeBag)
     
+    leaveWalkBarButton.rx.tap
+      .bind(to: input.leaveWalkButtonTapEvent)
+      .disposed(by: disposeBag)
+    
     cameraButton.rx.tap
       .bind(with: self, onNext: { owner, _ in
         owner.showingCamera()
@@ -138,19 +162,6 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
     
     walkCompleteButton.rx.tap
       .bind(to: input.walkCompleteButtonTapEvent)
-      .disposed(by: disposeBag)
-    
-    /// [Data] -> [UIImage] 변환 후 사진 리스트 업데이트
-    output.newImageData
-      .compactMap { $0 }
-      .compactMap { UIImage(data: $0) }
-      .drive(with: self) { owner, image in
-        owner.addNewPhoto(with: image)
-      }
-      .disposed(by: disposeBag)
-    
-    output.timerLabelText
-      .drive(timerLabel.rx.text)
       .disposed(by: disposeBag)
     
     photoPagerRelay
