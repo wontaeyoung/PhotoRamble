@@ -41,4 +41,15 @@ final class WalkRepositoryImpl: WalkRepository {
       return .error(PRError.RealmRepository.fetchFailed(error: error, modelName: "산책"))
     }
   }
+  
+  func deleteAll() -> Single<Void> {
+    
+    do {
+      try service.deleteTable(tableType: WalkDTO.self)
+      
+      return .just(())
+    } catch {
+      return .error(PRError.RealmRepository.deleteAllFailed(error: error, modelName: "산책"))
+    }
+  }
 }
