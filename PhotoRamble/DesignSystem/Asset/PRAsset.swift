@@ -110,34 +110,38 @@ enum PRAsset {
       case buildingColumnsFill = "building.columns.fill"
       case envelopeBadgePersonCropFill = "envelope.badge.person.crop.fill"
       case trashFill = "trash.fill"
+      
+      case xmark = "xmark"
     }
     
-    private static func image(_ sf: SF) -> UIImage? {
+    private static func sfImage(_ sf: SF) -> UIImage? {
       return UIImage(systemName: sf.rawValue)
     }
     
-    static let walkTabIcon: UIImage? = image(.figureWalk)
-    static let walkSelectedTabIcon: UIImage? = image(.figureWalkMotion)
-    static let diaryTabIcon: UIImage? = image(.textBookClosed)
-    static let diarySelectedTabIcon: UIImage? = image(.textBookClosedFill)
-    static let configTabIcon: UIImage? = image(.gearshape)
-    static let configSelectedTabIcon: UIImage? = image(.gearshapeFill)
+    static let walkTabIcon: UIImage? = sfImage(.figureWalk)
+    static let walkSelectedTabIcon: UIImage? = sfImage(.figureWalkMotion)
+    static let diaryTabIcon: UIImage? = sfImage(.textBookClosed)
+    static let diarySelectedTabIcon: UIImage? = sfImage(.textBookClosedFill)
+    static let configTabIcon: UIImage? = sfImage(.gearshape)
+    static let configSelectedTabIcon: UIImage? = sfImage(.gearshapeFill)
     
-    static let takePhotoButtonIcon: UIImage? = image(.cameraViewfinder)
+    static let takePhotoButtonIcon: UIImage? = sfImage(.cameraViewfinder)
     
-    static let dateInfoIcon: UIImage? = image(.calendar)
-    static let temperatureInfoIcon: UIImage? = image(.thermometerMedium)
-    static let walkDistanceInfoIcon: UIImage? = image(.figureWalk)
-    static let walkTimeInfoIcon: UIImage? = image(.clockFill)
+    static let dateInfoIcon: UIImage? = sfImage(.calendar)
+    static let temperatureInfoIcon: UIImage? = sfImage(.thermometerMedium)
+    static let walkDistanceInfoIcon: UIImage? = sfImage(.figureWalk)
+    static let walkTimeInfoIcon: UIImage? = sfImage(.clockFill)
     
-    static let continueWritingConfigIcon: UIImage? = image(.pencilLine)
-    static let nearHomeConfigIcon: UIImage? = image(.houseAndFlagFill)
-    static let locationConfigIcon: UIImage? = image(.locationFill)
-    static let useCameraConfigIcon: UIImage? = image(.cameraOnRectangleFill)
-    static let usePhotoConfigIcon: UIImage? = image(.photoFillOnRectangleFill)
-    static let termsConfigIcon: UIImage? = image(.docTextFill)
-    static let licenseConfigIcon: UIImage? = image(.buildingColumnsFill)
-    static let sendToDeveloperConfigIcon: UIImage? = image(.envelopeBadgePersonCropFill)
-    static let deleteAllDiaryConfigIcon: UIImage? = image(.trashFill)
+    static let continueWritingConfigIcon: UIImage? = sfImage(.pencilLine)
+    static let nearHomeConfigIcon: UIImage? = sfImage(.houseAndFlagFill)
+    static let locationConfigIcon: UIImage? = sfImage(.locationFill)
+    static let useCameraConfigIcon: UIImage? = sfImage(.cameraOnRectangleFill)
+    static let usePhotoConfigIcon: UIImage? = sfImage(.photoFillOnRectangleFill)
+    static let termsConfigIcon: UIImage? = sfImage(.docTextFill)
+    static let licenseConfigIcon: UIImage? = sfImage(.buildingColumnsFill)
+    static let sendToDeveloperConfigIcon: UIImage? = sfImage(.envelopeBadgePersonCropFill)
+    static let deleteAllDiaryConfigIcon: UIImage? = sfImage(.trashFill)
+    
+    static let xmarkIcon: UIImage? = sfImage(.xmark)
   }
 }
