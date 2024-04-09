@@ -19,8 +19,8 @@ final class WalkInProgressViewModel: ViewModel {
   }
   
   struct Output {
-    let imageDataList: Driver<[Data]>
-    let timerLabelText: Signal<String>
+    let newImageData: Driver<Data?>
+    let timerLabelText: Driver<String>
   }
   
   // MARK: - Observable
@@ -68,6 +68,8 @@ final class WalkInProgressViewModel: ViewModel {
   // MARK: - Method
   func transform(input: Input) -> Output {
     
+    let newPhotoData = PublishRelay<Data?>()
+    
     let timerText = timeIntervalRelay
       .withUnretained(self)
       .map { owner, interval in
@@ -81,22 +83,11 @@ final class WalkInProgressViewModel: ViewModel {
       .disposed(by: disposeBag)
     
     input.takenNewPhotoDataEvent
-      .observe(on: ConcurrentDispatchQueueScheduler(qos: .background))
       .withUnretained(self)
-      .flatMap { owner, data in
-        return owner.imageRepository.create(
-          imageData: data,
-          directoryName: owner.photoDirectoryName,
-          fileIndex: owner.currentFileIndex
-        )
+      .flatMap { owner, imageData in
+        return owner.updateImageDataList(with: imageData)
       }
-      .observe(on: MainScheduler.instance)
-      .subscribe(with: self, onNext: { owner, data in
-        owner.updateImageDataList(with: data)
-      }, onError: { owner, error in
-        LogManager.shared.log(with: error, to: .local)
-        owner.coordinator?.showErrorAlert(error: error)
-      })
+      .bind(to: newPhotoData)
       .disposed(by: disposeBag)
     
     input.walkCompleteButtonTapEvent
@@ -119,16 +110,17 @@ final class WalkInProgressViewModel: ViewModel {
       .disposed(by: disposeBag)
     
     return Output(
-      imageDataList: imagesDataRelay.asDriver(),
-      timerLabelText: timerText.asSignal(onErrorJustReturn: "--:--:--")
+      newImageData: newPhotoData.asDriver(onErrorJustReturn: nil),
+      timerLabelText: timerText.asDriver(onErrorJustReturn: "-")
     )
   }
   
-  private func updateImageDataList(with newData: Data) {
+  private func updateImageDataList(with newData: Data) -> Single<Data> {
     var currentList = imagesDataRelay.value
     currentList.append(newData)
-    
     imagesDataRelay.accept(currentList)
+    
+    return .just(newData)
   }
   
   private func processCompleteEvent(imageDataList: [Data]) {

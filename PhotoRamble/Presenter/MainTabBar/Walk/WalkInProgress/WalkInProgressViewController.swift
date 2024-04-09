@@ -141,18 +141,16 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
       .disposed(by: disposeBag)
     
     /// [Data] -> [UIImage] 변환 후 사진 리스트 업데이트
-    output.imageDataList
-      .flatMap {
-        Observable.from($0)
-          .compactMap { UIImage(data: $0) }
-          .toArray()
-          .asDriver(onErrorJustReturn: [])
+    output.newImageData
+      .compactMap { $0 }
+      .compactMap { UIImage(data: $0) }
+      .drive(with: self) { owner, image in
+        owner.addNewPhoto(with: image)
       }
-      .drive(photoPagerRelay)
       .disposed(by: disposeBag)
     
     output.timerLabelText
-      .emit(to: timerLabel.rx.text)
+      .drive(timerLabel.rx.text)
       .disposed(by: disposeBag)
     
     photoPagerRelay
@@ -195,6 +193,12 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
   
   private func updatePhotoCollection() {
     takenPhotoPagerView.reloadData()
+  }
+  
+  private func addNewPhoto(with newImage: UIImage) {
+    var currentPhotos = photoPagerRelay.value
+    currentPhotos.append(newImage)
+    photoPagerRelay.accept(currentPhotos)
   }
 }
 
