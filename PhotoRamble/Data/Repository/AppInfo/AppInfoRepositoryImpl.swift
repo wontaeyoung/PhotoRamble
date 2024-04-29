@@ -33,6 +33,7 @@ final class AppInfoRepositoryImpl: AppInfoRepository {
             single(.failure(error))
         }
       }
+      
       return Disposables.create()
     }
   }
