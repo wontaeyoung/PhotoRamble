@@ -63,7 +63,7 @@ final class AppVersionUpdateService {
       return .failure(.invalidVersionFormat)
     }
     
-    var isNewVersionAvailable: Bool = clientMajor < storeMajor
+    let isNewVersionAvailable: Bool = clientMajor < storeMajor
     
     return .success(isNewVersionAvailable)
   }
@@ -93,7 +93,7 @@ final class AppVersionUpdateService {
     }
     
     // ItunesAPI 요청 URL
-    guard let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(bundleID)") else {
+    guard let url = URL(string: "http://itunes.apple.com/lookup?bundleId=\(bundleID)&country=kr") else {
       return .failure(.invalidItunesURL)
     }
     
