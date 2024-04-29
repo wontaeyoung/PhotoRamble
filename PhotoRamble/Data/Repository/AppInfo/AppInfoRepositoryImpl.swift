@@ -11,22 +11,29 @@ import RxSwift
 final class AppInfoRepositoryImpl: AppInfoRepository {
   
   func fetchVersion() -> Single<String> {
-    guard var currentVersion = Bundle.main.object(forInfoDictionaryKey: Constant.InfoKey.versionString) as? String else {
-      return .error(PRError.AppInfo.invalidInfoKey(key: Constant.InfoKey.versionString))
-    }
+    let fetchResult = AppVersionUpdateService.fetchVersion()
     
-    if currentVersion.components(separatedBy: ".").count <= 2 {
-        currentVersion += ".0"
+    switch fetchResult {
+      case .success(let version):
+        return .just(version)
+      case .failure(let error):
+        return .error(error)
     }
-    
-    guard isValidPattern(text: currentVersion, pattern: Constant.RegPattern.appVersion) else {
-      return .error(PRError.AppInfo.invalidPattern)
-    }
-    
-    return .just(currentVersion)
   }
   
-  private func isValidPattern(text: String, pattern: String) -> Bool {
-    return text.range(of: pattern, options: .regularExpression) != nil
+  func fetchNewVersionAvailable() -> Single<Bool> {
+    return Single.create { single in
+      Task {
+        let fetchResult = await AppVersionUpdateService.isNewVersionAvailable()
+        
+        switch fetchResult {
+          case .success(let available):
+            single(.success(available))
+          case .failure(let error):
+            single(.failure(error))
+        }
+      }
+      return Disposables.create()
+    }
   }
 }
