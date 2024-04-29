@@ -28,6 +28,13 @@ internal class PRLabel: UILabel {
     self.textAlignment = alignment
     
     switch style {
+      case .appName:
+        self.configure {
+          $0.font = PRAsset.Font.prAppNameLabel
+          $0.textColor = PRAsset.Color.prWhite
+          $0.numberOfLines = 1
+        }
+        
       case .mainTitle:
         self.configure {
           $0.font = PRAsset.Font.prMainInfoLabel
@@ -88,6 +95,7 @@ internal class PRLabel: UILabel {
 internal extension PRLabel {
   
   enum Style {
+    case appName
     case mainTitle
     case timer
     case mainInfo

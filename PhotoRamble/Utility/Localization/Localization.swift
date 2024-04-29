@@ -9,6 +9,9 @@ import Foundation
 
 enum Localization: String {
   
+  /// 앱 로고
+  case app_logo_name
+  
   /// 네비게이션 타이틀
   case home_welcome_navigation_title
   

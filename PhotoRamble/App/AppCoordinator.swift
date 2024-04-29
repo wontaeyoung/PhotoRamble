@@ -19,11 +19,17 @@ final class AppCoordinator: Coordinator {
   }
   
   func start() {
-    connectMainTabBarFlow()
+    connectSplashFlow()
   }
 }
 
 extension AppCoordinator {
+  
+  private func connectSplashFlow() {
+    let splashCoordinator = SplashCoordinator(self.navigationController)
+    splashCoordinator.start()
+    self.addChild(splashCoordinator)
+  }
   
   private func connectMainTabBarFlow() {
     let mainTabBarCoordinator = MainTabBarCoordinator(self.navigationController)

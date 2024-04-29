@@ -193,34 +193,6 @@ extension UIImage {
 
 <br><br>
 
-### 이미지 메모리 용량 다운샘플링 - (기능 업데이트 후 작성 예정)
-- 압축된 이미지 파일로 UIImage를 표시해도 메모리에서 원본 용량을 차지하는 문제
-- 표시 이미지 메모리 감소를 위해서는 해상도 다운샘플링 및 이미지 버퍼 제거가 필요한 점 학습 내용 포함
-
-<details>
-    <summary>참고 이미지</summary>
-    
-![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/ee0fde18-3499-4aa2-89d3-5651fc1621d4)
-
-
-![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/b9d1add0-92a0-47bd-a7ee-9b7d481e964e)
-
-
-![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/d8929d5d-81ba-4f0f-a80e-2a89b37dba42)
-
-
-</details>
-
-<br><br>
-
-### 파일시스템 Replace 정합성 예외처리 - (기능 업데이트 후 작성 예정)
-- Replace 로직
-    1. 폴더 내 이미지 파일 전체 삭제
-    2. 사용자가 선택한 사진들로 다시 생성
-- 2번 과정에서 실패하는 경우 전체 작업을 취소하고 이미지 삭제 전으로 복구하는 예외처리 필요
-
-<br><br>
-
 ### 객체 관심사 분리
 
 ![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/712eaff0-3aa4-4076-826d-a926274a4f6e)
@@ -277,11 +249,45 @@ final class CreateWalkUsecaseImpl: CreateWalkUsecase {
 
 <br><br>
 
+<!--
+
+### 이미지 메모리 용량 다운샘플링 - (기능 업데이트 후 작성 예정)
+- 압축된 이미지 파일로 UIImage를 표시해도 메모리에서 원본 용량을 차지하는 문제
+- 표시 이미지 메모리 감소를 위해서는 해상도 다운샘플링 및 이미지 버퍼 제거가 필요한 점 학습 내용 포함
+
+<details>
+    <summary>참고 이미지</summary>
+    
+![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/ee0fde18-3499-4aa2-89d3-5651fc1621d4)
+
+
+![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/b9d1add0-92a0-47bd-a7ee-9b7d481e964e)
+
+
+![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/d8929d5d-81ba-4f0f-a80e-2a89b37dba42)
+
+
+</details>
+
+<br><br>
+
+### 파일시스템 Replace 정합성 예외처리 - (기능 업데이트 후 작성 예정)
+- Replace 로직
+    1. 폴더 내 이미지 파일 전체 삭제
+    2. 사용자가 선택한 사진들로 다시 생성
+- 2번 과정에서 실패하는 경우 전체 작업을 취소하고 이미지 삭제 전으로 복구하는 예외처리 필요
+
+
+
+<br><br>
+
 ### DI Container 도입 - (기능 업데이트 후 작성 예정)
 - 의존성 주입 코드량 감소 수치 작성
 - 참조 객체 재활용성
 
 <br><br>
+
+-->
 
 ## 개발 작업 공수 기록
 ![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/83a29ce2-5fda-4112-b2ea-25d81cf22a80)

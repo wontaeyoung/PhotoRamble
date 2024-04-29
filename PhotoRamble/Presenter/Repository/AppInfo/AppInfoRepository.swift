@@ -10,4 +10,5 @@ import RxSwift
 protocol AppInfoRepository {
   
   func fetchVersion() -> Single<String>
+  func fetchNewVersionAvailable() -> Single<Bool>
 }
