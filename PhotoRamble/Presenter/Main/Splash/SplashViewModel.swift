@@ -41,9 +41,10 @@ final class SplashViewModel: ViewModel {
       .withUnretained(self)
       .flatMap { owner, _ in
         return owner.appInfoRepository.fetchNewVersionAvailable()
-          .catchAndReturn(false)
+          .catch { error in
+            return .just(false)
+          }
       }
-      .debug()
       .observe(on: MainScheduler.instance)
       .bind(with: self) { owner, isNewVersionAvailable in
         if isNewVersionAvailable {
@@ -78,7 +79,6 @@ final class SplashViewModel: ViewModel {
       }
       
       UIApplication.shared.open(url)
-      exit(0)
     }
   }
   
