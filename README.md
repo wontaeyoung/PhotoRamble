@@ -16,20 +16,22 @@ ex) Alamofire를 사용할 때 URLRequestConvitible을 활용한 Router 패턴�
 
 -->
 
-# 스크린샷
+# 프로젝트
+
+### 스크린샷
 
 ![산책일기_스크린샷](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/3ba87274-8e62-40ed-b0be-5b0e78b093fc)
 
 
 <br>
 
-# 한 줄 소개
+### 한 줄 소개
 
 산책하면서 사진을 찍고 일기와 함께 기록할 수 있는 앱
 
 <br>
 
-# 핵심 기능
+### 핵심 기능
 
 - 사진 촬영
 - 산책 시간 체크
@@ -37,7 +39,7 @@ ex) Alamofire를 사용할 때 URLRequestConvitible을 활용한 Router 패턴�
 
 <br>
 
-# 프로젝트 환경
+## 프로젝트 환경
 
 **개발 인원**  
 1인
@@ -69,13 +71,13 @@ ex) Alamofire를 사용할 때 URLRequestConvitible을 활용한 Router 패턴�
 
 <br><br>
 
-# 아키텍처
+## 아키텍처
 
 <img width="2256" alt="산책일기_ReadME" src="https://github.com/wontaeyoung/PhotoRamble/assets/45925685/49e66bf4-c59a-4d4d-b0f5-5e75cc34095a">
 
 <br><br>
 
-# 기술 스택
+## 기술 스택
 
 - **`UIKit`** **`SnapKit`** **`CompositionalLayout`**
 - **`MVVM`** **`Coordinator`** **`RxSwift`**
@@ -84,7 +86,7 @@ ex) Alamofire를 사용할 때 URLRequestConvitible을 활용한 Router 패턴�
 
 <br><br>
 
-# 기술 사용 설명
+## 기술 사용 설명
 
 **Realm**
 
@@ -129,9 +131,9 @@ ex) Alamofire를 사용할 때 URLRequestConvitible을 활용한 Router 패턴�
 
 <br>
 
-# 트러블 슈팅
+## 트러블 슈팅
 	
-## 파일시스템 용량 확보를 위한 이미지 압축 로직 적용
+### 파일시스템 용량 확보를 위한 이미지 압축 로직 적용
 
 - 촬영한 사진이 원본으로 저장될 경우 앱 저장공간을 크게 차지하는 문제가 발생하여, 파일시스템에 저장되기 전에 이미지 파일 압축 처리
 - 압축 로직은 용량이 2MB 이하가 될 때까지 압축률을 10%씩 증가시켜서 시도하는 방식으로 구현
