@@ -2,9 +2,7 @@
 
 ### 스크린샷
 
-![](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/4e3c567b-8c9c-4cfb-8b69-ffa7618467e4)
-
-<br>
+![image](https://github.com/wontaeyoung/wontaeyoung/assets/45925685/8c367bf4-a031-45f7-aeec-13fcd65eab0b)
 
 ### 한 줄 소개
 
