@@ -47,7 +47,8 @@ final class DiaryPhotoCollectionCell: RXBaseCollectionViewCell {
 extension DiaryPhotoCollectionCell {
   
   func updateImage(with image: UIImage, at index: Int, tapEventRelay: PublishRelay<Int>) {
-    photoImageView.image = image
+    let newWidth = UIScreen.main.bounds.width / BusinessValue.gridCountInDiaryPhotoHorizontalRow.cgFloat
+    photoImageView.image = image.resized(newWidth: newWidth)
     indexRelay.accept(index)
     
     bindDeleteButtonTapEvent(tapEventRelay: tapEventRelay)

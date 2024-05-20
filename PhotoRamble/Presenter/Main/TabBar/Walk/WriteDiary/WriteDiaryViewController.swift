@@ -23,7 +23,7 @@ final class WriteDiaryViewController: RXBaseViewController, ViewModelController 
   private let noPhotoInfoLabel = PRLabel(style: .subInfo, title: "선택된 사진이 없어요.", alignment: .center)
   
   private var layout: UICollectionViewFlowLayout {
-    let cellCount: CGFloat = 3
+    let cellCount: CGFloat = BusinessValue.gridCountInDiaryPhotoHorizontalRow.cgFloat
     let cellSpacing: CGFloat = 20
     let cellWidth: CGFloat = (UIScreen.main.bounds.width - (cellSpacing * (2 + cellCount - 1))) / cellCount
     
