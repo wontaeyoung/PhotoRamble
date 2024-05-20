@@ -1,27 +1,8 @@
-<!--
- 기술 사용 설명 파트 수정
- 
- 조금 더 기술의 정의보다 내 프로젝트에서 어떻게 구현되어있는지를 설명하는 느낌으로 워딩이랑 문장 수정
- -> Coordinator 패턴을 사용해서 뷰모델에서
- 
-볼드 헤더 없애고, 기술 사용 설명보다 신경써서 구현한 부분이라는 느낌의 섹션 이름으로 변경
- 
-중요한 내용 위주로 10개 이하로 남겨서 나열식으로 변경
- 
-ex) Alamofire를 사용할 때 URLRequestConvitible을 활용한 Router 패턴을 구현해서 Request 추상화
-
----
-
-아키텍처 이미지와 설명
-
--->
-
 # 프로젝트
 
 ### 스크린샷
 
-![산책일기_스크린샷](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/3ba87274-8e62-40ed-b0be-5b0e78b093fc)
-
+![](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/4e3c567b-8c9c-4cfb-8b69-ffa7618467e4)
 
 <br>
 
@@ -31,20 +12,19 @@ ex) Alamofire를 사용할 때 URLRequestConvitible을 활용한 Router 패턴�
 
 <br>
 
-### 핵심 기능
+### 서비스 기능
 
-- 사진 촬영
-- 산책 시간 체크
-- 일기 작성 / 조회 / 삭제
+- 사진 촬영 기능
+- 산책 시간 체크 기능
+- 이미지 다중 선택 기능
+- 일기 작성 / 조회 / 삭제 기능
 
 <br>
 
 ## 프로젝트 환경
 
 **개발 인원**  
-1인
-
-<br>
+iOS/기획/디자인 1인
 
 **개발 기간**  
 2024.03.08 ~ 2024.03.26 (2.5주)
@@ -58,102 +38,175 @@ ex) Alamofire를 사용할 때 URLRequestConvitible을 활용한 Router 패턴�
 **iOS 최소 버전**  
 15.0+
 
-<br>
-
 **Xcode**  
 15.3
-
-<br>
 
 **기타 사항**
 - 다국어 대응
 - 디자인 시스템 적용
 
-<br><br>
+<br>
 
 ## 아키텍처
 
-<img width="2256" alt="산책일기_ReadME" src="https://github.com/wontaeyoung/PhotoRamble/assets/45925685/49e66bf4-c59a-4d4d-b0f5-5e75cc34095a">
+![](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/49e66bf4-c59a-4d4d-b0f5-5e75cc34095a)
 
-<br><br>
+<br>
 
 ## 기술 스택
 
 - **`UIKit`** **`SnapKit`** **`CompositionalLayout`**
-- **`MVVM`** **`Coordinator`** **`RxSwift`**
+- **`MVVM`** **`Input&Output`** **`Coordinator`** **`RxSwift`**
 - **`Realm`** **`Firebase Analytics`** **`Crashlytics`**
 - **`FSPager`** **`IQKeyboard`** **`Toast`**
 
-<br><br>
+<br>
+
+## 구현 고려사항
+
+- 상속이 필요하지 않은 클래스는 final 키워드로 **static dispatch** 유도
+- 접근 제어를 최소 권한으로 유지하여 **은닉화** 달성
+- 디자인 시스템으로 **UI 일관성** 유지
+- Repository 인터페이스를 의존하여 **의존성 역전** 준수
+- Router와 FileManager를 구현하여 파일시스템 **API 추상화**
+
+
+<br>
 
 ## 기술 활용
 
-**Realm**
+### 앱스토어 강제 업데이트 체크 로직 적용
 
-- FK를 활용해서 To-One 관계 정의
-- CRUD 로직을 추상화한 Service 객체 구현
+- Itunes API 버전 조회를 활용하여 클라이언트 앱 버전과 비교하는 로직을 앱 런치 시점에 검사
+- Major 버전이 다른 경우 팝업으로 유도하여, 대형 업데이트를 사용자가 즉시 반영할 수 있도록 활용 가능
 
-<br>
-
-**Coordinator Pattern**
-
-- 뷰컨트롤러에서 의존성 주입 역할 분리
-- 화면 전환 Output을 뷰컨트롤러로 반환하지 않고 뷰모델에서 처리
+<img src="https://github.com/wontaeyoung/PhotoRamble/assets/45925685/d599c6f1-cfe0-4e67-93c9-11c2ea585f46" width="300">
 
 <br>
-
-**Router**
-
-- 파일 시스템에 요청하기 위한 Request 구조 추상화
-- 디렉토리 / 파일 경로 획득 로직 재활용
-
 <br>
 
-**Analytics / Crashlytics**
+### Router를 활용한 파일시스템 요청 추상화
 
-- 사용자 이탈 지점 파악 후 업데이트 반영
-- 충돌 데이터 수집 결과를 활용하여 버그 개선
+- PhotoFileRouter 객체를 정의하여 파일시스템 요청 구조화
+- Repository에서 Router를 사용하여 FileManager에 파일시스템 처리 요청
+- FileManager에서 Router의 Sugar API를 사용하여 조건 체크
 
-<br>
+<img src="https://github.com/wontaeyoung/PhotoRamble/assets/45925685/60238b0d-2b7d-4afb-8c70-1ecd3a3bfd7a" width="500"><br>
 
-**컴파일 최적화**
+<details>
+  <summary>Router 구현 코드</summary>
 
-- final / 접근제어자를 사용해서 인라인 컴파일과 정적 메서드 디스패치 유도
+```swift
+struct PhotoFileRouter {
+  
+  enum FileExtension: String, CaseIterable {
+    
+    case jpg
+    case png
+    
+    var name: String {
+      return ".\(self.rawValue)"
+    }
+  }
+  
+  enum CompressionLevel {
+    
+    case high
+    case middle
+    case low
+    case raw
+    
+    var percent: CGFloat {
+      switch self {
+        case .high:
+          return 0.25
+        case .middle:
+          return 0.5
+        case .low:
+          return 0.75
+        case .raw:
+          return 1
+      }
+    }
+  }
+  
+  enum FileMethod {
+    
+    case write
+    case read
+    case delete
+  }
+  
+  
+  // MARK: - Property
+  let directory: String
+  let fileIndex: Int
+  let fileExtension: FileExtension
+  let fileMethod: FileMethod
+  
+  init(directory: String, fileIndex: Int, fileExtension: FileExtension, fileMethod: FileMethod) {
+    
+    self.directory = directory
+    self.fileIndex = fileIndex
+    self.fileExtension = fileExtension
+    self.fileMethod = fileMethod
+  }
+  
+  var baseDirectory: URL {
+    return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+  }
+  
+  var path: String {
+    return "photo/\(directory)"
+  }
+  
+  var directoryURL: URL {
+    return baseDirectory.appendingPathComponent(path)
+  }
+  
+  var fileName: String {
+    return directory + "_\(fileIndex)" + fileExtension.name
+  }
+  
+  var fileURL: URL {
+    return directoryURL.appendingPathComponent(fileName)
+  }
+  
+  var directoryPath: String {
+    return directoryURL.path
+  }
+  
+  var filePath: String {
+    return fileURL.path
+  }
+  
+  var directoryExist: Bool {
+    return FileManager.default.fileExists(atPath: directoryPath)
+  }
+  
+  var fileExist: Bool {
+    return FileManager.default.fileExists(atPath: filePath)
+  }
+}
 
-<br>
+```
+  
+</details>
 
-**디자인 시스템**
-
-- UI 스타일을 열거형 케이스로 관리해서 일관적인 디자인 사용
-- 디자인 속성 변경사항이 일괄적으로 반영되는 구조로 구현
-
-
-**Base UI**
-
-- 뷰컨트롤러, 셀을 상속한 Base 클래스를 사용해서 일관된 코드 구조 작성
-- UI 컴포넌트별로 상속받은 커스텀 컴포넌트를 구현해서 사용
-
-
-<br>
+<br><br>
 
 ## 트러블 슈팅
-	
-### 파일시스템 용량 확보를 위한 이미지 압축 로직 적용
 
-- 촬영한 사진이 원본으로 저장될 경우 앱 저장공간을 크게 차지하는 문제가 발생하여, 파일시스템에 저장되기 전에 이미지 파일 압축 처리
-- 압축 로직은 용량이 2MB 이하가 될 때까지 압축률을 10%씩 증가시켜서 시도하는 방식으로 구현
+### 파일시스템 용량 최적화를 위한 이미지 압축 로직 적용
 
-**적용 전**
+- 촬영된 사진이 원본으로 저장되면서 앱 저장공간을 과도하게 점유하는 문제 발생 
+- 파일 시스템 저장 시점에 이미지 파일 압축 처리 적용
+- 압축 로직은 이미지 용량이 2MB 이하로 감소할 때까지 압축률을 10%씩 점진적으로 증가하는 방식으로 구현
 
-![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/eb4cebeb-9254-48fc-869e-92fd585bd5a4)
+<img src="https://github.com/wontaeyoung/PhotoRamble/assets/45925685/0a142e77-de8e-4f2e-9c56-56b58282db41" width="600">
 
+<br><br>
 
-**적용 후**
-
-![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/d1bcef1b-58e3-40d7-b903-fa4383181635)
-
-
-<br>
 
 <details>
     <summary> 압축 로직 코드 </summary>
@@ -190,29 +243,21 @@ extension UIImage {
     
 </details>
 
+<br>
+
+### UIImage 리사이징 메모리 최적화
+
+- 이미 압축된 Data를 UIImage로 변환 시, 압축 전과 유사한 메모리 용량을 사용하는 문제 경험
+- JPEG 압축 과정에서 해상도가 아닌 시각적으로 인식하기 어려운 색상 및 세부 정보가 우선 손실되는 정책이 원인으로 파악
+- UIImage를 화면에 렌더링하는 시점에 해상도 기반 리사이징을 적용하여 메모리 사용량 개선
+
+
+<img src="https://github.com/wontaeyoung/PhotoRamble/assets/45925685/7c072feb-dc1c-4b88-a880-e4f475212386" width="500">
+
 <br><br>
 
 <!--
 
-### 이미지 메모리 용량 다운샘플링 - (기능 업데이트 후 작성 예정)
-- 압축된 이미지 파일로 UIImage를 표시해도 메모리에서 원본 용량을 차지하는 문제
-- 표시 이미지 메모리 감소를 위해서는 해상도 다운샘플링 및 이미지 버퍼 제거가 필요한 점 학습 내용 포함
-
-<details>
-    <summary>참고 이미지</summary>
-    
-![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/ee0fde18-3499-4aa2-89d3-5651fc1621d4)
-
-
-![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/b9d1add0-92a0-47bd-a7ee-9b7d481e964e)
-
-
-![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/d8929d5d-81ba-4f0f-a80e-2a89b37dba42)
-
-
-</details>
-
-<br><br>
 
 ### 파일시스템 Replace 정합성 예외처리 - (기능 업데이트 후 작성 예정)
 - Replace 로직
@@ -235,5 +280,3 @@ extension UIImage {
 ## 개발 작업 공수 기록
 
 ![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/83a29ce2-5fda-4112-b2ea-25d81cf22a80)
-
-- 작업에 대한 예상 소요시간과 실제 작업시간을 비교해서 어떤 부분에서 시간을 소요하는지 파악하는데 활용
