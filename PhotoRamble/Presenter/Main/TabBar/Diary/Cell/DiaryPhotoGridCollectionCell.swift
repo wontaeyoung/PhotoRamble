@@ -27,6 +27,6 @@ final class DiaryPhotoGridCollectionCell: RXBaseCollectionViewCell {
   }
   
   func updateUI(with image: UIImage) {
-    self.imageView.image = image
+    self.imageView.image = image.resized()
   }
 }
