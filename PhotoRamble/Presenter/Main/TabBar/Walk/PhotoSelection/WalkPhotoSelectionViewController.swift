@@ -50,10 +50,14 @@ final class WalkPhotoSelectionViewController: RXBaseViewController, ViewModelCon
   
   // MARK: - Initializer
   init(viewModel: WalkPhotoSelectionViewModel, imageDataList: [Data]) {
+    
+    let images = imageDataList.compactMap {
+      let newWidth = UIScreen.main.bounds.width / BusinessValue.gridCountInPhotoSelectionRow.cgFloat
+      return UIImage(data: $0)?.resized(newWidth: newWidth)
+    }
+    
     self.viewModel = viewModel
-    self.photosRelay = BehaviorRelay<[UIImage]>(
-      value: imageDataList.compactMap { UIImage(data: $0) }
-    )
+    self.photosRelay = BehaviorRelay<[UIImage]>(value: images)
     
     super.init()
   }

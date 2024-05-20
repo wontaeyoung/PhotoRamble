@@ -8,6 +8,8 @@
 import UIKit
 
 extension UIImage {
+
+  /// 이미지 압축
   var compressedJPEGData: Data? {
     let maxQuality: CGFloat = 1.0
     let minQuality: CGFloat = 0.0
@@ -42,5 +44,36 @@ extension UIImage {
     let value = Double(data.count) / (1024 * 1024)
     
     return NumberFormatManager.shared.toRoundedWith(from: value, fractionDigits: 2, unit: .MB)
+  }
+  
+  /// 이미지 색상 주입
+  func colored(color: UIColor) -> UIImage {
+    
+    return withTintColor(color, renderingMode: .alwaysOriginal)
+  }
+  
+  /// 폰트 기반 이미지 사이즈 적용
+  func fontSized(fontSize: CGFloat) -> UIImage {
+    
+    let font: UIFont = .systemFont(ofSize: fontSize)
+    let config = SymbolConfiguration(font: font)
+    
+    return withConfiguration(config)
+  }
+  
+  /// 새로운 가로 사이즈 기반 리사이징
+  func resized(newWidth: CGFloat = UIScreen.main.bounds.width) -> UIImage {
+    
+    let scale: CGFloat = newWidth / size.width
+    let newHeight: CGFloat = scale * size.height
+    
+    let size = CGSize(width: newWidth, height: newHeight)
+    let render = UIGraphicsImageRenderer(size: size)
+    
+    let renderImage = render.image { _ in
+      return draw(in: CGRect(origin: .zero, size: size))
+    }
+    
+    return renderImage
   }
 }

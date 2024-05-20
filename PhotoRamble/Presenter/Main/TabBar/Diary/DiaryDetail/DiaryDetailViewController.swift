@@ -184,7 +184,7 @@ extension DiaryDetailViewController: FSPagerViewDelegate, FSPagerViewDataSource 
     let cell = pagerView.dequeueReusableCell(withReuseIdentifier: FSPagerViewCell.identifier, at: index)
     
     cell.imageView?.configure {
-      $0.image = photoPagerRelay.value[index]
+      $0.image = photoPagerRelay.value[index].resized()
       $0.contentMode = .scaleAspectFill
     }
     

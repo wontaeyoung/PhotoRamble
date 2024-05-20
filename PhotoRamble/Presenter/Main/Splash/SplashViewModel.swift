@@ -35,6 +35,7 @@ final class SplashViewModel: ViewModel {
   }
   
   // MARK: - Method
+  @discardableResult
   func transform(input: Input) -> Output {
   
     input.viewDidLoadEvent

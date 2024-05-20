@@ -43,11 +43,8 @@ final class SplashViewController: RXBaseViewController, ViewModelController {
   override func bind() {
     
     let input = SplashViewModel.Input()
-    let output = viewModel.transform(input: input)
+    viewModel.transform(input: input)
     
     input.viewDidLoadEvent.accept(())
   }
-  
-  // MARK: - Method
-  
 }

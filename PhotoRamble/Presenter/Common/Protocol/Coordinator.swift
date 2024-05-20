@@ -131,4 +131,3 @@ internal extension Coordinator {
     self.childCoordinators.append(childCoordinator)
   }
 }
-
