@@ -1,24 +1,15 @@
 import Foundation
 import RealmSwift
 
-internal extension Results where Element: RealmModel {
+extension Results where Element: RealmModel {
   
   enum Operator {
-    internal enum Comparison: String {
+    enum Comparison: String {
       case less = "<"
       case lessEqual = "<="
       case equal = "=="
       case greaterEqual = ">="
       case greater = ">"
-    }
-  }
-  
-  func toList() -> List<Element> {
-    let list = List<Element>()
-    
-    return self.reduce(list) { list, element in
-      list.append(element)
-      return list
     }
   }
   
@@ -31,5 +22,14 @@ internal extension Results where Element: RealmModel {
     let predicate = NSPredicate(format: predicateFormat, value)
     
     return self.filter(predicate)
+  }
+  
+  func toList() -> List<Element> {
+    let list = List<Element>()
+    
+    return self.reduce(list) { list, element in
+      list.append(element)
+      return list
+    }
   }
 }

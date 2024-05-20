@@ -472,9 +472,9 @@
 		6E53C6AC2B998A170034649D /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
+				6EFFED342B9E111400B9A238 /* Common */,
 				6EC802742BDF712100FE2B69 /* Main */,
 				6E5A92C92B999F0900A0CE6C /* Repository */,
-				6EFFED342B9E111400B9A238 /* Common */,
 				6E53C6942B99833B0034649D /* ViewController.swift */,
 			);
 			path = Presenter;
@@ -1590,7 +1590,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 0.2.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Kaz.PhotoRamble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1627,7 +1627,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 0.2.0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Kaz.PhotoRamble;
 				PRODUCT_NAME = "$(TARGET_NAME)";
