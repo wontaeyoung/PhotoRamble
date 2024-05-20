@@ -175,6 +175,7 @@ final class WalkInProgressViewController: RXBaseViewController, ViewModelControl
 #if targetEnvironment(simulator)
     viewModel.requestImageForSimulator()
       .compactMap { UIImage(data: $0) }
+      .take(1)
       .bind(to: imageRelay)
       .disposed(by: disposeBag)
 #else
@@ -211,10 +212,10 @@ extension WalkInProgressViewController: FSPagerViewDataSource, FSPagerViewDelega
     )
     
     cell.imageView?.configure {
-      $0.image = photoPagerRelay.value[index]
+      $0.image = photoPagerRelay.value[index].resized()
       $0.clipsToBounds = true
       $0.layer.cornerRadius = 20
-
+      
 #if DEBUG
       LogManager.shared.log(with: "표시 이미지 용량 - " + UIImage.dataVolumnMB(data: $0.image!.jpegData(compressionQuality: 1.0)!) , to: .local, level: .debug)
 #endif
