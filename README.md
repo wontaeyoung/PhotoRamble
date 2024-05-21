@@ -2,7 +2,9 @@
 
 ### 스크린샷
 
-![image](https://github.com/wontaeyoung/wontaeyoung/assets/45925685/8c367bf4-a031-45f7-aeec-13fcd65eab0b)
+![산책일기_크롭 (1)](https://github.com/wontaeyoung/wontaeyoung/assets/45925685/829c9a39-30fb-4786-9025-37754dd456b7)
+
+<br>
 
 ### 한 줄 소개
 
