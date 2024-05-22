@@ -2,7 +2,7 @@
 
 ### 스크린샷
 
-![산책일기_크롭 (1)](https://github.com/wontaeyoung/wontaeyoung/assets/45925685/829c9a39-30fb-4786-9025-37754dd456b7)
+![산책일기_스크린샷_변경](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/c638c83c-45ae-4ee3-afb1-5a0a27404744)
 
 <br>
 
