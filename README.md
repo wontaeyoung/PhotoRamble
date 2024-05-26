@@ -4,8 +4,6 @@
 
 ![산책일기_스크린샷_변경](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/c638c83c-45ae-4ee3-afb1-5a0a27404744)
 
-<br>
-
 ### 한 줄 소개
 
 산책하면서 사진을 찍고 일기와 함께 기록할 수 있는 앱
@@ -47,12 +45,6 @@ iOS/기획/디자인 1인
 
 <br>
 
-## 아키텍처
-
-![](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/49e66bf4-c59a-4d4d-b0f5-5e75cc34095a)
-
-<br>
-
 ## 기술 스택
 
 - **`UIKit`** **`SnapKit`** **`CompositionalLayout`**
@@ -70,7 +62,6 @@ iOS/기획/디자인 1인
 - 디자인 시스템으로 **UI 일관성** 유지
 - Repository 인터페이스를 의존하여 **DIP** 적용
 - Router와 FileManager를 구현하여 파일시스템 **API 추상화**
-
 
 <br>
 
@@ -195,6 +186,12 @@ struct PhotoFileRouter {
 </details>
 
 <br><br>
+
+## 아키텍처
+
+![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/a1414ad4-e82d-4e8c-abcb-52d65f4d78d2)
+
+<br>
 
 ## 트러블 슈팅
 
