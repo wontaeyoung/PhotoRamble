@@ -56,12 +56,19 @@ iOS/기획/디자인 1인
 
 ## 구현 고려사항
 
+- **PhotoFileRouter**를 구현하여 파일시스템 요청 구조화
+- 앱 저장공간 최적화를 위한 **이미지 파일 압축** 프로세스 구현
+- **UIGraphicsImageRenderer**를 사용하여 해상도 기반 리사이징으로 **메모리 사용량 개선**
+- Repository 인터페이스 프로토콜을 의존하여 **DIP** 적용
 - **final** 키워드로 상속이 필요하지 않은 클래스에 **Static Dispatch** 유도
 - 접근 제어를 최소 권한으로 유지하여 **은닉화** 달성
-- **앱 저장공간과 메모리 최적화**를 위한 파일 압축 처리 및 이미지 리사이징 적용
 - 디자인 시스템으로 **UI 일관성** 유지
-- Repository 인터페이스를 의존하여 **DIP** 적용
-- Router와 FileManager를 구현하여 파일시스템 **API 추상화**
+
+<br>
+
+## 아키텍처
+
+![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/a1414ad4-e82d-4e8c-abcb-52d65f4d78d2)
 
 <br>
 
@@ -186,12 +193,6 @@ struct PhotoFileRouter {
 </details>
 
 <br><br>
-
-## 아키텍처
-
-![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/a1414ad4-e82d-4e8c-abcb-52d65f4d78d2)
-
-<br>
 
 ## 트러블 슈팅
 
