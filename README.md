@@ -67,8 +67,7 @@ iOS/기획/디자인 1인
 <br>
 
 ## 아키텍처
-
-![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/a1414ad4-e82d-4e8c-abcb-52d65f4d78d2)
+![image](https://github.com/wontaeyoung/PhotoRamble/assets/45925685/0b0ef652-91e4-467a-9c26-c2739b789dab)
 
 <br>
 
